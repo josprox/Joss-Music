@@ -90,6 +90,7 @@ import com.zionhuang.music.ui.component.BottomSheet
 import com.zionhuang.music.ui.component.BottomSheetState
 import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.MediaMetadataListItem
+import com.zionhuang.music.ui.menu.MediaMetadataMenu
 import com.zionhuang.music.ui.menu.PlayerMenu
 import com.zionhuang.music.ui.menu.QueueSelectionMenu
 import com.zionhuang.music.utils.joinByBullet
@@ -244,7 +245,7 @@ fun Queue(
                             PlayerMenu(
                                 mediaMetadata = mediaMetadata,
                                 navController = navController,
-                                playerBottomSheetState = playerBottomSheetState,
+                                bottomSheetState = playerBottomSheetState,
                                 onShowDetailsDialog = { showDetailsDialog = true },
                                 onDismiss = menuState::dismiss
                             )
@@ -359,15 +360,11 @@ fun Queue(
                                     IconButton(
                                         onClick = {
                                             menuState.show {
-                                                PlayerMenu(
-                                                    mediaMetadata = window.mediaItem.metadata,
+                                                MediaMetadataMenu(
+                                                    mediaMetadata = window.mediaItem.metadata!!,
                                                     navController = navController,
-                                                    playerBottomSheetState = playerBottomSheetState,
-                                                    isTriggeredFromQueue = true,
-                                                    onDismiss = {
-                                                        menuState.dismiss()
-                                                        state.collapseSoft()
-                                                    },
+                                                    bottomSheetState = state,
+                                                    onDismiss = menuState::dismiss,
                                                 )
                                             }
                                         }
