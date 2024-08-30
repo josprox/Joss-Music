@@ -28,11 +28,13 @@ import androidx.navigation.NavController
 import com.zionhuang.music.LocalDatabase
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.R
+import com.zionhuang.music.constants.DisableScreenshotKey
 import com.zionhuang.music.constants.PauseListenHistoryKey
 import com.zionhuang.music.constants.PauseSearchHistoryKey
 import com.zionhuang.music.ui.component.DefaultDialog
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.PreferenceEntry
+import com.zionhuang.music.ui.component.PreferenceGroupTitle
 import com.zionhuang.music.ui.component.SwitchPreference
 import com.zionhuang.music.ui.utils.backToMain
 import com.zionhuang.music.utils.rememberPreference
@@ -46,11 +48,9 @@ fun PrivacySettings(
     val database = LocalDatabase.current
     val (pauseListenHistory, onPauseListenHistoryChange) = rememberPreference(key = PauseListenHistoryKey, defaultValue = false)
     val (pauseSearchHistory, onPauseSearchHistoryChange) = rememberPreference(key = PauseSearchHistoryKey, defaultValue = false)
+    val (disableScreenshot, onDisableScreenshotChange) = rememberPreference(key = DisableScreenshotKey, defaultValue = false)
 
-    var showClearListenHistoryDialog by remember {
-        mutableStateOf(false)
-    }
-
+    var showClearListenHistoryDialog by remember { mutableStateOf(false) }
     if (showClearListenHistoryDialog) {
         DefaultDialog(
             onDismiss = { showClearListenHistoryDialog = false },
@@ -82,10 +82,7 @@ fun PrivacySettings(
         )
     }
 
-    var showClearSearchHistoryDialog by remember {
-        mutableStateOf(false)
-    }
-
+    var showClearSearchHistoryDialog by remember { mutableStateOf(false) }
     if (showClearSearchHistoryDialog) {
         DefaultDialog(
             onDismiss = { showClearSearchHistoryDialog = false },
@@ -124,27 +121,50 @@ fun PrivacySettings(
     ) {
         Spacer(Modifier.windowInsetsPadding(LocalPlayerAwareWindowInsets.current.only(WindowInsetsSides.Top)))
 
+        PreferenceGroupTitle(
+            title = stringResource(R.string.listen_history)
+        )
+
         SwitchPreference(
             title = { Text(stringResource(R.string.pause_listen_history)) },
             icon = { Icon(painterResource(R.drawable.history), null) },
             checked = pauseListenHistory,
             onCheckedChange = onPauseListenHistoryChange
         )
+
         PreferenceEntry(
             title = { Text(stringResource(R.string.clear_listen_history)) },
             icon = { Icon(painterResource(R.drawable.delete_history), null) },
             onClick = { showClearListenHistoryDialog = true }
         )
+
+        PreferenceGroupTitle(
+            title = stringResource(R.string.search_history)
+        )
+
         SwitchPreference(
             title = { Text(stringResource(R.string.pause_search_history)) },
             icon = { Icon(painterResource(R.drawable.search_off), null) },
             checked = pauseSearchHistory,
             onCheckedChange = onPauseSearchHistoryChange
         )
+
         PreferenceEntry(
             title = { Text(stringResource(R.string.clear_search_history)) },
             icon = { Icon(painterResource(R.drawable.clear_all), null) },
             onClick = { showClearSearchHistoryDialog = true }
+        )
+
+        PreferenceGroupTitle(
+            title = stringResource(R.string.misc)
+        )
+
+        SwitchPreference(
+            title = { Text(stringResource(R.string.disable_screenshot)) },
+            description = stringResource(R.string.disable_screenshot_desc),
+            icon = { Icon(painterResource(R.drawable.screenshot), null) },
+            checked = disableScreenshot,
+            onCheckedChange = onDisableScreenshotChange
         )
     }
 
