@@ -69,6 +69,7 @@ import com.zionhuang.music.ui.component.GridMenuItem
 import com.zionhuang.music.ui.component.ListDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 @Composable
 fun AlbumMenu(
@@ -85,6 +86,9 @@ fun AlbumMenu(
     val album = libraryAlbum ?: originalAlbum
     var songs by remember {
         mutableStateOf(emptyList<Song>())
+    }
+    val allInLibrary = remember(songs) {
+        songs.all { it.song.inLibrary != null }
     }
 
     LaunchedEffect(Unit) {
@@ -222,6 +226,7 @@ fun AlbumMenu(
             onDismiss()
             playerConnection.playNext(songs.map { it.toMediaItem() })
         }
+
         GridMenuItem(
             icon = R.drawable.queue_music,
             title = R.string.add_to_queue
@@ -229,12 +234,38 @@ fun AlbumMenu(
             onDismiss()
             playerConnection.addToQueue(songs.map { it.toMediaItem() })
         }
+
         GridMenuItem(
             icon = R.drawable.playlist_add,
             title = R.string.add_to_playlist
         ) {
             showChoosePlaylistDialog = true
         }
+
+        if (allInLibrary) {
+            GridMenuItem(
+                icon = R.drawable.library_add_check,
+                title = R.string.remove_all_from_library
+            ) {
+                database.transaction {
+                    songs.forEach {
+                        inLibrary(it.id, null)
+                    }
+                }
+            }
+        } else {
+            GridMenuItem(
+                icon = R.drawable.library_add,
+                title = R.string.add_all_to_library
+            ) {
+                database.transaction {
+                    songs.forEach {
+                        inLibrary(it.id, LocalDateTime.now())
+                    }
+                }
+            }
+        }
+
         DownloadGridMenu(
             state = downloadState,
             onDownload = {
@@ -262,6 +293,7 @@ fun AlbumMenu(
                 }
             }
         )
+
         GridMenuItem(
             icon = R.drawable.artist,
             title = R.string.view_artist
@@ -273,6 +305,7 @@ fun AlbumMenu(
                 showSelectArtistDialog = true
             }
         }
+
         GridMenuItem(
             icon = {
                 Icon(
@@ -292,6 +325,7 @@ fun AlbumMenu(
                 }
             }
         }
+
         GridMenuItem(
             icon = R.drawable.share,
             title = R.string.share
