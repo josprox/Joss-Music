@@ -22,6 +22,7 @@ import com.zionhuang.music.R
 import com.zionhuang.music.constants.AudioNormalizationKey
 import com.zionhuang.music.constants.AudioQuality
 import com.zionhuang.music.constants.AudioQualityKey
+import com.zionhuang.music.constants.AutoLoadMoreKey
 import com.zionhuang.music.constants.AutoSkipNextOnErrorKey
 import com.zionhuang.music.constants.PersistentQueueKey
 import com.zionhuang.music.constants.SkipSilenceKey
@@ -44,6 +45,7 @@ fun PlayerSettings(
     val (persistentQueue, onPersistentQueueChange) = rememberPreference(PersistentQueueKey, defaultValue = true)
     val (skipSilence, onSkipSilenceChange) = rememberPreference(SkipSilenceKey, defaultValue = false)
     val (audioNormalization, onAudioNormalizationChange) = rememberPreference(AudioNormalizationKey, defaultValue = true)
+    val (autoLoadMore, onAutoLoadMoreChange) = rememberPreference(AutoLoadMoreKey, defaultValue = true)
     val (autoSkipNextOnError, onAutoSkipNextOnErrorChange) = rememberPreference(AutoSkipNextOnErrorKey, defaultValue = false)
     val (stopMusicOnTaskClear, onStopMusicOnTaskClearChange) = rememberPreference(StopMusicOnTaskClearKey, defaultValue = false)
 
@@ -96,6 +98,14 @@ fun PlayerSettings(
             icon = { Icon(painterResource(R.drawable.queue_music), null) },
             checked = persistentQueue,
             onCheckedChange = onPersistentQueueChange
+        )
+
+        SwitchPreference(
+            title = { Text(stringResource(R.string.auto_load_more)) },
+            description = stringResource(R.string.auto_load_more_desc),
+            icon = { Icon(painterResource(R.drawable.playlist_add), null) },
+            checked = autoLoadMore,
+            onCheckedChange = onAutoLoadMoreChange
         )
 
         SwitchPreference(
