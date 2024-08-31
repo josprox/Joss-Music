@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -100,10 +101,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import org.burnoutcrew.reorderable.ReorderableItem
-import org.burnoutcrew.reorderable.detectReorder
-import org.burnoutcrew.reorderable.rememberReorderableLazyListState
-import org.burnoutcrew.reorderable.reorderable
+import sh.calvin.reorderable.ReorderableItem
+import sh.calvin.reorderable.rememberReorderableLazyListState
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -268,23 +267,46 @@ fun Queue(
         }
 
         val coroutineScope = rememberCoroutineScope()
+        val lazyListState = rememberLazyListState()
+        var dragInfo by remember {
+            mutableStateOf<Pair<Int, Int>?>(null)
+        }
         val reorderableState = rememberReorderableLazyListState(
-            onMove = { from, to ->
-                mutableQueueWindows.move(from.index, to.index)
-            },
-            onDragEnd = { fromIndex, toIndex ->
-                if (!playerConnection.player.shuffleModeEnabled) {
-                    playerConnection.player.moveMediaItem(fromIndex, toIndex)
-                } else {
-                    playerConnection.player.setShuffleOrder(
-                        DefaultShuffleOrder(
-                            queueWindows.map { it.firstPeriodIndex }.toMutableList().move(fromIndex, toIndex).toIntArray(),
-                            System.currentTimeMillis()
+            lazyListState = lazyListState,
+            scrollThresholdPadding = WindowInsets.systemBars.add(
+                WindowInsets(
+                    top = ListItemHeight,
+                    bottom = ListItemHeight
+                )
+            ).asPaddingValues()
+        ) { from, to ->
+            val currentDragInfo = dragInfo
+            dragInfo = if (currentDragInfo == null) {
+                from.index to to.index
+            } else {
+                currentDragInfo.first to to.index
+            }
+
+            mutableQueueWindows.move(from.index, to.index)
+        }
+
+        LaunchedEffect(reorderableState.isAnyItemDragging) {
+            if (!reorderableState.isAnyItemDragging) {
+                dragInfo?.let { (from, to) ->
+                    if (!playerConnection.player.shuffleModeEnabled) {
+                        playerConnection.player.moveMediaItem(from, to)
+                    } else {
+                        playerConnection.player.setShuffleOrder(
+                            DefaultShuffleOrder(
+                                queueWindows.map { it.firstPeriodIndex }.toMutableList().move(from, to).toIntArray(),
+                                System.currentTimeMillis()
+                            )
                         )
-                    )
+                    }
+                    dragInfo = null
                 }
             }
-        )
+        }
 
         LaunchedEffect(queueWindows) {
             mutableQueueWindows.apply {
@@ -300,12 +322,12 @@ fun Queue(
 
         LaunchedEffect(mutableQueueWindows) {
             if (currentWindowIndex != -1) {
-                reorderableState.listState.scrollToItem(currentWindowIndex)
+                lazyListState.scrollToItem(currentWindowIndex)
             }
         }
 
         LazyColumn(
-            state = reorderableState.listState,
+            state = lazyListState,
             contentPadding = WindowInsets.systemBars
                 .add(
                     WindowInsets(
@@ -314,16 +336,14 @@ fun Queue(
                     )
                 )
                 .asPaddingValues(),
-            modifier = Modifier
-                .reorderable(reorderableState)
-                .nestedScroll(state.preUpPostDownNestedScrollConnection)
+            modifier = Modifier.nestedScroll(state.preUpPostDownNestedScrollConnection)
         ) {
             itemsIndexed(
                 items = mutableQueueWindows,
                 key = { _, item -> item.uid.hashCode() }
             ) { index, window ->
                 ReorderableItem(
-                    reorderableState = reorderableState,
+                    state = reorderableState,
                     key = window.uid.hashCode()
                 ) {
                     val currentItem by rememberUpdatedState(window)
@@ -378,8 +398,7 @@ fun Queue(
                                     if (!lockQueue) {
                                         IconButton(
                                             onClick = { },
-                                            modifier = Modifier
-                                                .detectReorder(reorderableState)
+                                            modifier = Modifier.draggableHandle()
                                         ) {
                                             Icon(
                                                 painter = painterResource(R.drawable.drag_handle),
@@ -524,7 +543,7 @@ fun Queue(
                 modifier = Modifier.align(Alignment.CenterStart),
                 onClick = {
                     coroutineScope.launch {
-                        reorderableState.listState.animateScrollToItem(
+                        lazyListState.animateScrollToItem(
                             if (playerConnection.player.shuffleModeEnabled) playerConnection.player.currentMediaItemIndex else 0
                         )
                     }.invokeOnCompletion {
