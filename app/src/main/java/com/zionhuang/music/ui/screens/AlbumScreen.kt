@@ -80,11 +80,9 @@ import com.zionhuang.music.R
 import com.zionhuang.music.constants.AlbumThumbnailSize
 import com.zionhuang.music.constants.ThumbnailCornerRadius
 import com.zionhuang.music.db.entities.Album
-import com.zionhuang.music.db.entities.Song
-import com.zionhuang.music.extensions.toMediaItem
 import com.zionhuang.music.extensions.togglePlayPause
 import com.zionhuang.music.playback.ExoDownloadService
-import com.zionhuang.music.playback.queues.ListQueue
+import com.zionhuang.music.playback.queues.LocalAlbumRadio
 import com.zionhuang.music.ui.component.AutoResizeText
 import com.zionhuang.music.ui.component.FontSizeRange
 import com.zionhuang.music.ui.component.IconButton
@@ -339,10 +337,7 @@ fun AlbumScreen(
                         Button(
                             onClick = {
                                 playerConnection.playQueue(
-                                    ListQueue(
-                                        title = albumWithSongs.album.title,
-                                        items = albumWithSongs.songs.map(Song::toMediaItem)
-                                    )
+                                    LocalAlbumRadio(albumWithSongs)
                                 )
                             },
                             contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
@@ -362,10 +357,7 @@ fun AlbumScreen(
                         OutlinedButton(
                             onClick = {
                                 playerConnection.playQueue(
-                                    ListQueue(
-                                        title = albumWithSongs.album.title,
-                                        items = albumWithSongs.songs.shuffled().map(Song::toMediaItem)
-                                    )
+                                    LocalAlbumRadio(albumWithSongs.copy(songs = albumWithSongs.songs.shuffled()))
                                 )
                             },
                             contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
@@ -436,11 +428,7 @@ fun AlbumScreen(
                                     playerConnection.player.togglePlayPause()
                                 } else {
                                     playerConnection.playQueue(
-                                        ListQueue(
-                                            title = albumWithSongs.album.title,
-                                            items = albumWithSongs.songs.map { it.toMediaItem() },
-                                            startIndex = index
-                                        )
+                                        LocalAlbumRadio(albumWithSongs, startIndex = index)
                                     )
                                 }
                             },

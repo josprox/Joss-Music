@@ -71,10 +71,9 @@ import com.zionhuang.music.db.entities.Artist
 import com.zionhuang.music.db.entities.LocalItem
 import com.zionhuang.music.db.entities.Playlist
 import com.zionhuang.music.db.entities.Song
-import com.zionhuang.music.extensions.toMediaItem
 import com.zionhuang.music.extensions.togglePlayPause
 import com.zionhuang.music.models.toMediaMetadata
-import com.zionhuang.music.playback.queues.ListQueue
+import com.zionhuang.music.playback.queues.LocalAlbumRadio
 import com.zionhuang.music.playback.queues.YouTubeAlbumRadio
 import com.zionhuang.music.playback.queues.YouTubeQueue
 import com.zionhuang.music.ui.component.AlbumGridItem
@@ -682,13 +681,11 @@ fun HomeScreen(
                             is Song -> playerConnection.playQueue(YouTubeQueue.radio(luckyItem.toMediaMetadata()))
                             is Album -> {
                                 scope.launch(Dispatchers.IO) {
-                                    val songs = database.albumSongs(luckyItem.id).first()
-                                    playerConnection.playQueue(
-                                        ListQueue(
-                                            title = luckyItem.title,
-                                            items = songs.map(Song::toMediaItem)
+                                    database.albumWithSongs(luckyItem.id).first()?.let {
+                                        playerConnection.playQueue(
+                                            LocalAlbumRadio(it)
                                         )
-                                    )
+                                    }
                                 }
                             }
                             // not possible, already filtered out

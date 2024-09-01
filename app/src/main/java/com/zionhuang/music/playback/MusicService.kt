@@ -465,6 +465,7 @@ class MusicService : MediaLibraryService(),
             }
             if (initialStatus.items.isEmpty()) return@launch
             if (queue.preloadItem != null) {
+                // add missing songs back, without affecting current playing song
                 player.addMediaItems(0, initialStatus.items.subList(0, initialStatus.mediaItemIndex))
                 player.addMediaItems(initialStatus.items.subList(initialStatus.mediaItemIndex + 1, initialStatus.items.size))
             } else {
@@ -543,7 +544,6 @@ class MusicService : MediaLibraryService(),
         // Auto load more songs
         if (dataStore.get(AutoLoadMoreKey, true) &&
             reason != Player.MEDIA_ITEM_TRANSITION_REASON_REPEAT &&
-            player.playbackState != STATE_IDLE &&
             player.mediaItemCount - player.currentMediaItemIndex <= 5 &&
             currentQueue.hasNextPage()
         ) {
