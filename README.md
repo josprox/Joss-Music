@@ -43,7 +43,7 @@ A Material 3 YouTube Music client for Android
   <img src="https://raw.githubusercontent.com/z-huang/InnerTune/dev/fastlane/metadata/android/en-US/images/phoneScreenshots/05.png" width="200" />
 </p>
 
-> **Warning**
+> [!WARNING]
 >
 >If you're in a region where YouTube Music is not supported, you won't be able to use this app
 ***unless*** you have a proxy or VPN to connect to a YTM supported region.
