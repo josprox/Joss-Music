@@ -7,10 +7,12 @@ A Material 3 YouTube Music client for Android
 [![Latest release](https://img.shields.io/github/v/release/z-huang/InnerTune?include_prereleases)](https://github.com/z-huang/music/releases)
 [![License](https://img.shields.io/github/license/z-huang/InnerTune)](https://www.gnu.org/licenses/gpl-3.0)
 [![Downloads](https://img.shields.io/github/downloads/z-huang/InnerTune/total)](https://github.com/z-huang/InnerTune/releases)
+[![Translation](https://hosted.weblate.org/widget/innertune/svg-badge.svg)](https://hosted.weblate.org/engage/innertune/)
 
 [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/z-huang/InnerTune/releases/latest)
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/com.zionhuang.music)
 [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.zionhuang.music)
+
 
 [Compare versions](https://github.com/z-huang/InnerTune/wiki/App-Versions)
 
@@ -62,11 +64,13 @@ recommend [Pano Scrobbler](https://play.google.com/store/apps/details?id=com.arn
 2. In the three dots menu at the top-right of the screen, click "Developer settings"
 3. Enable "Unknown sources"
 
-## Contributing Translations
+## Translating
 
-Follow the [instructions](https://developer.android.com/guide/topics/resources/localization) and
-create a pull request. If possible, please build the app beforehand and make sure there is no error
-before you create a pull request.
+If you'd like to help translate InnerTune, check out [our project in Weblate.](https://hosted.weblate.org/engage/innertune/) Weblate allows us to solve issues with translation inconsistency, edited strings, etc.
+
+> Preferably do not send pull requests if you can. They can cause merging issues, which can lead to the loss of translation work from you or other people.
+
+Thank you for helping translate InnerTune!
 
 ## Donate
 
