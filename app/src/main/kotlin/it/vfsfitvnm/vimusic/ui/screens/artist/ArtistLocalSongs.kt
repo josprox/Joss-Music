@@ -81,7 +81,7 @@ fun ArtistLocalSongs(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         headerContent {
                             SecondaryTextButton(
-                                text = "Enqueue",
+                                text = "Poner en cola",
                                 enabled = !songs.isNullOrEmpty(),
                                 onClick = {
                                     binder?.player?.enqueue(songs!!.map(Song::asMediaItem))

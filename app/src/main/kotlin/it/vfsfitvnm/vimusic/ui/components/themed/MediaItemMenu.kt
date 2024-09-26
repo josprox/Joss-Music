@@ -464,7 +464,7 @@ fun MediaItemMenu(
                 onStartRadio?.let { onStartRadio ->
                     MenuEntry(
                         icon = R.drawable.radio,
-                        text = "Start radio",
+                        text = "Iniciar radio",
                         onClick = {
                             onDismiss()
                             onStartRadio()
@@ -475,7 +475,7 @@ fun MediaItemMenu(
                 onPlayNext?.let { onPlayNext ->
                     MenuEntry(
                         icon = R.drawable.play_skip_forward,
-                        text = "Play next",
+                        text = "Siguiente",
                         onClick = {
                             onDismiss()
                             onPlayNext()
@@ -486,7 +486,7 @@ fun MediaItemMenu(
                 onEnqueue?.let { onEnqueue ->
                     MenuEntry(
                         icon = R.drawable.enqueue,
-                        text = "Enqueue",
+                        text = "Poner en cola",
                         onClick = {
                             onDismiss()
                             onEnqueue()
@@ -497,7 +497,7 @@ fun MediaItemMenu(
                 onGoToEqualizer?.let { onGoToEqualizer ->
                     MenuEntry(
                         icon = R.drawable.equalizer,
-                        text = "Equalizer",
+                        text = "Ecualizador",
                         onClick = {
                             onDismiss()
                             onGoToEqualizer()
@@ -521,7 +521,7 @@ fun MediaItemMenu(
                     if (isShowingSleepTimerDialog) {
                         if (sleepTimerMillisLeft != null) {
                             ConfirmationDialog(
-                                text = "Do you want to stop the sleep timer?",
+                                text = "¿Quieres detener el temporizador de apagado automático?",
                                 cancelText = "No",
                                 confirmText = "Stop",
                                 onDismiss = { isShowingSleepTimerDialog = false },
@@ -539,7 +539,7 @@ fun MediaItemMenu(
                                 }
 
                                 BasicText(
-                                    text = "Set sleep timer",
+                                    text = "Establecer temporizador de apagado automático",
                                     style = typography.s.semiBold,
                                     modifier = Modifier
                                         .padding(vertical = 8.dp, horizontal = 24.dp)
@@ -624,7 +624,7 @@ fun MediaItemMenu(
 
                     MenuEntry(
                         icon = R.drawable.alarm,
-                        text = "Sleep timer",
+                        text = "Temporizador de sueño",
                         onClick = { isShowingSleepTimerDialog = true },
                         trailingContent = sleepTimerMillisLeft?.let {
                             {
@@ -647,7 +647,7 @@ fun MediaItemMenu(
                 if (onAddToPlaylist != null) {
                     MenuEntry(
                         icon = R.drawable.playlist,
-                        text = "Add to playlist",
+                        text = "Agregar a la playlist",
                         onClick = { isViewingPlaylists = true },
                         trailingContent = {
                             Image(
@@ -667,7 +667,7 @@ fun MediaItemMenu(
                     albumInfo?.let { (albumId) ->
                         MenuEntry(
                             icon = R.drawable.disc,
-                            text = "Go to album",
+                            text = "Ir al álbum",
                             onClick = {
                                 onDismiss()
                                 onGoToAlbum(albumId)
@@ -680,7 +680,7 @@ fun MediaItemMenu(
                     artistsInfo?.forEach { (authorId, authorName) ->
                         MenuEntry(
                             icon = R.drawable.person,
-                            text = "More from $authorName",
+                            text = "Más de $authorName",
                             onClick = {
                                 onDismiss()
                                 onGoToArtist(authorId)
@@ -692,7 +692,7 @@ fun MediaItemMenu(
                 onRemoveFromQueue?.let { onRemoveFromQueue ->
                     MenuEntry(
                         icon = R.drawable.trash,
-                        text = "Remove from queue",
+                        text = "Quitar de la cola",
                         onClick = {
                             onDismiss()
                             onRemoveFromQueue()
@@ -703,7 +703,7 @@ fun MediaItemMenu(
                 onRemoveFromPlaylist?.let { onRemoveFromPlaylist ->
                     MenuEntry(
                         icon = R.drawable.trash,
-                        text = "Remove from playlist",
+                        text = "Eliminar de la playlist",
                         onClick = {
                             onDismiss()
                             onRemoveFromPlaylist()
@@ -714,7 +714,7 @@ fun MediaItemMenu(
                 onHideFromDatabase?.let { onHideFromDatabase ->
                     MenuEntry(
                         icon = R.drawable.trash,
-                        text = "Hide",
+                        text = "Esconder",
                         onClick = onHideFromDatabase
                     )
                 }
@@ -722,7 +722,7 @@ fun MediaItemMenu(
                 onRemoveFromQuickPicks?.let {
                     MenuEntry(
                         icon = R.drawable.trash,
-                        text = "Hide from \"Quick picks\"",
+                        text = "Ocultar de \"Selecciones rápidas\"",
                         onClick = {
                             onDismiss()
                             onRemoveFromQuickPicks()
