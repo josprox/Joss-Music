@@ -1,1 +1,11 @@
-* Fix crash when fetching album metadata
+Music is now renamed to InnerTune!
+
+- Player redesign
+- Queue redesign
+- Cache songs
+- Stats for nerds
+- Persistent queue
+- Add built-in playlist (liked, downloaded)
+- Set cache limits
+- Sort songs by play time
+- Customize navigation tabs

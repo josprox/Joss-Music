@@ -1,18 +1,32 @@
+plugins {
+    alias(libs.plugins.hilt) apply (false)
+    alias(libs.plugins.kotlin.ksp) apply (false)
+    alias(libs.plugins.compose.compiler) apply false
+}
+
 buildscript {
+    val isFullBuild by extra {
+        gradle.startParameter.taskNames.none { task -> task.contains("foss", ignoreCase = true) }
+    }
+
     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal()
+        maven { setUrl("https://jitpack.io") }
     }
-
     dependencies {
-        classpath("com.android.tools.build", "gradle", "7.3.0")
+        classpath(libs.gradle)
         classpath(kotlin("gradle-plugin", libs.versions.kotlin.get()))
+        if (isFullBuild) {
+            classpath(libs.google.services)
+            classpath(libs.firebase.crashlytics.plugin)
+            classpath(libs.firebase.perf.plugin)
+        }
     }
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+tasks.register<Delete>("Clean") {
+    delete(rootProject.layout.buildDirectory)
 }
 
 subprojects {
