@@ -99,7 +99,7 @@ fun SettingsScreen(
                     }
                 },
                 onClick = {
-                    uriHandler.openUri("https://github.com/josprox/Joss-Music")
+                    uriHandler.openUri("https://github.com/josprox/Joss-Music/releases/")
                 }
             )
         }
