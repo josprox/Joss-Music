@@ -11,12 +11,10 @@ object Updater {
         private set
 
     suspend fun getLatestVersionName(): Result<String> = runCatching {
-        val response = client.get("https://api.github.com/repos/josprox/Joss-Music/releases/latest").bodyAsText()
+        val response = client.get("https://jossred.josprox.com/?app_name=com.josprox.jossmusic").bodyAsText()
         val json = JSONObject(response)
-        // Obtener el nombre del tag y eliminar el prefijo "V"
-        val versionName = json.getString("tag_name").removePrefix("V")
+        val versionName = json.getString("Version")
         lastCheckTime = System.currentTimeMillis()
         versionName
     }
 }
-

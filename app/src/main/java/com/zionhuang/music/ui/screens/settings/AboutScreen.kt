@@ -41,6 +41,23 @@ import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.R
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.utils.backToMain
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.* // Para Column, Row, Spacer, etc.
+import androidx.compose.foundation.verticalScroll // Para el scroll
+import androidx.compose.foundation.rememberScrollState // Para recordar el estado del scroll
+import androidx.compose.material3.* // Para Material 3 components como Button, Text
+import androidx.compose.ui.graphics.Color // Para usar colores
+import androidx.compose.ui.unit.dp // Para manejar el padding, tamaño, etc.
+import androidx.compose.ui.unit.sp // Para manejar el tamaño de fuente
+import androidx.compose.ui.text.style.TextAlign // Para la alineación del texto
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,6 +83,7 @@ fun AboutScreen(
             contentDescription = null,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground, BlendMode.SrcIn),
             modifier = Modifier
+                .size(100.dp) // Ajusta el tamaño de la imagen aquí
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.surfaceContainer)
                 .clickable { }
@@ -165,6 +183,103 @@ fun AboutScreen(
                     contentDescription = null
                 )
             }
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        // Descripción de la Aplicación
+        Text(
+            text = "Esta aplicación no recopila información del usuario. Los datos que proporciones se almacenarán en una base de datos la cuál puedes descargar. Además, al instalar esta aplicación, podrías recibir notificaciones push de nuestros servicios (Joss Red). Nuestros términos y servicios están disponibles en nuestra web oficial.",
+            fontSize = 14.sp,
+            modifier = Modifier.padding(10.dp),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+        )
+
+        // Soporte
+        Text(
+            text = "Soporte",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 10.dp)
+        )
+        Button(
+            onClick = {
+                uriHandler.openUri("https://josprox.com/soporte/")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ) {
+            Text(text = "Página de soporte")
+        }
+
+        // Web del Creador
+        Text(
+            text = "Web del Creador",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 10.dp)
+        )
+        Button(
+            onClick = {
+                uriHandler.openUri("https://josprox.com/")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ) {
+            Text(text = "Ir a JOSPROX | Joss Estrada")
+        }
+
+        // Aviso Importante
+        Text(
+            text = "Aviso Importante",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Red,
+            modifier = Modifier.padding(top = 10.dp)
+        )
+        Text(
+            text = "Se muestran a continuación la política de privacidad y los términos y condiciones de las aplicaciones dentro de 'Joss Red'. Esta aplicación puede contener compras internas gestionadas en la web JOSPROX MX y MHT. Toda la información será exclusivamente la que tú insertes. Las herramientas de la aplicación no compartirán tus datos con terceros.",
+            fontSize = 14.sp,
+            modifier = Modifier.padding(10.dp),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+        )
+
+        // Política de Privacidad
+        Text(
+            text = "Política de Privacidad",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 10.dp)
+        )
+        Button(
+            onClick = {
+                uriHandler.openUri("https://josprox.com/privacidad/")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ) {
+            Text(text = "Política de Privacidad")
+        }
+
+        // Términos y Condiciones
+        Text(
+            text = "Términos y Condiciones",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 10.dp)
+        )
+        Button(
+            onClick = {
+                uriHandler.openUri("https://josprox.com/terminos-y-condiciones/")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ) {
+            Text(text = "Términos y Condiciones")
         }
 
         Spacer(Modifier.height(6.dp))
