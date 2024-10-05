@@ -660,7 +660,7 @@ class MainActivity : ComponentActivity() {
                                         ) {
                                             BadgedBox(
                                                 badge = {
-                                                    if (latestVersionName != BuildConfig.VERSION_NAME) {
+                                                    if (latestVersionName > BuildConfig.VERSION_NAME) {
                                                         Badge()
                                                     }
                                                 }

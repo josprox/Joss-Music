@@ -83,14 +83,14 @@ fun SettingsScreen(
             icon = { Icon(painterResource(R.drawable.info), null) },
             onClick = { navController.navigate("settings/about") }
         )
-        if (latestVersionName != BuildConfig.VERSION_NAME) {
+        if (latestVersionName > BuildConfig.VERSION_NAME) {
             PreferenceEntry(
                 title = {
                     Text(
                         text = stringResource(R.string.new_version_available),
                     )
                 },
-                description = latestVersionName,
+                description = "Se ha detectado una nueva versión: "+BuildConfig.VERSION_NAME+"<"+latestVersionName,
                 icon = {
                     BadgedBox(
                         badge = { Badge() }
@@ -101,6 +101,15 @@ fun SettingsScreen(
                 onClick = {
                     uriHandler.openUri("https://github.com/josprox/Joss-Music/releases/")
                 }
+            )
+        }else{
+            PreferenceEntry(
+                title = {
+                    Text(
+                        text = stringResource(R.string.app_version),
+                    )
+                },
+                description = "Última version: "+BuildConfig.VERSION_NAME
             )
         }
     }
