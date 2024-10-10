@@ -102,9 +102,19 @@ fun AboutScreen(
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = BuildConfig.VERSION_NAME,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.secondary
+                text = "Google Play",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.secondary,
+                        shape = CircleShape
+                    )
+                    .padding(
+                        horizontal = 6.dp,
+                        vertical = 2.dp
+                    )
             )
 
             Spacer(Modifier.width(4.dp))
@@ -158,7 +168,7 @@ fun AboutScreen(
 
         Row {
             IconButton(
-                onClick = { uriHandler.openUri("https://github.com/josprox/Joss-Music") }
+                onClick = { uriHandler.openUri("https://github.com/josprox/") }
             ) {
                 Icon(
                     painter = painterResource(R.drawable.github),
@@ -171,7 +181,12 @@ fun AboutScreen(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.facebook),
-                    contentDescription = null
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(
+                            horizontal = 6.dp,
+                            vertical = 2.dp
+                        )
                 )
             }
 
@@ -180,7 +195,12 @@ fun AboutScreen(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.google_play),
-                    contentDescription = null
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(
+                            horizontal = 6.dp,
+                            vertical = 2.dp
+                        )
                 )
             }
         }
@@ -293,15 +313,6 @@ fun AboutScreen(
         Spacer(Modifier.height(8.dp))
 
         Row {
-            IconButton(
-                onClick = { uriHandler.openUri("https://github.com/z-huang/InnerTune") }
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.github),
-                    contentDescription = null
-                )
-            }
-
             IconButton(
                 onClick = { uriHandler.openUri("https://liberapay.com/zionhuang") }
             ) {

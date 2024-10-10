@@ -99,7 +99,7 @@ fun SettingsScreen(
                     }
                 },
                 onClick = {
-                    uriHandler.openUri("https://github.com/josprox/Joss-Music/releases/")
+                    uriHandler.openUri("https://play.google.com/store/apps/details?id=com.josprox.jossmusic")
                 }
             )
         }else{
