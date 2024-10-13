@@ -32,7 +32,7 @@ import com.zionhuang.music.R
 import com.zionhuang.music.constants.DisableScreenshotKey
 import com.zionhuang.music.constants.PauseListenHistoryKey
 import com.zionhuang.music.constants.PauseSearchHistoryKey
-import com.zionhuang.music.constants.UseLoginOnArtistPage
+import com.zionhuang.music.constants.UseLoginForBrowse
 import com.zionhuang.music.ui.component.DefaultDialog
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.PreferenceEntry
@@ -50,7 +50,7 @@ fun PrivacySettings(
     val database = LocalDatabase.current
     val (pauseListenHistory, onPauseListenHistoryChange) = rememberPreference(key = PauseListenHistoryKey, defaultValue = false)
     val (pauseSearchHistory, onPauseSearchHistoryChange) = rememberPreference(key = PauseSearchHistoryKey, defaultValue = false)
-    val (useLoginOnArtistPage, onUseLoginOnArtistPageChange) = rememberPreference(key = UseLoginOnArtistPage, defaultValue = false)
+    val (useLoginForBrowse, onUseLoginForBrowseChange) = rememberPreference(key = UseLoginForBrowse, defaultValue = false)
     val (disableScreenshot, onDisableScreenshotChange) = rememberPreference(key = DisableScreenshotKey, defaultValue = false)
 
     var showClearListenHistoryDialog by remember { mutableStateOf(false) }
@@ -163,13 +163,13 @@ fun PrivacySettings(
         )
 
         SwitchPreference(
-            title = { Text(stringResource(R.string.use_login_on_artist_page)) },
-            description = stringResource(R.string.use_login_on_artist_page_desc),
+            title = { Text(stringResource(R.string.use_login_for_browse)) },
+            description = stringResource(R.string.use_login_for_browse_desc),
             icon = { Icon(painterResource(R.drawable.person), null) },
-            checked = useLoginOnArtistPage,
+            checked = useLoginForBrowse,
             onCheckedChange = {
-                YouTube.useLoginOnArtistPage = it
-                onUseLoginOnArtistPageChange(it)
+                YouTube.useLoginForBrowse = it
+                onUseLoginForBrowseChange(it)
             }
         )
 
