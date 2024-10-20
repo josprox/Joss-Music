@@ -25,8 +25,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.4.4"
+        versionCode = 4
+        versionName = "1.4.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
