@@ -26,7 +26,7 @@ android {
         minSdk = 24
         targetSdk = 35
         versionCode = 4
-        versionName = "1.4.8"
+        versionName = "1.5.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -168,5 +168,5 @@ dependencies {
     "fullImplementation"(libs.opencc4j)
 
     implementation(libs.timber)
-    implementation("com.onesignal:OneSignal:5.1.23")
+    implementation(libs.onesignal)
 }
