@@ -82,6 +82,11 @@ object YouTube {
         set(value) {
             innerTube.proxy = value
         }
+    var useLoginForBrowse: Boolean
+        get() = innerTube.useLoginForBrowse
+        set(value) {
+            innerTube.useLoginForBrowse = value
+        }
 
     suspend fun searchSuggestions(query: String): Result<SearchSuggestions> = runCatching {
         val response = innerTube.getSearchSuggestions(WEB_REMIX, query).body<GetSearchSuggestionsResponse>()
@@ -194,7 +199,6 @@ object YouTube {
             response = innerTube.browse(
                 client = WEB_REMIX,
                 continuation = continuation,
-                setLogin = true
             ).body<BrowseResponse>()
             songs += response.continuationContents?.musicPlaylistShelfContinuation?.contents?.mapNotNull {
                 AlbumPage.fromMusicResponsiveListItemRenderer(it.musicResponsiveListItemRenderer)
