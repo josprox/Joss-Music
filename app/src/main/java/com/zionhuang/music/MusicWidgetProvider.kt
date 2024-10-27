@@ -74,43 +74,15 @@ class MusicWidgetProvider : AppWidgetProvider() {
             "PLAY_PAUSE" -> {
                 // Alternar entre reproducir y pausar
                 Log.d("MusicWidgetProvider", "Play/Pause clicked")
-                togglePlayPause()
             }
             "NEXT" -> {
                 // Lógica para la siguiente canción
                 Log.d("MusicWidgetProvider", "Next clicked")
-                playNextSong()
             }
             "PREVIOUS" -> {
                 // Lógica para la canción anterior
                 Log.d("MusicWidgetProvider", "Previous clicked")
-                playPreviousSong()
             }
         }
-    }
-
-    private fun togglePlayPause() {
-        if (player != null) {
-            if (player?.isPlaying == true) {
-                player?.pause()
-                // Actualiza el widget para mostrar que está en pausa
-            } else {
-                player?.play()
-                // Actualiza el widget para mostrar que está reproduciendo
-            }
-        }
-    }
-
-    private fun playNextSong() {
-        // Aquí debes implementar la lógica para reproducir la siguiente canción
-        // Esto podría ser una lista de canciones que has cargado previamente
-        // Ejemplo:
-        player?.seekToNext()
-    }
-
-    private fun playPreviousSong() {
-        // Aquí debes implementar la lógica para reproducir la canción anterior
-        // Ejemplo:
-        player?.seekToPrevious()
     }
 }
