@@ -90,6 +90,3 @@ lint/tmp/
 
 .kotlin
 output-metadata.json
-
-#Protecciones
-app/src/* merge=ours
