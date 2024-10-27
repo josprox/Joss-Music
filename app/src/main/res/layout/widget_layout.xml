@@ -1,49 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="#b5faa2">
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#fae6d7">
 
-    <ImageButton
-        android:id="@+id/previousButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="Previous"
-        app:srcCompat="@drawable/skip_previous" />
-
-    <ImageButton
-        android:id="@+id/playPauseButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="Play/Pause"
-        app:srcCompat="@drawable/play" />
-
-    <ImageButton
-        android:id="@+id/nextButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="Next"
-        app:srcCompat="@drawable/skip_next" />
-
-    <TextView
-        android:id="@+id/songTitle"
-        android:layout_width="0dp"
+    <!-- Fila para el logo, título de la canción y el artista -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="8dp"
-        android:text="Song Title"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txt_artist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Artist Name"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp" />
-</LinearLayout>
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/joss_music_logo" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/songTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Canción"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Artista"
+                android:textColor="#000"
+                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <ImageButton
+                        android:id="@+id/previousButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="Previous"
+                        app:srcCompat="@drawable/media3_icon_previous"
+                        android:layout_margin="5dp"
+                        android:tint="#000"
+                        tools:ignore="UseAppTint" />
+
+                    <ImageButton
+                        android:id="@+id/playPauseButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="Play/Pause"
+                        app:srcCompat="@drawable/media3_icon_play"
+                        android:layout_margin="5dp"
+                        android:tint="#000"
+                        tools:ignore="UseAppTint" />
+
+                    <ImageButton
+                        android:id="@+id/nextButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="Next"
+                        app:srcCompat="@drawable/media3_icon_next"
+                        android:layout_margin="5dp"
+                        android:tint="#000"
+                        tools:ignore="UseAppTint" />
+                </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+        <!-- Fila para los botones de control -->
+
+    </LinearLayout>
