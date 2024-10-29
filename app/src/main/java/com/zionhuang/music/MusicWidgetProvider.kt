@@ -13,8 +13,6 @@ import androidx.media3.common.Player.STATE_ENDED
 
 class MusicWidgetProvider : AppWidgetProvider() {
 
-    private var player: Player? = null
-
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -60,8 +58,8 @@ class MusicWidgetProvider : AppWidgetProvider() {
             views.setOnClickPendingIntent(R.id.previousButton, previousPendingIntent)
 
             // Configura los textos
-            views.setTextViewText(R.id.songTitle, "Nombre de la canción")
-            views.setTextViewText(R.id.txt_artist, "Artista")
+            views.setTextViewText(R.id.songTitle, "Sin reproducción")
+            views.setTextViewText(R.id.txt_artist, "Por el momento, el widget no funciona, espera a una futura actualización.")
 
             // Actualiza el widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
