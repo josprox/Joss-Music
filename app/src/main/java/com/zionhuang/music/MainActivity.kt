@@ -155,7 +155,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URLDecoder
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.days
+import kotlinx.coroutines.CoroutineScope
+import com.onesignal.OneSignal
+import com.onesignal.debug.LogLevel
+import io.github.cdimascio.dotenv.dotenv
+
+// NOTE: Replace the below with your own ONESIGNAL_APP_ID
+val dotenv = dotenv {
+    directory = "/assets"
+    filename = "env" // instead of 'env', use 'env'
+}
+val ONESIGNAL_APP_ID = dotenv["ONESIGNAL_APP_ID"]
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -207,6 +217,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        // Verbose Logging set to help debug issues, remove before releasing your app.
+        OneSignal.Debug.logLevel = LogLevel.VERBOSE
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
+
+        // requestPermission will show the native Android notification permission prompt.
+        // NOTE: It's recommended to use a OneSignal In-App Message to prompt instead.
+        CoroutineScope(Dispatchers.IO).launch {
+            OneSignal.Notifications.requestPermission(false)
+        }
+
         lifecycleScope.launch {
             dataStore.data
                 .map { it[DisableScreenshotKey] ?: false }
@@ -225,10 +247,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             LaunchedEffect(Unit) {
-                if (System.currentTimeMillis() - Updater.lastCheckTime > 1.days.inWholeMilliseconds) {
-                    Updater.getLatestVersionName().onSuccess {
-                        latestVersionName = it
-                    }
+                Updater.getLatestVersionName().onSuccess {
+                    latestVersionName = it
                 }
             }
 
@@ -638,7 +658,7 @@ class MainActivity : ComponentActivity() {
                                         ) {
                                             BadgedBox(
                                                 badge = {
-                                                    if (latestVersionName != BuildConfig.VERSION_NAME) {
+                                                    if (latestVersionName > BuildConfig.VERSION_NAME) {
                                                         Badge()
                                                     }
                                                 }

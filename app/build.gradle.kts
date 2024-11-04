@@ -22,11 +22,11 @@ android {
     compileSdk = 35
     buildToolsVersion = "35.0.0"
     defaultConfig {
-        applicationId = "com.zionhuang.music"
+        applicationId = "com.josprox.jossmusic"
         minSdk = 24
         targetSdk = 35
-        versionCode = 26
-        versionName = "0.5.10"
+        versionCode = 7
+        versionName = "1.5.4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -170,4 +170,6 @@ dependencies {
     "fullImplementation"(libs.opencc4j)
 
     implementation(libs.timber)
+    implementation(libs.onesignal)
+    implementation(libs.dotenv.kotlin)
 }

@@ -167,7 +167,7 @@ fun BottomSheetPlayer(
                 animationSpec = tween(durationMillis = 100, easing = LinearEasing),
                 label = "playPauseRoundness"
             )
-
+            //Nombre de la cancíon
             Text(
                 text = mediaMetadata.title,
                 style = MaterialTheme.typography.titleLarge,
@@ -190,7 +190,7 @@ fun BottomSheetPlayer(
             )
 
             Spacer(Modifier.height(6.dp))
-
+            //Nombre del artista
             Row(
                 horizontalArrangement = when (playerTextAlignment) {
                     PlayerTextAlignment.SIDED -> Arrangement.Start
