@@ -23,10 +23,10 @@ android {
     buildToolsVersion = "35.0.0"
     defaultConfig {
         applicationId = "com.josprox.jossmusic"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
-        versionCode = 7
-        versionName = "1.5.4"
+        versionCode = 9
+        versionName = "1.5.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -58,7 +58,6 @@ android {
 //            isUniversalApk = false
 //        }
 //    }
-    
     signingConfigs {
         getByName("debug") {
             if (System.getenv("MUSIC_DEBUG_SIGNING_STORE_PASSWORD") != null) {
@@ -106,7 +105,6 @@ android {
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
-
 dependencies {
     implementation(libs.guava)
     implementation(libs.coroutines.guava)
@@ -171,5 +169,4 @@ dependencies {
 
     implementation(libs.timber)
     implementation(libs.onesignal)
-    implementation(libs.dotenv.kotlin)
 }

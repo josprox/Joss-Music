@@ -158,14 +158,8 @@ import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import com.onesignal.OneSignal
 import com.onesignal.debug.LogLevel
-import io.github.cdimascio.dotenv.dotenv
 
-// NOTE: Replace the below with your own ONESIGNAL_APP_ID
-val dotenv = dotenv {
-    directory = "/assets"
-    filename = "env" // instead of 'env', use 'env'
-}
-val ONESIGNAL_APP_ID = dotenv["ONESIGNAL_APP_ID"]
+val ONESIGNAL_APP_ID = "d8bd65be-a177-407d-a2ad-197cf53a33c0"
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
