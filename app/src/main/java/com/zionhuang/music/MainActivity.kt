@@ -158,8 +158,13 @@ import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import com.onesignal.OneSignal
 import com.onesignal.debug.LogLevel
+import org.dotenv.vault.dotenvVault
 
-val ONESIGNAL_APP_ID = "d8bd65be-a177-407d-a2ad-197cf53a33c0"
+val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
+    directory = "/assets"
+    filename = "env.vault" // instead of '.env', use 'env'
+}
+val ONESIGNAL_APP_ID: String = dotenv["ONESIGNAL_APP_ID"]
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

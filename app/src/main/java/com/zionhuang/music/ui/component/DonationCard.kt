@@ -60,7 +60,7 @@ fun DonationCard(modifier: Modifier = Modifier) {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Your donation helps us keep the app free and improve its features..",
+                    text = "Your donation helps us keep the app free and improve its features...",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )

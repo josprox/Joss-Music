@@ -1,6 +1,7 @@
 package com.zionhuang.music.ui.screens.settings
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -106,7 +107,7 @@ fun SettingsScreen(
             },
             onClick = { uriHandler.openUri("https://www.paypal.me/jossestradamx") },
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer) // Fondo
+                .border(4.dp, MaterialTheme.colorScheme.primary, CircleShape) // Borde)
         )
         if (latestVersionName > BuildConfig.VERSION_NAME) {
             PreferenceEntry(

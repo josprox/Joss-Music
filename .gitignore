@@ -92,4 +92,4 @@ lint/tmp/
 output-metadata.json
 
 # Ignorar el archivo .env
-env
+env.vault

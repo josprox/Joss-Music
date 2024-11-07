@@ -35,9 +35,11 @@ android {
             isShrinkResources = true
             isCrunchPngs = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "DOTENV_KEY", System.getenv("DOTENV_KEY") ?: "\"\"")
         }
         debug {
             applicationIdSuffix = ".debug"
+            buildConfigField("String", "DOTENV_KEY", System.getenv("DOTENV_KEY") ?: "\"\"")
         }
     }
     flavorDimensions += "version"
@@ -169,4 +171,5 @@ dependencies {
 
     implementation(libs.timber)
     implementation(libs.onesignal)
+    implementation("com.github.dotenv-org:dotenv-vault-kotlin:0.0.2")
 }
