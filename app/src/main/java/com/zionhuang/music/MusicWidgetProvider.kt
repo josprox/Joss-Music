@@ -5,11 +5,9 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
-import androidx.media3.common.Player.STATE_ENDED
+import com.zionhuang.music.playback.MusicService
+import timber.log.Timber
 
 class MusicWidgetProvider : AppWidgetProvider() {
 
@@ -57,9 +55,9 @@ class MusicWidgetProvider : AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.previousButton, previousPendingIntent)
 
-            // Configura los textos
-            views.setTextViewText(R.id.songTitle, "Sin reproducción")
-            views.setTextViewText(R.id.txt_artist, "Por el momento, el widget no funciona, espera a una futura actualización.")
+            // Aquí puedes agregar la lógica para actualizar el estado
+            views.setTextViewText(R.id.songTitle, "Reproduciendo: Canción ejemplo")
+            views.setTextViewText(R.id.txt_artist, "Artista: Artista ejemplo")
 
             // Actualiza el widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -68,18 +66,18 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
+
+        val musicServiceIntent = Intent(context, MusicService::class.java) // Intent para controlar el servicio
+
         when (intent.action) {
             "PLAY_PAUSE" -> {
-                // Alternar entre reproducir y pausar
-                Log.d("MusicWidgetProvider", "Play/Pause clicked")
+                Timber.tag("MusicWidgetProvider").d("Play/Pause clicked")
             }
             "NEXT" -> {
-                // Lógica para la siguiente canción
-                Log.d("MusicWidgetProvider", "Next clicked")
+                Timber.tag("MusicWidgetProvider").d("Next clicked")
             }
             "PREVIOUS" -> {
-                // Lógica para la canción anterior
-                Log.d("MusicWidgetProvider", "Previous clicked")
+                Timber.tag("MusicWidgetProvider").d("Previous clicked")
             }
         }
     }

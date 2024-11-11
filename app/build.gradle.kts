@@ -25,8 +25,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 26
         targetSdk = 35
-        versionCode = 9
-        versionName = "1.5.8"
+        versionCode = 12
+        versionName = "1.6.4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -143,6 +143,7 @@ dependencies {
     implementation(libs.media3.okhttp)
 
     implementation(libs.room.runtime)
+    implementation(libs.billing.ktx)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 
@@ -171,5 +172,8 @@ dependencies {
 
     implementation(libs.timber)
     implementation(libs.onesignal)
-    implementation("com.github.dotenv-org:dotenv-vault-kotlin:0.0.2")
+    implementation(libs.dotenv.vault.kotlin)
+    implementation(libs.play.services.ads)
+    implementation(libs.billing)
+
 }

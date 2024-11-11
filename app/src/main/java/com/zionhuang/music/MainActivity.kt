@@ -1,10 +1,12 @@
 package com.zionhuang.music
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +14,7 @@ import android.os.IBinder
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.animateDpAsState
@@ -83,6 +86,7 @@ import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
@@ -95,6 +99,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.imageLoader
 import coil.request.ImageRequest
+import com.google.android.gms.ads.MobileAds
+import com.onesignal.OneSignal
+import com.onesignal.debug.LogLevel
 import com.valentinilk.shimmer.LocalShimmerTheme
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.SongItem
@@ -153,12 +160,10 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.dotenv.vault.dotenvVault
 import java.net.URLDecoder
 import javax.inject.Inject
-import kotlinx.coroutines.CoroutineScope
-import com.onesignal.OneSignal
-import com.onesignal.debug.LogLevel
-import org.dotenv.vault.dotenvVault
+import com.zionhuang.music.utils.NotificationPermissionActivity
 
 val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
     directory = "/assets"
@@ -216,18 +221,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        // Verbose Logging set to help debug issues, remove before releasing your app.
-        OneSignal.Debug.logLevel = LogLevel.VERBOSE
-
-        // OneSignal Initialization
+        // Inicializar OneSignal
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
 
-        // requestPermission will show the native Android notification permission prompt.
-        // NOTE: It's recommended to use a OneSignal In-App Message to prompt instead.
-        CoroutineScope(Dispatchers.IO).launch {
-            OneSignal.Notifications.requestPermission(false)
-        }
+        // Anuncios
 
+        MobileAds.initialize(this)
+
+        // Solicitar permiso de notificaciones
+        requestNotificationPermission()
+
+        // Configuraciones adicionales de la interfaz, temas y comportamiento
         lifecycleScope.launch {
             dataStore.data
                 .map { it[DisableScreenshotKey] ?: false }
@@ -243,6 +247,48 @@ class MainActivity : ComponentActivity() {
                     }
                 }
         }
+
+        setContent {
+            // Configuraciones de interfaz y temas
+            val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
+            val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
+            val isSystemInDarkTheme = isSystemInDarkTheme()
+            val useDarkTheme = remember(darkTheme, isSystemInDarkTheme) {
+                if (darkTheme == DarkMode.AUTO) isSystemInDarkTheme else darkTheme == DarkMode.ON
+            }
+
+            LaunchedEffect(useDarkTheme) {
+                setSystemBarAppearance(useDarkTheme)
+            }
+
+            // Lógica de la interfaz y color de tema dinámico
+            var themeColor by rememberSaveable(stateSaver = ColorSaver) { mutableStateOf(DefaultThemeColor) }
+            LaunchedEffect(playerConnection, enableDynamicTheme, isSystemInDarkTheme) {
+                val playerConnection = playerConnection
+                if (!enableDynamicTheme || playerConnection == null) {
+                    themeColor = DefaultThemeColor
+                    return@LaunchedEffect
+                }
+                playerConnection.service.currentMediaMetadata.collectLatest { song ->
+                    themeColor = if (song != null) {
+                        withContext(Dispatchers.IO) {
+                            val result = imageLoader.execute(
+                                ImageRequest.Builder(this@MainActivity)
+                                    .data(song.thumbnailUrl)
+                                    .allowHardware(false)
+                                    .build()
+                            )
+                            (result.drawable as? BitmapDrawable)?.bitmap?.extractThemeColor() ?: DefaultThemeColor
+                        }
+                    } else DefaultThemeColor
+                }
+            }
+        }
+    }
+
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    private fun initializeApp() {
 
         setContent {
             LaunchedEffect(Unit) {
@@ -820,6 +866,33 @@ class MainActivity : ComponentActivity() {
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             window.navigationBarColor = (if (isDark) Color.Transparent else Color.Black.copy(alpha = 0.2f)).toArgb()
+        }
+    }
+
+    private fun isNotificationPermissionGranted(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true // En versiones anteriores, se considera concedido por defecto
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+                if (isGranted) {
+                    initializeApp() // Llama a la inicialización si se otorga el permiso
+                } else {
+                    // Redirige a NotificationPermissionActivity si no se concede el permiso
+                    val intent = NotificationPermissionActivity.createIntent(this)
+                    startActivity(intent)
+                }
+            }.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 
