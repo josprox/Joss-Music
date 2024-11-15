@@ -881,6 +881,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun requestNotificationPermission() {
+        // Verifica si la versión del SDK es >= Android 13 (SDK 33)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerForActivityResult(
                 ActivityResultContracts.RequestPermission()
@@ -893,6 +894,9 @@ class MainActivity : ComponentActivity() {
                     startActivity(intent)
                 }
             }.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            // Para versiones anteriores, simplemente inicializa la aplicación
+            initializeApp()
         }
     }
 
