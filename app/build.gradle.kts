@@ -25,8 +25,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 26
         targetSdk = 35
-        versionCode = 15
-        versionName = "1.6.7"
+        versionCode = 17
+        versionName = "1.7.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -144,6 +144,7 @@ dependencies {
 
     implementation(libs.room.runtime)
     implementation(libs.billing.ktx)
+    implementation(libs.runtime.livedata)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 

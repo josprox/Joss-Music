@@ -4,16 +4,21 @@ annotation = "1.8.2"
 billing = "7.1.1"
 dotenvKotlin = "6.4.2"
 dotenvVaultKotlin = "0.0.2"
+jetbrainsKotlinxSerializationJson = "1.6.0"
 json = "20240303"
 kotlin = "2.0.10"
 compose = "1.6.8"
 kotlinxSerializationJson = "1.7.3"
 kotlinxSerializationJsonVersion = "1.x.x"
 ktorClientAndroid = "2.x.x"
+ktorClientCio = "3.0.0"
+ktorClientContentNegotiation = "2.3.3"
 ktorClientCore = "2.2.2"
 ktorClientCoreVersion = "2.x.x"
 ktorClientSerialization = "2.x.x"
+ktorKtorClientCore = "2.3.3"
 ktorSerializationKotlinxJson = "2.2.2"
+ktorSerializationKotlinxJsonVersion = "2.3.3"
 lifecycle = "2.8.4"
 material3 = "1.3.0-rc01"
 media3 = "1.4.1"
@@ -27,6 +32,7 @@ benchmarkMacro = "1.3.3"
 translate = "2.3.0"
 translateVersion = "16.0.0"
 billingKtx = "7.1.1"
+runtimeLivedata = "1.7.5"
 
 [libraries]
 annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
@@ -40,14 +46,19 @@ concurrent-futures = { group = "androidx.concurrent", name = "concurrent-futures
 gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 activity = { group = "androidx.activity", name = "activity-compose", version = "1.9.2" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinx-serialization-json-v160 = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "jetbrainsKotlinxSerializationJson" }
 kotlinx-serialization-json-v1xx = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientCore" }
 ktor-client-android-v2xx = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroid" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
+ktor-client-content-negotiation-v233 = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
 ktor-client-core-v222 = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
+ktor-client-core-v233 = { module = "io.ktor:ktor-client-core", version.ref = "ktorKtorClientCore" }
 ktor-client-core-v2xx = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCoreVersion" }
 ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktorClientCore" }
 ktor-client-serialization-v2xx = { module = "io.ktor:ktor-client-serialization", version.ref = "ktorClientSerialization" }
 ktor-serialization-kotlinx-json-v222 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+ktor-serialization-kotlinx-json-v233 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJsonVersion" }
 navigation = { group = "androidx.navigation", name = "navigation-compose", version = "2.8.2" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version = "1.1.1" }
@@ -122,6 +133,7 @@ mlkit-language-id = { group = "com.google.mlkit", name = "language-id", version 
 mlkit-translate = { group = "com.google.mlkit", name = "translate", version = "17.0.3" }
 benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro", version.ref = "benchmarkMacro" }
 billing-ktx = { group = "com.android.billingclient", name = "billing-ktx", version.ref = "billingKtx" }
+runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 
 [plugins]
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

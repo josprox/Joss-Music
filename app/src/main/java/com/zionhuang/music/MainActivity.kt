@@ -228,9 +228,6 @@ class MainActivity : ComponentActivity() {
 
         MobileAds.initialize(this)
 
-        // Solicitar permiso de notificaciones
-        requestNotificationPermission()
-
         // Configuraciones adicionales de la interfaz, temas y comportamiento
         lifecycleScope.launch {
             dataStore.data
@@ -284,6 +281,9 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        // Solicitar permiso de notificaciones
+        requestNotificationPermission()
     }
 
 
