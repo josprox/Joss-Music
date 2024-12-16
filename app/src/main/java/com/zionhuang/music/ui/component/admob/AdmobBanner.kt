@@ -9,19 +9,25 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.zionhuang.music.BuildConfig
 import org.dotenv.vault.dotenvVault
+import java.util.Calendar
 
 @Composable
 fun AdMobBannerAd() {
     val context = LocalContext.current
     val adView = rememberAdView(context)
 
-    AndroidView(
-        factory = { adView },
-        update = {
-            val adRequest = AdRequest.Builder().build()
-            it.loadAd(adRequest)
-        }
-    )
+    val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
+    val shouldShowAd = currentMonth != Calendar.DECEMBER && currentMonth != Calendar.JANUARY
+
+    if (shouldShowAd) {
+        AndroidView(
+            factory = { adView },
+            update = {
+                val adRequest = AdRequest.Builder().build()
+                it.loadAd(adRequest)
+            }
+        )
+    }
 }
 
 @Composable

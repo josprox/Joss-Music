@@ -90,6 +90,7 @@ import com.zionhuang.music.extensions.mediaItems
 import com.zionhuang.music.extensions.metadata
 import com.zionhuang.music.extensions.toMediaItem
 import com.zionhuang.music.lyrics.LyricsHelper
+import com.zionhuang.music.models.MediaMetadata
 import com.zionhuang.music.models.PersistQueue
 import com.zionhuang.music.models.toMediaMetadata
 import com.zionhuang.music.playback.queues.EmptyQueue
@@ -163,7 +164,7 @@ class MusicService : MediaLibraryService(),
     private var currentQueue: Queue = EmptyQueue
     var queueTitle: String? = null
 
-    val currentMediaMetadata = MutableStateFlow<com.zionhuang.music.models.MediaMetadata?>(null)
+    val currentMediaMetadata = MutableStateFlow<MediaMetadata?>(null)
     private val currentSong = currentMediaMetadata.flatMapLatest { mediaMetadata ->
         database.song(mediaMetadata?.id)
     }.stateIn(scope, SharingStarted.Lazily, null)
@@ -805,5 +806,21 @@ class MusicService : MediaLibraryService(),
         const val ERROR_CODE_NO_STREAM = 1000001
         const val CHUNK_LENGTH = 512 * 1024L
         const val PERSISTENT_QUEUE_FILE = "persistent_queue.data"
+        const val ACTION_TOGGLE_PLAY_PAUSE = "com.zionhuang.music.ACTION_TOGGLE_PLAY_PAUSE"
+        const val ACTION_NEXT = "com.zionhuang.music.ACTION_NEXT"
+        const val ACTION_PREVIOUS = "com.zionhuang.music.ACTION_PREVIOUS"
+    }
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        super.onStartCommand(intent, flags, startId)
+        val action = intent?.action
+        when (action) {
+            ACTION_TOGGLE_PLAY_PAUSE -> {
+            }
+            ACTION_NEXT -> {
+            }
+            ACTION_PREVIOUS -> {
+            }
+        }
+        return START_NOT_STICKY
     }
 }

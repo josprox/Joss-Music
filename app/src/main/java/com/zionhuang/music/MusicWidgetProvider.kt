@@ -72,12 +72,21 @@ class MusicWidgetProvider : AppWidgetProvider() {
         when (intent.action) {
             "PLAY_PAUSE" -> {
                 Timber.tag("MusicWidgetProvider").d("Play/Pause clicked")
+                // Enviar una solicitud al MusicService para pausar o reproducir la música
+                musicServiceIntent.action = MusicService.ACTION_TOGGLE_PLAY_PAUSE
+                context.startService(musicServiceIntent)
             }
             "NEXT" -> {
                 Timber.tag("MusicWidgetProvider").d("Next clicked")
+                // Enviar una solicitud al MusicService para pasar a la siguiente canción
+                musicServiceIntent.action = MusicService.ACTION_NEXT
+                context.startService(musicServiceIntent)
             }
             "PREVIOUS" -> {
                 Timber.tag("MusicWidgetProvider").d("Previous clicked")
+                // Enviar una solicitud al MusicService para retroceder a la canción anterior
+                musicServiceIntent.action = MusicService.ACTION_PREVIOUS
+                context.startService(musicServiceIntent)
             }
         }
     }
