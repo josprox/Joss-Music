@@ -92,7 +92,7 @@ class InnerTube {
         }
     }
 
-    private fun HttpRequestBuilder.ytClient(client: YouTubeClient, setLogin: Boolean = false) {
+    private fun HttpRequestBuilder.ytClient(client: YouTubeClient, setLogin: Boolean = false, sapisid: Boolean = true) {
         contentType(ContentType.Application.Json)
         headers {
             append("X-Goog-Api-Format-Version", "1")
@@ -102,7 +102,7 @@ class InnerTube {
             if (client.referer != null) {
                 append("Referer", client.referer)
             }
-            if (setLogin) {
+            if (setLogin && sapisid) {
                 cookie?.let { cookie ->
                     append("cookie", cookie)
                     if ("SAPISID" !in cookieMap) return@let
@@ -140,7 +140,7 @@ class InnerTube {
         videoId: String,
         playlistId: String?,
     ) = httpClient.post("player") {
-        ytClient(client, setLogin = true)
+        ytClient(client, setLogin = true, false)
         setBody(
             PlayerBody(
                 context = client.toContext(locale, visitorData).let {
@@ -240,7 +240,7 @@ class InnerTube {
         client: YouTubeClient,
         videoId: String,
     ) = httpClient.post("https://music.youtube.com/youtubei/v1/get_transcript") {
-        parameter("key", "AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30")
+        parameter("key", "Poner_Nueva_API")
         headers {
             append("Content-Type", "application/json")
         }
