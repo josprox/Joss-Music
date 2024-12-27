@@ -29,10 +29,11 @@ data class YouTubeClient(
         private const val USER_AGENT_ANDROID = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Mobile Safari/537.36"
         private const val USER_AGENT_IOS = "com.google.ios.youtube/19.29.1 (iPhone16,2; U; CPU iOS 17_5_1 like Mac OS X;)"
 
+        // Advertencia: Esta API ya no funciona, se recomienda poner una propia
         val ANDROID_MUSIC = YouTubeClient(
             clientName = "ANDROID_MUSIC",
             clientVersion = "5.01",
-            api_key = "Poner_Nueva_API",
+            api_key = "AIzaSyAOghZGza2MQSZkY_zfZ370N-PUdXEo8AI",
             userAgent = USER_AGENT_ANDROID
         )
 
@@ -50,10 +51,11 @@ data class YouTubeClient(
             userAgent = USER_AGENT_WEB
         )
 
+        // Advertencia: Esta API ya no funciona, se recomienda poner una propia
         val WEB_REMIX = YouTubeClient(
             clientName = "WEB_REMIX",
             clientVersion = "1.20220606.03.00",
-            api_key = "Poner_Nueva_API",
+            api_key = "AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30",
             userAgent = USER_AGENT_WEB,
             referer = REFERER_YOUTUBE_MUSIC
         )

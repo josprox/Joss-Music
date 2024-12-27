@@ -64,6 +64,20 @@ fun SettingsScreen(
             onClick = { navController.navigate("settings/content") }
         )
         PreferenceEntry(
+            title = { Text("Joss Red") },
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.joss_music_logo),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp) // Ajusta el tamaño a 24 dp
+                        .clip(CircleShape) // Aplica la forma circular
+                        .background(MaterialTheme.colorScheme.surfaceContainer) // Fondo
+                )
+            },
+            onClick = { navController.navigate("JossRedSettings") }
+        )
+        PreferenceEntry(
             title = { Text(stringResource(R.string.player_and_audio)) },
             icon = { Icon(painterResource(R.drawable.play), null) },
             onClick = { navController.navigate("settings/player") }

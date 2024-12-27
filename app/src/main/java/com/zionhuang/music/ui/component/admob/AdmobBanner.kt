@@ -8,6 +8,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.zionhuang.music.BuildConfig
+import com.zionhuang.music.ui.component.DonationCard
 import org.dotenv.vault.dotenvVault
 import java.util.Calendar
 
@@ -17,7 +18,7 @@ fun AdMobBannerAd() {
     val adView = rememberAdView(context)
 
     val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
-    val shouldShowAd = currentMonth != Calendar.DECEMBER && currentMonth != Calendar.JANUARY
+    val shouldShowAd = currentMonth != Calendar.DECEMBER
 
     if (shouldShowAd) {
         AndroidView(
@@ -27,6 +28,8 @@ fun AdMobBannerAd() {
                 it.loadAd(adRequest)
             }
         )
+    }else{
+        DonationCard()
     }
 }
 

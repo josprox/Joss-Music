@@ -71,8 +71,13 @@ class DownloadUtil @Inject constructor(
         val playerResponse = runBlocking(Dispatchers.IO) {
             YouTube.player(mediaId)
         }.getOrThrow()
+
+        // Verifica si hay restricciones de reproducción (por ejemplo, edad)
         if (playerResponse.playabilityStatus.status != "OK") {
-            throw PlaybackException(playerResponse.playabilityStatus.reason, null, PlaybackException.ERROR_CODE_REMOTE_ERROR)
+            // Si no es posible reproducir el contenido por restricciones, usa la URL alternativa
+            val alternativeUrl = "https://jossred.josprox.com/yt/stream/$mediaId"
+            songUrlCache[mediaId] = alternativeUrl to Long.MAX_VALUE // No caduca
+            return@Factory dataSpec.withUri(alternativeUrl.toUri())
         }
 
         val format =
@@ -89,7 +94,7 @@ class DownloadUtil @Inject constructor(
                         } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0) // prefer opus stream
                     }
             }!!.let {
-                // Specify range to avoid YouTube's throttling
+                // Especifica un rango para evitar la limitación de YouTube
                 it.copy(url = "${it.url}&range=0-${it.contentLength ?: 10000000}")
             }
 

@@ -25,8 +25,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 26
         targetSdk = 35
-        versionCode = 19
-        versionName = "1.7.4"
+        versionCode = 20
+        versionName = "1.7.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -145,6 +145,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.billing.ktx)
     implementation(libs.runtime.livedata)
+    implementation(project(":jossredconnect"))
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 
@@ -176,5 +177,4 @@ dependencies {
     implementation(libs.dotenv.vault.kotlin)
     implementation(libs.play.services.ads)
     implementation(libs.billing)
-
 }

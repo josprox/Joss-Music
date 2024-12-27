@@ -8,6 +8,7 @@ import android.database.SQLException
 import android.media.audiofx.AudioEffect
 import android.net.ConnectivityManager
 import android.os.Binder
+import android.util.Log
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.datastore.preferences.core.edit
@@ -119,6 +120,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -128,10 +130,12 @@ import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
+import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import java.net.URL
 import java.net.UnknownHostException
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -620,80 +624,110 @@ class MusicService : MediaLibraryService(),
             .setFlags(FLAG_IGNORE_CACHE_ON_ERROR)
 
     private fun createDataSourceFactory(): DataSource.Factory {
+        // Almacena URLs de canciones con su tiempo de expiración
         val songUrlCache = HashMap<String, Pair<String, Long>>()
+
+        // Crear una instancia de ResolvingDataSource que resolverá las URLs dinámicamente
         return ResolvingDataSource.Factory(createCacheDataSource()) { dataSpec ->
+            // Obtener el mediaId (identificador único de la canción)
             val mediaId = dataSpec.key ?: error("No media id")
 
+            // Verificar si la canción ya está almacenada en el caché local
             if (downloadCache.isCached(mediaId, dataSpec.position, if (dataSpec.length >= 0) dataSpec.length else 1) ||
                 playerCache.isCached(mediaId, dataSpec.position, CHUNK_LENGTH)
             ) {
+                // Si está en caché, iniciar un proceso para recuperarla
                 scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                 return@Factory dataSpec
             }
 
+            // Revisar si ya tenemos un URL almacenado y si aún es válido (no expirado)
             songUrlCache[mediaId]?.takeIf { it.second < System.currentTimeMillis() }?.let {
                 scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                 return@Factory dataSpec.withUri(it.first.toUri())
             }
 
-            // Check whether format exists so that users from older version can view format details
-            // There may be inconsistent between the downloaded file and the displayed info if user change audio quality frequently
+            // Consultar información del formato de la canción desde la base de datos
             val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
+
+            // Realizar una solicitud para obtener información del reproductor desde YouTube
             val playerResponse = runBlocking(Dispatchers.IO) {
                 YouTube.player(mediaId)
             }.getOrElse { throwable ->
+                // Manejo de errores comunes durante la solicitud
                 when (throwable) {
                     is ConnectException, is UnknownHostException -> {
-                        throw PlaybackException(getString(R.string.error_no_internet), throwable, PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)
+                        // Error de conexión a Internet
+                        throw PlaybackException(
+                            getString(R.string.error_no_internet),
+                            throwable,
+                            PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
+                        )
                     }
 
                     is SocketTimeoutException -> {
-                        throw PlaybackException(getString(R.string.error_timeout), throwable, PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT)
+                        // Error de tiempo de espera agotado
+                        throw PlaybackException(
+                            getString(R.string.error_timeout),
+                            throwable,
+                            PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT
+                        )
                     }
 
-                    else -> throw PlaybackException(getString(R.string.error_unknown), throwable, PlaybackException.ERROR_CODE_REMOTE_ERROR)
+                    else -> {
+                        // Error desconocido
+                        throw PlaybackException(
+                            getString(R.string.error_unknown),
+                            throwable,
+                            PlaybackException.ERROR_CODE_REMOTE_ERROR
+                        )
+                    }
                 }
             }
-            if (playerResponse.playabilityStatus.status != "OK") {
-                throw PlaybackException(playerResponse.playabilityStatus.reason, null, PlaybackException.ERROR_CODE_REMOTE_ERROR)
-            }
 
-            val format =
-                if (playedFormat != null) {
-                    playerResponse.streamingData?.adaptiveFormats?.find {
-                        // Use itag to identify previously played format
-                        it.itag == playedFormat.itag
-                    }
-                } else {
-                    playerResponse.streamingData?.adaptiveFormats
-                        ?.filter { it.isAudio }
-                        ?.maxByOrNull {
-                            it.bitrate * when (audioQuality) {
-                                AudioQuality.AUTO -> if (connectivityManager.isActiveNetworkMetered) -1 else 1
-                                AudioQuality.HIGH -> 1
-                                AudioQuality.LOW -> -1
-                            } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0) // prefer opus stream
-                        }
-                } ?: throw PlaybackException(getString(R.string.error_no_stream), null, ERROR_CODE_NO_STREAM)
-
-            database.query {
-                upsert(
-                    FormatEntity(
-                        id = mediaId,
-                        itag = format.itag,
-                        mimeType = format.mimeType.split(";")[0],
-                        codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
-                        bitrate = format.bitrate,
-                        sampleRate = format.audioSampleRate,
-                        contentLength = format.contentLength!!,
-                        loudnessDb = playerResponse.playerConfig?.audioConfig?.loudnessDb
-                    )
+            // Verificar el estado de reproducibilidad del video
+            if (playerResponse.playabilityStatus.status == "OK") {
+                // Si es reproducible, buscar el formato de audio compatible
+                val format = playerResponse.streamingData?.adaptiveFormats?.find {
+                    it.isAudio // Identificar si el formato es solo de audio
+                } ?: throw PlaybackException(
+                    getString(R.string.error_no_stream),
+                    null,
+                    PlaybackException.ERROR_CODE_REMOTE_ERROR
                 )
-            }
-            scope.launch(Dispatchers.IO) { recoverSong(mediaId, playerResponse) }
 
-            songUrlCache[mediaId] = format.url!! to playerResponse.streamingData!!.expiresInSeconds * 1000L
-            dataSpec.withUri(format.url!!.toUri()).subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
+                // Almacenar el formato de audio en la base de datos para futuras reproducciones
+                database.query {
+                    upsert(
+                        FormatEntity(
+                            id = mediaId,
+                            itag = format.itag,
+                            mimeType = format.mimeType.split(";")[0],
+                            codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
+                            bitrate = format.bitrate,
+                            sampleRate = format.audioSampleRate,
+                            contentLength = format.contentLength!!,
+                            loudnessDb = playerResponse.playerConfig?.audioConfig?.loudnessDb
+                        )
+                    )
+                }
+
+                // Recuperar la canción usando la información obtenida
+                scope.launch(Dispatchers.IO) { recoverSong(mediaId, playerResponse) }
+
+                // Guardar el URL y su tiempo de expiración en el caché
+                songUrlCache[mediaId] = format.url!! to playerResponse.streamingData!!.expiresInSeconds * 1000L
+
+                // Retornar el DataSpec actualizado con el URL de la fuente principal
+                return@Factory dataSpec.withUri(format.url!!.toUri())
+            } else {
+                // Si no es reproducible, usar la fuente alternativa
+                Log.w("JossRedService", "Usando fuente alternativa para $mediaId debido a restricciones")
+                val alternativeUrl = "https://jossred.josprox.com/yt/stream/$mediaId"
+
+                // Retornar el DataSpec con el URL de la fuente alternativa
+                return@Factory dataSpec.withUri(alternativeUrl.toUri())
+            }
         }
     }
 

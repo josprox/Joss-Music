@@ -28,6 +28,8 @@ import com.zionhuang.music.ui.screens.settings.BackupAndRestore
 import com.zionhuang.music.ui.screens.settings.ContentSettings
 import com.zionhuang.music.ui.screens.settings.DiscordLoginScreen
 import com.zionhuang.music.ui.screens.settings.DiscordSettings
+import com.zionhuang.music.ui.screens.settings.JossRedSettings
+import com.zionhuang.music.ui.screens.settings.LoginScreenV2
 import com.zionhuang.music.ui.screens.settings.PlayerSettings
 import com.zionhuang.music.ui.screens.settings.PrivacySettings
 import com.zionhuang.music.ui.screens.settings.SettingsScreen
@@ -190,6 +192,9 @@ fun NavGraphBuilder.navigationBuilder(
     composable("settings") {
         SettingsScreen(navController, scrollBehavior, latestVersionName)
     }
+    composable("JossRedSettings") {
+        JossRedSettings(navController, scrollBehavior)
+    }
     composable("settings/appearance") {
         AppearanceSettings(navController, scrollBehavior)
     }
@@ -219,5 +224,8 @@ fun NavGraphBuilder.navigationBuilder(
     }
     composable("login") {
         LoginScreen(navController)
+    }
+    composable("loginv2") {
+        LoginScreenV2(navController)
     }
 }

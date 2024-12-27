@@ -287,6 +287,7 @@ class MainActivity : ComponentActivity() {
     }
 
 
+    @SuppressLint("UnusedBoxWithConstraintsScope")
     @OptIn(ExperimentalMaterial3Api::class)
     private fun initializeApp() {
 
