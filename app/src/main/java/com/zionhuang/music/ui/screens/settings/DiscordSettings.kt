@@ -237,7 +237,7 @@ fun RichPresence(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Listening to InnerTune",
+                text = "Listening to Joss Music",
                 style = MaterialTheme.typography.labelLarge,
                 textAlign = TextAlign.Start,
                 fontWeight = FontWeight.ExtraBold,

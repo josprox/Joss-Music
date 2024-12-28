@@ -56,6 +56,7 @@ import com.zionhuang.innertube.models.SongItem
 import com.zionhuang.innertube.models.WatchEndpoint
 import com.zionhuang.innertube.models.response.PlayerResponse
 import com.zionhuang.music.MainActivity
+import com.zionhuang.music.MusicWidgetProvider
 import com.zionhuang.music.R
 import com.zionhuang.music.constants.AudioNormalizationKey
 import com.zionhuang.music.constants.AudioQuality
@@ -130,12 +131,10 @@ import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
-import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.net.ConnectException
 import java.net.SocketTimeoutException
-import java.net.URL
 import java.net.UnknownHostException
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -416,6 +415,18 @@ class MusicService : MediaLibraryService(),
             if (song == null) insert(mediaMetadata.copy(duration = duration))
             else if (song.song.duration == -1) update(song.song.copy(duration = duration))
         }
+        /**
+         * Sistema de widgets activado, este es un widget básico, preparándose para otros widgets en un futuro
+         * */
+        // Transformar la lista de artistas a un string separado por comas
+        val artistsString = mediaMetadata.artists.joinToString(", ") { it.name }
+
+        notifyWidget(mediaMetadata.title, artistsString, mediaMetadata.thumbnailUrl.toString())
+
+        /**
+         * Fin del widget dinámico
+         * **/
+
         if (!database.hasRelatedSongs(mediaId)) {
             val relatedEndpoint = YouTube.next(WatchEndpoint(videoId = mediaId)).getOrNull()?.relatedEndpoint ?: return
             val relatedPage = YouTube.related(relatedEndpoint).getOrNull() ?: return
@@ -433,6 +444,7 @@ class MusicService : MediaLibraryService(),
             }
         }
     }
+
 
     fun playQueue(queue: Queue, playWhenReady: Boolean = true) {
         if (!scope.isActive) {
@@ -718,6 +730,8 @@ class MusicService : MediaLibraryService(),
                 // Guardar el URL y su tiempo de expiración en el caché
                 songUrlCache[mediaId] = format.url!! to playerResponse.streamingData!!.expiresInSeconds * 1000L
 
+
+
                 // Retornar el DataSpec actualizado con el URL de la fuente principal
                 return@Factory dataSpec.withUri(format.url!!.toUri())
             } else {
@@ -837,24 +851,20 @@ class MusicService : MediaLibraryService(),
 
         const val CHANNEL_ID = "music_channel_01"
         const val NOTIFICATION_ID = 888
-        const val ERROR_CODE_NO_STREAM = 1000001
         const val CHUNK_LENGTH = 512 * 1024L
         const val PERSISTENT_QUEUE_FILE = "persistent_queue.data"
-        const val ACTION_TOGGLE_PLAY_PAUSE = "com.zionhuang.music.ACTION_TOGGLE_PLAY_PAUSE"
-        const val ACTION_NEXT = "com.zionhuang.music.ACTION_NEXT"
-        const val ACTION_PREVIOUS = "com.zionhuang.music.ACTION_PREVIOUS"
     }
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        super.onStartCommand(intent, flags, startId)
-        val action = intent?.action
-        when (action) {
-            ACTION_TOGGLE_PLAY_PAUSE -> {
-            }
-            ACTION_NEXT -> {
-            }
-            ACTION_PREVIOUS -> {
-            }
+
+    /**
+     * Configuración del widget
+     * **/
+    private fun notifyWidget(songTitle: String, artistName: String, imageAlbum: String) {
+        val intent = Intent(this, MusicWidgetProvider::class.java).apply {
+            action = "UPDATE_WIDGET"
+            putExtra("SONG_TITLE", songTitle)
+            putExtra("ARTIST_NAME", artistName)
+            putExtra("IMAGE_ALBUM", imageAlbum)
         }
-        return START_NOT_STICKY
+        sendBroadcast(intent)
     }
 }
