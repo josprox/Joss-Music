@@ -2,6 +2,7 @@
 
 package com.zionhuang.music.ui.component
 
+import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -83,6 +84,7 @@ import com.zionhuang.music.constants.AppBarHeight
 import kotlin.math.max
 import kotlin.math.roundToInt
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @ExperimentalMaterial3Api
 @Composable
 fun SearchBar(

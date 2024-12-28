@@ -15,6 +15,7 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.animateDpAsState
@@ -71,6 +72,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
@@ -129,6 +131,7 @@ import com.zionhuang.music.ui.component.BottomSheetMenu
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.SearchBar
+import com.zionhuang.music.ui.component.getIconForDate
 import com.zionhuang.music.ui.component.rememberBottomSheetState
 import com.zionhuang.music.ui.component.shimmer.ShimmerTheme
 import com.zionhuang.music.ui.menu.YouTubeSongMenu
@@ -286,7 +289,6 @@ class MainActivity : ComponentActivity() {
         requestNotificationPermission()
     }
 
-
     @SuppressLint("UnusedBoxWithConstraintsScope")
     @OptIn(ExperimentalMaterial3Api::class)
     private fun initializeApp() {
@@ -311,6 +313,9 @@ class MainActivity : ComponentActivity() {
             var themeColor by rememberSaveable(stateSaver = ColorSaver) {
                 mutableStateOf(DefaultThemeColor)
             }
+
+            val iconResId = getIconForDate() // Obtener el recurso dinámico
+            val iconPainter: Painter = painterResource(id = iconResId)
 
             LaunchedEffect(playerConnection, enableDynamicTheme, isSystemInDarkTheme) {
                 val playerConnection = playerConnection
@@ -711,7 +716,7 @@ class MainActivity : ComponentActivity() {
                                             ) {
 
                                                 Icon(
-                                                    painter = painterResource(R.drawable.settings),
+                                                    painter = iconPainter,
                                                     contentDescription = null
                                                 )
                                             }

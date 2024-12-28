@@ -131,6 +131,7 @@ import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
+import timber.log.Timber
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.net.ConnectException
@@ -200,7 +201,7 @@ class MusicService : MediaLibraryService(),
         setMediaNotificationProvider(
             DefaultMediaNotificationProvider(this, { NOTIFICATION_ID }, CHANNEL_ID, R.string.music_player)
                 .apply {
-                    setSmallIcon(R.drawable.small_icon)
+                    setSmallIcon(R.drawable.joss_music_logo)
                 }
         )
         player = ExoPlayer.Builder(this)
@@ -217,6 +218,7 @@ class MusicService : MediaLibraryService(),
             .setSeekBackIncrementMs(5000)
             .setSeekForwardIncrementMs(5000)
             .build()
+
             .apply {
                 addListener(this@MusicService)
                 sleepTimer = SleepTimer(scope, this)
@@ -403,30 +405,42 @@ class MusicService : MediaLibraryService(),
     }
 
     private suspend fun recoverSong(mediaId: String, playerResponse: PlayerResponse? = null) {
+        // Recuperar la canción desde la base de datos
         val song = database.song(mediaId).first()
         val mediaMetadata = withContext(Dispatchers.Main) {
             player.findNextMediaItemById(mediaId)?.metadata
         } ?: return
+
+        // Calcular la duración de la canción
         val duration = song?.song?.duration?.takeIf { it != -1 }
             ?: mediaMetadata.duration.takeIf { it != -1 }
             ?: (playerResponse ?: YouTube.player(mediaId).getOrNull())?.videoDetails?.lengthSeconds?.toInt()
             ?: -1
+
+        // Actualizar la base de datos con los metadatos de la canción
         database.query {
             if (song == null) insert(mediaMetadata.copy(duration = duration))
             else if (song.song.duration == -1) update(song.song.copy(duration = duration))
         }
+
         /**
-         * Sistema de widgets activado, este es un widget básico, preparándose para otros widgets en un futuro
+         * Actualizar widget después de que se haya recuperado la canción
          * */
-        // Transformar la lista de artistas a un string separado por comas
-        val artistsString = mediaMetadata.artists.joinToString(", ") { it.name }
+        // Obtener los metadatos de la canción que se está reproduciendo actualmente
+        val mediaMetadataSong = withContext(Dispatchers.Main) {
+            player.mediaMetadata
+        }
 
-        notifyWidget(mediaMetadata.title, artistsString, mediaMetadata.thumbnailUrl.toString())
+        // Actualizar el widget con los nuevos metadatos
+        notifyWidget(
+            mediaMetadataSong.title.toString(),
+            mediaMetadataSong.artist.toString(),
+            mediaMetadataSong.durationMs.toString()
+        )
 
         /**
-         * Fin del widget dinámico
-         * **/
-
+         * Manejo de canciones relacionadas
+         * */
         if (!database.hasRelatedSongs(mediaId)) {
             val relatedEndpoint = YouTube.next(WatchEndpoint(videoId = mediaId)).getOrNull()?.relatedEndpoint ?: return
             val relatedPage = YouTube.related(relatedEndpoint).getOrNull() ?: return
@@ -444,7 +458,6 @@ class MusicService : MediaLibraryService(),
             }
         }
     }
-
 
     fun playQueue(queue: Queue, playWhenReady: Boolean = true) {
         if (!scope.isActive) {
@@ -736,7 +749,8 @@ class MusicService : MediaLibraryService(),
                 return@Factory dataSpec.withUri(format.url!!.toUri())
             } else {
                 // Si no es reproducible, usar la fuente alternativa
-                Log.w("JossRedService", "Usando fuente alternativa para $mediaId debido a restricciones")
+                Timber.tag("JossRedService")
+                    .w("Usando fuente alternativa para $mediaId debido a restricciones")
                 val alternativeUrl = "https://jossred.josprox.com/yt/stream/$mediaId"
 
                 // Retornar el DataSpec con el URL de la fuente alternativa
