@@ -1,2 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="card_donation">Tu donación nos ayuda a mantener la aplicación gratuita y mejorar sus funciones</string>
+  <string name="website_url">ir al sitio web</string>
+  <string name="latestVersion">Versión más reciente</string>
+  <string name="close">Cerrar</string>
+  <string name="donate">Donar</string>
+  <string name="supportApp">¡Apoya nuestra aplicación!</string>
+  <string name="enaNotifications">Habilitar notificaciones</string>
+  <string name="enaNotificationsText">Es necesario habilitar las notificaciones para seguir utilizando la aplicación. Habilítelas en la configuración del sistema.</string>
+  <string name="goToSettings">Ir a configuración</string>
+  <string name="enaNotificationsTextTrue">Se han habilitado las notificaciones. Deslice el dedo hacia atrás o presione el botón Atrás en su teléfono.</string>
+  <string name="enaNotificationsTextFalse">No se puede acceder a la información de la aplicación</string>
+  <string name="back">Atrás</string>
+  <string name="noPlayback">Sin reproducción</string>
+  <string name="unknownArtist">Artista desconocido</string>
+  <string name="untitled">Sin título</string>
+</resources>

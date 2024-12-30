@@ -115,7 +115,7 @@ fun DataUpdate(
 
         releaseDetails.value?.let { details ->
             Text(
-                text = "Versión más reciente: ${details.version}",
+                text = stringResource(R.string.latestVersion)+": ${details.version}",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -148,7 +148,7 @@ fun DataUpdate(
                     },
                     modifier = Modifier.padding(horizontal = 16.dp)
                 ) {
-                    Text(text = "Ir al sitio web")
+                    Text(text = stringResource(R.string.website_url))
                 }
             }
         } ?: errorMessage.value?.let { error ->
@@ -162,7 +162,7 @@ fun DataUpdate(
     }
 
     TopAppBar(
-        title = { Text(stringResource(R.string.app_version)) },
+        title = { Text(stringResource(R.string.latestVersion)) },
         navigationIcon = {
             IconButton(
                 onClick = navController::navigateUp

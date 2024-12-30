@@ -105,7 +105,7 @@ fun SettingsScreen(
             onClick = { navController.navigate("settings/about") }
         )
         PreferenceEntry(
-            title = { Text("Donate") },
+            title = { Text(stringResource(R.string.donate)) },
             icon = {
                 Icon(
                     painter = painterResource(id = R.drawable.joss_music_logo),
@@ -127,7 +127,7 @@ fun SettingsScreen(
                         text = stringResource(R.string.new_version_available),
                     )
                 },
-                description = "Se ha detectado una nueva versión: "+BuildConfig.VERSION_NAME+"<"+latestVersionName,
+                description = stringResource(R.string.latestVersion)+": "+BuildConfig.VERSION_NAME+"<"+latestVersionName,
                 icon = {
                     BadgedBox(
                         badge = { Badge() }

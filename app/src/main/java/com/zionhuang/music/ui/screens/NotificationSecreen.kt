@@ -3,7 +3,6 @@ package com.zionhuang.music.ui.screens
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -19,7 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.NotificationManagerCompat
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.zionhuang.music.R
 
 @Composable
 fun NotificationPermissionScreen(
@@ -51,7 +51,7 @@ fun NotificationPermissionScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Enable Notifications",
+                    text = stringResource(R.string.enaNotifications),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
@@ -60,8 +60,7 @@ fun NotificationPermissionScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "It is necessary to enable notifications to continue using the app. " +
-                            "Please enable them in the system settings.",
+                    text = stringResource(R.string.enaNotificationsText),
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.padding(horizontal = 16.dp),
@@ -82,7 +81,7 @@ fun NotificationPermissionScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Go to Settings",
+                        text = stringResource(R.string.goToSettings),
                         color = Color.White
                     )
                 }
@@ -115,7 +114,7 @@ fun ContentScreen(onBackPressed: () -> Unit) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Notifications have been enabled. Please swipe back or press the back button on your phone.",
+                text = stringResource(R.string.enaNotificationsTextTrue),
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -133,7 +132,7 @@ fun ContentScreen(onBackPressed: () -> Unit) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Back",
+                    text = stringResource(R.string.back),
                     color = Color.White
                 )
             }

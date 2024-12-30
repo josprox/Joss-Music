@@ -26,9 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.zionhuang.music.R
 import java.util.Calendar
 
 @Composable
@@ -79,14 +81,14 @@ fun DonationCard(modifier: Modifier = Modifier) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Support our app!",
+                    text = stringResource(R.string.supportApp),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Your donation helps us keep the app free and improve its features...",
+                    text = stringResource(R.string.card_donation),
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -104,7 +106,7 @@ fun DonationCard(modifier: Modifier = Modifier) {
                         ),
                         modifier = Modifier.weight(1f) // Hace que el botón ocupe espacio
                     ) {
-                        Text(text = "Donate", color = Color.White)
+                        Text(text = stringResource(R.string.donate), color = Color.White)
                     }
                     Spacer(modifier = Modifier.width(8.dp)) // Espacio entre los botones
                     Button(
@@ -114,7 +116,7 @@ fun DonationCard(modifier: Modifier = Modifier) {
                         ),
                         modifier = Modifier.weight(1f) // Hace que el botón ocupe espacio
                     ) {
-                        Text(text = "Close", color = Color.White) // Texto del botón de cerrar
+                        Text(text = stringResource(R.string.close), color = Color.White) // Texto del botón de cerrar
                     }
                 }
             }

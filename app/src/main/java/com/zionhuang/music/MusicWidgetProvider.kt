@@ -17,8 +17,11 @@ class MusicWidgetProvider : AppWidgetProvider() {
         for (appWidgetId in appWidgetIds) {
             val views = RemoteViews(context.packageName, R.layout.widget_layout)
 
+            // Accede a las cadenas desde el archivo strings.xml
+            val noPlaybackText = context.getString(R.string.noPlayback)
+
             // Inicializa con texto predeterminado
-            views.setTextViewText(R.id.txt_station_title, "Sin reproducción")
+            views.setTextViewText(R.id.txt_station_title, noPlaybackText)
             views.setTextViewText(R.id.txt_station_subtitle, "---")
 
             // Actualiza el widget
@@ -31,9 +34,13 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
         when (intent.action) {
             "UPDATE_WIDGET" -> {
+                // Accede a las cadenas desde el archivo strings.xml
+                val unknownArtist = context.getString(R.string.unknownArtist)
+                val untitled = context.getString(R.string.untitled)
+
                 // Obtén los datos de la canción del intent
-                val songTitle = intent.getStringExtra("SONG_TITLE") ?: "Sin título"
-                val artistName = intent.getStringExtra("ARTIST_NAME") ?: "Artista desconocido"
+                val songTitle = intent.getStringExtra("SONG_TITLE") ?: untitled
+                val artistName = intent.getStringExtra("ARTIST_NAME") ?: unknownArtist
 
                 // Actualiza el widget con los nuevos datos
                 val appWidgetManager = AppWidgetManager.getInstance(context)
@@ -43,8 +50,11 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
                 for (appWidgetId in appWidgetIds) {
                     val views = RemoteViews(context.packageName, R.layout.widget_layout)
+
+                    // Actualiza las vistas del widget con los textos de la canción y el artista
                     views.setTextViewText(R.id.txt_station_title, songTitle)
                     views.setTextViewText(R.id.txt_station_subtitle, artistName)
+
                     appWidgetManager.updateAppWidget(appWidgetId, views)
                 }
             }

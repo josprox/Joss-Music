@@ -1,2 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="card_donation">Donasjonen din hjelper oss å holde appen gratis og forbedre funksjonene</string>
+  <string name="website_url">gå til nettsiden</string>
+  <string name="latestVersion">Siste versjon</string>
+  <string name="close">Lukke</string>
+  <string name="donate">Donere</string>
+  <string name="supportApp">Støtt appen vår!</string>
+  <string name="enaNotifications">Aktiver varsler</string>
+  <string name="enaNotificationsText">Du må aktivere varsler for å fortsette å bruke appen. Aktiver dem i systeminnstillingene.</string>
+  <string name="goToSettings">Gå til innstillinger</string>
+  <string name="enaNotificationsTextTrue">Varsler er aktivert. Sveip tilbake eller trykk på tilbakeknappen på telefonen.</string>
+  <string name="enaNotificationsTextFalse">Får ikke tilgang til appinformasjon</string>
+  <string name="back">Tilbake</string>
+  <string name="noPlayback">Ingen avspilling</string>
+  <string name="unknownArtist">Ukjent artist</string>
+  <string name="untitled">Uten tittel</string>
+</resources>
