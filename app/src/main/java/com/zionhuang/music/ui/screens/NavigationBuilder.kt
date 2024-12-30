@@ -26,6 +26,7 @@ import com.zionhuang.music.ui.screens.settings.AboutScreen
 import com.zionhuang.music.ui.screens.settings.AppearanceSettings
 import com.zionhuang.music.ui.screens.settings.BackupAndRestore
 import com.zionhuang.music.ui.screens.settings.ContentSettings
+import com.zionhuang.music.ui.screens.settings.DataUpdate
 import com.zionhuang.music.ui.screens.settings.DiscordLoginScreen
 import com.zionhuang.music.ui.screens.settings.DiscordSettings
 import com.zionhuang.music.ui.screens.settings.JossRedSettings
@@ -221,6 +222,9 @@ fun NavGraphBuilder.navigationBuilder(
     }
     composable("settings/about") {
         AboutScreen(navController, scrollBehavior)
+    }
+    composable("settings/update") {
+        DataUpdate(navController, scrollBehavior, latestVersionName)
     }
     composable("login") {
         LoginScreen(navController)

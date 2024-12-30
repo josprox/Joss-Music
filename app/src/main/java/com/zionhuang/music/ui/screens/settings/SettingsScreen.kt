@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -23,8 +22,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -138,9 +135,7 @@ fun SettingsScreen(
                         Icon(painterResource(R.drawable.update), null)
                     }
                 },
-                onClick = {
-                    uriHandler.openUri("https://play.google.com/store/apps/details?id=com.josprox.jossmusic")
-                }
+                onClick = { navController.navigate("settings/update") }
             )
         }else{
             PreferenceEntry(
@@ -149,7 +144,8 @@ fun SettingsScreen(
                         text = stringResource(R.string.app_version),
                     )
                 },
-                description = "Última version: "+BuildConfig.VERSION_NAME
+                description = "Última version: "+BuildConfig.VERSION_NAME,
+                onClick = { navController.navigate("settings/update") }
             )
         }
     }

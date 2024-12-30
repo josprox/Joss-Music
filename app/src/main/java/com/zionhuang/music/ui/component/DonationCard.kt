@@ -1,5 +1,6 @@
 package com.zionhuang.music.ui.component
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,10 +24,35 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.util.Calendar
+
+@Composable
+fun DonationCardWithTiming(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val sharedPreferences = context.getSharedPreferences("donation_card", Context.MODE_PRIVATE)
+    val lastShownTimestamp = sharedPreferences.getLong("last_shown", 0L)
+
+    val currentTime = Calendar.getInstance().timeInMillis
+    val twoDaysInMillis = 2 * 24 * 60 * 60 * 1000L // 2 days in milliseconds
+
+    val showDonationCard = currentTime - lastShownTimestamp >= twoDaysInMillis
+
+    // Mostrar la tarjeta solo si debe mostrarse
+    if (showDonationCard) {
+        DonationCard(modifier = modifier)
+
+        // Guardar la fecha actual como la última vez que se mostró la tarjeta
+        with(sharedPreferences.edit()) {
+            putLong("last_shown", currentTime)
+            apply()
+        }
+    }
+}
 
 @Composable
 fun DonationCard(modifier: Modifier = Modifier) {

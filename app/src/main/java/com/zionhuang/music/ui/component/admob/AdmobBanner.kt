@@ -8,7 +8,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.zionhuang.music.BuildConfig
-import com.zionhuang.music.ui.component.DonationCard
+import com.zionhuang.music.ui.component.DonationCardWithTiming
 import org.dotenv.vault.dotenvVault
 import java.util.Calendar
 
@@ -29,7 +29,7 @@ fun AdMobBannerAd() {
             }
         )
     }else{
-        DonationCard()
+        DonationCardWithTiming()
     }
 }
 

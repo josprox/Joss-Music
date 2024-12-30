@@ -654,77 +654,44 @@ class MusicService : MediaLibraryService(),
 
         // Crear una instancia de ResolvingDataSource que resolverá las URLs dinámicamente
         return ResolvingDataSource.Factory(createCacheDataSource()) { dataSpec ->
-            // Obtener el mediaId (identificador único de la canción)
             val mediaId = dataSpec.key ?: error("No media id")
 
-            // Verificar si la canción ya está almacenada en el caché local
+            // Verificar si está en caché local
             if (downloadCache.isCached(mediaId, dataSpec.position, if (dataSpec.length >= 0) dataSpec.length else 1) ||
                 playerCache.isCached(mediaId, dataSpec.position, CHUNK_LENGTH)
             ) {
-                // Si está en caché, iniciar un proceso para recuperarla
                 scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                 return@Factory dataSpec
             }
 
-            // Revisar si ya tenemos un URL almacenado y si aún es válido (no expirado)
-            songUrlCache[mediaId]?.takeIf { it.second < System.currentTimeMillis() }?.let {
+            // Validar si hay URL en caché y no ha expirado
+            songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
                 scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                 return@Factory dataSpec.withUri(it.first.toUri())
             }
 
-            // Consultar información del formato de la canción desde la base de datos
+            // Obtener formato almacenado
             val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
 
-            // Realizar una solicitud para obtener información del reproductor desde YouTube
+            // Obtener información del reproductor de YouTube
             val playerResponse = runBlocking(Dispatchers.IO) {
                 YouTube.player(mediaId)
             }.getOrElse { throwable ->
-                // Manejo de errores comunes durante la solicitud
-                when (throwable) {
-                    is ConnectException, is UnknownHostException -> {
-                        // Error de conexión a Internet
-                        throw PlaybackException(
-                            getString(R.string.error_no_internet),
-                            throwable,
-                            PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
-                        )
-                    }
-
-                    is SocketTimeoutException -> {
-                        // Error de tiempo de espera agotado
-                        throw PlaybackException(
-                            getString(R.string.error_timeout),
-                            throwable,
-                            PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT
-                        )
-                    }
-
-                    else -> {
-                        // Error desconocido
-                        throw PlaybackException(
-                            getString(R.string.error_unknown),
-                            throwable,
-                            PlaybackException.ERROR_CODE_REMOTE_ERROR
-                        )
-                    }
-                }
+                handlePlaybackError(throwable)
             }
 
-            // Verificar el estado de reproducibilidad del video
-            if (playerResponse.playabilityStatus.status == "OK") {
-                // Si es reproducible, buscar el formato de audio compatible
-                val format = playerResponse.streamingData?.adaptiveFormats?.find {
-                    it.isAudio // Identificar si el formato es solo de audio
-                } ?: throw PlaybackException(
-                    getString(R.string.error_no_stream),
-                    null,
-                    PlaybackException.ERROR_CODE_REMOTE_ERROR
-                )
+            // Intentar usar el formato principal
+            try {
+                if (playerResponse.playabilityStatus.status == "OK") {
+                    val format = playerResponse.streamingData?.adaptiveFormats?.find { it.isAudio }
+                        ?: throw PlaybackException(
+                            getString(R.string.error_no_stream),
+                            null,
+                            PlaybackException.ERROR_CODE_REMOTE_ERROR
+                        )
 
-                // Almacenar el formato de audio en la base de datos para futuras reproducciones
-                database.query {
-                    upsert(
-                        FormatEntity(
+                    database.query {
+                        upsert(FormatEntity(
                             id = mediaId,
                             itag = format.itag,
                             mimeType = format.mimeType.split(";")[0],
@@ -733,29 +700,47 @@ class MusicService : MediaLibraryService(),
                             sampleRate = format.audioSampleRate,
                             contentLength = format.contentLength!!,
                             loudnessDb = playerResponse.playerConfig?.audioConfig?.loudnessDb
-                        )
-                    )
+                        ))
+                    }
+
+                    songUrlCache[mediaId] = format.url!! to playerResponse.streamingData!!.expiresInSeconds * 1000L
+                    scope.launch(Dispatchers.IO) { recoverSong(mediaId, playerResponse) }
+                    return@Factory dataSpec.withUri(format.url!!.toUri())
                 }
-
-                // Recuperar la canción usando la información obtenida
-                scope.launch(Dispatchers.IO) { recoverSong(mediaId, playerResponse) }
-
-                // Guardar el URL y su tiempo de expiración en el caché
-                songUrlCache[mediaId] = format.url!! to playerResponse.streamingData!!.expiresInSeconds * 1000L
-
-
-
-                // Retornar el DataSpec actualizado con el URL de la fuente principal
-                return@Factory dataSpec.withUri(format.url!!.toUri())
-            } else {
-                // Si no es reproducible, usar la fuente alternativa
-                Timber.tag("JossRedService")
-                    .w("Usando fuente alternativa para $mediaId debido a restricciones")
-                val alternativeUrl = "https://jossred.josprox.com/yt/stream/$mediaId"
-
-                // Retornar el DataSpec con el URL de la fuente alternativa
-                return@Factory dataSpec.withUri(alternativeUrl.toUri())
+            } catch (e: Exception) {
+                Timber.tag("JossRedService").w("Fallo al usar fuente principal para $mediaId: ${e.message}")
             }
+
+            // Usar fuente alternativa si falla la principal
+            val alternativeUrl = "https://jossred.josprox.com/yt/stream/$mediaId"
+            scope.launch(Dispatchers.IO) {
+                try {
+                    recoverSong(mediaId)
+                } catch (e: Exception) {
+                    Timber.e(e, "Error al recuperar canción desde fuente alternativa: $mediaId")
+                }
+            }
+            return@Factory dataSpec.withUri(alternativeUrl.toUri())
+        }
+    }
+
+    private fun handlePlaybackError(throwable: Throwable): Nothing {
+        when (throwable) {
+            is ConnectException, is UnknownHostException -> throw PlaybackException(
+                getString(R.string.error_no_internet),
+                throwable,
+                PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
+            )
+            is SocketTimeoutException -> throw PlaybackException(
+                getString(R.string.error_timeout),
+                throwable,
+                PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT
+            )
+            else -> throw PlaybackException(
+                getString(R.string.error_unknown),
+                throwable,
+                PlaybackException.ERROR_CODE_REMOTE_ERROR
+            )
         }
     }
 
