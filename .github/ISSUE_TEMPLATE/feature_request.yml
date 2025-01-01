@@ -1,40 +1,40 @@
-name: Feature request
-description: Suggest an idea for InnerTune
-labels: [enhancement]
+name: Solicitud de función
+description: Sugiere una idea para Joss Music
+labels: [mejora]
 body:
   - type: checkboxes
     id: checklist
     attributes:
-      label: Checklist
-      description: You should ensure the completion of the task before proceeding to check it off the checklist. Neglecting to do so may impede the efficiency of the issue resolution process. The developer has the right to delete the issue directly if you check the list blindly.
+      label: Lista de verificación
+      description: Debes asegurarte de completar la tarea antes de marcarla como realizada en la lista. No hacerlo podría dificultar la eficiencia en el proceso de resolución del problema. El desarrollador tiene el derecho de eliminar el problema directamente si marcas la lista sin cumplir con los pasos indicados.
       options:
-        - label: I've checked that there is no other issue about this feature request.
+        - label: He comprobado que no hay otro informe sobre esta solicitud de función.
           required: true
-        - label: This issue contains only one feature request.
+        - label: Este informe contiene solo una solicitud de función.
           required: true
-        - label: The title of this issue accurately describes the feature request.
+        - label: El título de este informe describe con precisión la solicitud de función.
           required: true
 
   - type: textarea
     id: feature-description
     attributes:
-      label: Feature description
-      description: What feature you want the app to have? Provide detailed description about what it should look like or where it should be added.
+      label: Descripción de la función
+      description: ¿Qué función quieres que tenga la aplicación? Proporciona una descripción detallada sobre cómo debería verse o dónde debería añadirse.
     validations:
       required: true
 
   - type: textarea
     id: why-is-the-feature-requested
     attributes:
-      label: Why do you want this feature?
-      description: Describe the problem or limitation that motivates you to want this feature to be added.
+      label: ¿Por qué quieres esta función?
+      description: Describe el problema o la limitación que te motiva a querer que se añada esta función.
     validations:
       required: true
 
   - type: textarea
     id: additional-information
     attributes:
-      label: Additional information
-      description: Add any other context or screenshots about the feature request here.
+      label: Información adicional
+      description: Añade cualquier otro contexto o capturas de pantalla sobre la solicitud de función aquí.
       placeholder: |
-        Additional details and attachments.
+        Detalles adicionales y archivos adjuntos.
