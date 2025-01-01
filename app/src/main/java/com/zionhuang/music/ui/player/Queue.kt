@@ -83,7 +83,6 @@ import com.zionhuang.music.LocalPlayerConnection
 import com.zionhuang.music.R
 import com.zionhuang.music.constants.ListItemHeight
 import com.zionhuang.music.constants.LockQueueKey
-import com.zionhuang.music.constants.ShowLyricsKey
 import com.zionhuang.music.extensions.metadata
 import com.zionhuang.music.extensions.move
 import com.zionhuang.music.extensions.togglePlayPause
@@ -128,7 +127,6 @@ fun Queue(
 
     val currentSong by playerConnection.currentSong.collectAsState(initial = null)
 
-    var showLyrics by rememberPreference(ShowLyricsKey, defaultValue = false)
     var lockQueue by rememberPreference(LockQueueKey, defaultValue = false)
 
     var inSelectMode by remember {
@@ -197,14 +195,6 @@ fun Queue(
                     Icon(
                         painter = painterResource(R.drawable.queue_music),
                         contentDescription = null
-                    )
-                }
-
-                IconButton(onClick = { showLyrics = !showLyrics }) {
-                    Icon(
-                        painter = painterResource(R.drawable.lyrics),
-                        contentDescription = null,
-                        modifier = Modifier.alpha(if (showLyrics) 1f else 0.5f)
                     )
                 }
 

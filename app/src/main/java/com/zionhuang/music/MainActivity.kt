@@ -762,7 +762,7 @@ class MainActivity : ComponentActivity() {
 
                         BottomSheetPlayer(
                             state = playerBottomSheetState,
-                            navController = navController
+                            navController = navController,
                         )
 
                         NavigationBar(
