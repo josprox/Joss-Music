@@ -1,13 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+  <!--Actualizado el día 31/12/24; Traducido al 100% -->
+  <!-- Bottom navigation -->
   <string name="home">ホーム</string>
   <string name="songs">曲</string>
   <string name="artists">アーティスト</string>
   <string name="albums">アルバム</string>
   <string name="playlists">再生リスト</string>
+  <!-- Top bar -->
   <plurals name="n_selected">
     <item quantity="other">%d 個を選択済み</item>
   </plurals>
+  <!-- Home -->
   <string name="history">履歴</string>
   <string name="stats">統計</string>
   <string name="mood_and_genres">ムードとジャンル</string>
@@ -19,13 +23,16 @@
   <string name="keep_listening">視聴を維持</string>
   <string name="your_youtube_playlists">あなたのYouTubeの再生リスト</string>
   <string name="similar_to">これに似ている</string>
+  <!-- History -->
   <string name="today">今日</string>
   <string name="yesterday">昨日</string>
   <string name="this_week">今週</string>
   <string name="last_week">先週</string>
+  <!-- Stats -->
   <string name="most_played_songs">最も再生された曲</string>
   <string name="most_played_artists">最も再生されたアーティスト</string>
   <string name="most_played_albums">最も再生されたアルバム</string>
+  <!-- Search -->
   <string name="search">検索</string>
   <string name="search_yt_music">YouTube Music を検索…</string>
   <string name="search_library">ライブラリを検索…</string>
@@ -42,21 +49,27 @@
   <string name="filter_featured_playlists">おすすめの再生リスト</string>
   <string name="filter_bookmarked">ブックマーク済み</string>
   <string name="no_results_found">見つかりませんでした</string>
+  <!-- Library -->
   <string name="library_song_empty">曲のライブラリはここに表示されます</string>
   <string name="library_artist_empty">アーティストのライブラリはここに表示されます</string>
   <string name="library_album_empty">アルバムのライブラリはここに表示されます</string>
   <string name="library_playlist_empty">あなたの再生リストはここに表示されます</string>
+  <!-- Artist screen -->
   <string name="from_your_library">ライブラリから</string>
+  <!-- Album screen -->
   <string name="other_versions">別のバージョン</string>
+  <!-- Playlist -->
   <string name="liked_songs">高評価した曲</string>
   <string name="downloaded_songs">ダウンロードした曲</string>
   <string name="playlist_is_empty">再生リストが空です</string>
   <string name="remove_download_playlist_confirm">｢%s｣の再生リスト上の全曲をダウンロード済みから削除しますか？</string>
   <string name="delete_playlist_confirm">｢%s｣の再生リストを削除してもよろしいですか？</string>
+  <!-- Button -->
   <string name="retry">再試行</string>
   <string name="radio">ラジオ</string>
   <string name="shuffle">シャッフル</string>
   <string name="reset">リセット</string>
+  <!-- Menu -->
   <string name="details">詳細</string>
   <string name="edit">編集</string>
   <string name="start_radio">ラジオを再生</string>
@@ -84,6 +97,7 @@
   <string name="sync">同期</string>
   <string name="advanced">高度</string>
   <string name="tempo_and_pitch">速度とピッチ</string>
+  <!-- Sort menu -->
   <string name="sort_by_create_date">追加日時</string>
   <string name="sort_by_name">曲名</string>
   <string name="sort_by_artist">アーティスト</string>
@@ -92,6 +106,7 @@
   <string name="sort_by_length">長さ</string>
   <string name="sort_by_play_time">再生時間</string>
   <string name="sort_by_custom">カスタム</string>
+  <!-- Dialog -->
   <string name="media_id">メディア ID</string>
   <string name="mime_type">MIME タイプ</string>
   <string name="codecs">コーデック</string>
@@ -123,6 +138,7 @@
   <string name="add_anyway">気にせず追加</string>
   <string name="duplicates_description_single">曲はすでに再生リストにあります</string>
   <string name="duplicates_description_multiple">%d の曲はすでに再生リストにあります</string>
+  <!-- Noun -->
   <plurals name="n_song">
     <item quantity="other">%d 曲</item>
   </plurals>
@@ -144,10 +160,12 @@
   <plurals name="n_year">
     <item quantity="other">%d 年</item>
   </plurals>
+  <!-- Snackbar -->
   <string name="playlist_imported">再生リストをインポートしました</string>
   <string name="removed_song_from_playlist">再生リストから「%s」を削除しました</string>
   <string name="playlist_synced">再生リストが同期されました</string>
   <string name="undo">元に戻す</string>
+  <!-- Player -->
   <string name="lyrics_not_found">歌詞が見つかりません</string>
   <string name="sleep_timer">スリープタイマー</string>
   <string name="end_of_song">曲の終わり</string>
@@ -158,6 +176,7 @@
   <string name="error_no_internet">ネットワーク接続がありません</string>
   <string name="error_timeout">タイムアウトしました</string>
   <string name="error_unknown">不明なエラー</string>
+  <!-- Player action -->
   <string name="action_like">高評価</string>
   <string name="action_like_all">すべて高評価</string>
   <string name="action_remove_like">高評価を削除</string>
@@ -167,9 +186,12 @@
   <string name="repeat_mode_off">リピートモード OFF</string>
   <string name="repeat_mode_one">現在の曲をリピート</string>
   <string name="repeat_mode_all">キューをリピート</string>
+  <!-- Queue Title -->
   <string name="queue_all_songs">すべての曲</string>
   <string name="queue_searched_songs">検索した曲</string>
+  <!-- Notification name -->
   <string name="music_player">音楽プレーヤー</string>
+  <!-- Settings -->
   <string name="settings">設定</string>
   <string name="appearance">外観</string>
   <string name="theme">テーマ</string>
@@ -243,7 +265,7 @@
   <string name="clear_search_history">検索履歴を消去</string>
   <string name="clear_search_history_confirm">すべての検索履歴を消去しますか？</string>
   <string name="disable_screenshot">スクリーンショットを無効にする</string>
-  <string name="disable_screenshot_desc">スクリーンショットと最近使用したアプリの表示を無効にします</string>
+  <string name="disable_screenshot_desc">スクリーンショットと最近使用したアプリの表示を無効にします。</string>
   <string name="enable_lrclib">LrcLib での歌詞の取得を有効化</string>
   <string name="enable_kugou">KuGou での歌詞の取得を有効化</string>
   <string name="hide_explicit">露骨な内容のコンテンツを非表示</string>
@@ -255,7 +277,7 @@
   <string name="backup_create_failed">バックアップを作成できませんでした</string>
   <string name="restore_failed">バックアップの復元に失敗しました</string>
   <string name="discord_integration">Discord 統合</string>
-  <string name="discord_information">InnerTune は KizzyRPC ライブラリを使い、Discord アカウントのステータスを設定します。これは Discord ゲートウェイ接続を使うので、Discord の利用規約に違反する可能性があります。しかし、この理由でユーザーのアカウントが停止された例は確認されていません。自己責任でご利用ください。\n\nInnerTune はトークンを抽出するだけです。それ以外はすべて端末内にに保存されます。</string>
+  <string name="discord_information">Joss Music は KizzyRPC ライブラリを使い、Discord アカウントのステータスを設定します。これは Discord ゲートウェイ接続を使うので、Discord の利用規約に違反する可能性があります。しかし、この理由でユーザーのアカウントが停止された例は確認されていません。自己責任でご利用ください。\n\nJoss Music はトークンを抽出するだけです。それ以外はすべて端末内にに保存されます。</string>
   <string name="dismiss">非表示</string>
   <string name="options">オプション</string>
   <string name="preview">プレビュー</string>
@@ -267,6 +289,9 @@
   <string name="new_version_available">新しいバージョンがあります</string>
   <string name="translation_models">翻訳モデル</string>
   <string name="clear_translation_models">翻訳モデルを消去</string>
+  <string name="use_login_for_browse_desc">例えば、Premiumのアカウントでログインした時に、Premium限定のアルバムが表示されるようになります</string>
+  <string name="use_login_for_browse">表示されるコンテンツをアカウントと結び付ける</string>
+  <!-- Traducciones de Joss Music con Joss Red Traductor -->
   <string name="card_donation">あなたの寄付は、アプリを無料で維持し、機能を改善するのに役立ちます</string>
   <string name="website_url">ウェブサイトに行く</string>
   <string name="latestVersion">最新バージョン</string>

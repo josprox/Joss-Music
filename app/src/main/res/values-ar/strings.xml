@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+  <!--Actualizado el día 31/12/24; Traducido al 99 -->
   <string name="artists">فنانون</string>
   <string name="albums">ألبومات</string>
   <string name="history">تاريخ</string>
@@ -301,9 +302,9 @@
   <string name="restore_failed">فشل في استعادة النسخة الاحتياطية</string>
   <string name="options">خيارات</string>
   <string name="preview">معاينة</string>
-  <string name="discord_information">InnerTune يستخدم مكتبة KizzyRPC لتعيين حالة حساب Discord الخاص بك. هذا يتضمن استخدام اتصال Discord Gateway، والذي قد يعتبر انتهاكًا لشروط خدمة Discord. مع ذلك، لا توجد حالات معروفة لتعطيل حسابات المستخدمين لهذا السبب. استخدم على مسؤوليتك الخاصة.
+  <string name="discord_information">Joss Music يستخدم مكتبة KizzyRPC لتعيين حالة حساب Discord الخاص بك. هذا يتضمن استخدام اتصال Discord Gateway، والذي قد يعتبر انتهاكًا لشروط خدمة Discord. مع ذلك، لا توجد حالات معروفة لتعطيل حسابات المستخدمين لهذا السبب. استخدم على مسؤوليتك الخاصة.
 \n
-\nسيقوم InnerTune فقط باستخراج رمز الوصول الخاص بك، وسيتم تخزين كل شيء آخر محليًا.</string>
+\nسيقوم Joss Music فقط باستخراج رمز الوصول الخاص بك، وسيتم تخزين كل شيء آخر محليًا.</string>
   <string name="dismiss">صرف</string>
   <string name="enable_discord_rpc">فعل Rich Presence</string>
   <string name="new_version_available">نسخة جديدة متوفرة</string>
@@ -314,6 +315,7 @@
   <string name="logout">تسجيل الخروج</string>
   <string name="clear_translation_models">مسح نماذج الترجمة</string>
   <string name="disable_screenshot_desc">عند تفعيل هذا الخيار، يتم تعطيل اخذ لقطات للشاشة وعدم اظهار محتوى التطبيق في التطبيقات الأخيرة.</string>
+  <!-- Traducciones de Joss Music con Joss Red Traductor -->
   <string name="card_donation">يساعدنا تبرعك في الحفاظ على التطبيق مجانيًا وتحسين ميزاته</string>
   <string name="website_url">انتقل إلى الموقع</string>
   <string name="latestVersion">أحدث نسخة</string>

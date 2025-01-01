@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+  <!--Actualizado el día 31/12/24; Traducido al 100% -->
   <string name="artists">Изпълнители</string>
   <string name="albums">Албуми</string>
   <string name="playlists">Плейлисти</string>
@@ -176,9 +177,9 @@
   <string name="repeat_mode_off">Режим на повторение е изключен</string>
   <string name="repeat_mode_one">Повтори текущата песен</string>
   <string name="repeat_mode_all">Повтори опашката</string>
-  <string name="discord_information">InnerTune използва библиотеката KizzyRPC, за да зададе състоянието на акаунта ви в Discord. Това включва използването на връзката Discord Gateway, което може да се счита за нарушение на TOS на Discord. Въпреки това няма известни случаи на спиране на потребителски акаунти поради тази причина. Използвайте на свой собствен риск.
+  <string name="discord_information">Joss Music използва библиотеката KizzyRPC, за да зададе състоянието на акаунта ви в Discord. Това включва използването на връзката Discord Gateway, което може да се счита за нарушение на TOS на Discord. Въпреки това няма известни случаи на спиране на потребителски акаунти поради тази причина. Използвайте на свой собствен риск.
 \n
-\nInnerTune ще извлече само вашия токен, а всичко останало се съхранява локално.</string>
+\nJoss Music ще извлече само вашия токен, а всичко останало се съхранява локално.</string>
   <string name="backup">Архивиране</string>
   <string name="translation_models">Модели за превод</string>
   <string name="clear_image_cache">Изчисти кеша на изображение</string>
@@ -278,6 +279,9 @@
   <string name="logout">Изход</string>
   <string name="enable_discord_rpc">Активирай Rich Presence</string>
   <string name="new_version_available">Налична е нова версия</string>
+  <string name="use_login_for_browse">Използвай вход за разглеждане на съдържание</string>
+  <string name="use_login_for_browse_desc">Това може да повлияе какво съдържание виждате и например показва само премиум албуми, ако сте влезли с Премиум акаунт</string>
+  <!-- Traducciones de Joss Music con Joss Red Traductor -->
   <string name="card_donation">Вашето дарение ни помага да поддържаме приложението безплатно и да подобряваме функциите му</string>
   <string name="website_url">отидете на уебсайт</string>
   <string name="latestVersion">Последна версия</string>
