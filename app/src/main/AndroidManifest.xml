@@ -71,16 +71,31 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.InnerTune"
             android:windowSoftInputMode="adjustResize">
+
+            <!-- Intent Filter principal para abrir la app -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- Intent Filter para manejar el deep link de m.jossmusic.me -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                    android:host="m.jossmusic.me"
+                    android:pathPattern="/shared/.*" />
+            </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MUSIC_PLAYER" />
                 <category android:name="android.intent.category.APP_MUSIC" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <!-- Intent Filter para manejar otros enlaces de YouTube o cualquier otro deep link adicional -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />

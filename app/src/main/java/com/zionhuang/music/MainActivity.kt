@@ -3,10 +3,8 @@ package com.zionhuang.music
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
@@ -15,7 +13,6 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.animateDpAsState
@@ -88,7 +85,6 @@ import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
@@ -96,6 +92,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -103,7 +100,6 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import com.google.android.gms.ads.MobileAds
 import com.onesignal.OneSignal
-import com.onesignal.debug.LogLevel
 import com.valentinilk.shimmer.LocalShimmerTheme
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.SongItem
@@ -149,6 +145,7 @@ import com.zionhuang.music.ui.theme.extractThemeColor
 import com.zionhuang.music.ui.utils.appBarScrollBehavior
 import com.zionhuang.music.ui.utils.backToMain
 import com.zionhuang.music.ui.utils.resetHeightOffset
+import com.zionhuang.music.utils.NotificationPermissionActivity
 import com.zionhuang.music.utils.Updater
 import com.zionhuang.music.utils.dataStore
 import com.zionhuang.music.utils.get
@@ -166,7 +163,6 @@ import kotlinx.coroutines.withContext
 import org.dotenv.vault.dotenvVault
 import java.net.URLDecoder
 import javax.inject.Inject
-import com.zionhuang.music.utils.NotificationPermissionActivity
 
 val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
     directory = "/assets"
@@ -198,10 +194,13 @@ class MainActivity : ComponentActivity() {
 
     private var latestVersionName by mutableStateOf(BuildConfig.VERSION_NAME)
 
+    // Handle deep links
+    private lateinit var navController: NavHostController
+
     override fun onStart() {
         super.onStart()
         startService(Intent(this, MusicService::class.java))
-        bindService(Intent(this, MusicService::class.java), serviceConnection, Context.BIND_AUTO_CREATE)
+        bindService(Intent(this, MusicService::class.java), serviceConnection, BIND_AUTO_CREATE)
     }
 
     override fun onStop() {
@@ -234,7 +233,7 @@ class MainActivity : ComponentActivity() {
         // Configuraciones adicionales de la interfaz, temas y comportamiento
         lifecycleScope.launch {
             dataStore.data
-                .map { it[DisableScreenshotKey] ?: false }
+                .map { it[DisableScreenshotKey] == true }
                 .distinctUntilChanged()
                 .collectLatest {
                     if (it) {
@@ -287,6 +286,9 @@ class MainActivity : ComponentActivity() {
 
         // Solicitar permiso de notificaciones
         requestNotificationPermission()
+
+        // Handle deep links
+        handleDeepLink(intent)
     }
 
     @SuppressLint("UnusedBoxWithConstraintsScope")
@@ -875,14 +877,32 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun isNotificationPermissionGranted(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED
-        } else {
-            true // En versiones anteriores, se considera concedido por defecto
+    private fun handleDeepLink(intent: Intent?) {
+        intent?.data?.let { uri ->
+            val pathSegments = uri.pathSegments
+            when {
+                pathSegments.contains("playlist") -> {
+                    val idPlaylist = pathSegments.lastOrNull()
+                    idPlaylist?.let {
+                        navController.navigate("online_playlist/$it")
+                    }
+                }
+                pathSegments.contains("artist") -> {
+                    val idArtist = pathSegments.lastOrNull()
+                    idArtist?.let {
+                        navController.navigate("artist/$it")
+                    }
+                }
+                pathSegments.contains("album") -> {
+                    val idAlbum = pathSegments.lastOrNull()
+                    idAlbum?.let {
+                        navController.navigate("album/$it")
+                    }
+                }
+                else -> {
+                    navController.navigate(Screens.Home.route)
+                }
+            }
         }
     }
 
