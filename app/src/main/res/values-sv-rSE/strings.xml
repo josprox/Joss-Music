@@ -256,4 +256,27 @@
   <string name="noPlayback">Ingen uppspelning</string>
   <string name="unknownArtist">Okänd artist</string>
   <string name="untitled">Ofrälse</string>
+  <string name="similar_to">Liknar</string>
+  <string name="forgotten_favorites">Glömda favoriter</string>
+  <string name="keep_listening">Fortsätt lyssna</string>
+  <string name="your_youtube_playlists">Dina YouTube-spellistor</string>
+  <string name="other_versions">Andra versioner</string>
+  <string name="library_song_empty">Bibliotekslåtar kommer att dyka upp här</string>
+  <string name="library_artist_empty">Bibliotekskonstnärer kommer att dyka upp här</string>
+  <string name="action_like_all">Som alla</string>
+  <string name="action_remove_like_all">Ta bort alla likes</string>
+  <string name="duplicates">Dubletter</string>
+  <string name="skip_duplicates">Hoppa över dubbletter</string>
+  <string name="add_anyway">Lägg till ändå</string>
+  <string name="duplicates_description_single">Låten finns redan i din spellista</string>
+  <string name="library_album_empty">Biblioteksalbum kommer att dyka upp här</string>
+  <string name="library_playlist_empty">Dina spellistor kommer att visas här</string>
+  <string name="add_all_to_library">Lägg till alla i biblioteket</string>
+  <string name="remove_all_from_library">Ta bort allt från biblioteket</string>
+  <string name="remove_from_playlist">Ta bort från spellistan</string>
+  <string name="remove_from_queue">Ta bort från kön</string>
+  <string name="tempo_and_pitch">Tempo och Pitch</string>
+  <string name="theme">Tema</string>
+  <string name="logout">Utloggning</string>
+  <string name="login_failed">Inloggningen misslyckades</string>
 </resources>

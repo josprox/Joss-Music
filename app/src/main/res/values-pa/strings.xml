@@ -256,4 +256,27 @@
   <string name="noPlayback">ਕੋਈ ਪਲੇਬੈਕ ਨਹੀਂ</string>
   <string name="unknownArtist">ਅਣਜਾਣ ਕਲਾਕਾਰ</string>
   <string name="untitled">ਬਿਨਾਂ ਸਿਰਲੇਖ ਵਾਲਾ</string>
+  <string name="similar_to">ਦੇ ਸਮਾਨ</string>
+  <string name="forgotten_favorites">ਭੁੱਲ ਗਏ ਮਨਪਸੰਦ</string>
+  <string name="keep_listening">ਸੁਣਦੇ ਰਹੋ</string>
+  <string name="your_youtube_playlists">ਤੁਹਾਡੀਆਂ YouTube ਪਲੇਲਿਸਟਾਂ</string>
+  <string name="other_versions">ਹੋਰ ਸੰਸਕਰਣ</string>
+  <string name="library_song_empty">ਲਾਇਬ੍ਰੇਰੀ ਗੀਤ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ</string>
+  <string name="library_artist_empty">ਲਾਇਬ੍ਰੇਰੀ ਕਲਾਕਾਰ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ</string>
+  <string name="action_like_all">ਸਭ ਦੀ ਤਰ੍ਹਾਂ</string>
+  <string name="action_remove_like_all">ਸਾਰੀਆਂ ਪਸੰਦਾਂ ਨੂੰ ਹਟਾਓ</string>
+  <string name="duplicates">ਡੁਪਲੀਕੇਟ</string>
+  <string name="skip_duplicates">ਡੁਪਲੀਕੇਟ ਛੱਡੋ</string>
+  <string name="add_anyway">ਫਿਰ ਵੀ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="duplicates_description_single">ਗੀਤ ਪਹਿਲਾਂ ਹੀ ਤੁਹਾਡੀ ਪਲੇਲਿਸਟ ਵਿੱਚ ਹੈ</string>
+  <string name="library_album_empty">ਲਾਇਬ੍ਰੇਰੀ ਐਲਬਮਾਂ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੀਆਂ</string>
+  <string name="library_playlist_empty">ਤੁਹਾਡੀਆਂ ਪਲੇਲਿਸਟਾਂ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੀਆਂ</string>
+  <string name="add_all_to_library">ਸਭ ਨੂੰ ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="remove_all_from_library">ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚੋਂ ਸਭ ਨੂੰ ਹਟਾਓ</string>
+  <string name="remove_from_playlist">ਪਲੇਲਿਸਟ ਤੋਂ ਹਟਾਓ</string>
+  <string name="remove_from_queue">ਕਤਾਰ ਤੋਂ ਹਟਾਓ</string>
+  <string name="tempo_and_pitch">ਟੈਂਪੋ ਅਤੇ ਪਿੱਚ</string>
+  <string name="theme">ਥੀਮ</string>
+  <string name="logout">ਲਾਗਆਉਟ</string>
+  <string name="login_failed">ਲਾਗਿਨ ਅਸਫਲ ਰਿਹਾ</string>
 </resources>

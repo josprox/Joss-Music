@@ -255,4 +255,27 @@
   <string name="noPlayback">କ play ଣସି ପ୍ଲେକ୍ ନାହିଁ |</string>
   <string name="unknownArtist">ଅଜ୍ଞାତ କଳାକାର |</string>
   <string name="untitled">ଆଖ୍ୟାବିହୀନ |</string>
+  <string name="similar_to">ସହିତ ସମାନ |</string>
+  <string name="forgotten_favorites">ଭୁଲିଯାଇଥିବା ପ୍ରିୟ |</string>
+  <string name="keep_listening">ଶୁଣନ୍ତୁ |</string>
+  <string name="your_youtube_playlists">ତୁମର ୟୁଟ୍ୟୁବ୍ ପ୍ଲେଲିଷ୍ଟଗୁଡିକ |</string>
+  <string name="other_versions">ଅନ୍ୟାନ୍ୟ ସଂସ୍କରଣ |</string>
+  <string name="library_song_empty">ଲାଇବ୍ରେରୀ ଗୀତ ଏଠାରେ ଦେଖାଯିବ |</string>
+  <string name="library_artist_empty">ଲାଇବ୍ରେରୀ କଳାକାରମାନେ ଏଠାରେ ପ୍ରଦର୍ଶନ କରିବେ |</string>
+  <string name="action_like_all">ସମସ୍ତଙ୍କ ପରି |</string>
+  <string name="action_remove_like_all">ସମସ୍ତ ଲାଇକ୍ ଅପସାରଣ କରନ୍ତୁ |</string>
+  <string name="duplicates">ନକଲ</string>
+  <string name="skip_duplicates">ନକଲଗୁଡିକ ଛାଡିଦିଅ |</string>
+  <string name="add_anyway">ଯାହା ବି ହେଉ ଯୋଡନ୍ତୁ |</string>
+  <string name="duplicates_description_single">ଗୀତଟି ତୁମର ପ୍ଲେ ଲିଷ୍ଟରେ ଅଛି |</string>
+  <string name="library_album_empty">ଲାଇବ୍ରେରୀ ଆଲବମ୍ ଏଠାରେ ଦେଖାଯିବ |</string>
+  <string name="library_playlist_empty">ତୁମର ପ୍ଲେଲିଷ୍ଟଗୁଡିକ ଏଠାରେ ଦେଖାଯିବ |</string>
+  <string name="add_all_to_library">ସମସ୍ତ ଲାଇବ୍ରେରୀରେ ଯୋଡନ୍ତୁ |</string>
+  <string name="remove_all_from_library">ଲାଇବ୍ରେରୀରୁ ସମସ୍ତ ଅପସାରଣ କରନ୍ତୁ |</string>
+  <string name="remove_from_playlist">ପ୍ଲେ ଲିଷ୍ଟରୁ ହଟାନ୍ତୁ |</string>
+  <string name="remove_from_queue">ଧାଡିରୁ ହଟାନ୍ତୁ |</string>
+  <string name="tempo_and_pitch">ଟେମ୍ପୋ ଏବଂ ପିଚ୍ |</string>
+  <string name="theme">ଥିମ୍</string>
+  <string name="logout">ଲଗଆଉଟ୍ |</string>
+  <string name="login_failed">ଲଗଇନ୍ ବିଫଳ ହେଲା |</string>
 </resources>

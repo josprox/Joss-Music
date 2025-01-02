@@ -6,7 +6,7 @@
   <string name="songs">Canciones</string>
   <string name="artists">Artistas</string>
   <string name="albums">Álbumes</string>
-  <string name="playlists">playlist</string>
+  <string name="playlists">playlists</string>
   <!-- Top bar -->
   <plurals name="n_selected">
     <item quantity="one">%d seleccionada</item>

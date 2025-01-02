@@ -269,4 +269,16 @@
   <string name="noPlayback">Nincs lejátszás</string>
   <string name="unknownArtist">Ismeretlen művész</string>
   <string name="untitled">Cím nélkül</string>
+  <string name="action_like_all">Mint minden</string>
+  <string name="action_remove_like_all">Távolítsa el az összes kedvelést</string>
+  <string name="duplicates">Ismétlődések</string>
+  <string name="skip_duplicates">Az ismétlődések kihagyása</string>
+  <string name="add_anyway">Add hozzá mindenképp</string>
+  <string name="duplicates_description_single">A dal már szerepel a lejátszási listán</string>
+  <string name="remove_from_playlist">Eltávolítás a lejátszási listáról</string>
+  <string name="remove_from_queue">Eltávolítás a sorból</string>
+  <string name="tempo_and_pitch">Tempó és hangmagasság</string>
+  <string name="theme">Téma</string>
+  <string name="logout">Kijelentkezés</string>
+  <string name="login_failed">Sikertelen bejelentkezés</string>
 </resources>

@@ -256,4 +256,27 @@
   <string name="noPlayback">কোনো প্লেব্যাক নেই</string>
   <string name="unknownArtist">অচেনা শিল্পী</string>
   <string name="untitled">শিরোনামহীন</string>
+  <string name="similar_to">অনুরূপ</string>
+  <string name="forgotten_favorites">ভুলে যাওয়া প্রিয়</string>
+  <string name="keep_listening">শুনতে থাকুন</string>
+  <string name="your_youtube_playlists">আপনার YouTube প্লেলিস্ট</string>
+  <string name="other_versions">অন্যান্য সংস্করণ</string>
+  <string name="library_song_empty">লাইব্রেরি গান এখানে প্রদর্শিত হবে</string>
+  <string name="library_artist_empty">লাইব্রেরি শিল্পীরা এখানে প্রদর্শিত হবে</string>
+  <string name="action_like_all">সব মত</string>
+  <string name="action_remove_like_all">সব পছন্দ সরান</string>
+  <string name="duplicates">ডুপ্লিকেট</string>
+  <string name="skip_duplicates">ডুপ্লিকেট এড়িয়ে যান</string>
+  <string name="add_anyway">যাইহোক যোগ করুন</string>
+  <string name="duplicates_description_single">গানটি ইতিমধ্যেই আপনার প্লেলিস্টে রয়েছে৷</string>
+  <string name="library_album_empty">লাইব্রেরি অ্যালবামগুলি এখানে দেখাবে৷</string>
+  <string name="library_playlist_empty">আপনার প্লেলিস্ট এখানে প্রদর্শিত হবে</string>
+  <string name="add_all_to_library">লাইব্রেরিতে সব যোগ করুন</string>
+  <string name="remove_all_from_library">লাইব্রেরি থেকে সব সরান</string>
+  <string name="remove_from_playlist">প্লেলিস্ট থেকে সরান</string>
+  <string name="remove_from_queue">সারি থেকে সরান</string>
+  <string name="tempo_and_pitch">টেম্পো এবং পিচ</string>
+  <string name="theme">থিম</string>
+  <string name="logout">লগআউট</string>
+  <string name="login_failed">লগইন ব্যর্থ হয়েছে</string>
 </resources>

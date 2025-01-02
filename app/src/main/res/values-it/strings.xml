@@ -303,4 +303,6 @@
   <string name="noPlayback">Nessuna riproduzione</string>
   <string name="unknownArtist">Artista sconosciuto</string>
   <string name="untitled">Senza titolo</string>
+  <string name="logout">Esci</string>
+  <string name="login_failed">Accesso non riuscito</string>
 </resources>

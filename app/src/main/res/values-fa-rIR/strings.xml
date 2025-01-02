@@ -235,4 +235,27 @@
   <string name="unknownArtist">هنرمند ناشناس</string>
   <string name="untitled">بدون عنوان</string>
   <string name="card_donation">کمک مالی شما به ما کمک می کند تا برنامه را رایگان نگه داریم و ویژگی های آن را بهبود ببخشیم…</string>
+  <string name="similar_to">شبیه به</string>
+  <string name="forgotten_favorites">موارد دلخواه فراموش شده</string>
+  <string name="keep_listening">به گوش دادن ادامه بده</string>
+  <string name="your_youtube_playlists">لیست های پخش YouTube شما</string>
+  <string name="other_versions">نسخه های دیگر</string>
+  <string name="library_song_empty">آهنگ‌های کتابخانه در اینجا نمایش داده می‌شوند</string>
+  <string name="library_artist_empty">هنرمندان کتابخانه در اینجا نمایش داده می شوند</string>
+  <string name="action_like_all">مثل همه</string>
+  <string name="action_remove_like_all">حذف همه لایک ها</string>
+  <string name="duplicates">موارد تکراری</string>
+  <string name="skip_duplicates">از موارد تکراری بگذرید</string>
+  <string name="add_anyway">به هر حال اضافه کنید</string>
+  <string name="duplicates_description_single">آهنگ از قبل در لیست پخش شما موجود است</string>
+  <string name="library_album_empty">آلبوم‌های کتابخانه در اینجا نمایش داده می‌شوند</string>
+  <string name="library_playlist_empty">لیست های پخش شما در اینجا نمایش داده می شود</string>
+  <string name="add_all_to_library">همه را به کتابخانه اضافه کنید</string>
+  <string name="remove_all_from_library">همه را از کتابخانه حذف کنید</string>
+  <string name="remove_from_playlist">حذف از لیست پخش</string>
+  <string name="remove_from_queue">حذف از صف</string>
+  <string name="tempo_and_pitch">تمپو و پیچ</string>
+  <string name="theme">تم</string>
+  <string name="logout">خروج از سیستم</string>
+  <string name="login_failed">ورود ناموفق بود</string>
 </resources>

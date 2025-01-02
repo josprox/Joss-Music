@@ -274,4 +274,27 @@
   <string name="noPlayback">Няма прайгравання</string>
   <string name="unknownArtist">Невядомы мастак</string>
   <string name="untitled">Без назвы</string>
+  <string name="similar_to">Падобныя на</string>
+  <string name="forgotten_favorites">Забытыя фаварыты</string>
+  <string name="keep_listening">Працягвай слухаць</string>
+  <string name="your_youtube_playlists">Вашы плэйлісты YouTube</string>
+  <string name="other_versions">Іншыя версіі</string>
+  <string name="library_song_empty">Тут з\'явяцца песні з бібліятэкі</string>
+  <string name="library_artist_empty">Бібліятэчныя мастакі з\'явяцца тут</string>
+  <string name="action_like_all">Як усе</string>
+  <string name="action_remove_like_all">Выдаліць усе лайкі</string>
+  <string name="duplicates">Дублікаты</string>
+  <string name="skip_duplicates">Прапусціць дублікаты</string>
+  <string name="add_anyway">Усё роўна дадаць</string>
+  <string name="duplicates_description_single">Песня ўжо ў вашым плэйлісце</string>
+  <string name="library_album_empty">Альбомы з бібліятэкі будуць паказвацца тут</string>
+  <string name="library_playlist_empty">Вашы плэйлісты будуць паказвацца тут</string>
+  <string name="add_all_to_library">Дадаць усё ў бібліятэку</string>
+  <string name="remove_all_from_library">Выдаліць усё з бібліятэкі</string>
+  <string name="remove_from_playlist">Выдаліць з плэйліста</string>
+  <string name="remove_from_queue">Выдаліць з чаргі</string>
+  <string name="tempo_and_pitch">Тэмп і вышыня</string>
+  <string name="theme">Тэма</string>
+  <string name="logout">Выйсці з сістэмы</string>
+  <string name="login_failed">Не атрымалася ўвайсці</string>
 </resources>
