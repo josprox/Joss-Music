@@ -1,18 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:ns0="http://schemas.android.com/tools">
-  <!--Actualizado el día 31/12/24; Traducido al 99% -->
-  <!-- Bottom navigation -->
   <string name="home">Startseite</string>
   <string name="songs">Titel</string>
   <string name="artists">Künstler</string>
   <string name="albums">Alben</string>
   <string name="playlists">Wiedergabelisten</string>
-  <!-- Top bar -->
   <plurals name="n_selected">
     <item quantity="one">%d ausgewählt</item>
     <item quantity="other">%d ausgewählt</item>
   </plurals>
-  <!-- Home -->
   <string name="history">Hörverlauf</string>
   <string name="stats">Statistiken</string>
   <string name="mood_and_genres">Stimmungen und Genres</string>
@@ -20,16 +16,13 @@
   <string name="quick_picks">Schnellauswahl</string>
   <string name="quick_picks_empty">Höre dir einige Songs an, um deine Schnellauswahl zu erstellen</string>
   <string name="new_release_albums">Neu veröffentlichte Alben</string>
-  <!-- History -->
   <string name="today">Heute</string>
   <string name="yesterday">Gestern</string>
   <string name="this_week">Diese Woche</string>
   <string name="last_week">Letzte Woche</string>
-  <!-- Stats -->
   <string name="most_played_songs">Meist gespielte Songs</string>
   <string name="most_played_artists">Meist gespielte Künstler</string>
   <string name="most_played_albums">Meist gespielte Alben</string>
-  <!-- Search -->
   <string name="search">Suche</string>
   <string name="search_yt_music">YouTube Music durchsuchen…</string>
   <string name="search_library">Bibliothek durchsuchen…</string>
@@ -45,18 +38,14 @@
   <string name="filter_community_playlists">Community-Wiedergabelisten</string>
   <string name="filter_featured_playlists">Ausgewählte Wiedergabelisten</string>
   <string name="no_results_found">Keine Ergebnisse gefunden</string>
-  <!-- Artist screen -->
   <string name="from_your_library">Aus der Bibliothek</string>
-  <!-- Playlist -->
   <string name="liked_songs">Favoriten</string>
   <string name="downloaded_songs">Heruntergeladene Titel</string>
   <string name="playlist_is_empty">Die Wiedergabeliste ist leer</string>
-  <!-- Button -->
   <string name="retry">Wiederholen</string>
   <string name="radio">Radio</string>
   <string name="shuffle">Mischen</string>
   <string name="reset">Zurücksetzen</string>
-  <!-- Menu -->
   <string name="details">Details</string>
   <string name="edit">Bearbeiten</string>
   <string name="start_radio">Radio starten</string>
@@ -79,7 +68,6 @@
   <string name="search_online">Online-Suche</string>
   <string name="sync">Synchronisieren</string>
   <string name="advanced">Erweitert</string>
-  <!-- Sort menu -->
   <string name="sort_by_create_date">Datum hinzugefügt</string>
   <string name="sort_by_name">Name</string>
   <string name="sort_by_artist">Künstler</string>
@@ -88,7 +76,6 @@
   <string name="sort_by_length">Länge</string>
   <string name="sort_by_play_time">Wiedergabedauer</string>
   <string name="sort_by_custom">Individuelle Reinfolge</string>
-  <!-- Dialog -->
   <string name="media_id">Medien-ID</string>
   <string name="mime_type">MIME-Typ</string>
   <string name="codecs">Codecs</string>
@@ -115,7 +102,6 @@
   <string name="edit_artist">Künstler bearbeiten</string>
   <string name="artist_name">Name des Künstlers</string>
   <string name="error_artist_name_empty">Der Name des Künstlers darf nicht leer sein.</string>
-  <!-- Noun -->
   <plurals name="n_song">
     <item quantity="one">%d Lied</item>
     <item quantity="other">%d Lieder</item>
@@ -144,12 +130,10 @@
     <item quantity="one">%d Jahr</item>
     <item quantity="other">%d Jahre</item>
   </plurals>
-  <!-- Snackbar -->
   <string name="playlist_imported">Wiedergabeliste importiert</string>
   <string name="removed_song_from_playlist">\"%s\" aus der Wiedergabeliste entfernt</string>
   <string name="playlist_synced">Wiedergabeliste synchronisiert</string>
   <string name="undo">Rückgängig machen</string>
-  <!-- Player -->
   <string name="lyrics_not_found">Liedtext nicht gefunden</string>
   <string name="sleep_timer">Schlaf-Timer</string>
   <string name="end_of_song">Ende des Liedes</string>
@@ -161,7 +145,6 @@
   <string name="error_no_internet">Keine Netzverbindung</string>
   <string name="error_timeout">Zeitüberschreitung</string>
   <string name="error_unknown">Unbekannter Fehler</string>
-  <!-- Player action -->
   <string name="action_like">Favoriten</string>
   <string name="action_remove_like">Aus Favoriten entfernen</string>
   <string name="action_shuffle_on">Mischen an</string>
@@ -169,12 +152,9 @@
   <string name="repeat_mode_off">Wiederholungsmodus aus</string>
   <string name="repeat_mode_one">Dieses Lied wiederholen</string>
   <string name="repeat_mode_all">Warteschlange wiederholen</string>
-  <!-- Queue Title -->
   <string name="queue_all_songs">Alle Titel</string>
   <string name="queue_searched_songs">Gesuchte Titel</string>
-  <!-- Notification name -->
   <string name="music_player">Musik-Player</string>
-  <!-- Settings -->
   <string name="settings">Einstellungen</string>
   <string name="appearance">Erscheinungsbild</string>
   <string name="enable_dynamic_theme">Dynamisches Design aktivieren</string>
@@ -298,7 +278,6 @@
   <string name="filter_bookmarked">Lesezeichen</string>
   <string name="use_login_for_browse">Anmeldung zum Durchsuchen von Inhalten verwenden</string>
   <string name="use_login_for_browse_desc">Dies kann Einfluss darauf haben, welche Inhalte Sie sehen und zeigt zum Beispiel nur Premium-Alben an, wenn Sie mit einem Premium-Konto angemeldet sind</string>
-  <!-- Traducciones de Joss Music con Joss Red Traductor -->
   <string name="website_url">Gehe zur Website</string>
   <string name="latestVersion">Neueste Version</string>
   <string name="close">Schließen</string>
@@ -313,4 +292,5 @@
   <string name="noPlayback">Keine Wiedergabe</string>
   <string name="unknownArtist">Unbekannter Künstler</string>
   <string name="untitled">Ohne Titel</string>
+  <string name="card_donation">Ihre Spende hilft uns, die App kostenlos zu halten und ihre Funktionen zu verbessern …</string>
 </resources>
