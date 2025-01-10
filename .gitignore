@@ -90,3 +90,6 @@ lint/tmp/
 
 .kotlin
 output-metadata.json
+
+# Ignorar el archivo .env
+env.vault

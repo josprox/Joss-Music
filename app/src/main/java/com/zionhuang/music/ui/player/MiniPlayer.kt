@@ -4,6 +4,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,10 +27,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -44,6 +47,9 @@ import com.zionhuang.music.constants.MiniPlayerHeight
 import com.zionhuang.music.constants.ThumbnailCornerRadius
 import com.zionhuang.music.extensions.togglePlayPause
 import com.zionhuang.music.models.MediaMetadata
+import androidx.compose.runtime.*
+import androidx.compose.material3.*
+import com.zionhuang.music.ui.component.ResizableIconButton
 
 @Composable
 fun MiniPlayer(
@@ -58,11 +64,34 @@ fun MiniPlayer(
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
     val canSkipNext by playerConnection.canSkipNext.collectAsState()
 
+    var dragAmount by remember { mutableStateOf(0f) }
+    val currentSong by playerConnection.currentSong.collectAsState(initial = null)
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(MiniPlayerHeight)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+            .pointerInput(Unit) {
+                detectHorizontalDragGestures(
+                    onDragEnd = {
+                        // Detectar la dirección del deslizamiento al finalizar
+                        if (dragAmount < 0) {
+                            // Deslizar a la izquierda: ir a la siguiente canción
+                            playerConnection.seekToNext()
+                        } else if (dragAmount > 0) {
+                            // Deslizar a la derecha: ir a la canción anterior
+                            playerConnection.seekToPrevious()
+                        }
+                        // Reiniciar el valor de dragAmount para el próximo gesto
+                        dragAmount = 0f
+                    },
+                    onHorizontalDrag = { change, dragDelta ->
+                        // Acumular la cantidad de desplazamiento
+                        dragAmount += dragDelta
+                    }
+                )
+            }
     ) {
         LinearProgressIndicator(
             progress = { (position.toFloat() / duration).coerceIn(0f, 1f) },
@@ -87,6 +116,14 @@ fun MiniPlayer(
                 }
             }
 
+            Box() {
+                ResizableIconButton(
+                    icon = if (currentSong?.song?.liked == true) R.drawable.favorite else R.drawable.favorite_border,
+                    color = if (currentSong?.song?.liked == true) MaterialTheme.colorScheme.error else LocalContentColor.current,
+                    onClick = playerConnection::toggleLike
+                )
+            }
+
             IconButton(
                 onClick = {
                     if (playbackState == Player.STATE_ENDED) {
@@ -99,16 +136,6 @@ fun MiniPlayer(
             ) {
                 Icon(
                     painter = painterResource(if (playbackState == Player.STATE_ENDED) R.drawable.replay else if (isPlaying) R.drawable.pause else R.drawable.play),
-                    contentDescription = null
-                )
-            }
-
-            IconButton(
-                enabled = canSkipNext,
-                onClick = playerConnection::seekToNext
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.skip_next),
                     contentDescription = null
                 )
             }

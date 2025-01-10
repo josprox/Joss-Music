@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,7 +29,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
@@ -69,6 +71,7 @@ import com.zionhuang.music.constants.PlayerHorizontalPadding
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
 import com.zionhuang.music.constants.PureBlackKey
 import com.zionhuang.music.constants.QueuePeekHeight
+import com.zionhuang.music.constants.ShowLyricsKey
 import com.zionhuang.music.constants.SliderStyle
 import com.zionhuang.music.constants.SliderStyleKey
 import com.zionhuang.music.extensions.togglePlayPause
@@ -78,6 +81,7 @@ import com.zionhuang.music.ui.component.BottomSheet
 import com.zionhuang.music.ui.component.BottomSheetState
 import com.zionhuang.music.ui.component.ResizableIconButton
 import com.zionhuang.music.ui.component.rememberBottomSheetState
+import com.zionhuang.music.ui.menu.PlayerMenu
 import com.zionhuang.music.ui.screens.settings.DarkMode
 import com.zionhuang.music.ui.screens.settings.PlayerTextAlignment
 import com.zionhuang.music.utils.makeTimeString
@@ -86,6 +90,7 @@ import com.zionhuang.music.utils.rememberPreference
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import me.saket.squiggles.SquigglySlider
+import com.zionhuang.music.ui.component.LocalMenuState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -95,6 +100,7 @@ fun BottomSheetPlayer(
     modifier: Modifier = Modifier,
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
+    val menuState = LocalMenuState.current
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
@@ -117,6 +123,7 @@ fun BottomSheetPlayer(
     val repeatMode by playerConnection.repeatMode.collectAsState()
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
     val currentSong by playerConnection.currentSong.collectAsState(initial = null)
+    var showLyrics by rememberPreference(ShowLyricsKey, defaultValue = false)
 
     val canSkipPrevious by playerConnection.canSkipPrevious.collectAsState()
     val canSkipNext by playerConnection.canSkipNext.collectAsState()
@@ -167,57 +174,74 @@ fun BottomSheetPlayer(
                 animationSpec = tween(durationMillis = 100, easing = LinearEasing),
                 label = "playPauseRoundness"
             )
-
-            Text(
-                text = mediaMetadata.title,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .padding(horizontal = PlayerHorizontalPadding)
-                    .basicMarquee()
-                    .clickable(enabled = mediaMetadata.album != null) {
-                        navController.navigate("album/${mediaMetadata.album!!.id}")
-                        state.collapseSoft()
-                    }
-                    .align(
-                        when (playerTextAlignment) {
-                            PlayerTextAlignment.SIDED -> Alignment.Start
-                            PlayerTextAlignment.CENTER -> Alignment.CenterHorizontally
-                        },
-                    )
-            )
-
-            Spacer(Modifier.height(6.dp))
-
             Row(
-                horizontalArrangement = when (playerTextAlignment) {
-                    PlayerTextAlignment.SIDED -> Arrangement.Start
-                    PlayerTextAlignment.CENTER -> Arrangement.Center
-                },
+                horizontalArrangement = Arrangement.Start,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = PlayerHorizontalPadding)
             ) {
-                mediaMetadata.artists.fastForEachIndexed { index, artist ->
-                    Text(
-                        text = artist.name,
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.secondary,
-                        maxLines = 1,
+                Row {
+                    Box(
                         modifier = Modifier
-                            .clickable(enabled = artist.id != null) {
-                                navController.navigate("artist/${artist.id}")
-                                state.collapseSoft()
-                            }
-                    )
-
-                    if (index != mediaMetadata.artists.lastIndex) {
+                            .weight(1f)
+                    ) {
                         Text(
-                            text = ", ",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.secondary
+                            text = mediaMetadata.title,
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier
+                                .basicMarquee(
+                                    iterations = 1,
+                                    initialDelayMillis = 3000
+                                )
+                                .clickable(enabled = mediaMetadata.album != null) {
+                                    navController.navigate("album/${mediaMetadata.album!!.id}")
+                                    state.collapseSoft()
+                                }
+                        )
+
+                        Row(
+                            modifier = Modifier.offset(y = 25.dp)
+                        ) {
+                            mediaMetadata.artists.fastForEachIndexed { index, artist ->
+                                Text(
+                                    text = artist.name,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    maxLines = 1,
+                                    modifier = Modifier.clickable(enabled = artist.id != null) {
+                                        navController.navigate("artist/${artist.id}")
+                                        state.collapseSoft()
+                                    }
+                                )
+
+                                if (index != mediaMetadata.artists.lastIndex) {
+                                    Text(
+                                        text = ", ",
+                                        style = MaterialTheme.typography.titleMedium,
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    Box(
+                        modifier = Modifier
+                            .offset(y = 5.dp)
+                            .size(36.dp)
+                            .clip(RoundedCornerShape(24.dp))
+                            .background(MaterialTheme.colorScheme.primary)
+                    ) {
+                        ResizableIconButton(
+                            icon = if (currentSong?.song?.liked == true) R.drawable.favorite else R.drawable.favorite_border,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(24.dp),
+                            onClick = playerConnection::toggleLike
                         )
                     }
                 }
@@ -299,15 +323,13 @@ fun BottomSheetPlayer(
                     .padding(horizontal = PlayerHorizontalPadding)
             ) {
                 Box(modifier = Modifier.weight(1f)) {
-                    ResizableIconButton(
-                        icon = if (currentSong?.song?.liked == true) R.drawable.favorite else R.drawable.favorite_border,
-                        color = if (currentSong?.song?.liked == true) MaterialTheme.colorScheme.error else LocalContentColor.current,
-                        modifier = Modifier
-                            .size(32.dp)
-                            .padding(4.dp)
-                            .align(Alignment.Center),
-                        onClick = playerConnection::toggleLike
-                    )
+                    IconButton(onClick = { showLyrics = !showLyrics }) {
+                        Icon(
+                            painter = painterResource(R.drawable.lyrics),
+                            contentDescription = null,
+                            modifier = Modifier.alpha(if (showLyrics) 1f else 0.5f)
+                        )
+                    }
                 }
 
                 Box(modifier = Modifier.weight(1f)) {
@@ -442,7 +464,7 @@ fun BottomSheetPlayer(
             state = queueSheetState,
             playerBottomSheetState = state,
             backgroundColor = backgroundColor,
-            navController = navController
+            navController = navController,
         )
     }
 }

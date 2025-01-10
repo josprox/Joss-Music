@@ -31,6 +31,7 @@ val HideExplicitKey = booleanPreferencesKey("hideExplicit")
 val ProxyEnabledKey = booleanPreferencesKey("proxyEnabled")
 val ProxyUrlKey = stringPreferencesKey("proxyUrl")
 val ProxyTypeKey = stringPreferencesKey("proxyType")
+val JossRedEnabledKey = booleanPreferencesKey("JossRedEnabled")
 
 val AudioQualityKey = stringPreferencesKey("audioQuality")
 
@@ -149,6 +150,8 @@ val InnerTubeCookieKey = stringPreferencesKey("innerTubeCookie")
 val AccountNameKey = stringPreferencesKey("accountName")
 val AccountEmailKey = stringPreferencesKey("accountEmail")
 val AccountChannelHandleKey = stringPreferencesKey("accountChannelHandle")
+val AccessTokenKey = stringPreferencesKey("accessToken")
+val RefreshTokenKey = stringPreferencesKey("refreshToken")
 
 val LanguageCodeToName = mapOf(
     "af" to "Afrikaans",

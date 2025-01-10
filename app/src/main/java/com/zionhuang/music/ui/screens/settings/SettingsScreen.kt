@@ -1,24 +1,31 @@
 package com.zionhuang.music.ui.screens.settings
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.zionhuang.music.BuildConfig
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
@@ -54,6 +61,20 @@ fun SettingsScreen(
             onClick = { navController.navigate("settings/content") }
         )
         PreferenceEntry(
+            title = { Text("Joss Red") },
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.joss_music_logo),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp) // Ajusta el tamaño a 24 dp
+                        .clip(CircleShape) // Aplica la forma circular
+                        .background(MaterialTheme.colorScheme.surfaceContainer) // Fondo
+                )
+            },
+            onClick = { navController.navigate("JossRedSettings") }
+        )
+        PreferenceEntry(
             title = { Text(stringResource(R.string.player_and_audio)) },
             icon = { Icon(painterResource(R.drawable.play), null) },
             onClick = { navController.navigate("settings/player") }
@@ -83,14 +104,30 @@ fun SettingsScreen(
             icon = { Icon(painterResource(R.drawable.info), null) },
             onClick = { navController.navigate("settings/about") }
         )
-        if (latestVersionName != BuildConfig.VERSION_NAME) {
+        PreferenceEntry(
+            title = { Text(stringResource(R.string.donate)) },
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.joss_music_logo),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp) // Ajusta el tamaño a 24 dp
+                        .clip(CircleShape) // Aplica la forma circular
+                        .background(MaterialTheme.colorScheme.surfaceContainer) // Fondo
+                )
+            },
+            onClick = { uriHandler.openUri("https://www.paypal.me/jossestradamx") },
+            modifier = Modifier
+                .border(4.dp, MaterialTheme.colorScheme.primary, CircleShape) // Borde)
+        )
+        if (latestVersionName > BuildConfig.VERSION_NAME) {
             PreferenceEntry(
                 title = {
                     Text(
                         text = stringResource(R.string.new_version_available),
                     )
                 },
-                description = latestVersionName,
+                description = stringResource(R.string.latestVersion)+": "+BuildConfig.VERSION_NAME+"<"+latestVersionName,
                 icon = {
                     BadgedBox(
                         badge = { Badge() }
@@ -98,9 +135,17 @@ fun SettingsScreen(
                         Icon(painterResource(R.drawable.update), null)
                     }
                 },
-                onClick = {
-                    uriHandler.openUri("https://github.com/z-huang/InnerTune/releases/latest")
-                }
+                onClick = { navController.navigate("settings/update") }
+            )
+        }else{
+            PreferenceEntry(
+                title = {
+                    Text(
+                        text = stringResource(R.string.app_version),
+                    )
+                },
+                description = "Última version: "+BuildConfig.VERSION_NAME,
+                onClick = { navController.navigate("settings/update") }
             )
         }
     }

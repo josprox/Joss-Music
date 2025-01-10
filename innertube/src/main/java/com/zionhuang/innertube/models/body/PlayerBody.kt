@@ -8,5 +8,4 @@ data class PlayerBody(
     val context: Context,
     val videoId: String,
     val playlistId: String?,
-    val contentCheckOk: Boolean = true,
 )

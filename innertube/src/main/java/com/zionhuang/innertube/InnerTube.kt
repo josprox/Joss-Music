@@ -4,22 +4,36 @@ import com.zionhuang.innertube.encoder.brotli
 import com.zionhuang.innertube.models.Context
 import com.zionhuang.innertube.models.YouTubeClient
 import com.zionhuang.innertube.models.YouTubeLocale
-import com.zionhuang.innertube.models.body.*
+import com.zionhuang.innertube.models.body.AccountMenuBody
+import com.zionhuang.innertube.models.body.BrowseBody
+import com.zionhuang.innertube.models.body.GetQueueBody
+import com.zionhuang.innertube.models.body.GetSearchSuggestionsBody
+import com.zionhuang.innertube.models.body.GetTranscriptBody
+import com.zionhuang.innertube.models.body.NextBody
+import com.zionhuang.innertube.models.body.PlayerBody
+import com.zionhuang.innertube.models.body.SearchBody
 import com.zionhuang.innertube.utils.parseCookieString
 import com.zionhuang.innertube.utils.sha1
-import io.ktor.client.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.compression.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.compression.ContentEncoding
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.get
+import io.ktor.client.request.headers
+import io.ktor.client.request.parameter
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.http.userAgent
+import io.ktor.serialization.kotlinx.json.json
 import io.ktor.util.encodeBase64
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import java.net.Proxy
-import java.util.*
+import java.util.Locale
 
 /**
  * Provide access to InnerTube endpoints.
@@ -78,7 +92,7 @@ class InnerTube {
         }
     }
 
-    private fun HttpRequestBuilder.ytClient(client: YouTubeClient, setLogin: Boolean = false) {
+    private fun HttpRequestBuilder.ytClient(client: YouTubeClient, setLogin: Boolean = false, sapisid: Boolean = true) {
         contentType(ContentType.Application.Json)
         headers {
             append("X-Goog-Api-Format-Version", "1")
@@ -88,7 +102,7 @@ class InnerTube {
             if (client.referer != null) {
                 append("Referer", client.referer)
             }
-            if (setLogin) {
+            if (setLogin && sapisid) {
                 cookie?.let { cookie ->
                     append("cookie", cookie)
                     if ("SAPISID" !in cookieMap) return@let
@@ -126,7 +140,7 @@ class InnerTube {
         videoId: String,
         playlistId: String?,
     ) = httpClient.post("player") {
-        ytClient(client, setLogin = true)
+        ytClient(client, setLogin = true, false)
         setBody(
             PlayerBody(
                 context = client.toContext(locale, visitorData).let {
@@ -226,6 +240,7 @@ class InnerTube {
         client: YouTubeClient,
         videoId: String,
     ) = httpClient.post("https://music.youtube.com/youtubei/v1/get_transcript") {
+        // Advertencia: Esta API ya no funciona, se recomienda poner una propia
         parameter("key", "AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX3")
         headers {
             append("Content-Type", "application/json")

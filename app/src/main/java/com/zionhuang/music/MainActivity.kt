@@ -1,8 +1,8 @@
 package com.zionhuang.music
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.drawable.BitmapDrawable
@@ -12,6 +12,7 @@ import android.os.IBinder
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.animateDpAsState
@@ -68,6 +69,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
@@ -90,11 +92,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.imageLoader
 import coil.request.ImageRequest
+import com.google.android.gms.ads.MobileAds
+import com.onesignal.OneSignal
 import com.valentinilk.shimmer.LocalShimmerTheme
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.SongItem
@@ -122,6 +127,7 @@ import com.zionhuang.music.ui.component.BottomSheetMenu
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.SearchBar
+import com.zionhuang.music.ui.component.getIconForDate
 import com.zionhuang.music.ui.component.rememberBottomSheetState
 import com.zionhuang.music.ui.component.shimmer.ShimmerTheme
 import com.zionhuang.music.ui.menu.YouTubeSongMenu
@@ -139,6 +145,7 @@ import com.zionhuang.music.ui.theme.extractThemeColor
 import com.zionhuang.music.ui.utils.appBarScrollBehavior
 import com.zionhuang.music.ui.utils.backToMain
 import com.zionhuang.music.ui.utils.resetHeightOffset
+import com.zionhuang.music.utils.NotificationPermissionActivity
 import com.zionhuang.music.utils.Updater
 import com.zionhuang.music.utils.dataStore
 import com.zionhuang.music.utils.get
@@ -153,9 +160,15 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.dotenv.vault.dotenvVault
 import java.net.URLDecoder
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.days
+
+val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
+    directory = "/assets"
+    filename = "env.vault" // instead of '.env', use 'env'
+}
+val ONESIGNAL_APP_ID: String = dotenv["ONESIGNAL_APP_ID"]
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -181,10 +194,13 @@ class MainActivity : ComponentActivity() {
 
     private var latestVersionName by mutableStateOf(BuildConfig.VERSION_NAME)
 
+    // Handle deep links
+    private lateinit var navController: NavHostController
+
     override fun onStart() {
         super.onStart()
         startService(Intent(this, MusicService::class.java))
-        bindService(Intent(this, MusicService::class.java), serviceConnection, Context.BIND_AUTO_CREATE)
+        bindService(Intent(this, MusicService::class.java), serviceConnection, BIND_AUTO_CREATE)
     }
 
     override fun onStop() {
@@ -207,9 +223,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        // Inicializar OneSignal
+        OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
+
+        // Anuncios
+
+        MobileAds.initialize(this)
+
+        // Configuraciones adicionales de la interfaz, temas y comportamiento
         lifecycleScope.launch {
             dataStore.data
-                .map { it[DisableScreenshotKey] ?: false }
+                .map { it[DisableScreenshotKey] == true }
                 .distinctUntilChanged()
                 .collectLatest {
                     if (it) {
@@ -224,11 +248,57 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
+            // Configuraciones de interfaz y temas
+            val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
+            val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
+            val isSystemInDarkTheme = isSystemInDarkTheme()
+            val useDarkTheme = remember(darkTheme, isSystemInDarkTheme) {
+                if (darkTheme == DarkMode.AUTO) isSystemInDarkTheme else darkTheme == DarkMode.ON
+            }
+
+            LaunchedEffect(useDarkTheme) {
+                setSystemBarAppearance(useDarkTheme)
+            }
+
+            // Lógica de la interfaz y color de tema dinámico
+            var themeColor by rememberSaveable(stateSaver = ColorSaver) { mutableStateOf(DefaultThemeColor) }
+            LaunchedEffect(playerConnection, enableDynamicTheme, isSystemInDarkTheme) {
+                val playerConnection = playerConnection
+                if (!enableDynamicTheme || playerConnection == null) {
+                    themeColor = DefaultThemeColor
+                    return@LaunchedEffect
+                }
+                playerConnection.service.currentMediaMetadata.collectLatest { song ->
+                    themeColor = if (song != null) {
+                        withContext(Dispatchers.IO) {
+                            val result = imageLoader.execute(
+                                ImageRequest.Builder(this@MainActivity)
+                                    .data(song.thumbnailUrl)
+                                    .allowHardware(false)
+                                    .build()
+                            )
+                            (result.drawable as? BitmapDrawable)?.bitmap?.extractThemeColor() ?: DefaultThemeColor
+                        }
+                    } else DefaultThemeColor
+                }
+            }
+        }
+
+        // Solicitar permiso de notificaciones
+        requestNotificationPermission()
+
+        // Handle deep links
+        handleDeepLink(intent)
+    }
+
+    @SuppressLint("UnusedBoxWithConstraintsScope")
+    @OptIn(ExperimentalMaterial3Api::class)
+    private fun initializeApp() {
+
+        setContent {
             LaunchedEffect(Unit) {
-                if (System.currentTimeMillis() - Updater.lastCheckTime > 1.days.inWholeMilliseconds) {
-                    Updater.getLatestVersionName().onSuccess {
-                        latestVersionName = it
-                    }
+                Updater.getLatestVersionName().onSuccess {
+                    latestVersionName = it
                 }
             }
 
@@ -245,6 +315,9 @@ class MainActivity : ComponentActivity() {
             var themeColor by rememberSaveable(stateSaver = ColorSaver) {
                 mutableStateOf(DefaultThemeColor)
             }
+
+            val iconResId = getIconForDate() // Obtener el recurso dinámico
+            val iconPainter: Painter = painterResource(id = iconResId)
 
             LaunchedEffect(playerConnection, enableDynamicTheme, isSystemInDarkTheme) {
                 val playerConnection = playerConnection
@@ -638,14 +711,14 @@ class MainActivity : ComponentActivity() {
                                         ) {
                                             BadgedBox(
                                                 badge = {
-                                                    if (latestVersionName != BuildConfig.VERSION_NAME) {
+                                                    if (latestVersionName > BuildConfig.VERSION_NAME) {
                                                         Badge()
                                                     }
                                                 }
                                             ) {
 
                                                 Icon(
-                                                    painter = painterResource(R.drawable.settings),
+                                                    painter = iconPainter,
                                                     contentDescription = null
                                                 )
                                             }
@@ -691,7 +764,7 @@ class MainActivity : ComponentActivity() {
 
                         BottomSheetPlayer(
                             state = playerBottomSheetState,
-                            navController = navController
+                            navController = navController,
                         )
 
                         NavigationBar(
@@ -801,6 +874,55 @@ class MainActivity : ComponentActivity() {
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             window.navigationBarColor = (if (isDark) Color.Transparent else Color.Black.copy(alpha = 0.2f)).toArgb()
+        }
+    }
+
+    private fun handleDeepLink(intent: Intent?) {
+        intent?.data?.let { uri ->
+            val pathSegments = uri.pathSegments
+            when {
+                pathSegments.contains("playlist") -> {
+                    val idPlaylist = pathSegments.lastOrNull()
+                    idPlaylist?.let {
+                        navController.navigate("online_playlist/$it")
+                    }
+                }
+                pathSegments.contains("artist") -> {
+                    val idArtist = pathSegments.lastOrNull()
+                    idArtist?.let {
+                        navController.navigate("artist/$it")
+                    }
+                }
+                pathSegments.contains("album") -> {
+                    val idAlbum = pathSegments.lastOrNull()
+                    idAlbum?.let {
+                        navController.navigate("album/$it")
+                    }
+                }
+                else -> {
+                    navController.navigate(Screens.Home.route)
+                }
+            }
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        // Verifica si la versión del SDK es >= Android 13 (SDK 33)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+                if (isGranted) {
+                    initializeApp() // Llama a la inicialización si se otorga el permiso
+                } else {
+                    // Redirige a NotificationPermissionActivity si no se concede el permiso
+                    val intent = NotificationPermissionActivity.createIntent(this)
+                    startActivity(intent)
+                }
+            }.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            // Para versiones anteriores, simplemente inicializa la aplicación
+            initializeApp()
         }
     }
 

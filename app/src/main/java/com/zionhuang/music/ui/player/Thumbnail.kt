@@ -3,7 +3,7 @@ package com.zionhuang.music.ui.player
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +43,7 @@ fun Thumbnail(
     val error by playerConnection.error.collectAsState()
 
     val showLyrics by rememberPreference(ShowLyricsKey, false)
+    var dragAmount by remember { mutableStateOf(0f) }
 
     DisposableEffect(showLyrics) {
         currentView.keepScreenOn = showLyrics
@@ -70,13 +74,22 @@ fun Thumbnail(
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(ThumbnailCornerRadius * 2))
                         .pointerInput(Unit) {
-                            detectTapGestures(
-                                onDoubleTap = { offset ->
-                                    if (offset.x < size.width / 2) {
-                                        playerConnection.player.seekBack()
-                                    } else {
-                                        playerConnection.player.seekForward()
+                            detectHorizontalDragGestures(
+                                onDragEnd = {
+                                    // Detectar la dirección del deslizamiento al finalizar
+                                    if (dragAmount < 0) {
+                                        // Deslizar a la izquierda: ir a la siguiente canción
+                                        playerConnection.seekToNext()
+                                    } else if (dragAmount > 0) {
+                                        // Deslizar a la derecha: ir a la canción anterior
+                                        playerConnection.seekToPrevious()
                                     }
+                                    // Reiniciar el valor de dragAmount para el próximo gesto
+                                    dragAmount = 0f
+                                },
+                                onHorizontalDrag = { change, dragDelta ->
+                                    // Acumular la cantidad de desplazamiento
+                                    dragAmount += dragDelta
                                 }
                             )
                         }

@@ -52,6 +52,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.my.kizzy.rpc.KizzyRPC
+import com.zionhuang.music.BuildConfig
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.LocalPlayerConnection
 import com.zionhuang.music.R
@@ -61,6 +62,7 @@ import com.zionhuang.music.constants.DiscordTokenKey
 import com.zionhuang.music.constants.DiscordUsernameKey
 import com.zionhuang.music.constants.EnableDiscordRPCKey
 import com.zionhuang.music.db.entities.Song
+import com.zionhuang.music.dotenv
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.PreferenceEntry
 import com.zionhuang.music.ui.component.PreferenceGroupTitle
@@ -69,7 +71,7 @@ import com.zionhuang.music.ui.utils.backToMain
 import com.zionhuang.music.utils.rememberPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
+import org.dotenv.vault.dotenvVault
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,6 +88,11 @@ fun DiscordSettings(
     var discordUsername by rememberPreference(DiscordUsernameKey, "")
     var discordName by rememberPreference(DiscordNameKey, "")
     var infoDismissed by rememberPreference(DiscordInfoDismissedKey, false)
+
+    val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
+        directory = "/assets"
+        filename = "env.vault" // instead of '.env', use 'env'
+    }
 
     LaunchedEffect(discordToken) {
         val token = discordToken
@@ -237,7 +244,7 @@ fun RichPresence(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Listening to InnerTune",
+                text = "Listening to Joss Music",
                 style = MaterialTheme.typography.labelLarge,
                 textAlign = TextAlign.Start,
                 fontWeight = FontWeight.ExtraBold,
@@ -333,12 +340,12 @@ fun RichPresence(
 
             OutlinedButton(
                 onClick = {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/z-huang/InnerTune"))
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dotenv["HOMEPAGE"]))
                     context.startActivity(intent)
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Visit InnerTune")
+                Text("Visit Joss Music")
             }
         }
     }

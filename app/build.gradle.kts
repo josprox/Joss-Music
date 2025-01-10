@@ -22,11 +22,11 @@ android {
     compileSdk = 35
     buildToolsVersion = "35.0.0"
     defaultConfig {
-        applicationId = "com.zionhuang.music"
-        minSdk = 24
+        applicationId = "com.josprox.jossmusic"
+        minSdk = 26
         targetSdk = 35
-        versionCode = 26
-        versionName = "0.5.10"
+        versionCode = 24
+        versionName = "1.8.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -35,9 +35,11 @@ android {
             isShrinkResources = true
             isCrunchPngs = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "DOTENV_KEY", System.getenv("DOTENV_KEY") ?: "\"\"")
         }
         debug {
             applicationIdSuffix = ".debug"
+            buildConfigField("String", "DOTENV_KEY", System.getenv("DOTENV_KEY") ?: "\"\"")
         }
     }
     flavorDimensions += "version"
@@ -58,7 +60,6 @@ android {
 //            isUniversalApk = false
 //        }
 //    }
-    
     signingConfigs {
         getByName("debug") {
             if (System.getenv("MUSIC_DEBUG_SIGNING_STORE_PASSWORD") != null) {
@@ -106,7 +107,6 @@ android {
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
-
 dependencies {
     implementation(libs.guava)
     implementation(libs.coroutines.guava)
@@ -143,6 +143,9 @@ dependencies {
     implementation(libs.media3.okhttp)
 
     implementation(libs.room.runtime)
+    implementation(libs.billing.ktx)
+    implementation(libs.runtime.livedata)
+    implementation(project(":jossredconnect"))
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 
@@ -170,4 +173,8 @@ dependencies {
     "fullImplementation"(libs.opencc4j)
 
     implementation(libs.timber)
+    implementation(libs.onesignal)
+    implementation(libs.dotenv.vault.kotlin)
+    implementation(libs.play.services.ads)
+    implementation(libs.billing)
 }

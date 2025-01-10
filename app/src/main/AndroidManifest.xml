@@ -2,20 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permisos necesarios para la aplicación -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
+    <!-- Consultas para otras aplicaciones -->
     <queries>
         <intent>
             <action android:name="android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL" />
         </intent>
     </queries>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -24,97 +27,106 @@
         android:appCategory="audio"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.InnerTune"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="tiramisu">
+
+        <!-- Configuración de servicios de anuncios -->
+        <property
+            android:name="android.adservices.AD_SERVICES_CONFIG"
+            android:resource="@xml/gma_ad_services_config"
+            tools:replace="android:resource" />
+
+        <!-- Configuración de metadatos -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9451235108408321~9379363896" />
+        <meta-data
+            android:name="com.google.android.play.billingclient.version"
+            android:value="7.1.1"/>
+
+        <!-- Widget de música -->
+        <receiver
+            android:name=".MusicWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider" />
+        </receiver>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
+        <!-- Actividades de la aplicación -->
+        <activity android:name=".utils.NotificationPermissionActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/Theme.InnerTune"
             android:windowSoftInputMode="adjustResize">
+
+            <!-- Intent Filter principal para abrir la app -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Intent Filter para manejar el deep link de m.jossmusic.me -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                    android:host="m.jossmusic.me"
+                    android:pathPattern="/shared/.*" />
+            </intent-filter>
+
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MUSIC_PLAYER" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.APP_MUSIC" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
-            <!-- Youtube filter -->
+            <!-- Intent Filter para manejar otros enlaces de YouTube o cualquier otro deep link adicional -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="youtube.com" />
                 <data android:host="m.youtube.com" />
                 <data android:host="www.youtube.com" />
                 <data android:host="music.youtube.com" />
-                <!-- video prefix -->
                 <data android:pathPrefix="/v/" />
                 <data android:pathPrefix="/embed/" />
                 <data android:pathPrefix="/watch" />
-                <!-- channel prefix -->
                 <data android:pathPrefix="/channel/" />
                 <data android:pathPrefix="/user/" />
                 <data android:pathPrefix="/c/" />
-                <!-- playlist prefix -->
                 <data android:pathPrefix="/playlist" />
             </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="youtu.be" />
-                <data android:pathPrefix="/" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="vnd.youtube" />
-                <data android:scheme="vnd.youtube.launch" />
-            </intent-filter>
-
-            <!-- Share filter -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
 
+        <!-- Proveedor de archivos -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.FileProvider"
@@ -125,6 +137,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <!-- Servicio de reproducción de música en primer plano -->
         <service
             android:name=".playback.MusicService"
             android:exported="true"
@@ -137,19 +150,20 @@
             </intent-filter>
         </service>
 
+        <!-- Servicio de descarga de ExoPlayer -->
         <service
             android:name=".playback.ExoDownloadService"
-            android:foregroundServiceType="dataSync"
-            android:exported="false">
+            android:exported="false"
+            android:foregroundServiceType="dataSync">
             <intent-filter>
                 <action android:name="androidx.media3.exoplayer.downloadService.action.RESTART" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
+        <!-- Metadata para compatibilidad con Android Auto -->
         <meta-data
             android:name="com.google.android.gms.car.application"
             android:resource="@xml/automotive_app_desc" />
     </application>
-
 </manifest>

@@ -1,99 +1,99 @@
-name: Bug report
-description: Create a bug report to help us improve
-labels: [ bug ]
+name: Informe de error
+description: Crea un informe de error para ayudarnos a mejorar
+labels: [ error ]
 body:
   - type: checkboxes
     id: checklist
     attributes:
-      label: Checklist
-      description: You should ensure the completion of the task before proceeding to check it off the checklist. Neglecting to do so may impede the efficiency of the issue resolution process. The developer has the right to delete the issue directly if you check the list blindly.
+      label: Lista de verificación
+      description: Debes asegurarte de completar la tarea antes de marcarla como realizada en la lista. No hacerlo podría dificultar la eficiencia en la resolución del problema. El desarrollador tiene el derecho de eliminar el problema directamente si marcas la lista sin cumplir con los pasos indicados.
       options:
-        - label: I am able to reproduce the bug with the [latest debug version](https://github.com/z-huang/InnerTune/actions/workflows/build.yml).
+        - label: Puedo reproducir el error con la [última versión de publicación](https://github.com/josprox/Joss-Music/).
           required: true
-        - label: I've checked that there is no open or closed issue about this bug.
+        - label: He comprobado que no hay ningún problema abierto o cerrado relacionado con este error.
           required: true
-        - label: This issue contains only one bug.
+        - label: Este informe contiene solo un error.
           required: true
-        - label: The title of this issue accurately describes the bug.
+        - label: El título de este informe describe con precisión el error.
           required: true
 
   - type: textarea
     id: reproduce-steps
     attributes:
-      label: Steps to reproduce the bug
-      description: What did you do for the bug to show up?
+      label: Pasos para reproducir el error
+      description: ¿Qué hiciste para que apareciera el error?
       placeholder: |
-        Example:
-          1. Go to '...'
-          2. Click on '....'
-          3. Scroll down to '....'
-          4. See error
+        Ejemplo:
+          1. Ve a '...'
+          2. Haz clic en '....'
+          3. Desplázate hacia '....'
+          4. Ver error
     validations:
       required: true
 
   - type: textarea
     id: expected-behavior
     attributes:
-      label: Expected behavior
+      label: Comportamiento esperado
       placeholder: |
-        Example:
-          "This should happen..."
+        Ejemplo:
+          "Esto debería suceder..."
     validations:
       required: true
 
   - type: textarea
     id: actual-behavior
     attributes:
-      label: Actual behavior
+      label: Comportamiento actual
       placeholder: |
-        Example:
-          "This happened instead..."
+        Ejemplo:
+          "Esto ocurrió en su lugar..."
     validations:
       required: true
 
   - type: textarea
     id: sreen-media
     attributes:
-      label: Screenshots/Screen recordings
+      label: Capturas de pantalla/Grabaciones de pantalla
       description: |
-        A picture or video helps us understand the bug more.
+        Una imagen o video nos ayuda a entender mejor el error.
 
-        You can upload them directly in the text box.
+        Puedes subirlos directamente en el cuadro de texto.
 
   - type: textarea
     id: logs
     attributes:
-      label: Logs
+      label: Registros
       description: |
-        Please use `adb logcat` or other ways to provide logs. This field is strongly recommended to be filled. Without this information, it's likely that the developer is unable to take any meaningful action or provide further assistance. Check https://developer.android.com/tools/logcat on how to get logs.
+        Por favor, utiliza `adb logcat` u otras herramientas para proporcionar los registros. Este campo es altamente recomendado. Sin esta información, es probable que el desarrollador no pueda tomar medidas significativas o proporcionar asistencia adicional. Consulta https://developer.android.com/tools/logcat para aprender a obtener registros.
     validations:
       required: true
 
   - type: input
     id: app-version
     attributes:
-      label: InnerTune version
+      label: Versión de Joss Music
       description: |
-        You can find your InnerTune version in **Settings**.
+        Puedes encontrar la versión de Joss Music en **Configuración**.
       placeholder: |
-        Example: "0.5.6"
+        Ejemplo: "0.5.6"
     validations:
       required: true
 
   - type: input
     id: android-version
     attributes:
-      label: Android version
+      label: Versión de Android
       description: |
-        You can find this somewhere in your Android settings.
+        Puedes encontrar esta información en la configuración de tu dispositivo Android.
       placeholder: |
-        Example: "Android 13"
+        Ejemplo: "Android 13"
     validations:
       required: true
 
   - type: textarea
     id: additional-information
     attributes:
-      label: Additional information
+      label: Información adicional
       placeholder: |
-        Additional details and attachments.
+        Detalles adicionales y archivos adjuntos.

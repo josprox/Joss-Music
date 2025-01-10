@@ -46,6 +46,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -104,6 +105,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlin.math.min
 import kotlin.random.Random
+import com.zionhuang.music.ui.component.admob.AdMobBannerAd
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -361,6 +363,18 @@ fun HomeScreen(
                             modifier = Modifier.weight(1f)
                         )
                     }
+                }
+            }
+
+            item {
+
+                Row (
+                    modifier = Modifier
+                        .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                        .fillMaxWidth()
+                ) {
+                    AdMobBannerAd()
                 }
             }
 
