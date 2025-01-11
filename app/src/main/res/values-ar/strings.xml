@@ -331,4 +331,7 @@
   <string name="noPlayback">لا التشغيل</string>
   <string name="unknownArtist">فنان غير معروف</string>
   <string name="untitled">بدون عنوان</string>
+  <string name="jossredSettings_welcome">مرحبًا بك في نظام "جوس ريد". يقدم هذا النظام المبتكر بديلاً قويًا لكل من واجهات برمجة التطبيقات "NewPipe" و"YouTube". مع "Joss Red"، يمكنك الاستمتاع بتجربة مخصصة عند التفاعل مع جميع أنواع التشغيل، وذلك ببساطة عن طريق تنشيط الخيارات التي تناسب احتياجاتك على أفضل وجه.</string>
+  <string name="playSongJR">تشغيل الموسيقى من "Joss Red".</string>
+  <string name="playSongJRDesc">يسمح لك بتشغيل أي أغنية دون تسجيل الدخول بجودة عالية.</string>
 </resources>

@@ -305,4 +305,7 @@
   <string name="noPlayback">沒有播放</string>
   <string name="unknownArtist">未知藝術家</string>
   <string name="untitled">無題</string>
+  <string name="jossredSettings_welcome">歡迎來到「喬斯紅」系統。這個創新系統為「NewPipe」和「YouTube」API 提供了強大的替代方案。透過“Joss Red”，您只需啟動最適合您需求的選項，即可在與所有類型的播放互動時享受個人化體驗。</string>
+  <string name="playSongJR">播放“Joss Red”中的音樂。</string>
+  <string name="playSongJRDesc">它允許您無需登入即可高品質地播放任何歌曲。</string>
 </resources>

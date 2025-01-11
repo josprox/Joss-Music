@@ -307,4 +307,7 @@
   <string name="noPlayback">Không phát lại</string>
   <string name="unknownArtist">Nghệ sĩ vô danh</string>
   <string name="untitled">Không có tiêu đề</string>
+  <string name="jossredSettings_welcome">Chào mừng đến với hệ thống Joss Red. Hệ thống đổi mới này cung cấp giải pháp thay thế mạnh mẽ cho cả API NewPipe và YouTube. Với Joss Red, bạn có thể tận hưởng trải nghiệm được cá nhân hóa khi tương tác với tất cả các kiểu phát lại, chỉ cần kích hoạt các tùy chọn phù hợp nhất với nhu cầu của bạn.</string>
+  <string name="playSongJR">Phát nhạc từ Joss Red.</string>
+  <string name="playSongJRDesc">Nó cho phép bạn phát bất kỳ bài hát nào mà không cần đăng nhập với chất lượng cao.</string>
 </resources>

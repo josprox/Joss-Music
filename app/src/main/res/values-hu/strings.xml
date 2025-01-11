@@ -281,4 +281,7 @@
   <string name="theme">Téma</string>
   <string name="logout">Kijelentkezés</string>
   <string name="login_failed">Sikertelen bejelentkezés</string>
+  <string name="jossredSettings_welcome">Üdvözöljük a „Joss Red” rendszerben. Ez az innovatív rendszer hatékony alternatívát kínál a „NewPipe” és a „YouTube” API-kkal szemben. A „Joss Red” segítségével személyre szabott élményben lehet része, amikor bármilyen lejátszási móddal kommunikál, egyszerűen csak aktiválja az igényeinek leginkább megfelelő opciókat.</string>
+  <string name="playSongJR">Zene lejátszása a „Joss Red”-től.</string>
+  <string name="playSongJRDesc">Lehetővé teszi bármilyen dal lejátszását bejelentkezés nélkül, kiváló minőségben.</string>
 </resources>

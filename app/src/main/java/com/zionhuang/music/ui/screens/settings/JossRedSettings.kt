@@ -38,6 +38,7 @@ import com.zionhuang.music.R
 import com.zionhuang.music.constants.AccessTokenKey
 import com.zionhuang.music.constants.AutoSkipNextOnErrorKey
 import com.zionhuang.music.constants.JossRedEnabledKey
+import com.zionhuang.music.constants.JossRedMultimedia
 import com.zionhuang.music.constants.RefreshTokenKey
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.PreferenceEntry
@@ -57,6 +58,7 @@ fun JossRedSettings(
     var accessToken by rememberPreference(AccessTokenKey, "")
     var refreshToken by rememberPreference(RefreshTokenKey, "")
     val (jossRedEnabled, onJossRedEnabledChange) = rememberPreference(key = JossRedEnabledKey, defaultValue = false)
+    val (jossRedMultimedia, onJossRedMultimediaChange) = rememberPreference(key = JossRedMultimedia, defaultValue = false)
 
     // Variables para los nuevos campos de entrada
     var manualAccessToken by remember { mutableStateOf(accessToken) }
@@ -73,7 +75,7 @@ fun JossRedSettings(
     ) {
         Spacer(Modifier.windowInsetsPadding(LocalPlayerAwareWindowInsets.current.only(WindowInsetsSides.Top)))
 
-        Text("El sistema está en desarrollo, puedes ir preparando tus credenciales para una futura actualización.")
+        Text(stringResource(R.string.jossredSettings_welcome))
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -97,6 +99,23 @@ fun JossRedSettings(
             },
             checked = jossRedEnabled,
             onCheckedChange = onJossRedEnabledChange
+        )
+
+        SwitchPreference(
+            title = { Text(stringResource(R.string.playSongJR)) },
+            description = stringResource(R.string.playSongJRDesc),
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.music_note),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp) // Ajusta el tamaño a 24 dp
+                        .clip(CircleShape) // Aplica la forma circular
+                        .background(MaterialTheme.colorScheme.surfaceContainer) // Fondo
+                )
+            },
+            checked = jossRedMultimedia,
+            onCheckedChange = onJossRedMultimediaChange
         )
 
         SwitchPreference(

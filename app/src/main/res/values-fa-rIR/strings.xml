@@ -258,4 +258,7 @@
   <string name="theme">تم</string>
   <string name="logout">خروج از سیستم</string>
   <string name="login_failed">ورود ناموفق بود</string>
+  <string name="jossredSettings_welcome">به سیستم "Joss Red" خوش آمدید. این سیستم نوآورانه جایگزین قدرتمندی برای هر دو API «NewPipe» و «YouTube» ارائه می‌کند. با «Joss Red»، می‌توانید هنگام تعامل با انواع پخش، از یک تجربه شخصی‌سازی شده لذت ببرید و به سادگی گزینه‌هایی را که به بهترین وجه با نیازهای شما مطابقت دارند، فعال کنید.</string>
+  <string name="playSongJR">پخش موسیقی از "Joss Red".</string>
+  <string name="playSongJRDesc">به شما امکان می دهد هر آهنگی را بدون ورود به سیستم با کیفیت بالا پخش کنید.</string>
 </resources>

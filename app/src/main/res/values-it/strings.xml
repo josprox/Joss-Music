@@ -305,4 +305,7 @@
   <string name="untitled">Senza titolo</string>
   <string name="logout">Esci</string>
   <string name="login_failed">Accesso non riuscito</string>
+  <string name="jossredSettings_welcome">Benvenuto nel sistema "Joss Red". Questo sistema innovativo offre una potente alternativa alle API "NewPipe" e "YouTube". Con Joss Red puoi goderti un\'esperienza personalizzata interagendo con tutti i tipi di riproduzione, semplicemente attivando le opzioni che meglio si adattano alle tue esigenze.</string>
+  <string name="playSongJR">Riproduci la musica di "Joss Red".</string>
+  <string name="playSongJRDesc">Ti consente di riprodurre qualsiasi brano senza accedere con alta qualità.</string>
 </resources>

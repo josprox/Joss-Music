@@ -311,4 +311,7 @@
   <string name="noPlayback">Geen weergave</string>
   <string name="unknownArtist">Onbekende artiest</string>
   <string name="untitled">Zonder titel</string>
+  <string name="jossredSettings_welcome">Welkom bij het Joss Red-systeem. Dit innovatieve systeem biedt een krachtig alternatief voor zowel NewPipe als YouTube API\'s. Met Joss Red kunt u genieten van een persoonlijke ervaring bij interactie met alle soorten weergave, door eenvoudigweg de opties te activeren die het beste bij uw behoeften passen.</string>
+  <string name="playSongJR">Speel muziek af van Joss Red.</string>
+  <string name="playSongJRDesc">Hiermee kun je elk nummer afspelen zonder in te loggen met hoge kwaliteit.</string>
 </resources>

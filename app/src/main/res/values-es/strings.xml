@@ -324,4 +324,7 @@
   <string name="noPlayback">Sin reproducción</string>
   <string name="unknownArtist">Artista desconocido</string>
   <string name="untitled">Sin título</string>
+  <string name="jossredSettings_welcome">Bienvenido al sistema Joss Red. Este innovador sistema ofrece una alternativa eficaz tanto a NewPipe como a las API de YouTube. Con Joss Red, podrás disfrutar de una experiencia personalizada al interactuar con todo tipo de reproducción, simplemente activando las opciones que mejor se ajusten a tus necesidades.</string>
+  <string name="playSongJR">Reproducir música desde Joss Red.</string>
+  <string name="playSongJRDesc">Permite reproducir cualquier canción sin necesidad de iniciar sesión con alta calidad.</string>
 </resources>

@@ -334,4 +334,7 @@
   <string name="noPlayback">Brak odtwarzania</string>
   <string name="unknownArtist">Nieznany artysta</string>
   <string name="untitled">Nieuprawny</string>
+  <string name="jossredSettings_welcome">Witamy w systemie „Joss Red”. Ten innowacyjny system oferuje potężną alternatywę dla interfejsów API „NewPipe” i „YouTube”. Dzięki „Joss Red” możesz cieszyć się spersonalizowanymi wrażeniami podczas interakcji ze wszystkimi rodzajami odtwarzania, po prostu aktywując opcje, które najlepiej odpowiadają Twoim potrzebom.</string>
+  <string name="playSongJR">Odtwórz muzykę z „Joss Red”.</string>
+  <string name="playSongJRDesc">Pozwala odtwarzać dowolny utwór bez logowania się w wysokiej jakości.</string>
 </resources>

@@ -278,4 +278,7 @@
   <string name="theme">ଥିମ୍</string>
   <string name="logout">ଲଗଆଉଟ୍ |</string>
   <string name="login_failed">ଲଗଇନ୍ ବିଫଳ ହେଲା |</string>
+  <string name="jossredSettings_welcome">Joss Red  ସିଷ୍ଟମକୁ ସ୍ୱାଗତ | ଏହି ଅଭିନବ ପ୍ରଣାଳୀ ଉଭୟ NewPipe ଏବଂ YouTube API ପାଇଁ ଏକ ଶକ୍ତିଶାଳୀ ବିକଳ୍ପ ପ୍ରଦାନ କରେ | Joss Red  ସହିତ, ଆପଣ ସମସ୍ତ ପ୍ରକାରର ପ୍ଲେକ୍ ସହିତ ଯୋଗାଯୋଗ କରିବା ସମୟରେ ଏକ ବ୍ୟକ୍ତିଗତ ଅଭିଜ୍ଞତାକୁ ଉପଭୋଗ କରିପାରିବେ, କେବଳ ଆପଣଙ୍କ ଆବଶ୍ୟକତା ଅନୁଯାୟୀ ବିକଳ୍ପଗୁଡ଼ିକୁ ସକ୍ରିୟ କରି |</string>
+  <string name="playSongJR">Joss Red ରୁ ସଂଗୀତ ବଜାନ୍ତୁ |</string>
+  <string name="playSongJRDesc">ଉଚ୍ଚ ଗୁଣବତ୍ତା ସହିତ ଲଗ୍ ଇନ୍ ନକରି ଏହା ଆପଣଙ୍କୁ ଯେକ song ଣସି ଗୀତ ବଜାଇବାକୁ ଅନୁମତି ଦିଏ |</string>
 </resources>

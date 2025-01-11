@@ -334,4 +334,7 @@
   <string name="noPlayback">Žádné přehrávání</string>
   <string name="unknownArtist">Neznámý umělec</string>
   <string name="untitled">Bez názvu</string>
+  <string name="jossredSettings_welcome">Vítejte v systému Joss Red. Tento inovativní systém nabízí výkonnou alternativu k API „NewPipe“ a „YouTube“. S Joss Red si můžete vychutnat personalizovaný zážitek při interakci se všemi typy přehrávání, jednoduše aktivujte možnosti, které nejlépe vyhovují vašim potřebám.</string>
+  <string name="playSongJR">Přehrávejte hudbu z Joss Red.</string>
+  <string name="playSongJRDesc">Umožňuje vám přehrávat jakoukoli skladbu bez přihlášení ve vysoké kvalitě.</string>
 </resources>

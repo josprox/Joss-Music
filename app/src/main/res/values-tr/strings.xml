@@ -316,4 +316,7 @@
   <string name="noPlayback">Oynatma yok</string>
   <string name="unknownArtist">Bilinmeyen sanatçı</string>
   <string name="untitled">İsimsiz</string>
+  <string name="jossredSettings_welcome">Joss Red sistemine hoş geldiniz. Bu yenilikçi sistem, hem NewPipe hem de YouTube API\'lerine güçlü bir alternatif sunuyor. Joss Red ile her tür oynatmayla etkileşimde bulunurken ihtiyaçlarınıza en uygun seçenekleri etkinleştirerek kişiselleştirilmiş bir deneyimin keyfini çıkarabilirsiniz.</string>
+  <string name="playSongJR">Joss Red den müzik çalın.</string>
+  <string name="playSongJRDesc">Giriş yapmadan herhangi bir şarkıyı yüksek kalitede çalmanıza olanak tanır.</string>
 </resources>

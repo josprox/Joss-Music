@@ -8,7 +8,6 @@ import android.database.SQLException
 import android.media.audiofx.AudioEffect
 import android.net.ConnectivityManager
 import android.os.Binder
-import android.util.Log
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.datastore.preferences.core.edit
@@ -66,6 +65,7 @@ import com.zionhuang.music.constants.AutoSkipNextOnErrorKey
 import com.zionhuang.music.constants.DiscordTokenKey
 import com.zionhuang.music.constants.EnableDiscordRPCKey
 import com.zionhuang.music.constants.HideExplicitKey
+import com.zionhuang.music.constants.JossRedMultimedia
 import com.zionhuang.music.constants.MediaSessionConstants.CommandToggleLibrary
 import com.zionhuang.music.constants.MediaSessionConstants.CommandToggleLike
 import com.zionhuang.music.constants.MediaSessionConstants.CommandToggleRepeatMode
@@ -92,7 +92,6 @@ import com.zionhuang.music.extensions.mediaItems
 import com.zionhuang.music.extensions.metadata
 import com.zionhuang.music.extensions.toMediaItem
 import com.zionhuang.music.lyrics.LyricsHelper
-import com.zionhuang.music.models.MediaMetadata
 import com.zionhuang.music.models.PersistQueue
 import com.zionhuang.music.models.toMediaMetadata
 import com.zionhuang.music.playback.queues.EmptyQueue
@@ -102,6 +101,7 @@ import com.zionhuang.music.playback.queues.YouTubeQueue
 import com.zionhuang.music.playback.queues.filterExplicit
 import com.zionhuang.music.utils.CoilBitmapLoader
 import com.zionhuang.music.utils.DiscordRPC
+import com.zionhuang.music.utils.YTPlayerUtils
 import com.zionhuang.music.utils.dataStore
 import com.zionhuang.music.utils.enumPreference
 import com.zionhuang.music.utils.get
@@ -121,7 +121,6 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -168,7 +167,7 @@ class MusicService : MediaLibraryService(),
     private var currentQueue: Queue = EmptyQueue
     var queueTitle: String? = null
 
-    val currentMediaMetadata = MutableStateFlow<MediaMetadata?>(null)
+    val currentMediaMetadata = MutableStateFlow<com.zionhuang.music.models.MediaMetadata?>(null)
     private val currentSong = currentMediaMetadata.flatMapLatest { mediaMetadata ->
         database.song(mediaMetadata?.id)
     }.stateIn(scope, SharingStarted.Lazily, null)
@@ -201,7 +200,7 @@ class MusicService : MediaLibraryService(),
         setMediaNotificationProvider(
             DefaultMediaNotificationProvider(this, { NOTIFICATION_ID }, CHANNEL_ID, R.string.music_player)
                 .apply {
-                    setSmallIcon(R.drawable.joss_music_logo)
+                    setSmallIcon(R.drawable.small_icon)
                 }
         )
         player = ExoPlayer.Builder(this)
@@ -218,7 +217,6 @@ class MusicService : MediaLibraryService(),
             .setSeekBackIncrementMs(5000)
             .setSeekForwardIncrementMs(5000)
             .build()
-
             .apply {
                 addListener(this@MusicService)
                 sleepTimer = SleepTimer(scope, this)
@@ -404,7 +402,7 @@ class MusicService : MediaLibraryService(),
         )
     }
 
-    private suspend fun recoverSong(mediaId: String, playerResponse: PlayerResponse? = null) {
+    private suspend fun recoverSong(mediaId: String, videoDetails: PlayerResponse.VideoDetails? = null) {
         // Recuperar la canción desde la base de datos
         val song = database.song(mediaId).first()
         val mediaMetadata = withContext(Dispatchers.Main) {
@@ -414,7 +412,7 @@ class MusicService : MediaLibraryService(),
         // Calcular la duración de la canción
         val duration = song?.song?.duration?.takeIf { it != -1 }
             ?: mediaMetadata.duration.takeIf { it != -1 }
-            ?: (playerResponse ?: YouTube.player(mediaId).getOrNull())?.videoDetails?.lengthSeconds?.toInt()
+            ?: (videoDetails ?: YTPlayerUtils.playerResponseForMetadata(mediaId).getOrNull()?.videoDetails)?.lengthSeconds?.toInt()
             ?: -1
 
         // Actualizar la base de datos con los metadatos de la canción
@@ -441,6 +439,7 @@ class MusicService : MediaLibraryService(),
         /**
          * Manejo de canciones relacionadas
          * */
+
         if (!database.hasRelatedSongs(mediaId)) {
             val relatedEndpoint = YouTube.next(WatchEndpoint(videoId = mediaId)).getOrNull()?.relatedEndpoint ?: return
             val relatedPage = YouTube.related(relatedEndpoint).getOrNull() ?: return
@@ -656,6 +655,13 @@ class MusicService : MediaLibraryService(),
         return ResolvingDataSource.Factory(createCacheDataSource()) { dataSpec ->
             val mediaId = dataSpec.key ?: error("No media id")
 
+            // Consultar preferencia JossRedMultimedia
+            val useAlternativeSource = runBlocking {
+                dataStore.data.map { preferences ->
+                    preferences[JossRedMultimedia] ?: false
+                }.first()
+            }
+
             // Verificar si está en caché local
             if (downloadCache.isCached(mediaId, dataSpec.position, if (dataSpec.length >= 0) dataSpec.length else 1) ||
                 playerCache.isCached(mediaId, dataSpec.position, CHUNK_LENGTH)
@@ -665,82 +671,74 @@ class MusicService : MediaLibraryService(),
             }
 
             // Validar si hay URL en caché y no ha expirado
-            songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
+            songUrlCache[mediaId]?.takeIf { it.second < System.currentTimeMillis() }?.let {
                 scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                 return@Factory dataSpec.withUri(it.first.toUri())
             }
 
+            // Si la preferencia está activa, intentar usar la fuente alternativa
+
+            if (useAlternativeSource) {
+                val alternativeUrl = "https://jossred.josprox.com/yt/v2/stream/$mediaId"
+                Timber.i("Se está usando Joss Red para la reproducción de música")
+                try {
+                    scope.launch(Dispatchers.IO) {
+                        recoverSong(mediaId)
+                    }
+                    return@Factory dataSpec.withUri(alternativeUrl.toUri())
+                } catch (e: Exception) {
+                    Timber.e(e, "Error al usar la fuente alternativa: $mediaId. Reintentando con YouTube.")
+                }
+            }
+
+            // Verificar si existe el formato para que los usuarios de versiones anteriores puedan ver los detalles del formato
+            // Puede haber inconsistencias entre el archivo descargado y la información mostrada si el usuario cambia la calidad del audio con frecuencia
             // Obtener formato almacenado
             val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
-
-            // Obtener información del reproductor de YouTube
-            val playerResponse = runBlocking(Dispatchers.IO) {
-                YouTube.player(mediaId)
+            val playbackData = runBlocking(Dispatchers.IO) {
+                YTPlayerUtils.playerResponseForPlayback(
+                    mediaId,
+                    playedFormat = playedFormat,
+                    audioQuality = audioQuality,
+                    connectivityManager = connectivityManager,
+                )
             }.getOrElse { throwable ->
-                handlePlaybackError(throwable)
-            }
+                when (throwable) {
+                    is PlaybackException -> throw throwable
 
-            // Intentar usar el formato principal
-            try {
-                if (playerResponse.playabilityStatus.status == "OK") {
-                    val format = playerResponse.streamingData?.adaptiveFormats?.find { it.isAudio }
-                        ?: throw PlaybackException(
-                            getString(R.string.error_no_stream),
-                            null,
-                            PlaybackException.ERROR_CODE_REMOTE_ERROR
-                        )
-
-                    database.query {
-                        upsert(FormatEntity(
-                            id = mediaId,
-                            itag = format.itag,
-                            mimeType = format.mimeType.split(";")[0],
-                            codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
-                            bitrate = format.bitrate,
-                            sampleRate = format.audioSampleRate,
-                            contentLength = format.contentLength!!,
-                            loudnessDb = playerResponse.playerConfig?.audioConfig?.loudnessDb
-                        ))
+                    is ConnectException, is UnknownHostException -> {
+                        throw PlaybackException(getString(R.string.error_no_internet), throwable, PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)
                     }
 
-                    songUrlCache[mediaId] = format.url!! to playerResponse.streamingData!!.expiresInSeconds * 1000L
-                    scope.launch(Dispatchers.IO) { recoverSong(mediaId, playerResponse) }
-                    return@Factory dataSpec.withUri(format.url!!.toUri())
-                }
-            } catch (e: Exception) {
-                Timber.tag("JossRedService").w("Fallo al usar fuente principal para $mediaId: ${e.message}")
-            }
+                    is SocketTimeoutException -> {
+                        throw PlaybackException(getString(R.string.error_timeout), throwable, PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT)
+                    }
 
-            // Usar fuente alternativa si falla la principal
-            val alternativeUrl = "https://jossred.josprox.com/yt/stream/$mediaId"
-            scope.launch(Dispatchers.IO) {
-                try {
-                    recoverSong(mediaId)
-                } catch (e: Exception) {
-                    Timber.e(e, "Error al recuperar canción desde fuente alternativa: $mediaId")
+                    else -> throw PlaybackException(getString(R.string.error_unknown), throwable, PlaybackException.ERROR_CODE_REMOTE_ERROR)
                 }
             }
-            return@Factory dataSpec.withUri(alternativeUrl.toUri())
-        }
-    }
+            val format = playbackData.format
 
-    private fun handlePlaybackError(throwable: Throwable): Nothing {
-        when (throwable) {
-            is ConnectException, is UnknownHostException -> throw PlaybackException(
-                getString(R.string.error_no_internet),
-                throwable,
-                PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
-            )
-            is SocketTimeoutException -> throw PlaybackException(
-                getString(R.string.error_timeout),
-                throwable,
-                PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT
-            )
-            else -> throw PlaybackException(
-                getString(R.string.error_unknown),
-                throwable,
-                PlaybackException.ERROR_CODE_REMOTE_ERROR
-            )
+            database.query {
+                upsert(
+                    FormatEntity(
+                        id = mediaId,
+                        itag = format.itag,
+                        mimeType = format.mimeType.split(";")[0],
+                        codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
+                        bitrate = format.bitrate,
+                        sampleRate = format.audioSampleRate,
+                        contentLength = format.contentLength!!,
+                        loudnessDb = playbackData.audioConfig?.loudnessDb
+                    )
+                )
+            }
+            scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData.videoDetails) }
+
+            val streamUrl = playbackData.streamUrl
+
+            songUrlCache[mediaId] = streamUrl to playbackData.streamExpiresInSeconds * 1000L
+            dataSpec.withUri(streamUrl.toUri()).subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
         }
     }
 
@@ -850,10 +848,10 @@ class MusicService : MediaLibraryService(),
 
         const val CHANNEL_ID = "music_channel_01"
         const val NOTIFICATION_ID = 888
+        const val ERROR_CODE_NO_STREAM = 1000001
         const val CHUNK_LENGTH = 512 * 1024L
         const val PERSISTENT_QUEUE_FILE = "persistent_queue.data"
     }
-
     /**
      * Configuración del widget
      * **/

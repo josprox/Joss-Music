@@ -313,4 +313,7 @@
   <string name="noPlayback">Ei toistoa</string>
   <string name="unknownArtist">Tuntematon artisti</string>
   <string name="untitled">Nimetön</string>
+  <string name="jossredSettings_welcome">Tervetuloa Joss Red -järjestelmään. Tämä innovatiivinen järjestelmä tarjoaa tehokkaan vaihtoehdon sekä NewPipe- että YouTube-sovellusliittymille. Joss Redin avulla voit nauttia henkilökohtaisesta kokemuksesta, kun olet vuorovaikutuksessa kaikentyyppisten toistojen kanssa, yksinkertaisesti aktivoimalla tarpeitasi parhaiten vastaavat vaihtoehdot.</string>
+  <string name="playSongJR">Toista musiikkia Joss Redistä.</string>
+  <string name="playSongJRDesc">Sen avulla voit toistaa mitä tahansa kappaletta kirjautumatta sisään korkealaatuisesti.</string>
 </resources>

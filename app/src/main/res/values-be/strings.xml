@@ -297,4 +297,7 @@
   <string name="theme">Тэма</string>
   <string name="logout">Выйсці з сістэмы</string>
   <string name="login_failed">Не атрымалася ўвайсці</string>
+  <string name="jossredSettings_welcome">Сардэчна запрашаем у сістэму «Joss Red». Гэтая інавацыйная сістэма прапануе магутную альтэрнатыву API "NewPipe" і "YouTube". З «Joss Red» вы можаце карыстацца персаналізаваным вопытам пры ўзаемадзеянні з усімі тыпамі прайгравання, проста актывуючы параметры, якія найбольш адпавядаюць вашым патрэбам.</string>
+  <string name="playSongJR">Прайграйце музыку з "Joss Red".</string>
+  <string name="playSongJRDesc">Гэта дазваляе прайграваць любую песню без ўваходу ў сістэму з высокай якасцю.</string>
 </resources>
