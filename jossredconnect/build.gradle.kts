@@ -9,9 +9,4 @@ java {
 }
 
 dependencies {
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.okhttp.v490)
-    implementation(libs.logging.interceptor)
-    implementation(libs.gson) // Agrega esta línea para Gson
 }

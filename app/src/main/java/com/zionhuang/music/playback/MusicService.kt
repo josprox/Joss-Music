@@ -1,5 +1,6 @@
 package com.zionhuang.music.playback
 
+import JossRedClient
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
@@ -40,7 +41,6 @@ import androidx.media3.exoplayer.audio.DefaultAudioSink
 import androidx.media3.exoplayer.audio.SilenceSkippingAudioProcessor
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.source.ShuffleOrder.DefaultShuffleOrder
-import androidx.media3.extractor.ExtractorsFactory
 import androidx.media3.extractor.mkv.MatroskaExtractor
 import androidx.media3.extractor.mp4.FragmentedMp4Extractor
 import androidx.media3.session.CommandButton
@@ -53,7 +53,6 @@ import com.google.common.util.concurrent.MoreExecutors
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.SongItem
 import com.zionhuang.innertube.models.WatchEndpoint
-import com.zionhuang.innertube.models.response.PlayerResponse
 import com.zionhuang.music.MainActivity
 import com.zionhuang.music.MusicWidgetProvider
 import com.zionhuang.music.R
@@ -679,7 +678,7 @@ class MusicService : MediaLibraryService(),
             // Si la preferencia está activa, intentar usar la fuente alternativa
 
             if (useAlternativeSource) {
-                val alternativeUrl = "https://jossred.josprox.com/yt/v2/stream/$mediaId"
+                val alternativeUrl = JossRedClient.getStreamingUrl(mediaId)
                 Timber.i("Se está usando Joss Red para la reproducción de música")
                 try {
                     scope.launch(Dispatchers.IO) {
