@@ -200,7 +200,7 @@ class MusicService : MediaLibraryService(),
         setMediaNotificationProvider(
             DefaultMediaNotificationProvider(this, { NOTIFICATION_ID }, CHANNEL_ID, R.string.music_player)
                 .apply {
-                    setSmallIcon(R.drawable.small_icon)
+                    setSmallIcon(R.drawable.joss_music_logo)
                 }
         )
         player = ExoPlayer.Builder(this)
@@ -402,7 +402,7 @@ class MusicService : MediaLibraryService(),
         )
     }
 
-    private suspend fun recoverSong(mediaId: String, videoDetails: PlayerResponse.VideoDetails? = null) {
+    private suspend fun recoverSong(mediaId: String, playbackData: YTPlayerUtils.PlaybackData? = null) {
         // Recuperar la canción desde la base de datos
         val song = database.song(mediaId).first()
         val mediaMetadata = withContext(Dispatchers.Main) {
@@ -412,7 +412,7 @@ class MusicService : MediaLibraryService(),
         // Calcular la duración de la canción
         val duration = song?.song?.duration?.takeIf { it != -1 }
             ?: mediaMetadata.duration.takeIf { it != -1 }
-            ?: (videoDetails ?: YTPlayerUtils.playerResponseForMetadata(mediaId).getOrNull()?.videoDetails)?.lengthSeconds?.toInt()
+            ?: (playbackData?.videoDetails ?: YTPlayerUtils.playerResponseForMetadata(mediaId).getOrNull()?.videoDetails)?.lengthSeconds?.toInt()
             ?: -1
 
         // Actualizar la base de datos con los metadatos de la canción
@@ -671,7 +671,7 @@ class MusicService : MediaLibraryService(),
             }
 
             // Validar si hay URL en caché y no ha expirado
-            songUrlCache[mediaId]?.takeIf { it.second < System.currentTimeMillis() }?.let {
+            songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
                 scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                 return@Factory dataSpec.withUri(it.first.toUri())
             }
@@ -733,22 +733,21 @@ class MusicService : MediaLibraryService(),
                     )
                 )
             }
-            scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData.videoDetails) }
+            scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData) }
 
             val streamUrl = playbackData.streamUrl
 
-            songUrlCache[mediaId] = streamUrl to playbackData.streamExpiresInSeconds * 1000L
+            songUrlCache[mediaId] = streamUrl to System.currentTimeMillis() + (playbackData.streamExpiresInSeconds * 1000L)
             dataSpec.withUri(streamUrl.toUri()).subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
         }
     }
 
     private fun createMediaSourceFactory() =
         DefaultMediaSourceFactory(
-            createDataSourceFactory(),
-            ExtractorsFactory {
-                arrayOf(MatroskaExtractor(), FragmentedMp4Extractor())
-            }
-        )
+            createDataSourceFactory()
+        ) {
+            arrayOf(MatroskaExtractor(), FragmentedMp4Extractor())
+        }
 
     private fun createRenderersFactory() =
         object : DefaultRenderersFactory(this) {

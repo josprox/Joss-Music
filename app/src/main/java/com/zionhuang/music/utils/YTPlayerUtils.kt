@@ -20,18 +20,18 @@ object YTPlayerUtils {
         .build()
 
     /**
-     * The main client is used for metadata and initial streams.
-     * Do not use other clients for this because it can result in inconsistent metadata.
-     * For example other clients can have different normalization targets (loudnessDb).
+     * El cliente principal se utiliza para los metadatos y las transmisiones iniciales.
+     * No se deben usar otros clientes para esto, ya que puede dar lugar a metadatos inconsistentes.
+     * Por ejemplo, otros clientes pueden tener objetivos de normalización diferentes (loudnessDb).
      *
-     * [com.zionhuang.innertube.models.YouTubeClient.WEB_REMIX] should be preferred here because currently it is the only client which provides:
-     * - the correct metadata (like loudnessDb)
-     * - premium formats
+     * [com.zionhuang.innertube.models.YouTubeClient.WEB_REMIX] debería ser el preferido aquí porque actualmente es el único cliente que proporciona:
+     * - los metadatos correctos (como loudnessDb)
+     * - formatos premium
      */
     private val MAIN_CLIENT: YouTubeClient = WEB_REMIX
 
     /**
-     * Clients used for fallback streams in case the streams of the main client do not work.
+     * Clientes usados para transmisiones de respaldo en caso de que las del cliente principal no funcionen.
      */
     private val STREAM_FALLBACK_CLIENTS: Array<YouTubeClient> = arrayOf(WEB_CREATOR, IOS)
 
@@ -44,9 +44,9 @@ object YTPlayerUtils {
     )
 
     /**
-     * Custom player response intended to use for playback.
-     * Metadata like audioConfig and videoDetails are from [MAIN_CLIENT].
-     * Format & stream can be from [MAIN_CLIENT] or [STREAM_FALLBACK_CLIENTS].
+     * Respuesta de reproductor personalizada destinada para la reproducción.
+     * Los metadatos como audioConfig y videoDetails provienen de [MAIN_CLIENT].
+     * El formato y la transmisión pueden ser de [MAIN_CLIENT] o de [STREAM_FALLBACK_CLIENTS].
      */
     suspend fun playerResponseForPlayback(
         videoId: String,
@@ -56,10 +56,10 @@ object YTPlayerUtils {
         connectivityManager: ConnectivityManager,
     ): Result<PlaybackData> = runCatching {
         /**
-         * This is required for some clients to get working streams however
-         * it should not be forced for the [MAIN_CLIENT] because the response of the [MAIN_CLIENT]
-         * is required even if the streams won't work from this client.
-         * This is why it is allowed to be null.
+         * Esto es necesario para que algunos clientes obtengan transmisiones funcionales, sin embargo,
+         * no debería forzarse para el [MAIN_CLIENT], ya que se requiere la respuesta de este cliente
+         * incluso si las transmisiones no funcionan.
+         * Por esto, se permite que sea nulo.
          */
         val signatureTimestamp = getSignatureTimestampOrNull(videoId)
 
@@ -75,20 +75,20 @@ object YTPlayerUtils {
 
         var streamPlayerResponse: PlayerResponse? = null
         for (clientIndex in (-1 until STREAM_FALLBACK_CLIENTS.size)) {
-            // reset for each client
+            // reiniciar para cada cliente
             format = null
             streamUrl = null
             streamExpiresInSeconds = null
 
-            // decide which client to use
+            // decidir qué cliente usar
             if (clientIndex == -1) {
-                // try with streams from main client first
+                // intentar primero con transmisiones del cliente principal
                 streamPlayerResponse = mainPlayerResponse
             } else {
-                // after main client use fallback clients
+                // después del cliente principal, usar clientes de respaldo
                 val client = STREAM_FALLBACK_CLIENTS[clientIndex]
                 if (client.loginRequired && YouTube.cookie == null) {
-                    // skip client if it requires login but user is not logged in
+                    // omitir cliente si requiere inicio de sesión pero el usuario no está conectado
                     continue
                 }
 
@@ -96,7 +96,7 @@ object YTPlayerUtils {
                     YouTube.player(videoId, playlistId, client, signatureTimestamp).getOrNull()
             }
 
-            // process current client response
+            // procesar la respuesta del cliente actual
             if (streamPlayerResponse?.playabilityStatus?.status == "OK") {
                 format =
                     findFormat(
@@ -109,18 +109,18 @@ object YTPlayerUtils {
                 streamExpiresInSeconds = streamPlayerResponse.streamingData?.expiresInSeconds ?: continue
 
                 if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1) {
-                    /** skip [validateStatus] for last client */
+                    /** omitir [validateStatus] para el último cliente */
                     break
                 }
                 if (validateStatus(streamUrl)) {
-                    // working stream found
+                    // se encontró una transmisión funcional
                     break
                 }
             }
         }
 
         if (streamPlayerResponse == null) {
-            throw Exception("Bad stream player response")
+            throw Exception("Respuesta del reproductor de transmisiones inválida")
         }
         if (streamPlayerResponse.playabilityStatus.status != "OK") {
             throw PlaybackException(
@@ -130,13 +130,13 @@ object YTPlayerUtils {
             )
         }
         if (streamExpiresInSeconds == null) {
-            throw Exception("Missing stream expire time")
+            throw Exception("Falta el tiempo de expiración de la transmisión")
         }
         if (format == null) {
-            throw Exception("Could not find format")
+            throw Exception("No se pudo encontrar el formato")
         }
         if (streamUrl == null) {
-            throw Exception("Could not find stream url")
+            throw Exception("No se pudo encontrar la URL de transmisión")
         }
 
         PlaybackData(
@@ -149,8 +149,8 @@ object YTPlayerUtils {
     }
 
     /**
-     * Simple player response intended to use for metadata only.
-     * Stream URLs of this response might not work so don't use them.
+     * Respuesta simple del reproductor destinada solo para metadatos.
+     * Las URLs de transmisión de esta respuesta podrían no funcionar, por lo que no deben usarse.
      */
     suspend fun playerResponseForMetadata(
         videoId: String,
@@ -174,14 +174,14 @@ object YTPlayerUtils {
                         AudioQuality.AUTO -> if (connectivityManager.isActiveNetworkMetered) -1 else 1
                         AudioQuality.HIGH -> 1
                         AudioQuality.LOW -> -1
-                    } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0) // prefer opus stream
+                    } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0) // preferir flujo opus
                 }
         }
 
     /**
-     * Checks if the stream url returns a successful status.
-     * If this returns true the url is likely to work.
-     * If this returns false the url might cause an error during playback.
+     * Verifica si la URL de transmisión devuelve un estado exitoso.
+     * Si esto devuelve true, la URL probablemente funcionará.
+     * Si esto devuelve false, la URL podría causar un error durante la reproducción.
      */
     private fun validateStatus(url: String): Boolean {
         try {
@@ -197,7 +197,7 @@ object YTPlayerUtils {
     }
 
     /**
-     * Wrapper around the [NewPipeUtils.getSignatureTimestamp] function which reports exceptions
+     * Envoltura alrededor de la función [NewPipeUtils.getSignatureTimestamp] que informa excepciones.
      */
     private fun getSignatureTimestampOrNull(
         videoId: String
@@ -210,7 +210,7 @@ object YTPlayerUtils {
     }
 
     /**
-     * Wrapper around the [NewPipeUtils.getStreamUrl] function which reports exceptions
+     * Envoltura alrededor de la función [NewPipeUtils.getStreamUrl] que informa excepciones.
      */
     private fun findUrlOrNull(
         format: PlayerResponse.StreamingData.Format,
