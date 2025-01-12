@@ -63,7 +63,11 @@ class DownloadUtil @Inject constructor(
             return@Factory dataSpec
         }
 
-        songUrlCache[mediaId]?.takeIf { it.second < System.currentTimeMillis() }?.let {
+        /**
+         * Actúa sobre elementos válidos (it.second > System.currentTimeMillis()).
+         * Anteriormente actuaba sobre elementos expirados (it.second < System.currentTimeMillis())
+         * **/
+        songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
             return@Factory dataSpec.withUri(it.first.toUri())
         }
 
@@ -98,7 +102,8 @@ class DownloadUtil @Inject constructor(
             "${it}&range=0-${format.contentLength ?: 10000000}"
         }
 
-        songUrlCache[mediaId] = streamUrl to playbackData.streamExpiresInSeconds * 1000L
+        // Más simple y eficiente si siempre necesitas saber exactamente cuándo expira el recurso.
+        songUrlCache[mediaId] = streamUrl to System.currentTimeMillis() + (playbackData.streamExpiresInSeconds * 1000L)
         dataSpec.withUri(streamUrl.toUri())
     }
     val downloadNotificationHelper = DownloadNotificationHelper(context, ExoDownloadService.CHANNEL_ID)
