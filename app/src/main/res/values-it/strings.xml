@@ -305,7 +305,16 @@
   <string name="untitled">Senza titolo</string>
   <string name="logout">Esci</string>
   <string name="login_failed">Accesso non riuscito</string>
-  <string name="jossredSettings_welcome">Benvenuto nel sistema "Joss Red". Questo sistema innovativo offre una potente alternativa alle API "NewPipe" e "YouTube". Con Joss Red puoi goderti un\'esperienza personalizzata interagendo con tutti i tipi di riproduzione, semplicemente attivando le opzioni che meglio si adattano alle tue esigenze.</string>
-  <string name="playSongJR">Riproduci la musica di "Joss Red".</string>
+  <string name="jossredSettings_welcome">Benvenuto nel sistema Joss Red. Questo sistema innovativo offre una potente alternativa alle API "NewPipe" e "YouTube". Con Joss Red puoi goderti un\'esperienza personalizzata interagendo con tutti i tipi di riproduzione, semplicemente attivando le opzioni che meglio si adattano alle tue esigenze.</string>
+  <string name="playSongJR">Riproduci la musica di Joss Red.</string>
   <string name="playSongJRDesc">Ti consente di riprodurre qualsiasi brano senza accedere con alta qualità.</string>
+  <string name="gplMessage">Questa applicazione è distribuita sotto la licenza GPL 3.0 e mira a rispettare e contribuire all\'ecosistema del software open source. Se rilevi possibili violazioni o irregolarità, ti invitiamo a contattare il nostro team di supporto per risolverle adeguatamente.</string>
+  <string name="aboutScreenText1">Questa applicazione non raccoglie informazioni personali dell\'utente, tranne quando utilizza il servizio Joss Red. I dati forniti verranno archiviati in un database che l\'utente potrà scaricare in ogni momento. Inoltre, installando questa applicazione, potresti ricevere notifiche push relative ai nostri servizi, incluso Joss Red. Per maggiori dettagli, consulta i nostri termini e condizioni disponibili sul nostro sito ufficiale.</string>
+  <string name="support">Supporto</string>
+  <string name="websupport">Pagina di supporto</string>
+  <string name="aboutScreenText2">Di seguito sono riportate l\'informativa sulla privacy, i termini e le condizioni delle applicazioni all\'interno di Joss Red. Tutti gli strumenti dell\'applicazione sono progettati per non condividere i tuoi dati con terze parti, garantendo la tua privacy in ogni momento.</string>
+  <string name="importantmessage">Avviso importante</string>
+  <string name="privacyPolicy">politica sulla riservatezza</string>
+  <string name="termsConditions">Termini e Condizioni</string>
+  <string name="appByJosproxMx">Un\'applicazione sviluppata da JOSPROX MX</string>
 </resources>

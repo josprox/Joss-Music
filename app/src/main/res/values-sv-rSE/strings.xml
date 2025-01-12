@@ -279,7 +279,16 @@
   <string name="theme">Tema</string>
   <string name="logout">Utloggning</string>
   <string name="login_failed">Inloggningen misslyckades</string>
-  <string name="jossredSettings_welcome">Välkommen till "Joss Red"-systemet. Detta innovativa system erbjuder ett kraftfullt alternativ till både "NewPipe" och "YouTube" API:er. Med "Joss Red" kan du njuta av en personlig upplevelse när du interagerar med alla typer av uppspelning, genom att helt enkelt aktivera de alternativ som bäst passar dina behov.</string>
-  <string name="playSongJR">Spela musik från "Joss Red".</string>
+  <string name="jossredSettings_welcome">Välkommen till Joss Red-systemet. Detta innovativa system erbjuder ett kraftfullt alternativ till både "NewPipe" och "YouTube" API:er. Med Joss Red kan du njuta av en personlig upplevelse när du interagerar med alla typer av uppspelning, genom att helt enkelt aktivera de alternativ som bäst passar dina behov.</string>
+  <string name="playSongJR">Spela musik från Joss Red.</string>
   <string name="playSongJRDesc">Det låter dig spela vilken låt som helst utan att logga in med hög kvalitet.</string>
+  <string name="gplMessage">Denna applikation distribueras under GPL 3.0-licensen och syftar till att respektera och bidra till mjukvarans ekosystem med öppen källkod. Om du upptäcker eventuella överträdelser eller oegentligheter uppmanar vi dig att kontakta vårt supportteam för att lösa det på lämpligt sätt.</string>
+  <string name="aboutScreenText1">Denna applikation samlar inte in personlig information från användaren, förutom när du använder tjänsten Joss Red. Uppgifterna som tillhandahålls kommer att lagras i en databas som användaren kan ladda ner när som helst. Genom att installera den här applikationen kan du dessutom få push-meddelanden relaterade till våra tjänster, inklusive Joss Red. För mer information, se våra villkor som finns på vår officiella hemsida.</string>
+  <string name="support">Stöd</string>
+  <string name="websupport">Supportsida</string>
+  <string name="aboutScreenText2">Nedan finns integritetspolicyn och villkoren för applikationerna inom \'Joss Red\'. Alla verktyg i applikationen är utformade för att inte dela dina data med tredje part, vilket garanterar din integritet hela tiden.</string>
+  <string name="importantmessage">Viktigt meddelande</string>
+  <string name="privacyPolicy">Sekretesspolicy</string>
+  <string name="termsConditions">Regler och villkor</string>
+  <string name="appByJosproxMx">En applikation utvecklad av JOSPROX MX</string>
 </resources>

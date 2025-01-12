@@ -331,7 +331,16 @@
   <string name="noPlayback">لا التشغيل</string>
   <string name="unknownArtist">فنان غير معروف</string>
   <string name="untitled">بدون عنوان</string>
-  <string name="jossredSettings_welcome">مرحبًا بك في نظام "جوس ريد". يقدم هذا النظام المبتكر بديلاً قويًا لكل من واجهات برمجة التطبيقات "NewPipe" و"YouTube". مع "Joss Red"، يمكنك الاستمتاع بتجربة مخصصة عند التفاعل مع جميع أنواع التشغيل، وذلك ببساطة عن طريق تنشيط الخيارات التي تناسب احتياجاتك على أفضل وجه.</string>
-  <string name="playSongJR">تشغيل الموسيقى من "Joss Red".</string>
+  <string name="jossredSettings_welcome">مرحبًا بك في نظام "جوس ريد". يقدم هذا النظام المبتكر بديلاً قويًا لكل من واجهات برمجة التطبيقات "NewPipe" و"YouTube". مع Joss Red، يمكنك الاستمتاع بتجربة مخصصة عند التفاعل مع جميع أنواع التشغيل، وذلك ببساطة عن طريق تنشيط الخيارات التي تناسب احتياجاتك على أفضل وجه.</string>
+  <string name="playSongJR">تشغيل الموسيقى من Joss Red.</string>
   <string name="playSongJRDesc">يسمح لك بتشغيل أي أغنية دون تسجيل الدخول بجودة عالية.</string>
+  <string name="gplMessage">يتم توزيع هذا التطبيق بموجب ترخيص GPL 3.0 ويهدف إلى احترام النظام البيئي للبرمجيات مفتوحة المصدر والمساهمة فيه. إذا اكتشفت أي انتهاك أو مخالفة محتملة، فإننا ندعوك إلى الاتصال بفريق الدعم لدينا لحلها بشكل مناسب.</string>
+  <string name="aboutScreenText1">لا يقوم هذا التطبيق بجمع معلومات شخصية من المستخدم إلا عند استخدام خدمة Joss Red. سيتم تخزين البيانات المقدمة في قاعدة بيانات يمكن للمستخدم تنزيلها في أي وقت. بالإضافة إلى ذلك، عن طريق تثبيت هذا التطبيق، قد تتلقى إشعارات الدفع المتعلقة بخدماتنا، بما في ذلك Joss Red. لمزيد من التفاصيل، راجع الشروط والأحكام المتوفرة على موقعنا الرسمي.</string>
+  <string name="support">يدعم</string>
+  <string name="websupport">صفحة الدعم</string>
+  <string name="aboutScreenText2">فيما يلي سياسة الخصوصية وشروط وأحكام التطبيقات ضمن Joss Red. جميع الأدوات الموجودة في التطبيق مصممة بحيث لا تشارك بياناتك مع أطراف ثالثة، مما يضمن خصوصيتك في جميع الأوقات.</string>
+  <string name="importantmessage">ملاحظة هامة</string>
+  <string name="privacyPolicy">سياسة الخصوصية</string>
+  <string name="termsConditions">الشروط والأحكام</string>
+  <string name="appByJosproxMx">تطبيق تم تطويره بواسطة JOSPROX MX</string>
 </resources>

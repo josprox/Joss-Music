@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,34 +31,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.zionhuang.music.BuildConfig
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.R
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.utils.backToMain
-import androidx.compose.foundation.layout.size
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.* // Para Column, Row, Spacer, etc.
-import androidx.compose.foundation.verticalScroll // Para el scroll
-import androidx.compose.foundation.rememberScrollState // Para recordar el estado del scroll
-import androidx.compose.material3.* // Para Material 3 components como Button, Text
-import androidx.compose.ui.graphics.Color // Para usar colores
-import androidx.compose.ui.unit.dp // Para manejar el padding, tamaño, etc.
-import androidx.compose.ui.unit.sp // Para manejar el tamaño de fuente
-import androidx.compose.ui.text.style.TextAlign // Para la alineación del texto
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.foundation.layout.*
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.platform.LocalContext
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -159,7 +147,7 @@ fun AboutScreen(
         Spacer(Modifier.height(4.dp))
 
         Text(
-            text = "Una aplicación de JOSPROX MX",
+            text = stringResource(R.string.appByJosproxMx),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.secondary
         )
@@ -224,7 +212,7 @@ fun AboutScreen(
 
         // Descripción de la Aplicación
         Text(
-            text = "Esta aplicación no recopila información del usuario. Los datos que proporciones se almacenarán en una base de datos la cuál puedes descargar. Además, al instalar esta aplicación, podrías recibir notificaciones push de nuestros servicios (Joss Red). Nuestros términos y servicios están disponibles en nuestra web oficial.",
+            text = stringResource(R.string.aboutScreenText1),
             fontSize = 14.sp,
             modifier = Modifier.padding(10.dp),
             textAlign = androidx.compose.ui.text.style.TextAlign.Center
@@ -232,7 +220,7 @@ fun AboutScreen(
 
         // Soporte
         Text(
-            text = "Soporte",
+            text = stringResource(R.string.support),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 10.dp)
@@ -245,12 +233,12 @@ fun AboutScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            Text(text = "Página de soporte")
+            Text(text = stringResource(R.string.websupport))
         }
 
         // Web del Creador
         Text(
-            text = "Web del Creador",
+            text = "JOSPROX MX",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 10.dp)
@@ -263,19 +251,19 @@ fun AboutScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            Text(text = "Ir a JOSPROX | Joss Estrada")
+            Text(stringResource(R.string.website_url))
         }
 
         // Aviso Importante
         Text(
-            text = "Aviso Importante",
+            text = stringResource(R.string.importantmessage),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Red,
             modifier = Modifier.padding(top = 10.dp)
         )
         Text(
-            text = "Se muestran a continuación la política de privacidad y los términos y condiciones de las aplicaciones dentro de 'Joss Red'. Esta aplicación puede contener compras internas gestionadas en la web JOSPROX MX y MHT. Toda la información será exclusivamente la que tú insertes. Las herramientas de la aplicación no compartirán tus datos con terceros.",
+            text = stringResource(R.string.aboutScreenText2),
             fontSize = 14.sp,
             modifier = Modifier.padding(10.dp),
             textAlign = androidx.compose.ui.text.style.TextAlign.Center
@@ -283,7 +271,7 @@ fun AboutScreen(
 
         // Política de Privacidad
         Text(
-            text = "Política de Privacidad",
+            text = stringResource(R.string.privacyPolicy),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 10.dp)
@@ -296,12 +284,12 @@ fun AboutScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            Text(text = "Política de Privacidad")
+            Text(text = stringResource(R.string.privacyPolicy))
         }
 
         // Términos y Condiciones
         Text(
-            text = "Términos y Condiciones",
+            text = stringResource(R.string.termsConditions),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 10.dp)
@@ -314,13 +302,13 @@ fun AboutScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            Text(text = "Términos y Condiciones")
+            Text(text = stringResource(R.string.termsConditions))
         }
 
         Spacer(Modifier.height(6.dp))
 
         Text(
-            text = "Principal modificación desde Zion Huang",
+            text = "Zion Huang (innertune)",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.secondary
         )
@@ -348,7 +336,7 @@ fun AboutScreen(
         }
 
         Text(
-            text = "Código nativo de ViMusic",
+            text = "ViMusic",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.secondary
         )
@@ -365,7 +353,7 @@ fun AboutScreen(
         }
 
         Text(
-            text = "Esta es una aplicación con licencia GPL 3.0, no busca beneficiarse de ningún proyecto abierto, en caso de alguna violación, ponerse en contacto con soporte.",
+            text = stringResource(R.string.gplMessage),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.secondary
         )

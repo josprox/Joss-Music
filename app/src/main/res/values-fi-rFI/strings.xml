@@ -316,4 +316,13 @@
   <string name="jossredSettings_welcome">Tervetuloa Joss Red -järjestelmään. Tämä innovatiivinen järjestelmä tarjoaa tehokkaan vaihtoehdon sekä NewPipe- että YouTube-sovellusliittymille. Joss Redin avulla voit nauttia henkilökohtaisesta kokemuksesta, kun olet vuorovaikutuksessa kaikentyyppisten toistojen kanssa, yksinkertaisesti aktivoimalla tarpeitasi parhaiten vastaavat vaihtoehdot.</string>
   <string name="playSongJR">Toista musiikkia Joss Redistä.</string>
   <string name="playSongJRDesc">Sen avulla voit toistaa mitä tahansa kappaletta kirjautumatta sisään korkealaatuisesti.</string>
+  <string name="gplMessage">Tämä sovellus on jaettu GPL 3.0 -lisenssin alaisena ja sen tavoitteena on kunnioittaa avoimen lähdekoodin ohjelmistoekosysteemiä ja edistää sitä. Jos havaitset mahdollisen rikkomuksen tai sääntöjenvastaisuuden, pyydämme sinua ottamaan yhteyttä tukitiimiimme asian ratkaisemiseksi.</string>
+  <string name="aboutScreenText1">Tämä sovellus ei kerää henkilökohtaisia ​​tietoja käyttäjältä, paitsi jos käytetään Joss Red -palvelua. Annetut tiedot tallennetaan tietokantaan, jonka käyttäjä voi ladata milloin tahansa. Lisäksi, kun asennat tämän sovelluksen, saatat saada push-ilmoituksia, jotka liittyvät palveluihimme, mukaan lukien Joss Red. Katso lisätietoja viralliselta verkkosivustoltamme saatavilla olevista ehdoistamme.</string>
+  <string name="support">Tukea</string>
+  <string name="websupport">Tukisivu</string>
+  <string name="aboutScreenText2">Alla on Joss Red -sovellusten tietosuojakäytäntö ja ehdot. Kaikki sovelluksen työkalut on suunniteltu olemaan jakamatta tietojasi kolmansien osapuolien kanssa, mikä takaa yksityisyytesi aina.</string>
+  <string name="importantmessage">Tärkeä huomautus</string>
+  <string name="privacyPolicy">Tietosuojakäytäntö</string>
+  <string name="termsConditions">Ehdot</string>
+  <string name="appByJosproxMx">JOSPROX MX:n kehittämä sovellus</string>
 </resources>

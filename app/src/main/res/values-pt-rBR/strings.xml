@@ -328,4 +328,13 @@
   <string name="jossredSettings_welcome">Bem-vindo ao sistema Joss Red. Este sistema inovador oferece uma alternativa poderosa às APIs NewPipe e YouTube. Com o Joss Red, você pode desfrutar de uma experiência personalizada ao interagir com todos os tipos de reprodução, bastando ativar as opções que melhor atendem às suas necessidades.</string>
   <string name="playSongJR">Toque música de Joss Red.</string>
   <string name="playSongJRDesc">Ele permite que você toque qualquer música sem fazer login com alta qualidade.</string>
+  <string name="gplMessage">Este aplicativo é distribuído sob a licença GPL 3.0 e tem como objetivo respeitar e contribuir para o ecossistema de software de código aberto. Caso detecte alguma possível violação ou irregularidade, convidamos você a entrar em contato com nossa equipe de suporte para resolvê-la adequadamente.</string>
+  <string name="aboutScreenText1">Este aplicativo não coleta informações pessoais do usuário, exceto quando utiliza o serviço “Joss Red”. Os dados fornecidos serão armazenados em um banco de dados que o usuário poderá baixar a qualquer momento. Além disso, ao instalar este aplicativo, você poderá receber notificações push relacionadas aos nossos serviços, incluindo Joss Red. Para mais detalhes, consulte nossos termos e condições disponíveis em nosso site oficial.</string>
+  <string name="support">Apoiar</string>
+  <string name="websupport">Página de suporte</string>
+  <string name="aboutScreenText2">Abaixo estão a política de privacidade e os termos e condições dos aplicativos do Joss Red. Todas as ferramentas do aplicativo foram projetadas para não compartilhar seus dados com terceiros, garantindo sempre sua privacidade.</string>
+  <string name="importantmessage">Aviso importante</string>
+  <string name="privacyPolicy">política de Privacidade</string>
+  <string name="termsConditions">Termos e Condições</string>
+  <string name="appByJosproxMx">Um aplicativo desenvolvido por JOSPROX MX</string>
 </resources>

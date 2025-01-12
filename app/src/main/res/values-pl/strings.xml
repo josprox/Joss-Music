@@ -337,4 +337,13 @@
   <string name="jossredSettings_welcome">Witamy w systemie „Joss Red”. Ten innowacyjny system oferuje potężną alternatywę dla interfejsów API „NewPipe” i „YouTube”. Dzięki „Joss Red” możesz cieszyć się spersonalizowanymi wrażeniami podczas interakcji ze wszystkimi rodzajami odtwarzania, po prostu aktywując opcje, które najlepiej odpowiadają Twoim potrzebom.</string>
   <string name="playSongJR">Odtwórz muzykę z „Joss Red”.</string>
   <string name="playSongJRDesc">Pozwala odtwarzać dowolny utwór bez logowania się w wysokiej jakości.</string>
+  <string name="gplMessage">Ta aplikacja jest rozpowszechniana na licencji GPL 3.0 i ma na celu szanowanie ekosystemu oprogramowania open source i wnoszenie w niego wkładu. Jeśli wykryjesz jakiekolwiek możliwe naruszenia lub nieprawidłowości, zapraszamy do skontaktowania się z naszym zespołem wsparcia w celu odpowiedniego rozwiązania problemu.</string>
+  <string name="aboutScreenText1">Ta aplikacja nie zbiera danych osobowych od użytkownika, za wyjątkiem korzystania z usługi „Joss Red”. Podane dane zostaną zapisane w bazie danych, którą użytkownik może w każdej chwili pobrać. Dodatkowo, instalując tę ​​aplikację, możesz otrzymywać powiadomienia push związane z naszymi usługami, w tym „Joss Red”. Aby uzyskać więcej informacji, zapoznaj się z naszym regulaminem dostępnym na naszej oficjalnej stronie internetowej.</string>
+  <string name="support">Wsparcie</string>
+  <string name="websupport">Strona wsparcia</string>
+  <string name="aboutScreenText2">Poniżej znajduje się polityka prywatności oraz warunki korzystania z aplikacji w ramach „Joss Red”. Wszystkie narzędzia w aplikacji zostały zaprojektowane tak, aby nie udostępniać Twoich danych podmiotom trzecim, gwarantując przez cały czas Twoją prywatność.</string>
+  <string name="importantmessage">Ważna uwaga</string>
+  <string name="privacyPolicy">Polityka prywatności</string>
+  <string name="termsConditions">Regulamin</string>
+  <string name="appByJosproxMx">Aplikacja opracowana przez JOSPROX MX</string>
 </resources>

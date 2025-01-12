@@ -310,4 +310,13 @@
   <string name="jossredSettings_welcome">「ジョスレッド」システムへようこそ。この革新的なシステムは、「NewPipe」API と「YouTube」API の両方に代わる強力な代替手段を提供します。 「Joss Red」を使用すると、ニーズに最も適したオプションをアクティブにするだけで、あらゆる種類の再生を操作するときにパーソナライズされたエクスペリエンスを楽しむことができます。</string>
   <string name="playSongJR">「ジョス レッド」の音楽を再生します。</string>
   <string name="playSongJRDesc">ログインせずにどの曲でも高音質で再生できます。</string>
+  <string name="gplMessage">このアプリケーションは GPL 3.0 ライセンスに基づいて配布されており、オープンソース ソフトウェア エコシステムを尊重し、それに貢献することを目的としています。違反または不正行為の可能性を発見した場合は、適切に解決するためにサポート チームにご連絡ください。</string>
+  <string name="aboutScreenText1">本アプリケーションは、「Joss Red」サービスを利用する場合を除き、ユーザーから個人情報を収集することはありません。提供されたデータはデータベースに保存され、ユーザーがいつでもダウンロードできます。また、本アプリをインストールすることにより、「Joss Red」をはじめとする弊社サービスに関するプッシュ通知が届く場合がございます。詳細については、公式 Web サイトにある利用規約をご覧ください。</string>
+  <string name="support">サポート</string>
+  <string name="websupport">サポートページ</string>
+  <string name="aboutScreenText2">以下は、「Joss Red」内のアプリケーションのプライバシー ポリシーと利用規約です。アプリケーション内のすべてのツールは、データを第三者と共有しないように設計されており、常にプライバシーが保証されます。</string>
+  <string name="importantmessage">重要なお知らせ</string>
+  <string name="privacyPolicy">プライバシーポリシー</string>
+  <string name="termsConditions">利用規約</string>
+  <string name="appByJosproxMx">JOSPROX MX によって開発されたアプリケーション</string>
 </resources>

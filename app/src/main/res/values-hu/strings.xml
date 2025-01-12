@@ -284,4 +284,13 @@
   <string name="jossredSettings_welcome">Üdvözöljük a „Joss Red” rendszerben. Ez az innovatív rendszer hatékony alternatívát kínál a „NewPipe” és a „YouTube” API-kkal szemben. A „Joss Red” segítségével személyre szabott élményben lehet része, amikor bármilyen lejátszási móddal kommunikál, egyszerűen csak aktiválja az igényeinek leginkább megfelelő opciókat.</string>
   <string name="playSongJR">Zene lejátszása a „Joss Red”-től.</string>
   <string name="playSongJRDesc">Lehetővé teszi bármilyen dal lejátszását bejelentkezés nélkül, kiváló minőségben.</string>
+  <string name="gplMessage">Ezt az alkalmazást a GPL 3.0 licenc alatt terjesztik, és célja, hogy tiszteletben tartsa a nyílt forráskódú szoftverek ökoszisztémáját, és hozzájáruljon ahhoz. Ha bármilyen lehetséges szabálysértést vagy szabálytalanságot észlel, kérjük, forduljon ügyfélszolgálatunkhoz a megfelelő megoldás érdekében.</string>
+  <string name="aboutScreenText1">Ez az alkalmazás nem gyűjt személyes adatokat a felhasználótól, kivéve a „Joss Red” szolgáltatás használatakor. A megadott adatok egy adatbázisban kerülnek tárolásra, amelyet a felhasználó bármikor letölthet. Ezenkívül az alkalmazás telepítésével push értesítéseket kaphat szolgáltatásainkkal kapcsolatban, beleértve a „Joss Red”-et is. További részletekért tekintse meg szerződési feltételeinket a hivatalos weboldalunkon.</string>
+  <string name="support">Támogatás</string>
+  <string name="websupport">Támogatási oldal</string>
+  <string name="aboutScreenText2">Az alábbiakban olvashatók a „Joss Red” alkalmazás adatvédelmi szabályzata és feltételei. Az alkalmazásban található összes eszközt úgy tervezték, hogy ne ossza meg adatait harmadik felekkel, így mindenkor garantálja az Ön adatainak védelmét.</string>
+  <string name="importantmessage">Fontos megjegyzés</string>
+  <string name="privacyPolicy">Adatvédelmi szabályzat</string>
+  <string name="termsConditions">Általános Szerződési Feltételek</string>
+  <string name="appByJosproxMx">A JOSPROX MX által fejlesztett alkalmazás</string>
 </resources>

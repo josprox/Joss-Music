@@ -296,4 +296,13 @@
   <string name="jossredSettings_welcome">Willkommen im „Joss Red“-System. Dieses innovative System bietet eine leistungsstarke Alternative zu den APIs „NewPipe“ und „YouTube“. Mit „Joss Red“ können Sie bei der Interaktion mit allen Wiedergabearten ein personalisiertes Erlebnis genießen, indem Sie einfach die Optionen aktivieren, die Ihren Anforderungen am besten entsprechen.</string>
   <string name="playSongJR">Spielen Sie Musik von „Joss Red“.</string>
   <string name="playSongJRDesc">Damit können Sie jedes Lied in hoher Qualität abspielen, ohne sich anmelden zu müssen.</string>
+  <string name="gplMessage">Diese Anwendung wird unter der GPL 3.0-Lizenz vertrieben und zielt darauf ab, das Open-Source-Software-Ökosystem zu respektieren und einen Beitrag dazu zu leisten. Wenn Sie einen möglichen Verstoß oder eine Unregelmäßigkeit feststellen, bitten wir Sie, sich an unser Support-Team zu wenden, um das Problem angemessen zu beheben.</string>
+  <string name="aboutScreenText1">Diese Anwendung erfasst keine personenbezogenen Daten des Benutzers, außer bei Nutzung des Dienstes „Joss Red“. Die bereitgestellten Daten werden in einer Datenbank gespeichert, die der Nutzer jederzeit herunterladen kann. Darüber hinaus erhalten Sie durch die Installation dieser Anwendung möglicherweise Push-Benachrichtigungen zu unseren Diensten, einschließlich „Joss Red“. Weitere Einzelheiten finden Sie in unseren Allgemeinen Geschäftsbedingungen auf unserer offiziellen Website.</string>
+  <string name="support">Unterstützung</string>
+  <string name="websupport">Support-Seite</string>
+  <string name="aboutScreenText2">Nachfolgend finden Sie die Datenschutzrichtlinien und Geschäftsbedingungen für die Anwendungen innerhalb von „Joss Red“. Alle Tools in der Anwendung sind so konzipiert, dass Ihre Daten nicht an Dritte weitergegeben werden, sodass Ihre Privatsphäre jederzeit gewährleistet ist.</string>
+  <string name="importantmessage">Wichtiger Hinweis</string>
+  <string name="privacyPolicy">Datenschutzrichtlinie</string>
+  <string name="termsConditions">Geschäftsbedingungen</string>
+  <string name="appByJosproxMx">Eine von JOSPROX MX entwickelte Anwendung</string>
 </resources>

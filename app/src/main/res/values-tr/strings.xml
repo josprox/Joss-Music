@@ -319,4 +319,13 @@
   <string name="jossredSettings_welcome">Joss Red sistemine hoş geldiniz. Bu yenilikçi sistem, hem NewPipe hem de YouTube API\'lerine güçlü bir alternatif sunuyor. Joss Red ile her tür oynatmayla etkileşimde bulunurken ihtiyaçlarınıza en uygun seçenekleri etkinleştirerek kişiselleştirilmiş bir deneyimin keyfini çıkarabilirsiniz.</string>
   <string name="playSongJR">Joss Red den müzik çalın.</string>
   <string name="playSongJRDesc">Giriş yapmadan herhangi bir şarkıyı yüksek kalitede çalmanıza olanak tanır.</string>
+  <string name="gplMessage">Bu uygulama GPL 3.0 lisansı altında dağıtılmaktadır ve açık kaynaklı yazılım ekosistemine saygı duymayı ve katkıda bulunmayı amaçlamaktadır. Olası bir ihlal veya usulsüzlük tespit ederseniz, durumu uygun şekilde çözmek için sizi destek ekibimizle iletişime geçmeye davet ediyoruz.</string>
+  <string name="aboutScreenText1">Bu uygulama Joss Red hizmetini kullanma durumu dışında kullanıcıdan kişisel bilgi toplamaz. Sağlanan veriler kullanıcının istediği zaman indirebileceği bir veritabanında saklanacaktır. Ayrıca bu uygulamayı yükleyerek Joss Red dahil hizmetlerimizle ilgili anlık bildirimler alabilirsiniz. Daha fazla ayrıntı için resmi web sitemizde bulunan şartlar ve koşullarımıza bakın.</string>
+  <string name="support">Destek</string>
+  <string name="websupport">Destek sayfası</string>
+  <string name="aboutScreenText2">Aşağıda Joss Red bünyesindeki uygulamaların gizlilik politikası ve hüküm ve koşulları yer almaktadır. Uygulamada yer alan tüm araçlar verilerinizin üçüncü kişilerle paylaşılmayacak şekilde tasarlanmış olup gizliliğiniz her zaman garanti altına alınmıştır.</string>
+  <string name="importantmessage">Önemli Uyarı</string>
+  <string name="privacyPolicy">Gizlilik Politikası</string>
+  <string name="termsConditions">Şartlar ve koşullar</string>
+  <string name="appByJosproxMx">JOSPROX MX tarafından geliştirilen bir uygulama</string>
 </resources>

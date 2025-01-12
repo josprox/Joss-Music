@@ -327,4 +327,13 @@
   <string name="jossredSettings_welcome">Bienvenido al sistema Joss Red. Este innovador sistema ofrece una alternativa eficaz tanto a NewPipe como a las API de YouTube. Con Joss Red, podrás disfrutar de una experiencia personalizada al interactuar con todo tipo de reproducción, simplemente activando las opciones que mejor se ajusten a tus necesidades.</string>
   <string name="playSongJR">Reproducir música desde Joss Red.</string>
   <string name="playSongJRDesc">Permite reproducir cualquier canción sin necesidad de iniciar sesión con alta calidad.</string>
+  <string name="gplMessage">Esta aplicación se distribuye bajo la licencia GPL 3.0 y tiene como objetivo respetar y contribuir al ecosistema de software de código abierto. Si detectas alguna posible infracción o irregularidad, te invitamos a ponerte en contacto con nuestro equipo de soporte para resolverlo de manera adecuada.</string>
+  <string name="aboutScreenText1">Esta aplicación no recopila información personal del usuario, excepto cuando se utiliza el servicio Joss Red. Los datos proporcionados serán almacenados en una base de datos que el usuario puede descargar en cualquier momento. Asimismo, al instalar esta aplicación, podrías recibir notificaciones push relacionadas con nuestros servicios, incluyendo Joss Red. Para más detalles, consulta nuestros términos y condiciones disponibles en nuestra página web oficial.</string>
+  <string name="support">Apoyo</string>
+  <string name="websupport">Página de soporte</string>
+  <string name="aboutScreenText2">A continuación, se detallan la política de privacidad y los términos y condiciones de las aplicaciones dentro de Joss Red. Todas las herramientas de la aplicación están diseñadas para no compartir tus datos con terceros, garantizando tu privacidad en todo momento.</string>
+  <string name="importantmessage">Aviso Importante</string>
+  <string name="privacyPolicy">política de privacidad</string>
+  <string name="termsConditions">Términos y condiciones</string>
+  <string name="appByJosproxMx">Una aplicación desarrollada por JOSPROX MX</string>
 </resources>

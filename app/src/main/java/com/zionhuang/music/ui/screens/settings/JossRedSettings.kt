@@ -107,11 +107,7 @@ fun JossRedSettings(
             icon = {
                 Icon(
                     painter = painterResource(id = R.drawable.music_note),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(24.dp) // Ajusta el tamaño a 24 dp
-                        .clip(CircleShape) // Aplica la forma circular
-                        .background(MaterialTheme.colorScheme.surfaceContainer) // Fondo
+                    contentDescription = null
                 )
             },
             checked = jossRedMultimedia,

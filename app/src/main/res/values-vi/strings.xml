@@ -310,4 +310,13 @@
   <string name="jossredSettings_welcome">Chào mừng đến với hệ thống Joss Red. Hệ thống đổi mới này cung cấp giải pháp thay thế mạnh mẽ cho cả API NewPipe và YouTube. Với Joss Red, bạn có thể tận hưởng trải nghiệm được cá nhân hóa khi tương tác với tất cả các kiểu phát lại, chỉ cần kích hoạt các tùy chọn phù hợp nhất với nhu cầu của bạn.</string>
   <string name="playSongJR">Phát nhạc từ Joss Red.</string>
   <string name="playSongJRDesc">Nó cho phép bạn phát bất kỳ bài hát nào mà không cần đăng nhập với chất lượng cao.</string>
+  <string name="gplMessage">Ứng dụng này được phân phối theo giấy phép GPL 3.0 và nhằm mục đích tôn trọng và đóng góp cho hệ sinh thái phần mềm nguồn mở. Nếu bạn phát hiện bất kỳ vi phạm hoặc bất thường nào có thể xảy ra, chúng tôi mời bạn liên hệ với nhóm hỗ trợ của chúng tôi để giải quyết một cách thích hợp.</string>
+  <string name="aboutScreenText1">Ứng dụng này không thu thập thông tin cá nhân từ người dùng, ngoại trừ khi sử dụng dịch vụ Joss Red. Dữ liệu được cung cấp sẽ được lưu trữ trong cơ sở dữ liệu mà người dùng có thể tải xuống bất cứ lúc nào. Ngoài ra, bằng cách cài đặt ứng dụng này, bạn có thể nhận được thông báo đẩy liên quan đến các dịch vụ của chúng tôi, bao gồm cả Joss Red. Để biết thêm chi tiết, hãy xem các điều khoản và điều kiện có sẵn trên trang web chính thức của chúng tôi.</string>
+  <string name="support">Ủng hộ</string>
+  <string name="websupport">Trang hỗ trợ</string>
+  <string name="aboutScreenText2">Dưới đây là chính sách quyền riêng tư cũng như các điều khoản và điều kiện của các ứng dụng trong \'Joss Red\'. Tất cả các công cụ trong ứng dụng được thiết kế để không chia sẻ dữ liệu của bạn với bên thứ ba, đảm bảo quyền riêng tư của bạn mọi lúc.</string>
+  <string name="importantmessage">Thông báo quan trọng</string>
+  <string name="privacyPolicy">Chính sách bảo mật</string>
+  <string name="termsConditions">Điều khoản và Điều kiện</string>
+  <string name="appByJosproxMx">Một ứng dụng được phát triển bởi JOSPROX MX</string>
 </resources>
