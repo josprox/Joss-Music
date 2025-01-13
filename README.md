@@ -42,6 +42,7 @@ height="80">](https://play.google.com/store/apps/details?id=com.josprox.jossmusi
 
 ## Traducciones
 Si deseas ayudar a traducir la aplicación, puedes mandar un pull request y nosotros aceptaremos la traducción, también usamos las traducciones de innertune.
+
 [![Translation status](https://hosted.weblate.org/widget/innertune/multi-auto.svg)](https://hosted.weblate.org/engage/innertune/)
 
 ## Aviso legal
