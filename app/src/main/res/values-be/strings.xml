@@ -309,4 +309,6 @@
   <string name="privacyPolicy">Палітыка прыватнасці</string>
   <string name="termsConditions">Правілы і ўмовы</string>
   <string name="appByJosproxMx">Дадатак, распрацаванае JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" павінна застацца на пярэднім плане, каб працягваць граць музыку. Гэта дазваляе вам атрымліваць асалоду ад песнямі без перапынкаў і аднавіць іх у любы час.</string>
+  <string name="musicTitleNotification">🎵 Joss Music заўсёды з табой</string>
 </resources>

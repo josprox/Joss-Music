@@ -270,4 +270,6 @@
   <string name="privacyPolicy">سیاست حفظ حریم خصوصی</string>
   <string name="termsConditions">شرایط و ضوابط</string>
   <string name="appByJosproxMx">نرم افزار توسعه یافته توسط JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" برای ادامه موسیقی خود باید در پیش زمینه بماند. این به شما امکان می دهد بدون وقفه از آهنگ های خود لذت ببرید و در هر زمان آنها را از سر بگیرید.</string>
+  <string name="musicTitleNotification">🎵 موسیقی جوس همیشه با شما</string>
 </resources>

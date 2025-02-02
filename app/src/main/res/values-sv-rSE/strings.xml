@@ -291,4 +291,6 @@
   <string name="privacyPolicy">Sekretesspolicy</string>
   <string name="termsConditions">Regler och villkor</string>
   <string name="appByJosproxMx">En applikation utvecklad av JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" måste stanna i förgrunden för att fortsätta spela din musik. Detta gör att du kan njuta av dina låtar utan avbrott och återuppta dem när som helst.</string>
+  <string name="musicTitleNotification">🎵 Joss -musik alltid med dig</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.zionhuang.music.playback
 
 import JossRedClient
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
@@ -9,6 +11,7 @@ import android.database.SQLException
 import android.media.audiofx.AudioEffect
 import android.net.ConnectivityManager
 import android.os.Binder
+import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.datastore.preferences.core.edit
@@ -196,6 +199,33 @@ class MusicService : MediaLibraryService(),
 
     override fun onCreate() {
         super.onCreate()
+
+        /*
+        * A partir de android 14 debemos de declarar un canal de notificaciones cuando estemos usando un servicio foreground, por ello se ha creado este modo
+        * de notificación, cumpliendo las normas de Android y Google Play, además se mostrará en dispositivos superiores a android 8.
+        * */
+        val channel = NotificationChannel(
+            "MUSIC_CHANNEL",
+            getString(R.string.music_player),
+            NotificationManager.IMPORTANCE_LOW
+        ).apply {
+            description = getString(R.string.musicDescNotification)
+        }
+
+        val notificationManager = getSystemService(NotificationManager::class.java)
+        notificationManager.createNotificationChannel(channel)
+
+        // Crear notificación
+        val notification = NotificationCompat.Builder(this, "MUSIC_CHANNEL")
+            .setContentTitle(getString(R.string.musicTitleNotification))
+            .setContentText(getString(R.string.musicDescNotification))
+            .setSmallIcon(R.drawable.joss_music_logo)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .build()
+
+        startForeground(1, notification)
+
+        //Demás configuración
         setMediaNotificationProvider(
             DefaultMediaNotificationProvider(this, { NOTIFICATION_ID }, CHANNEL_ID, R.string.music_player)
                 .apply {

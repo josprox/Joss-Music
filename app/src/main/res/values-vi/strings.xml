@@ -319,4 +319,6 @@
   <string name="privacyPolicy">Chính sách bảo mật</string>
   <string name="termsConditions">Điều khoản và Điều kiện</string>
   <string name="appByJosproxMx">Một ứng dụng được phát triển bởi JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" cần phải ở trong tiền cảnh để tiếp tục chơi nhạc của bạn. Điều này cho phép bạn thưởng thức các bài hát của mình mà không bị gián đoạn và tiếp tục chúng bất cứ lúc nào.</string>
+  <string name="musicTitleNotification">🎵 Joss Music luôn với bạn</string>
 </resources>

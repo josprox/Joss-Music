@@ -317,4 +317,6 @@
   <string name="privacyPolicy">Kebijakan Privasi</string>
   <string name="termsConditions">syarat dan Ketentuan</string>
   <string name="appByJosproxMx">Aplikasi yang dikembangkan oleh JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" perlu tetap di latar depan untuk terus memainkan musik Anda. Ini memungkinkan Anda untuk menikmati lagu Anda tanpa gangguan dan melanjutkannya kapan saja.</string>
+  <string name="musicTitleNotification">🎵 Musik Joss selalu bersamamu</string>
 </resources>

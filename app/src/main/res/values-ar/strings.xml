@@ -343,4 +343,6 @@
   <string name="privacyPolicy">سياسة الخصوصية</string>
   <string name="termsConditions">الشروط والأحكام</string>
   <string name="appByJosproxMx">تطبيق تم تطويره بواسطة JOSPROX MX</string>
+  <string name="musicDescNotification">"موسيقى جوس" تحتاج إلى البقاء في المقدمة لمواصلة تشغيل الموسيقى الخاصة بك. يتيح لك هذا الاستمتاع بأغانيك دون انقطاع واستئنافها في أي وقت.</string>
+  <string name="musicTitleNotification">🎵 موسيقى جوس دائما معك</string>
 </resources>

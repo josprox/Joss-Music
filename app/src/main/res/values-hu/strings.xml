@@ -293,4 +293,6 @@
   <string name="privacyPolicy">Adatvédelmi szabályzat</string>
   <string name="termsConditions">Általános Szerződési Feltételek</string>
   <string name="appByJosproxMx">A JOSPROX MX által fejlesztett alkalmazás</string>
+  <string name="musicDescNotification">A "Joss Music" -nak az előtérben kell maradnia, hogy folytathassa a zenéjét. Ez lehetővé teszi, hogy megszakítások nélkül élvezze dalait, és bármikor folytatja őket.</string>
+  <string name="musicTitleNotification">🎵 Joss zene mindig veled</string>
 </resources>

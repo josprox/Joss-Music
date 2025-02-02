@@ -328,4 +328,6 @@
   <string name="privacyPolicy">Gizlilik Politikası</string>
   <string name="termsConditions">Şartlar ve koşullar</string>
   <string name="appByJosproxMx">JOSPROX MX tarafından geliştirilen bir uygulama</string>
+  <string name="musicDescNotification">"Joss Music", müziğinizi çalmaya devam etmek için ön planda kalmalıdır. Bu, şarkılarınızın kesintisiz olarak tadını çıkarmanıza ve istediğiniz zaman devam etmenize olanak tanır.</string>
+  <string name="musicTitleNotification">🎵 Joss müzik her zaman seninle</string>
 </resources>

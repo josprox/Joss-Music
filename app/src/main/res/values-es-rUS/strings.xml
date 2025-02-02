@@ -336,4 +336,6 @@
   <string name="privacyPolicy">política de privacidad</string>
   <string name="termsConditions">Términos y condiciones</string>
   <string name="appByJosproxMx">Una aplicación desarrollada por JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" debe permanecer en primer plano para seguir tocando tu música. Esto le permite disfrutar de sus canciones sin interrupciones y reanudarlas en cualquier momento.</string>
+  <string name="musicTitleNotification">🎵 Joss Music siempre contigo</string>
 </resources>

@@ -317,4 +317,6 @@
   <string name="privacyPolicy">隱私權政策</string>
   <string name="termsConditions">條款與條件</string>
   <string name="appByJosproxMx">JOSPROX MX 開發的應用程式</string>
+  <string name="musicDescNotification">“喬斯音樂”需要留在前景中才能繼續播放您的音樂。這使您可以隨時欣賞歌曲而不會恢復。</string>
+  <string name="musicTitleNotification">🎵喬斯音樂總是和你在一起</string>
 </resources>

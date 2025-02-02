@@ -305,4 +305,6 @@
   <string name="privacyPolicy">Datenschutzrichtlinie</string>
   <string name="termsConditions">Geschäftsbedingungen</string>
   <string name="appByJosproxMx">Eine von JOSPROX MX entwickelte Anwendung</string>
+  <string name="musicDescNotification">"Joss Music" muss im Vordergrund bleiben, um Ihre Musik weiter zu spielen. Auf diese Weise können Sie Ihre Songs ohne Unterbrechungen genießen und sie jederzeit wieder aufnehmen.</string>
+  <string name="musicTitleNotification">🎵 Joss Musik immer mit dir</string>
 </resources>

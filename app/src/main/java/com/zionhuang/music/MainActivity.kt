@@ -85,6 +85,7 @@ import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
@@ -199,9 +200,24 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        startService(Intent(this, MusicService::class.java))
-        bindService(Intent(this, MusicService::class.java), serviceConnection, BIND_AUTO_CREATE)
+
+        /*
+        * Cambios en el formato del ServiceIntent para android 14+ manteniendo la lógica para android 13 o menor.
+        * Evita errores de cierres innesperados.
+        * */
+
+        val serviceIntent = Intent(this, MusicService::class.java)
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // Android 13 o menor (SDK < 34)
+            startService(serviceIntent) // Usar startService en versiones antiguas
+        } else {
+            ContextCompat.startForegroundService(this, serviceIntent) // Usar startForegroundService en Android 14+
+        }
+
+        // Vincular el servicio en ambas versiones
+        bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE)
     }
+
 
     override fun onStop() {
         unbindService(serviceConnection)
