@@ -110,9 +110,9 @@ fun BottomSheetPlayer(
         useDarkTheme && pureBlack
     }
     val backgroundColor = if (useBlackBackground && state.value > state.collapsedBound) {
-        lerp(MaterialTheme.colorScheme.surfaceContainer, Color.Black, state.progress)
+        lerp(MaterialTheme.colorScheme.surfaceContainer, Color.Black.copy(alpha = 0.5f), state.progress)
     } else {
-        MaterialTheme.colorScheme.surfaceContainer
+        MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.8f) // Ajusta el nivel de transparencia
     }
 
     val playerTextAlignment by rememberEnumPreference(PlayerTextAlignmentKey, PlayerTextAlignment.CENTER)
