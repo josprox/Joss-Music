@@ -330,4 +330,6 @@
   <string name="appByJosproxMx">JOSPROX MX tarafından geliştirilen bir uygulama</string>
   <string name="musicDescNotification">"Joss Music", müziğinizi çalmaya devam etmek için ön planda kalmalıdır. Bu, şarkılarınızın kesintisiz olarak tadını çıkarmanıza ve istediğiniz zaman devam etmenize olanak tanır.</string>
   <string name="musicTitleNotification">🎵 Joss müzik her zaman seninle</string>
+  <string name="transparentMode">Şeffaf mod</string>
+  <string name="transparentModeText">Oynatıcıdaki şeffaf modu etkinleştirin veya devre dışı bırakın.</string>
 </resources>

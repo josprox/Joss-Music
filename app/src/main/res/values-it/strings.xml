@@ -319,4 +319,6 @@
   <string name="appByJosproxMx">Un\'applicazione sviluppata da JOSPROX MX</string>
   <string name="musicDescNotification">"Joss Music" deve rimanere in primo piano per continuare a suonare la tua musica. Ciò ti consente di goderti le tue canzoni senza interruzioni e riprenderle in qualsiasi momento.</string>
   <string name="musicTitleNotification">🎵 Joss Music sempre con te</string>
+  <string name="transparentMode">Modalità trasparente</string>
+  <string name="transparentModeText">Attiva o disattiva la modalità trasparente nel giocatore.</string>
 </resources>

@@ -89,6 +89,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -162,6 +164,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.dotenv.vault.dotenvVault
+import timber.log.Timber
 import java.net.URLDecoder
 import javax.inject.Inject
 
@@ -179,17 +182,21 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var downloadUtil: DownloadUtil
 
+    private var isServiceBound = false
+
     private var playerConnection by mutableStateOf<PlayerConnection?>(null)
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             if (service is MusicBinder) {
                 playerConnection = PlayerConnection(this@MainActivity, service, database, lifecycleScope)
+                isServiceBound = true // Servicio vinculado
             }
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
             playerConnection?.dispose()
             playerConnection = null
+            isServiceBound = false // Servicio desvinculado
         }
     }
 
@@ -208,11 +215,17 @@ class MainActivity : ComponentActivity() {
 
         val serviceIntent = Intent(this, MusicService::class.java)
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // Android 13 o menor (SDK < 34)
-            startService(serviceIntent) // Usar startService en versiones antiguas
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // Android 14+ Vivo y Samsung
+            if (ProcessLifecycleOwner.get().lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                ContextCompat.startForegroundService(this, serviceIntent)
+            } else {
+                Timber.tag("MainActivity")
+                    .w("No se puede iniciar el servicio: la app está en background")
+            }
         } else {
-            ContextCompat.startForegroundService(this, serviceIntent) // Usar startForegroundService en Android 14+
+            startService(serviceIntent) // Para Android 13 o menor
         }
+
 
         // Vincular el servicio en ambas versiones
         bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE)
@@ -220,7 +233,10 @@ class MainActivity : ComponentActivity() {
 
 
     override fun onStop() {
-        unbindService(serviceConnection)
+        if (isServiceBound) {
+            unbindService(serviceConnection)
+            isServiceBound = false // Cambia el estado cuando se desvincula
+        }
         super.onStop()
     }
 

@@ -325,4 +325,6 @@
   <string name="appByJosproxMx">Een applicatie ontwikkeld door JOSPROX MX</string>
   <string name="musicDescNotification">"Joss Music" moet op de voorgrond blijven om je muziek te blijven spelen. Hierdoor kunt u van uw liedjes genieten zonder onderbrekingen en ze op elk gewenst moment hervatten.</string>
   <string name="musicTitleNotification">🎵 Joss Music altijd bij je</string>
+  <string name="transparentMode">Transparante modus</string>
+  <string name="transparentModeText">Activeer of deactiveer de transparante modus in de speler.</string>
 </resources>

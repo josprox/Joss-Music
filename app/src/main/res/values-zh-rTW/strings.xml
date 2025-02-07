@@ -319,4 +319,6 @@
   <string name="appByJosproxMx">JOSPROX MX 開發的應用程式</string>
   <string name="musicDescNotification">“喬斯音樂”需要留在前景中才能繼續播放您的音樂。這使您可以隨時欣賞歌曲而不會恢復。</string>
   <string name="musicTitleNotification">🎵喬斯音樂總是和你在一起</string>
+  <string name="transparentMode">透明模式</string>
+  <string name="transparentModeText">在玩家中激活或停用透明模式。</string>
 </resources>

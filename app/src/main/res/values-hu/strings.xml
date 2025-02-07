@@ -295,4 +295,6 @@
   <string name="appByJosproxMx">A JOSPROX MX által fejlesztett alkalmazás</string>
   <string name="musicDescNotification">A "Joss Music" -nak az előtérben kell maradnia, hogy folytathassa a zenéjét. Ez lehetővé teszi, hogy megszakítások nélkül élvezze dalait, és bármikor folytatja őket.</string>
   <string name="musicTitleNotification">🎵 Joss zene mindig veled</string>
+  <string name="transparentMode">Átlátható mód</string>
+  <string name="transparentModeText">Aktiválja vagy deaktiválja az átlátszó módot a lejátszóban.</string>
 </resources>

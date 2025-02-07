@@ -321,4 +321,6 @@
   <string name="appByJosproxMx">JOSPROX MX によって開発されたアプリケーション</string>
   <string name="musicDescNotification">「Joss Music」は、音楽を演奏し続けるために前景にとどまる必要があります。これにより、中断することなく曲を楽しんで、いつでも再開できます。</string>
   <string name="musicTitleNotification">🎵ジョス音楽はいつもあなたと一緒です</string>
+  <string name="transparentMode">透明モード</string>
+  <string name="transparentModeText">プレーヤーの透明モードをアクティブ化または非アクティブ化します。</string>
 </resources>

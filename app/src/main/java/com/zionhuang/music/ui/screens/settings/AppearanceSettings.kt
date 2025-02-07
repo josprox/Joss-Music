@@ -47,7 +47,9 @@ import com.zionhuang.music.constants.DefaultOpenTabKey
 import com.zionhuang.music.constants.DynamicThemeKey
 import com.zionhuang.music.constants.GridCellSize
 import com.zionhuang.music.constants.GridCellSizeKey
+import com.zionhuang.music.constants.JossRedMultimedia
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
+import com.zionhuang.music.constants.PlayerTransparent
 import com.zionhuang.music.constants.PureBlackKey
 import com.zionhuang.music.constants.SliderStyle
 import com.zionhuang.music.constants.SliderStyleKey
@@ -75,6 +77,7 @@ fun AppearanceSettings(
     val (sliderStyle, onSliderStyleChange) = rememberEnumPreference(SliderStyleKey, defaultValue = SliderStyle.DEFAULT)
     val (defaultOpenTab, onDefaultOpenTabChange) = rememberEnumPreference(DefaultOpenTabKey, defaultValue = NavigationTab.HOME)
     val (gridCellSize, onGridCellSizeChange) = rememberEnumPreference(GridCellSizeKey, defaultValue = GridCellSize.SMALL)
+    val (playertTransparent, onPlayertTransparentChange) = rememberPreference(key = PlayerTransparent, defaultValue = false)
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val useDarkTheme = remember(darkMode, isSystemInDarkTheme) {
@@ -251,6 +254,14 @@ fun AppearanceSettings(
             onClick = {
                 showSliderOptionDialog = true
             }
+        )
+
+        SwitchPreference(
+            title = { Text(stringResource(R.string.transparentMode)) },
+            description = stringResource(R.string.transparentModeText),
+            icon = { Icon(painterResource(R.drawable.palette), null) },
+            checked = playertTransparent,
+            onCheckedChange = onPlayertTransparentChange
         )
 
         PreferenceGroupTitle(

@@ -146,6 +146,7 @@ dependencies {
     implementation(libs.billing.ktx)
     implementation(libs.runtime.livedata)
     implementation(project(":jossredconnect"))
+    implementation(libs.lifecycle.process)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 

@@ -308,4 +308,6 @@
   <string name="appByJosproxMx">En applikasjon utviklet av JOSPROX MX</string>
   <string name="musicDescNotification">"Joss Music" må være i forgrunnen for å fortsette å spille musikken din. Dette lar deg glede deg over sangene dine uten avbrudd og gjenoppta dem når som helst.</string>
   <string name="musicTitleNotification">🎵 Joss musikk alltid med deg</string>
+  <string name="transparentMode">Gjennomsiktig modus</string>
+  <string name="transparentModeText">Aktiver eller deaktiver gjennomsiktig modus i spilleren.</string>
 </resources>

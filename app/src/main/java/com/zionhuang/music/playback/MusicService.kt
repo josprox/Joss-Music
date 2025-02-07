@@ -7,10 +7,12 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.SQLException
 import android.media.audiofx.AudioEffect
 import android.net.ConnectivityManager
 import android.os.Binder
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
@@ -215,7 +217,7 @@ class MusicService : MediaLibraryService(),
         val notificationManager = getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
 
-        // Crear notificación
+        // Crear la notificación
         val notification = NotificationCompat.Builder(this, "MUSIC_CHANNEL")
             .setContentTitle(getString(R.string.musicTitleNotification))
             .setContentText(getString(R.string.musicDescNotification))
@@ -223,7 +225,17 @@ class MusicService : MediaLibraryService(),
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
 
-        startForeground(1, notification)
+        // Solo iniciar el servicio en primer plano si está permitido (Android 14+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // Android 14+
+            if (checkSelfPermission(android.Manifest.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK) == PackageManager.PERMISSION_GRANTED) {
+                startForeground(1, notification)
+            } else {
+                Timber.tag("MusicService")
+                    .w("No se puede iniciar foreground service: falta permiso FOREGROUND_SERVICE_MEDIA_PLAYBACK")
+            }
+        } else {
+            startForeground(1, notification) // Para Android 13 o menor
+        }
 
         //Demás configuración
         setMediaNotificationProvider(

@@ -348,4 +348,6 @@
   <string name="appByJosproxMx">Aplikace vyvinutá společností JOSPROX MX</string>
   <string name="musicDescNotification">„Jossova hudba“ musí zůstat v popředí, aby mohla hrát hudbu. To vám umožní užít si své písně bez přerušení a obnovit je kdykoli.</string>
   <string name="musicTitleNotification">🎵 Joss Music vždy s vámi</string>
+  <string name="transparentMode">Transparentní režim</string>
+  <string name="transparentModeText">Aktivujte nebo deaktivujte transparentní režim v přehrávači.</string>
 </resources>

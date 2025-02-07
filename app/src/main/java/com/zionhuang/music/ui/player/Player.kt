@@ -69,6 +69,7 @@ import com.zionhuang.music.R
 import com.zionhuang.music.constants.DarkModeKey
 import com.zionhuang.music.constants.PlayerHorizontalPadding
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
+import com.zionhuang.music.constants.PlayerTransparent
 import com.zionhuang.music.constants.PureBlackKey
 import com.zionhuang.music.constants.QueuePeekHeight
 import com.zionhuang.music.constants.ShowLyricsKey
@@ -109,10 +110,20 @@ fun BottomSheetPlayer(
         val useDarkTheme = if (darkTheme == DarkMode.AUTO) isSystemInDarkTheme else darkTheme == DarkMode.ON
         useDarkTheme && pureBlack
     }
+    val isTransparent by rememberPreference(PlayerTransparent, defaultValue = false)
+
     val backgroundColor = if (useBlackBackground && state.value > state.collapsedBound) {
-        lerp(MaterialTheme.colorScheme.surfaceContainer, Color.Black.copy(alpha = 0.5f), state.progress)
+        if (isTransparent) {
+            lerp(MaterialTheme.colorScheme.surfaceContainer, Color.Black.copy(alpha = 0.85f), state.progress)
+        } else {
+            lerp(MaterialTheme.colorScheme.surfaceContainer, Color.Black, state.progress)
+        }
     } else {
-        MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.8f) // Ajusta el nivel de transparencia
+        if (isTransparent) {
+            MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.95f) // Menos transparencia
+        } else {
+            MaterialTheme.colorScheme.surfaceContainer
+        }
     }
 
     val playerTextAlignment by rememberEnumPreference(PlayerTextAlignmentKey, PlayerTextAlignment.CENTER)

@@ -327,4 +327,6 @@
   <string name="appByJosproxMx">JOSPROX MX:n kehittämä sovellus</string>
   <string name="musicDescNotification">"Joss Music" on pysyttävä etualalla musiikin pelaamiseksi. Tämän avulla voit nauttia kappaleistasi keskeytyksiä ja jatkaa niitä milloin tahansa.</string>
   <string name="musicTitleNotification">🎵 Joss -musiikki aina kanssasi</string>
+  <string name="transparentMode">Läpinäkyvä tila</string>
+  <string name="transparentModeText">Aktivoi tai deaktivoi läpinäkyvä tila soittimessa.</string>
 </resources>

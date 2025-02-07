@@ -40,6 +40,7 @@ translateVersion = "16.0.0"
 billingKtx = "7.1.1"
 runtimeLivedata = "1.7.5"
 jetbrainsKotlinJvm = "2.0.10"
+lifecycleProcess = "2.8.7"
 
 [libraries]
 confetti = { group = "com.github.jinatonic.confetti", name = "confetti", version.ref = "confetti" }
@@ -152,6 +153,7 @@ newpipe-extractor = { group = "com.github.TeamNewPipe", name = "NewPipeExtractor
 benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro", version.ref = "benchmarkMacro" }
 billing-ktx = { group = "com.android.billingclient", name = "billing-ktx", version.ref = "billingKtx" }
 runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
+lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "lifecycleProcess" }
 
 [plugins]
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

@@ -326,4 +326,6 @@
   <string name="appByJosproxMx">Μια εφαρμογή που αναπτύχθηκε από την JOSPROX MX</string>
   <string name="musicDescNotification">Το "Joss Music" πρέπει να παραμείνει στο προσκήνιο για να συνεχίσει να παίζει τη μουσική σας. Αυτό σας επιτρέπει να απολαύσετε τα τραγούδια σας χωρίς διακοπές και να τα επαναλάβετε ανά πάσα στιγμή.</string>
   <string name="musicTitleNotification">🎵 joss μουσική πάντα μαζί σου</string>
+  <string name="transparentMode">Διαφανής λειτουργία</string>
+  <string name="transparentModeText">Ενεργοποιήστε ή απενεργοποιήστε τη διαφανή λειτουργία στη συσκευή αναπαραγωγής.</string>
 </resources>

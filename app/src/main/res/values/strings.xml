@@ -328,4 +328,6 @@
   <string name="appByJosproxMx">An application developed by JOSPROX MX</string>
   <string name="musicDescNotification">"Joss Music" needs to stay in the foreground to keep playing your music. This allows you to enjoy your songs without interruptions and resume them anytime.</string>
   <string name="musicTitleNotification">🎵 Joss Music always with you</string>
+  <string name="transparentMode">Transparent mode</string>
+  <string name="transparentModeText">Activate or deactivate transparent mode in the player.</string>
 </resources>
