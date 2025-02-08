@@ -321,4 +321,6 @@
   <string name="musicTitleNotification">🎵喬斯音樂總是和你在一起</string>
   <string name="transparentMode">透明模式</string>
   <string name="transparentModeText">在玩家中激活或停用透明模式。</string>
+  <string name="sleepTimerSong">Pausar之前的歌曲</string>
+  <string name="sleepTimerSongText">它允許播放歌曲在計時器到期之前暫停音樂之前結束。</string>
 </resources>

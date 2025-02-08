@@ -350,4 +350,6 @@
   <string name="musicTitleNotification">🎵 Joss Music vždy s vámi</string>
   <string name="transparentMode">Transparentní režim</string>
   <string name="transparentModeText">Aktivujte nebo deaktivujte transparentní režim v přehrávači.</string>
+  <string name="sleepTimerSong">Dokončete píseň před Pausar</string>
+  <string name="sleepTimerSongText">Umožňuje přehrávací skladbu před zastavením hudby, když vyprší časovač.</string>
 </resources>

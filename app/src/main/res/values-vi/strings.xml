@@ -323,4 +323,6 @@
   <string name="musicTitleNotification">🎵 Joss Music luôn với bạn</string>
   <string name="transparentMode">Chế độ trong suốt</string>
   <string name="transparentModeText">Kích hoạt hoặc hủy kích hoạt chế độ trong suốt trong trình phát.</string>
+  <string name="sleepTimerSong">Kết thúc bài hát trước khi pausar</string>
+  <string name="sleepTimerSongText">Nó cho phép bài hát chơi kết thúc trước khi tạm dừng âm nhạc khi bộ hẹn giờ hết hạn.</string>
 </resources>

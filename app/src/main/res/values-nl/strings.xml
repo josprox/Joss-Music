@@ -327,4 +327,6 @@
   <string name="musicTitleNotification">🎵 Joss Music altijd bij je</string>
   <string name="transparentMode">Transparante modus</string>
   <string name="transparentModeText">Activeer of deactiveer de transparante modus in de speler.</string>
+  <string name="sleepTimerSong">Voltooid lied voor Pausar</string>
+  <string name="sleepTimerSongText">Hiermee kan het speelnummer eindigen voordat de muziek pauzeert wanneer de timer verloopt.</string>
 </resources>

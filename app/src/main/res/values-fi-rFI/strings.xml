@@ -329,4 +329,6 @@
   <string name="musicTitleNotification">🎵 Joss -musiikki aina kanssasi</string>
   <string name="transparentMode">Läpinäkyvä tila</string>
   <string name="transparentModeText">Aktivoi tai deaktivoi läpinäkyvä tila soittimessa.</string>
+  <string name="sleepTimerSong">Lopeta kappale ennen Pausaria</string>
+  <string name="sleepTimerSongText">Se antaa soittavan kappaleen loppua ennen kuin keskeyttää musiikin ajastimen päättyessä.</string>
 </resources>

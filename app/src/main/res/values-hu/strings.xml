@@ -297,4 +297,6 @@
   <string name="musicTitleNotification">🎵 Joss zene mindig veled</string>
   <string name="transparentMode">Átlátható mód</string>
   <string name="transparentModeText">Aktiválja vagy deaktiválja az átlátszó módot a lejátszóban.</string>
+  <string name="sleepTimerSong">Fejezze be a dalt Pausar előtt</string>
+  <string name="sleepTimerSongText">Ez lehetővé teszi, hogy a lejátszási dal véget érjen, mielőtt szüneteltetné a zenét, amikor az időzítő lejár.</string>
 </resources>

@@ -338,4 +338,6 @@
   <string name="musicTitleNotification">🎵 Joss Musique toujours avec toi</string>
   <string name="transparentMode">Mode transparent</string>
   <string name="transparentModeText">Activez ou désactivez le mode transparent dans le lecteur.</string>
+  <string name="sleepTimerSong">Terminer la chanson avant Pausar</string>
+  <string name="sleepTimerSongText">Il permet à la chanson de jeu de se terminer avant de faire une pause de la musique lorsque la minuterie expire.</string>
 </resources>

@@ -33,13 +33,11 @@ import com.zionhuang.music.constants.EnableKugouKey
 import com.zionhuang.music.constants.EnableLrcLibKey
 import com.zionhuang.music.constants.HideExplicitKey
 import com.zionhuang.music.constants.InnerTubeCookieKey
-import com.zionhuang.music.constants.JossRedMultimedia
 import com.zionhuang.music.constants.LanguageCodeToName
 import com.zionhuang.music.constants.ProxyEnabledKey
 import com.zionhuang.music.constants.ProxyTypeKey
 import com.zionhuang.music.constants.ProxyUrlKey
 import com.zionhuang.music.constants.SYSTEM_DEFAULT
-import com.zionhuang.music.constants.SleepFinishSong
 import com.zionhuang.music.ui.component.EditTextPreference
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.ListPreference
@@ -73,8 +71,6 @@ fun ContentSettings(
     val (proxyEnabled, onProxyEnabledChange) = rememberPreference(key = ProxyEnabledKey, defaultValue = false)
     val (proxyType, onProxyTypeChange) = rememberEnumPreference(key = ProxyTypeKey, defaultValue = Proxy.Type.HTTP)
     val (proxyUrl, onProxyUrlChange) = rememberPreference(key = ProxyUrlKey, defaultValue = "host:port")
-
-    val (sleepFinishSong, onSleepFinishSongChange) = rememberPreference(key = SleepFinishSong, defaultValue = false)
 
     Column(
         Modifier
@@ -122,19 +118,6 @@ fun ContentSettings(
             icon = { Icon(painterResource(R.drawable.explicit), null) },
             checked = hideExplicit,
             onCheckedChange = onHideExplicitChange
-        )
-
-        SwitchPreference(
-            title = { Text("Temporalizador") },
-            description = "Poner en pausa el temporalizador después del tiempo especificado pero permitir terminar la canción.",
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.bedtime),
-                    contentDescription = null
-                )
-            },
-            checked = sleepFinishSong,
-            onCheckedChange = onSleepFinishSongChange
         )
 
         SwitchPreference(

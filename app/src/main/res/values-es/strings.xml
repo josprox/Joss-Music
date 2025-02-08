@@ -340,4 +340,6 @@
   <string name="musicTitleNotification">🎵 Joss Music siempre contigo</string>
   <string name="transparentMode">Modo transparente</string>
   <string name="transparentModeText">Active o desactive el modo transparente en el reproductor.</string>
+  <string name="sleepTimerSong">Finalizar canción antes de pausar</string>
+  <string name="sleepTimerSongText">Permite que la canción en reproducción termine antes de pausar la música cuando el temporizador expire.</string>
 </resources>

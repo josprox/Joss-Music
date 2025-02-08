@@ -347,4 +347,6 @@
   <string name="musicTitleNotification">🎵 موسيقى جوس دائما معك</string>
   <string name="transparentMode">وضع شفاف</string>
   <string name="transparentModeText">تنشيط أو إلغاء تنشيط الوضع الشفاف في اللاعب.</string>
+  <string name="sleepTimerSong">الانتهاء من الأغنية قبل بوسار</string>
+  <string name="sleepTimerSongText">يسمح للأغنية العزف أن تنتهي قبل توقف الموسيقى عندما ينتهي الموقت.</string>
 </resources>

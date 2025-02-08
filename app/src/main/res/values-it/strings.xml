@@ -321,4 +321,6 @@
   <string name="musicTitleNotification">🎵 Joss Music sempre con te</string>
   <string name="transparentMode">Modalità trasparente</string>
   <string name="transparentModeText">Attiva o disattiva la modalità trasparente nel giocatore.</string>
+  <string name="sleepTimerSong">Finita la canzone prima di Pausar</string>
+  <string name="sleepTimerSongText">Permette alla canzone di suonare di terminare prima di mettere in pausa la musica quando il timer scade.</string>
 </resources>

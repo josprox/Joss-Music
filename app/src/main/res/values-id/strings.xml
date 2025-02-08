@@ -321,4 +321,6 @@
   <string name="musicTitleNotification">🎵 Musik Joss selalu bersamamu</string>
   <string name="transparentMode">Mode transparan</string>
   <string name="transparentModeText">Mengaktifkan atau menonaktifkan mode transparan di pemain.</string>
+  <string name="sleepTimerSong">Selesaikan lagu sebelum Pausar</string>
+  <string name="sleepTimerSongText">Ini memungkinkan lagu bermain untuk berakhir sebelum menghentikan musik ketika timer berakhir.</string>
 </resources>

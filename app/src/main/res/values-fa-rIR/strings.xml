@@ -274,4 +274,6 @@
   <string name="musicTitleNotification">🎵 موسیقی جوس همیشه با شما</string>
   <string name="transparentMode">حالت شفاف</string>
   <string name="transparentModeText">حالت شفاف را در پخش کننده فعال یا غیرفعال کنید.</string>
+  <string name="sleepTimerSong">آهنگ را قبل از Pausar تمام کنید</string>
+  <string name="sleepTimerSongText">این اجازه می دهد تا آهنگ پخش شود قبل از مکث موسیقی هنگام انقضا تایمر.</string>
 </resources>

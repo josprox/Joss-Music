@@ -310,4 +310,6 @@
   <string name="musicTitleNotification">🎵 Joss musikk alltid med deg</string>
   <string name="transparentMode">Gjennomsiktig modus</string>
   <string name="transparentModeText">Aktiver eller deaktiver gjennomsiktig modus i spilleren.</string>
+  <string name="sleepTimerSong">Fullfør sangen før Pausar</string>
+  <string name="sleepTimerSongText">Den lar den spillende sangen avsluttes før du tar en pause musikken når tidtakeren går ut.</string>
 </resources>

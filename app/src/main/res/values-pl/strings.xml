@@ -350,4 +350,6 @@
   <string name="musicTitleNotification">🎵 Joss Music zawsze z tobą</string>
   <string name="transparentMode">Tryb przezroczysty</string>
   <string name="transparentModeText">Aktywuj lub dezaktywuj tryb przezroczystego przez gracza.</string>
+  <string name="sleepTimerSong">Zakończ piosenkę przed Pausar</string>
+  <string name="sleepTimerSongText">Umożliwia to zakończenie piosenki, zanim zatrzyma muzykę, gdy wygaśnie czas.</string>
 </resources>

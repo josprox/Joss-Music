@@ -328,4 +328,6 @@
   <string name="musicTitleNotification">🎵 joss μουσική πάντα μαζί σου</string>
   <string name="transparentMode">Διαφανής λειτουργία</string>
   <string name="transparentModeText">Ενεργοποιήστε ή απενεργοποιήστε τη διαφανή λειτουργία στη συσκευή αναπαραγωγής.</string>
+  <string name="sleepTimerSong">Τελειώστε το τραγούδι πριν από το Pausar</string>
+  <string name="sleepTimerSongText">Επιτρέπει στο να τελειώνει το τραγούδι πριν από την παύση της μουσικής όταν λήγει ο χρονοδιακόπτης.</string>
 </resources>

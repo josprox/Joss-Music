@@ -33,6 +33,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -653,18 +654,19 @@ fun SleepTimerDialog(
                 ) {
                     Text(stringResource(R.string.end_of_song))
                 }
-                SwitchPreference(
-                    title = { Text("Temporalizador") },
-                    description = "Poner en pausa el temporalizador después del tiempo especificado pero permitir terminar la canción.",
-                    icon = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.bedtime),
-                            contentDescription = null
-                        )
+                OutlinedButton(
+                    onClick = {
+                        onSleepFinishSongChange(!sleepFinishSong) // Cambia el estado del temporizador
                     },
-                    checked = sleepFinishSong,
-                    onCheckedChange = onSleepFinishSongChange
-                )
+                    modifier = Modifier.fillMaxWidth().padding(4.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = if (sleepFinishSong) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.95f), // Mantener color normal si está desactivado
+                        contentColor = if (sleepFinishSong) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface // Mantener color de texto normal si está desactivado
+                    )
+                ) {
+                    Text(stringResource(R.string.sleepTimerSong))
+                }
+
             }
         }
     )

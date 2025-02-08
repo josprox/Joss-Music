@@ -295,4 +295,6 @@
   <string name="musicTitleNotification">🎵 Joss -musik alltid med dig</string>
   <string name="transparentMode">Transparent läge</string>
   <string name="transparentModeText">Aktivera eller inaktivera transparent läge i spelaren.</string>
+  <string name="sleepTimerSong">Slutför låten före Pausar</string>
+  <string name="sleepTimerSongText">Det gör att spellåten kan avsluta innan du pausar musiken när timern löper ut.</string>
 </resources>

@@ -323,4 +323,6 @@
   <string name="musicTitleNotification">🎵ジョス音楽はいつもあなたと一緒です</string>
   <string name="transparentMode">透明モード</string>
   <string name="transparentModeText">プレーヤーの透明モードをアクティブ化または非アクティブ化します。</string>
+  <string name="sleepTimerSong">Pausarの前に曲を仕上げます</string>
+  <string name="sleepTimerSongText">タイマーが期限切れになったときに音楽を一時停止する前に、演奏曲が終了することができます。</string>
 </resources>

@@ -332,4 +332,6 @@
   <string name="musicTitleNotification">🎵 Joss müzik her zaman seninle</string>
   <string name="transparentMode">Şeffaf mod</string>
   <string name="transparentModeText">Oynatıcıdaki şeffaf modu etkinleştirin veya devre dışı bırakın.</string>
+  <string name="sleepTimerSong">Pausar\'dan Önce Şarkıyı Bitir</string>
+  <string name="sleepTimerSongText">Zamanlayıcı sona erdiğinde müziği duraklatmadan önce çalma şarkısının bitmesine izin verir.</string>
 </resources>

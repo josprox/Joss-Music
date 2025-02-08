@@ -313,4 +313,6 @@
   <string name="musicTitleNotification">🎵 Joss музика винаги с вас</string>
   <string name="transparentMode">Прозрачен режим</string>
   <string name="transparentModeText">Активирайте или деактивирайте прозрачния режим в плейъра.</string>
+  <string name="sleepTimerSong">Завършете песен преди Паузар</string>
+  <string name="sleepTimerSongText">Тя позволява на песента да приключи, преди да спира музиката, когато таймерът изтече.</string>
 </resources>

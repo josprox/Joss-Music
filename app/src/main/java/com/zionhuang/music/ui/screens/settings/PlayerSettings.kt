@@ -26,6 +26,7 @@ import com.zionhuang.music.constants.AutoLoadMoreKey
 import com.zionhuang.music.constants.AutoSkipNextOnErrorKey
 import com.zionhuang.music.constants.PersistentQueueKey
 import com.zionhuang.music.constants.SkipSilenceKey
+import com.zionhuang.music.constants.SleepFinishSong
 import com.zionhuang.music.constants.StopMusicOnTaskClearKey
 import com.zionhuang.music.ui.component.EnumListPreference
 import com.zionhuang.music.ui.component.IconButton
@@ -48,6 +49,7 @@ fun PlayerSettings(
     val (autoLoadMore, onAutoLoadMoreChange) = rememberPreference(AutoLoadMoreKey, defaultValue = true)
     val (autoSkipNextOnError, onAutoSkipNextOnErrorChange) = rememberPreference(AutoSkipNextOnErrorKey, defaultValue = false)
     val (stopMusicOnTaskClear, onStopMusicOnTaskClearChange) = rememberPreference(StopMusicOnTaskClearKey, defaultValue = false)
+    val (sleepFinishSong, onSleepFinishSongChange) = rememberPreference(key = SleepFinishSong, defaultValue = false)
 
     Column(
         Modifier
@@ -125,6 +127,19 @@ fun PlayerSettings(
             icon = { Icon(painterResource(R.drawable.clear_all), null) },
             checked = stopMusicOnTaskClear,
             onCheckedChange = onStopMusicOnTaskClearChange
+        )
+
+        SwitchPreference(
+            title = { Text(stringResource(R.string.sleepTimerSong)) },
+            description = stringResource(R.string.sleepTimerSongText),
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.bedtime),
+                    contentDescription = null
+                )
+            },
+            checked = sleepFinishSong,
+            onCheckedChange = onSleepFinishSongChange
         )
     }
 
