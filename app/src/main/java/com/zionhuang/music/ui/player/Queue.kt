@@ -83,6 +83,7 @@ import com.zionhuang.music.LocalPlayerConnection
 import com.zionhuang.music.R
 import com.zionhuang.music.constants.ListItemHeight
 import com.zionhuang.music.constants.LockQueueKey
+import com.zionhuang.music.constants.SleepFinishSong
 import com.zionhuang.music.extensions.metadata
 import com.zionhuang.music.extensions.move
 import com.zionhuang.music.extensions.togglePlayPause
@@ -90,6 +91,7 @@ import com.zionhuang.music.ui.component.BottomSheet
 import com.zionhuang.music.ui.component.BottomSheetState
 import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.MediaMetadataListItem
+import com.zionhuang.music.ui.component.SwitchPreference
 import com.zionhuang.music.ui.menu.MediaMetadataMenu
 import com.zionhuang.music.ui.menu.PlayerMenu
 import com.zionhuang.music.ui.menu.QueueSelectionMenu
@@ -601,6 +603,8 @@ fun SleepTimerDialog(
         mutableFloatStateOf(30f)
     }
 
+    val (sleepFinishSong, onSleepFinishSongChange) = rememberPreference(key = SleepFinishSong, defaultValue = false)
+
     AlertDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
         onDismissRequest = onDismiss,
@@ -649,6 +653,18 @@ fun SleepTimerDialog(
                 ) {
                     Text(stringResource(R.string.end_of_song))
                 }
+                SwitchPreference(
+                    title = { Text("Temporalizador") },
+                    description = "Poner en pausa el temporalizador después del tiempo especificado pero permitir terminar la canción.",
+                    icon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.bedtime),
+                            contentDescription = null
+                        )
+                    },
+                    checked = sleepFinishSong,
+                    onCheckedChange = onSleepFinishSongChange
+                )
             }
         }
     )

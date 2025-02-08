@@ -41,6 +41,7 @@ billingKtx = "7.1.1"
 runtimeLivedata = "1.7.5"
 jetbrainsKotlinJvm = "2.0.10"
 lifecycleProcess = "2.8.7"
+preferenceKtx = "1.2.1"
 
 [libraries]
 confetti = { group = "com.github.jinatonic.confetti", name = "confetti", version.ref = "confetti" }
@@ -154,6 +155,7 @@ benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro", vers
 billing-ktx = { group = "com.android.billingclient", name = "billing-ktx", version.ref = "billingKtx" }
 runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "lifecycleProcess" }
+preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preferenceKtx" }
 
 [plugins]
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

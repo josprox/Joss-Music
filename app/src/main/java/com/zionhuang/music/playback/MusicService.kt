@@ -80,6 +80,7 @@ import com.zionhuang.music.constants.PlayerVolumeKey
 import com.zionhuang.music.constants.RepeatModeKey
 import com.zionhuang.music.constants.ShowLyricsKey
 import com.zionhuang.music.constants.SkipSilenceKey
+import com.zionhuang.music.constants.SleepFinishSong
 import com.zionhuang.music.db.MusicDatabase
 import com.zionhuang.music.db.entities.Event
 import com.zionhuang.music.db.entities.FormatEntity
@@ -181,6 +182,7 @@ class MusicService : MediaLibraryService(),
 
     private val normalizeFactor = MutableStateFlow(1f)
     val playerVolume = MutableStateFlow(dataStore.get(PlayerVolumeKey, 1f).coerceIn(0f, 1f))
+    private val sleepTimerFinish = MutableStateFlow(dataStore.get(SleepFinishSong, false))
 
     lateinit var sleepTimer: SleepTimer
 
@@ -260,7 +262,7 @@ class MusicService : MediaLibraryService(),
             .build()
             .apply {
                 addListener(this@MusicService)
-                sleepTimer = SleepTimer(scope, this)
+                sleepTimer = SleepTimer(scope,this , sleepTimerFinish)
                 addListener(sleepTimer)
                 addAnalyticsListener(PlaybackStatsListener(false, this@MusicService))
             }
