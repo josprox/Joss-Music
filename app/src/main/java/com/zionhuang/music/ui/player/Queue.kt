@@ -654,18 +654,6 @@ fun SleepTimerDialog(
                 ) {
                     Text(stringResource(R.string.end_of_song))
                 }
-                OutlinedButton(
-                    onClick = {
-                        onSleepFinishSongChange(!sleepFinishSong) // Cambia el estado del temporizador
-                    },
-                    modifier = Modifier.fillMaxWidth().padding(4.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        containerColor = if (sleepFinishSong) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.95f), // Mantener color normal si está desactivado
-                        contentColor = if (sleepFinishSong) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface // Mantener color de texto normal si está desactivado
-                    )
-                ) {
-                    Text(stringResource(R.string.sleepTimerSong))
-                }
 
             }
         }

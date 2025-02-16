@@ -82,7 +82,8 @@ fun YouTubePlaylistMenu(
             icon = R.drawable.shuffle,
             title = R.string.shuffle
         ) {
-            playerConnection.playQueue(YouTubeQueue(playlist.shuffleEndpoint))
+            playlist.shuffleEndpoint?.let { YouTubeQueue(it) }
+                ?.let { playerConnection.playQueue(it) }
             onDismiss()
         }
         playlist.radioEndpoint?.let { radioEndpoint ->

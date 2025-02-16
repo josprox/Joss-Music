@@ -9,7 +9,6 @@ import com.zionhuang.innertube.models.MusicTwoRowItemRenderer
 import com.zionhuang.innertube.models.PlaylistItem
 import com.zionhuang.innertube.models.SongItem
 import com.zionhuang.innertube.models.YTItem
-import com.zionhuang.innertube.models.filterExplicit
 import com.zionhuang.innertube.models.oddElements
 
 data class HomePage(
@@ -125,11 +124,11 @@ data class HomePage(
         }
     }
 
-    fun filterExplicit(enabled: Boolean = true) =
-        if (enabled) {
-            copy(sections = sections.map {
-                it.copy(items = it.items.filterExplicit())
-            })
-        } else this
+//    fun filterExplicit(enabled: Boolean = true) =
+//        if (enabled) {
+//            copy(sections = sections.map {
+//                it.copy(items = it.items.filterExplicit())
+//            })
+//        } else this
 
 }

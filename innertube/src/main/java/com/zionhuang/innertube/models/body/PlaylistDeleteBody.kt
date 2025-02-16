@@ -4,9 +4,7 @@ import com.zionhuang.innertube.models.Context
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BrowseBody(
+data class PlaylistDeleteBody(
     val context: Context,
-    val browseId: String?,
-    val params: String?,
-    val continuation: String?
+    val playlistId: String
 )

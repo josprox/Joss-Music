@@ -9,10 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.pages.ArtistPage
-import com.zionhuang.music.constants.HideExplicitKey
 import com.zionhuang.music.db.MusicDatabase
-import com.zionhuang.music.utils.dataStore
-import com.zionhuang.music.utils.get
 import com.zionhuang.music.utils.reportException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -35,10 +32,14 @@ class ArtistViewModel @Inject constructor(
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     init {
+        fetchArtistsFromYTM()
+    }
+
+    private fun fetchArtistsFromYTM() {
         viewModelScope.launch {
             YouTube.artist(artistId)
                 .onSuccess {
-                    artistPage = it.filterExplicit(context.dataStore.get(HideExplicitKey, false))
+                    artistPage = it
                 }.onFailure {
                     reportException(it)
                 }

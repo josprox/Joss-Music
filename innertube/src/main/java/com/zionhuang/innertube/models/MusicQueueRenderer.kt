@@ -14,12 +14,12 @@ data class MusicQueueRenderer(
 
     @Serializable
     data class Header(
-        val musicQueueHeaderRenderer: MusicQueueHeaderRenderer?,
-    ) {
-        @Serializable
-        data class MusicQueueHeaderRenderer(
-            val title: Runs?,
-            val subtitle: Runs?,
-        )
-    }
+        val musicQueueHeaderRenderer: MusicQueueHeaderRenderer,
+    )
 }
+
+@Serializable
+data class MusicQueueHeaderRenderer(
+    val title: Runs,
+    val subtitle: Runs,
+)

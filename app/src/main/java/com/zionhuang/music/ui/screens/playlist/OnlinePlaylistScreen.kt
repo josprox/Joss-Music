@@ -309,7 +309,11 @@ fun OnlinePlaylistScreen(
                                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                                     Button(
                                         onClick = {
-                                            playerConnection.playQueue(YouTubeQueue(playlist.shuffleEndpoint))
+                                            playlist.shuffleEndpoint?.let {
+                                                YouTubeQueue(
+                                                    it
+                                                )
+                                            }?.let { playerConnection.playQueue(it) }
                                         },
                                         contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                                         modifier = Modifier.weight(1f)

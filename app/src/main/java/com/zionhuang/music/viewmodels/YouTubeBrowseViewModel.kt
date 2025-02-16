@@ -29,7 +29,7 @@ class YouTubeBrowseViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             YouTube.browse(browseId, params).onSuccess {
-                result.value = it.filterExplicit(context.dataStore.get(HideExplicitKey, false))
+                result.value = it
             }.onFailure {
                 reportException(it)
             }

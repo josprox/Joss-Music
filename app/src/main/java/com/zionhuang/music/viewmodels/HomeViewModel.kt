@@ -1,5 +1,6 @@
 package com.zionhuang.music.viewmodels
 
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,18 +8,15 @@ import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.PlaylistItem
 import com.zionhuang.innertube.models.WatchEndpoint
 import com.zionhuang.innertube.models.YTItem
-import com.zionhuang.innertube.models.filterExplicit
 import com.zionhuang.innertube.pages.ExplorePage
 import com.zionhuang.innertube.pages.HomePage
-import com.zionhuang.music.constants.HideExplicitKey
+import com.zionhuang.innertube.utils.completed
 import com.zionhuang.music.db.MusicDatabase
 import com.zionhuang.music.db.entities.Album
 import com.zionhuang.music.db.entities.Artist
 import com.zionhuang.music.db.entities.LocalItem
 import com.zionhuang.music.db.entities.Song
 import com.zionhuang.music.models.SimilarRecommendation
-import com.zionhuang.music.utils.dataStore
-import com.zionhuang.music.utils.get
 import com.zionhuang.music.utils.reportException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -30,7 +28,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    @ApplicationContext val context: Context,
+    @ApplicationContext context: Context,
     val database: MusicDatabase,
 ) : ViewModel() {
     val isRefreshing = MutableStateFlow(false)
@@ -50,8 +48,6 @@ class HomeViewModel @Inject constructor(
     private suspend fun load() {
         isLoading.value = true
 
-        val hideExplicit = context.dataStore.get(HideExplicitKey, false)
-
         quickPicks.value = database.quickPicks()
             .first().shuffled().take(20)
 
@@ -67,12 +63,15 @@ class HomeViewModel @Inject constructor(
             .first().filter { it.artist.isYouTubeArtist && it.artist.thumbnailUrl != null }.shuffled().take(5)
         keepListening.value = (keepListeningSongs + keepListeningAlbums + keepListeningArtists).shuffled()
 
-        allLocalItems.value = (quickPicks.value.orEmpty() + forgottenFavorites.value.orEmpty() + keepListening.value.orEmpty())
-            .filter { it is Song || it is Album }
+        allLocalItems.value =
+            (quickPicks.value.orEmpty() + forgottenFavorites.value.orEmpty() + keepListening.value.orEmpty())
+                .filter { it is Song || it is Album }
 
         if (YouTube.cookie != null) { // if logged in
-            YouTube.likedPlaylists().onSuccess {
-                accountPlaylists.value = it
+            // InnerTune way is YouTube.likedPlaylists().onSuccess { ... }
+            // OuterTune uses YouTube.library("FEmusic_liked_playlists").completedL().onSuccess { ... }
+            YouTube.library("FEmusic_liked_playlists").completed().onSuccess {
+                accountPlaylists.value = it.items.filterIsInstance<PlaylistItem>()
             }.onFailure {
                 reportException(it)
             }
@@ -92,7 +91,6 @@ class HomeViewModel @Inject constructor(
                     SimilarRecommendation(
                         title = it,
                         items = items
-                            .filterExplicit(hideExplicit)
                             .shuffled()
                             .ifEmpty { return@mapNotNull null }
                     )
@@ -111,7 +109,6 @@ class HomeViewModel @Inject constructor(
                                 page.albums.shuffled().take(4) +
                                 page.artists.shuffled().take(4) +
                                 page.playlists.shuffled().take(4))
-                            .filterExplicit(hideExplicit)
                             .shuffled()
                             .ifEmpty { return@mapNotNull null }
                     )
@@ -119,7 +116,7 @@ class HomeViewModel @Inject constructor(
         similarRecommendations.value = (artistRecommendations + songRecommendations).shuffled()
 
         YouTube.home().onSuccess { page ->
-            homePage.value = page.filterExplicit(hideExplicit)
+            homePage.value = page
         }.onFailure {
             reportException(it)
         }
@@ -141,7 +138,6 @@ class HomeViewModel @Inject constructor(
                         else if (album.artists.orEmpty().any { it.id in artists }) 1
                         else 2
                     }
-                    .filterExplicit(hideExplicit)
             )
         }.onFailure {
             reportException(it)

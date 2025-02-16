@@ -6,11 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.BrowseEndpoint
-import com.zionhuang.innertube.models.filterExplicit
-import com.zionhuang.music.constants.HideExplicitKey
 import com.zionhuang.music.models.ItemsPage
-import com.zionhuang.music.utils.dataStore
-import com.zionhuang.music.utils.get
 import com.zionhuang.music.utils.reportException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -57,9 +53,7 @@ class ArtistItemsViewModel @Inject constructor(
                 .onSuccess { artistItemsContinuationPage ->
                     itemsPage.update {
                         ItemsPage(
-                            items = (oldItemsPage.items + artistItemsContinuationPage.items)
-                                .distinctBy { it.id }
-                                .filterExplicit(context.dataStore.get(HideExplicitKey, false)),
+                            items = (oldItemsPage.items + artistItemsContinuationPage.items).distinctBy { it.id },
                             continuation = artistItemsContinuationPage.continuation
                         )
                     }

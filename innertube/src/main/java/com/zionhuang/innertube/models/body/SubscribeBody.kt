@@ -4,9 +4,7 @@ import com.zionhuang.innertube.models.Context
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BrowseBody(
+data class SubscribeBody(
+    val channelIds: List<String>,
     val context: Context,
-    val browseId: String?,
-    val params: String?,
-    val continuation: String?
 )
