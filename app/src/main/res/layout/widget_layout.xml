@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="250dp"
+    android:background="#e2edf3"
+    android:padding="16dp">
+
+    <!-- Imagen o portada -->
+    <ImageView
+        android:id="@+id/image_cover"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/joss_music_logo"
+        android:scaleType="centerCrop"
+        android:background="@drawable/joss_music_logo" />
+
+    <!-- Título de la estación -->
+    <TextView
+        android:id="@+id/txt_station_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_cover"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Canción"
+        android:textColor="#1d2224"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- Subtítulo (tipo de contenido) -->
+    <TextView
+        android:id="@+id/txt_station_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_station_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="Artista"
+        android:textColor="#1d2224"
+        android:textSize="14sp"
+        android:gravity="center" />
+
+</RelativeLayout>

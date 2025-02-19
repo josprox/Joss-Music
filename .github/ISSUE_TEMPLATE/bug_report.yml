@@ -1,0 +1,99 @@
+name: Informe de error
+description: Crea un informe de error para ayudarnos a mejorar
+labels: [ error ]
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Lista de verificación
+      description: Debes asegurarte de completar la tarea antes de marcarla como realizada en la lista. No hacerlo podría dificultar la eficiencia en la resolución del problema. El desarrollador tiene el derecho de eliminar el problema directamente si marcas la lista sin cumplir con los pasos indicados.
+      options:
+        - label: Puedo reproducir el error con la [última versión de publicación](https://github.com/josprox/Joss-Music/).
+          required: true
+        - label: He comprobado que no hay ningún problema abierto o cerrado relacionado con este error.
+          required: true
+        - label: Este informe contiene solo un error.
+          required: true
+        - label: El título de este informe describe con precisión el error.
+          required: true
+
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: Pasos para reproducir el error
+      description: ¿Qué hiciste para que apareciera el error?
+      placeholder: |
+        Ejemplo:
+          1. Ve a '...'
+          2. Haz clic en '....'
+          3. Desplázate hacia '....'
+          4. Ver error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Comportamiento esperado
+      placeholder: |
+        Ejemplo:
+          "Esto debería suceder..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Comportamiento actual
+      placeholder: |
+        Ejemplo:
+          "Esto ocurrió en su lugar..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: sreen-media
+    attributes:
+      label: Capturas de pantalla/Grabaciones de pantalla
+      description: |
+        Una imagen o video nos ayuda a entender mejor el error.
+
+        Puedes subirlos directamente en el cuadro de texto.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Registros
+      description: |
+        Por favor, utiliza `adb logcat` u otras herramientas para proporcionar los registros. Este campo es altamente recomendado. Sin esta información, es probable que el desarrollador no pueda tomar medidas significativas o proporcionar asistencia adicional. Consulta https://developer.android.com/tools/logcat para aprender a obtener registros.
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: Versión de Joss Music
+      description: |
+        Puedes encontrar la versión de Joss Music en **Configuración**.
+      placeholder: |
+        Ejemplo: "0.5.6"
+    validations:
+      required: true
+
+  - type: input
+    id: android-version
+    attributes:
+      label: Versión de Android
+      description: |
+        Puedes encontrar esta información en la configuración de tu dispositivo Android.
+      placeholder: |
+        Ejemplo: "Android 13"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Información adicional
+      placeholder: |
+        Detalles adicionales y archivos adjuntos.

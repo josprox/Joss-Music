@@ -1,0 +1,40 @@
+name: Solicitud de función
+description: Sugiere una idea para Joss Music
+labels: [mejora]
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Lista de verificación
+      description: Debes asegurarte de completar la tarea antes de marcarla como realizada en la lista. No hacerlo podría dificultar la eficiencia en el proceso de resolución del problema. El desarrollador tiene el derecho de eliminar el problema directamente si marcas la lista sin cumplir con los pasos indicados.
+      options:
+        - label: He comprobado que no hay otro informe sobre esta solicitud de función.
+          required: true
+        - label: Este informe contiene solo una solicitud de función.
+          required: true
+        - label: El título de este informe describe con precisión la solicitud de función.
+          required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Descripción de la función
+      description: ¿Qué función quieres que tenga la aplicación? Proporciona una descripción detallada sobre cómo debería verse o dónde debería añadirse.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-is-the-feature-requested
+    attributes:
+      label: ¿Por qué quieres esta función?
+      description: Describe el problema o la limitación que te motiva a querer que se añada esta función.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Información adicional
+      description: Añade cualquier otro contexto o capturas de pantalla sobre la solicitud de función aquí.
+      placeholder: |
+        Detalles adicionales y archivos adjuntos.
