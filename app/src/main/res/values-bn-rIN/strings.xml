@@ -36,9 +36,6 @@
     <string name="search">খুঁজুন</string>
     <string name="search_yt_music">খুঁজুন YouTube Music এ</string>
     <string name="search_library">খুঁজুন লাইব্রেরি তে</string>
-    <string name="filter_library">Library</string>
-    <string name="filter_liked">Liked</string>
-    <string name="filter_downloaded">Downloaded</string>
     <string name="filter_all">সব</string>
     <string name="filter_songs">সংগীত</string>
     <string name="filter_videos">ভিডিও</string>
@@ -47,7 +44,6 @@
     <string name="filter_playlists">প্লেলিস্ট</string>
     <string name="filter_community_playlists">প্লেলিস্ট ক্রম</string>
     <string name="filter_featured_playlists">বিশিষ্ট প্লেলিস্ট</string>
-    <string name="filter_bookmarked">Bookmarked</string>
     <string name="no_results_found">কিছু পাওয়া যায়নি</string>
 
     <!-- Artist screen -->
@@ -62,7 +58,6 @@
     <string name="retry">পুনরায় চেষ্টা করুন</string>
     <string name="radio">বেতার</string>
     <string name="shuffle">এলোমেলো</string>
-    <string name="reset">Reset</string>
 
     <!-- Menu -->
     <string name="details">বিস্তারিত</string>
@@ -86,7 +81,6 @@
     <string name="remove_from_history">ইতিহাস থেকে অপসারণ</string>
     <string name="search_online">অনলাইন এ খুঁজুন</string>
     <string name="sync">সুসংগত</string>
-    <string name="advanced">Advanced</string>
 
     <!-- Sort menu -->
     <string name="sort_by_create_date">সময় সম্পাদনা করা হয়েছে</string>
@@ -99,11 +93,6 @@
     <string name="sort_by_custom">অনুকুলিত</string>
 
     <!-- Dialog -->
-    <string name="media_id">Media ID</string>
-    <string name="mime_type">MIME Type</string>
-    <string name="codecs">Codec</string>
-    <string name="bitrate">Bitrate</string>
-    <string name="sample_rate">Sample Rate</string>
     <string name="loudness">শব্দের মাত্রা</string>
     <string name="volume">ধ্বনির মাত্রা</string>
     <string name="file_size">ফাইলের আকার</string>
@@ -182,11 +171,6 @@
     <!-- Player action -->
     <string name="action_like">পছন্দ</string>
     <string name="action_remove_like">অপছন্দ</string>
-    <string name="action_shuffle_on">Shuffle on</string>
-    <string name="action_shuffle_off">Shuffle off</string>
-    <string name="repeat_mode_off">Repeat mode off</string>
-    <string name="repeat_mode_one">Repeat current song</string>
-    <string name="repeat_mode_all">Repeat queue</string>
 
     <!-- Queue Title -->
     <string name="queue_all_songs">সব গান</string>
@@ -263,8 +247,4 @@
 
     <string name="about">সম্পর্কিত</string>
     <string name="app_version">অ্যাপ সংস্করণ</string>
-
-    <string name="new_version_available">New version available</string>
-    <string name="translation_models">Translation Models</string>
-    <string name="clear_translation_models">Clear translation models</string>
 </resources>
