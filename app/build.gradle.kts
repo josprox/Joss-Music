@@ -178,4 +178,6 @@ dependencies {
     implementation(libs.dotenv.vault.kotlin)
     implementation(libs.play.services.ads)
     implementation(libs.billing)
+    implementation(libs.markwon)
+    implementation(libs.markwon.html)
 }
