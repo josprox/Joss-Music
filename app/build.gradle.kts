@@ -180,4 +180,5 @@ dependencies {
     implementation(libs.billing)
     implementation(libs.markwon)
     implementation(libs.markwon.html)
+    implementation(libs.coil.compose.v240)
 }

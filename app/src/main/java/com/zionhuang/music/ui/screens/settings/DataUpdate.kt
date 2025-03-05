@@ -13,17 +13,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -32,14 +28,13 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.zionhuang.music.BuildConfig
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.R
 import com.zionhuang.music.utils.Updater
 import io.noties.markwon.Markwon
-import io.noties.markwon.html.HtmlPlugin
 import kotlinx.coroutines.launch
 import org.dotenv.vault.dotenvVault
 
@@ -52,9 +47,9 @@ fun DataUpdate(
 ) {
     val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
         directory = "/assets"
-        filename = "env.vault" // instead of '.env', use 'env'
+        filename = "env.vault"
     }
-    val homePage_web: String = dotenv["HOMEPAGE"]
+    val homePageWeb: String = dotenv["HOMEPAGE"]
 
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
@@ -131,14 +126,12 @@ fun DataUpdate(
 
             Spacer(Modifier.height(8.dp))
 
-            // Convertir Markdown a AnnotatedString
-            val markdownText = remember(details.description) {
-                val markwon = Markwon.create(context)
-                val spanned = markwon.toMarkdown(details.description)
-                spannedToAnnotatedString(spanned)
-            }
+            val imageUrls = remember(details.description) { extractImageUrls(details.description) }
+            val markwon = Markwon.create(context)
+            val spanned = markwon.toMarkdown(details.description)
+            val markdownText = spannedToAnnotatedString(spanned)
 
-            // Mostrar el Markdown renderizado en un Text de Compose
+            // Mostrar Markdown como texto
             Text(
                 text = markdownText,
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -146,6 +139,20 @@ fun DataUpdate(
             )
 
             Spacer(Modifier.height(16.dp))
+
+            // Mostrar imágenes extraídas del Markdown
+            imageUrls.forEach { imageUrl ->
+                AsyncImage(
+                    model = imageUrl,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .clip(MaterialTheme.shapes.medium),
+                    contentScale = ContentScale.Crop
+                )
+                Spacer(Modifier.height(16.dp))
+            }
 
             if (latestVersionName > BuildConfig.VERSION_NAME) {
                 Button(
@@ -160,7 +167,7 @@ fun DataUpdate(
             } else {
                 Button(
                     onClick = {
-                        uriHandler.openUri(homePage_web)
+                        uriHandler.openUri(homePageWeb)
                     },
                     modifier = Modifier.padding(horizontal = 16.dp)
                 ) {
@@ -193,9 +200,15 @@ fun DataUpdate(
     )
 }
 
+// Función para extraer URLs de imágenes del Markdown
+fun extractImageUrls(markdown: String): List<String> {
+    val regex = Regex("""!\[.*?\]\((.*?)\)""")
+    return regex.findAll(markdown).map { it.groupValues[1] }.toList()
+}
+
 // Función para convertir Spanned a AnnotatedString
 fun spannedToAnnotatedString(spanned: Spanned): AnnotatedString {
     return buildAnnotatedString {
-        append(spanned.toString()) // Aquí se puede mejorar para soportar más estilos si es necesario
+        append(spanned.toString())
     }
 }

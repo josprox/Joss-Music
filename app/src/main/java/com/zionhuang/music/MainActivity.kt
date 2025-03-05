@@ -434,10 +434,25 @@ class MainActivity : ComponentActivity() {
                     val onSearch: (String) -> Unit = {
                         if (it.isNotEmpty()) {
                             onActiveChange(false)
-                            navController.navigate("search/${it.urlEncode()}")
-                            if (dataStore[PauseSearchHistoryKey] != true) {
+
+                            // Sanitizar entrada (eliminando caracteres no válidos)
+                            val sanitizedQuery = it.replace(Regex("[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]"), "") // Opción 1
+                            // O también puedes hacer una validación más estricta si solo aceptas caracteres alfanuméricos:
+                            // val sanitizedQuery = it.replace("%", "").replace("_", "") // Reemplaza '%' si está presente
+
+                            // Continuar con la búsqueda solo si es válida
+                            val query = if (sanitizedQuery.lastOrNull() == '%') {
+                                sanitizedQuery.substring(0, sanitizedQuery.lastIndex)
+                            } else {
+                                sanitizedQuery
+                            }
+
+                            navController.navigate("search/${query.urlEncode()}")
+
+                            // Solo guardar en historial si la búsqueda es válida (sin '%')
+                            if (dataStore[PauseSearchHistoryKey] != true && !query.contains("%")) {
                                 database.query {
-                                    insert(SearchHistory(query = it))
+                                    insert(SearchHistory(query = sanitizedQuery))
                                 }
                             }
                         }

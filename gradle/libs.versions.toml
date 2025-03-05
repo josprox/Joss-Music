@@ -2,6 +2,7 @@
 androidGradlePlugin = "8.8.2"
 annotation = "1.9.1"
 billing = "7.1.1"
+coilCompose = "2.4.0"
 dotenvVaultKotlin = "0.0.2"
 json = "20240303"
 kotlin = "2.0.10"
@@ -23,6 +24,7 @@ markwon = "4.6.2" # o la versión más reciente
 
 [libraries]
 
+coil-compose-v240 = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 markwon = { group = "io.noties.markwon", name = "core", version.ref = "markwon" }
 markwon-html = { group = "io.noties.markwon", name = "html", version.ref = "markwon" }
 annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
