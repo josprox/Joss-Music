@@ -276,4 +276,5 @@
   <string name="transparentModeText">حالت شفاف را در پخش کننده فعال یا غیرفعال کنید.</string>
   <string name="sleepTimerSong">آهنگ را قبل از Pausar تمام کنید</string>
   <string name="sleepTimerSongText">این اجازه می دهد تا آهنگ پخش شود قبل از مکث موسیقی هنگام انقضا تایمر.</string>
+  <string name="discord_information">Joss Music از کتابخانه Kizzyrpc برای ایجاد وضعیت حساب Discord شما استفاده می کند. این به معنای استفاده از اتصال Discord Gateway است ، که می تواند نقض شرایط سرویس Discord تلقی شود. با این حال ، هیچ موردی از حساب های کاربری که به همین دلیل به حالت تعلیق درآمده است ، مشخص نیست. از آن در معرض خطر خود استفاده کنید.</string>
 </resources>

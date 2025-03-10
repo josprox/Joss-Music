@@ -299,4 +299,5 @@
   <string name="transparentModeText">Aktiválja vagy deaktiválja az átlátszó módot a lejátszóban.</string>
   <string name="sleepTimerSong">Fejezze be a dalt Pausar előtt</string>
   <string name="sleepTimerSongText">Ez lehetővé teszi, hogy a lejátszási dal véget érjen, mielőtt szüneteltetné a zenét, amikor az időzítő lejár.</string>
+  <string name="discord_information">A Joss Music a KizzyrPC könyvtárat használja a Discord -fiók állapotának meghatározására. Ez magában foglalja a Discord Gateway Connection használatát, amelyet a Discord szolgáltatási feltételeinek megsértésének tekinthetnek. Ennek oka azonban nem ismertek a felhasználói fiókok esetében. Használja a saját felelősségére.</string>
 </resources>
