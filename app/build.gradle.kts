@@ -25,8 +25,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 26
         targetSdk = 35
-        versionCode = 33
-        versionName = "1.9.2"
+        versionCode = 34
+        versionName = "1.9.4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -174,6 +174,9 @@ dependencies {
     "fullImplementation"(libs.opencc4j)
 
     implementation(libs.timber)
+    implementation(libs.nanojson)
+    implementation(libs.androidx.webkit)
+    // Joss Music
     implementation(libs.onesignal)
     implementation(libs.dotenv.vault.kotlin)
     implementation(libs.play.services.ads)

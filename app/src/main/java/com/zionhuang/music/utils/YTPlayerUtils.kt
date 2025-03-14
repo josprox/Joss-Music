@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.zionhuang.music.utils
 
 import android.net.ConnectivityManager
@@ -12,12 +14,16 @@ import com.zionhuang.innertube.models.response.PlayerResponse
 import com.zionhuang.music.constants.AudioQuality
 import com.zionhuang.music.db.entities.FormatEntity
 import okhttp3.OkHttpClient
+import com.zionhuang.music.utils.potoken.PoTokenGenerator
+import com.zionhuang.music.utils.potoken.PoTokenResult
 
 object YTPlayerUtils {
 
     private val httpClient = OkHttpClient.Builder()
         .proxy(YouTube.proxy)
         .build()
+
+    private val poTokenGenerator = PoTokenGenerator()
 
     /**
      * El cliente principal se utiliza para los metadatos y las transmisiones iniciales.
@@ -66,8 +72,17 @@ object YTPlayerUtils {
          */
         val signatureTimestamp = getSignatureTimestampOrNull(videoId)
 
+        /**
+         * Uso de PoToken
+         * **/
+        val (webPlayerPot, webStreamingPot) = getWebClientPoTokenOrNull(videoId)?.let {
+            Pair(it.playerRequestPoToken, it.streamingDataPoToken)
+        } ?: Pair(null, null)
+        // Fin de Potoken
+
         val mainPlayerResponse =
-            YouTube.player(videoId, playlistId, MAIN_CLIENT, signatureTimestamp).getOrThrow()
+            YouTube.player(videoId, playlistId, MAIN_CLIENT, signatureTimestamp, webPlayerPot)
+                .getOrThrow()
 
         val audioConfig = mainPlayerResponse.playerConfig?.audioConfig
         val videoDetails = mainPlayerResponse.videoDetails
@@ -84,7 +99,17 @@ object YTPlayerUtils {
             streamExpiresInSeconds = null
 
             // decidir qué cliente usar
-            if (clientIndex == -1) {
+            val client =
+                if (clientIndex == -1) {
+                    // Intente primero con transmisiones desde el cliente principal
+                    MAIN_CLIENT
+                } else {
+                    // Usar cliente alternativo
+                    STREAM_FALLBACK_CLIENTS[clientIndex]
+                }
+
+            // get player response for streams
+            if (client == MAIN_CLIENT) {
                 // intentar primero con transmisiones del cliente principal
                 streamPlayerResponse = mainPlayerResponse
             } else {
@@ -96,7 +121,8 @@ object YTPlayerUtils {
                 }
 
                 streamPlayerResponse =
-                    YouTube.player(videoId, playlistId, client, signatureTimestamp).getOrNull()
+                    YouTube.player(videoId, playlistId, client, signatureTimestamp, webPlayerPot)
+                        .getOrNull()
             }
 
             // procesar la respuesta del cliente actual
@@ -109,7 +135,12 @@ object YTPlayerUtils {
                         connectivityManager,
                     ) ?: continue
                 streamUrl = findUrlOrNull(format, videoId) ?: continue
-                streamExpiresInSeconds = streamPlayerResponse.streamingData?.expiresInSeconds ?: continue
+                streamExpiresInSeconds =
+                    streamPlayerResponse.streamingData?.expiresInSeconds ?: continue
+
+                if (client.useWebPoTokens && webStreamingPot != null) {
+                    streamUrl += "&pot=$webStreamingPot";
+                }
 
                 if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1) {
                     /** omitir [validateStatus] para el último cliente */
@@ -224,5 +255,16 @@ object YTPlayerUtils {
                 reportException(it)
             }
             .getOrNull()
+    }
+    /**
+     * Envoltura alrededor de la función [PoTokenGenerator.getWebClientPoToken] que informa excepciones
+     */
+    private fun getWebClientPoTokenOrNull(videoId: String): PoTokenResult? {
+        try {
+            return poTokenGenerator.getWebClientPoToken(videoId)
+        } catch (e: Exception) {
+            reportException(e)
+        }
+        return null
     }
 }

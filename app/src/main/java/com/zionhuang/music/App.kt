@@ -14,6 +14,7 @@ import com.zionhuang.kugou.KuGou
 import com.zionhuang.music.constants.ContentCountryKey
 import com.zionhuang.music.constants.ContentLanguageKey
 import com.zionhuang.music.constants.CountryCodeToName
+import com.zionhuang.music.constants.DataSyncIdKey
 import com.zionhuang.music.constants.InnerTubeCookieKey
 import com.zionhuang.music.constants.LanguageCodeToName
 import com.zionhuang.music.constants.MaxImageCacheSizeKey
@@ -43,6 +44,7 @@ class App : Application(), ImageLoaderFactory {
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate() {
         super.onCreate()
+        instance = this
         Timber.plant(Timber.DebugTree())
 
         val locale = Locale.getDefault()
@@ -90,6 +92,15 @@ class App : Application(), ImageLoaderFactory {
                         } ?: YouTube.DEFAULT_VISITOR_DATA
                 }
         }
+        // Uso de sincronización de datos por ID de llave
+        GlobalScope.launch {
+            dataStore.data
+                .map { it[DataSyncIdKey] }
+                .distinctUntilChanged()
+                .collect { dataSyncId ->
+                    YouTube.dataSyncId = dataSyncId
+                }
+        }
         GlobalScope.launch {
             dataStore.data
                 .map { it[InnerTubeCookieKey] }
@@ -98,7 +109,7 @@ class App : Application(), ImageLoaderFactory {
                     // quick hack until https://github.com/z-huang/InnerTune/pull/1694 is done
                     val isLoggedIn: Boolean = rawCookie?.contains("SAPISID") ?: false
                     val cookie = if (isLoggedIn) rawCookie else null
-                    
+
                     YouTube.cookie = cookie
                 }
         }
@@ -115,4 +126,10 @@ class App : Application(), ImageLoaderFactory {
                 .build()
         )
         .build()
+
+    // Se ha convertido en una instancia App, de esta manera se añade soporte PoToken
+    companion object {
+        lateinit var instance: App
+            private set
+    }
 }

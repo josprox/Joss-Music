@@ -26,6 +26,7 @@ import com.zionhuang.music.R
 import com.zionhuang.music.constants.AccountChannelHandleKey
 import com.zionhuang.music.constants.AccountEmailKey
 import com.zionhuang.music.constants.AccountNameKey
+import com.zionhuang.music.constants.DataSyncIdKey
 import com.zionhuang.music.constants.InnerTubeCookieKey
 import com.zionhuang.music.constants.VisitorDataKey
 import com.zionhuang.music.ui.component.IconButton
@@ -43,6 +44,7 @@ fun LoginScreen(
     navController: NavController,
 ) {
     var visitorData by rememberPreference(VisitorDataKey, "")
+    var dataSyncId by rememberPreference(DataSyncIdKey, "")
     var innerTubeCookie by rememberPreference(InnerTubeCookieKey, "")
     var accountName by rememberPreference(AccountNameKey, "")
     var accountEmail by rememberPreference(AccountEmailKey, "")
@@ -74,6 +76,7 @@ fun LoginScreen(
 
                     override fun onPageFinished(view: WebView, url: String?) {
                         loadUrl("javascript:Android.onRetrieveVisitorData(window.yt.config_.VISITOR_DATA)")
+                        loadUrl("javascript:Android.onRetrieveDataSyncId(window.yt.config_.DATASYNC_ID)")
                     }
                 }
                 settings.apply {
@@ -87,6 +90,12 @@ fun LoginScreen(
                     fun onRetrieveVisitorData(newVisitorData: String?) {
                         if (newVisitorData != null) {
                             visitorData = newVisitorData
+                        }
+                    }
+                    @JavascriptInterface
+                    fun onRetrieveDataSyncId(newDataSyncId: String?) {
+                        if (newDataSyncId != null) {
+                            dataSyncId = newDataSyncId
                         }
                     }
                 }, "Android")
