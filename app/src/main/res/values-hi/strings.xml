@@ -118,10 +118,6 @@
         <item quantity="one">%d चाल सूची</item>
         <item quantity="other">%d चाल सूचियां</item>
     </plurals>
-    <plurals name="n_year">
-        <item quantity="one"></item>
-        <item quantity="other">%d वर्ष</item>
-    </plurals>
     <string name="sort_by_name">नाम</string>
     <string name="sort_by_year">वर्ष</string>
     <string name="sort_by_song_count">गीत संख्या</string>
@@ -147,10 +143,6 @@
     <plurals name="n_song">
         <item quantity="one">%d गाना</item>
         <item quantity="other">%d गाने</item>
-    </plurals>
-    <plurals name="n_artist">
-        <item quantity="one"></item>
-        <item quantity="other">%d कलाकार</item>
     </plurals>
     <plurals name="n_month">
         <item quantity="one">%d महीना</item>
