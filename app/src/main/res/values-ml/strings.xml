@@ -122,7 +122,7 @@
     <string name="persistent_queue">പെർസിസ്റ്റന്റ് കീ</string>
     <string name="equalizer">ഇക്വലൈസർ</string>
     <string name="unlimited">പരിധിയില്ലാത്ത</string>
-    <string name="clear_all_downloads">"ഡൗൺലോഡുകൾ  എല്ലാം നീക്കം ചെയ്യുക"</string>
+    <string name="clear_all_downloads">ഡൗൺലോഡുകൾ എല്ലാം നീക്കം ചെയ്യുക</string>
     <string name="privacy">സ്വകാര്യത</string>
     <string name="pause_search_history">തിരയൽ ചരിത്രം താൽക്കാലികമായി നിർത്തുക</string>
     <string name="clear_search_history">തിരയൽ ചരിത്രം മായ്‌ക്കുക</string>

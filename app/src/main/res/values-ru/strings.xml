@@ -106,7 +106,7 @@
     <string name="sort_by_year">Год</string>
     <string name="sort_by_song_count">Количество треков</string>
     <string name="sort_by_length">Длительность</string>
-    <string name="sort_by_play_time">Количество воспр.</string>
+    <string name="sort_by_play_time">Количество воспр</string>
     <string name="sort_by_custom">Польз. порядок</string>
     <!-- Dialog -->
     <string name="media_id">Идентификатор медиа</string>
@@ -124,17 +124,17 @@
     <string name="edit_song">Редактировать композицию</string>
     <string name="song_title">Название композиции</string>
     <string name="song_artists">Исполнители композиции</string>
-    <string name="error_song_title_empty">Укажите название композиции</string>
-    <string name="error_song_artist_empty">Укажите исполнителей композиции</string>
+    <string name="error_song_title_empty">Укажите название композиции.</string>
+    <string name="error_song_artist_empty">Укажите исполнителей композиции.</string>
     <string name="save">Сохранить</string>
     <string name="choose_playlist">Выбрать плейлист</string>
     <string name="edit_playlist">Редактировать плейлист</string>
     <string name="create_playlist">Создать плейлист</string>
     <string name="playlist_name">Название плейлиста</string>
-    <string name="error_playlist_name_empty">Укажите название плейлиста</string>
+    <string name="error_playlist_name_empty">Укажите название плейлиста.</string>
     <string name="edit_artist">Редактировать исполнителя</string>
     <string name="artist_name">Имя исполнителя</string>
-    <string name="error_artist_name_empty">Укажите имя исполнителя</string>
+    <string name="error_artist_name_empty">Укажите имя исполнителя.</string>
     <string name="duplicates">Дубликаты</string>
     <string name="skip_duplicates">Пропустить дубликаты</string>
     <string name="add_anyway">Добавить в любом случае</string>
