@@ -262,8 +262,8 @@ object YouTube {
             ArtistItemsPage(
                 title = response.header?.musicHeaderRenderer?.title?.runs?.firstOrNull()?.text!!,
                 items = musicPlaylistShelfRenderer?.contents?.getItems()?.mapNotNull {
-                        ArtistItemsPage.fromMusicResponsiveListItemRenderer(it)
-                    }!!,
+                    ArtistItemsPage.fromMusicResponsiveListItemRenderer(it)
+                }!!,
                 continuation = musicPlaylistShelfRenderer.contents.getContinuation()
             )
         }
@@ -373,8 +373,8 @@ object YouTube {
                 ?.appendContinuationItemsAction?.continuationItems
             PlaylistContinuationPage(
                 songs = continuationItems?.getItems()?.mapNotNull {
-                        PlaylistPage.fromMusicResponsiveListItemRenderer(it)
-                    }!!,
+                    PlaylistPage.fromMusicResponsiveListItemRenderer(it)
+                }!!,
                 continuation = continuationItems.getContinuation()
             )
         }
