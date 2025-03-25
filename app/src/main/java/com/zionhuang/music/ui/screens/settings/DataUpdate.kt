@@ -2,6 +2,7 @@ package com.zionhuang.music.ui.screens.settings
 
 import android.content.Intent
 import android.net.Uri
+import android.text.Spanned
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,27 +12,29 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.zionhuang.music.BuildConfig
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.R
 import com.zionhuang.music.utils.Updater
+import io.noties.markwon.Markwon
 import kotlinx.coroutines.launch
 import org.dotenv.vault.dotenvVault
 
@@ -44,9 +47,9 @@ fun DataUpdate(
 ) {
     val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
         directory = "/assets"
-        filename = "env.vault" // instead of '.env', use 'env'
+        filename = "env.vault"
     }
-    val homePage_web: String = dotenv["HOMEPAGE"]
+    val homePageWeb: String = dotenv["HOMEPAGE"]
 
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
@@ -79,11 +82,11 @@ fun DataUpdate(
         Image(
             painter = painterResource(R.drawable.joss_music_logo),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground, BlendMode.SrcIn),
+            colorFilter = ColorFilter.tint(colorScheme.onBackground, BlendMode.SrcIn),
             modifier = Modifier
                 .size(100.dp)
                 .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.surfaceContainer)
+                .background(colorScheme.surfaceContainer)
                 .clickable { }
         )
 
@@ -100,11 +103,11 @@ fun DataUpdate(
             Text(
                 text = "Google Play",
                 style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.secondary,
+                color = colorScheme.secondary,
                 modifier = Modifier
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = colorScheme.secondary,
                         shape = CircleShape
                     )
                     .padding(horizontal = 6.dp, vertical = 2.dp)
@@ -115,7 +118,7 @@ fun DataUpdate(
 
         releaseDetails.value?.let { details ->
             Text(
-                text = stringResource(R.string.latestVersion)+": ${details.version}",
+                text = stringResource(R.string.latestVersion) + ": ${details.version}",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -123,13 +126,33 @@ fun DataUpdate(
 
             Spacer(Modifier.height(8.dp))
 
+            val imageUrls = remember(details.description) { extractImageUrls(details.description) }
+            val markwon = Markwon.create(context)
+            val spanned = markwon.toMarkdown(details.description)
+            val markdownText = spannedToAnnotatedString(spanned)
+
+            // Mostrar Markdown como texto
             Text(
-                text = details.description,
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                text = markdownText,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                style = MaterialTheme.typography.bodyMedium
             )
 
             Spacer(Modifier.height(16.dp))
+
+            // Mostrar imágenes extraídas del Markdown
+            imageUrls.forEach { imageUrl ->
+                AsyncImage(
+                    model = imageUrl,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .clip(MaterialTheme.shapes.medium),
+                    contentScale = ContentScale.Crop
+                )
+                Spacer(Modifier.height(16.dp))
+            }
 
             if (latestVersionName > BuildConfig.VERSION_NAME) {
                 Button(
@@ -141,10 +164,10 @@ fun DataUpdate(
                 ) {
                     Text(text = stringResource(R.string.new_version_available))
                 }
-            }else{
+            } else {
                 Button(
                     onClick = {
-                        uriHandler.openUri(homePage_web)
+                        uriHandler.openUri(homePageWeb)
                     },
                     modifier = Modifier.padding(horizontal = 16.dp)
                 ) {
@@ -155,7 +178,7 @@ fun DataUpdate(
             Text(
                 text = "Error al obtener la información: $error",
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.error,
+                color = colorScheme.error,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
@@ -175,4 +198,17 @@ fun DataUpdate(
         },
         scrollBehavior = scrollBehavior
     )
+}
+
+// Función para extraer URLs de imágenes del Markdown
+fun extractImageUrls(markdown: String): List<String> {
+    val regex = Regex("""!\[.*?\]\((.*?)\)""")
+    return regex.findAll(markdown).map { it.groupValues[1] }.toList()
+}
+
+// Función para convertir Spanned a AnnotatedString
+fun spannedToAnnotatedString(spanned: Spanned): AnnotatedString {
+    return buildAnnotatedString {
+        append(spanned.toString())
+    }
 }

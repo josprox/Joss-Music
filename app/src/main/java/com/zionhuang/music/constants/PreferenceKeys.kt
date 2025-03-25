@@ -153,8 +153,6 @@ val InnerTubeCookieKey = stringPreferencesKey("innerTubeCookie")
 val AccountNameKey = stringPreferencesKey("accountName")
 val AccountEmailKey = stringPreferencesKey("accountEmail")
 val AccountChannelHandleKey = stringPreferencesKey("accountChannelHandle")
-val AccessTokenKey = stringPreferencesKey("accessToken")
-val RefreshTokenKey = stringPreferencesKey("refreshToken")
 
 val LanguageCodeToName = mapOf(
     "af" to "Afrikaans",

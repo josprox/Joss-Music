@@ -98,7 +98,7 @@ class App : Application(), ImageLoaderFactory {
                     // quick hack until https://github.com/z-huang/InnerTune/pull/1694 is done
                     val isLoggedIn: Boolean = rawCookie?.contains("SAPISID") ?: false
                     val cookie = if (isLoggedIn) rawCookie else null
-                    
+
                     YouTube.cookie = cookie
                 }
         }

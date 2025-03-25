@@ -286,7 +286,6 @@
   <string name="backup_create_failed">Couldn\'t create backup</string>
   <string name="restore_failed">Failed to restore backup</string>
   <string name="discord_integration">Discord Integration</string>
-  <string name="discord_information">InnerTune uses the KizzyRPC library to set your Discord account\'s status. This involves using the Discord Gateway connection, which may be considered a violation of Discord\'s TOS. However, there are no known cases of user accounts being suspended for this reason. Use at your own risk.\n\nInnerTune will only extract your token, and everything else is stored locally.</string>
   <string name="dismiss">Dismiss</string>
   <string name="options">Options</string>
   <string name="preview">Preview</string>
@@ -332,4 +331,5 @@
   <string name="transparentModeText">Activate or deactivate transparent mode in the player.</string>
   <string name="sleepTimerSong">Finish song before Pausar</string>
   <string name="sleepTimerSongText">It allows the playing song to end before pausing the music when the timer expires.</string>
+  <string name="discord_information">Joss Music uses the KizzyrpC library to establish the state of your discord account. This implies the use of Discord Gateway connection, which could be considered a violation of discord service conditions. However, no cases of user accounts suspended for this reason are known. Use it at your own risk. \ N \ njoss music will only extract your token, everything else is stored locally.</string>
 </resources>
