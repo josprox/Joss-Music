@@ -32,7 +32,6 @@ import com.zionhuang.music.constants.AutoSkipNextOnErrorKey
 import com.zionhuang.music.constants.JossRedEnabledKey
 import com.zionhuang.music.constants.JossRedMultimedia
 import com.zionhuang.music.ui.component.IconButton
-import com.zionhuang.music.ui.component.PreferenceEntry
 import com.zionhuang.music.ui.component.SwitchPreference
 import com.zionhuang.music.ui.utils.backToMain
 import com.zionhuang.music.utils.rememberPreference

@@ -23,7 +23,6 @@ class SleepTimer(
     var triggerTime by mutableLongStateOf(-1L)
         private set
     var pauseWhenSongEnd by mutableStateOf(false)
-        private set
 
     val isActive: Boolean
         get() = triggerTime != -1L || pauseWhenSongEnd

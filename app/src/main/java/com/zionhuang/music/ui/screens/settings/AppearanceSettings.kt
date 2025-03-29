@@ -47,7 +47,6 @@ import com.zionhuang.music.constants.DefaultOpenTabKey
 import com.zionhuang.music.constants.DynamicThemeKey
 import com.zionhuang.music.constants.GridCellSize
 import com.zionhuang.music.constants.GridCellSizeKey
-import com.zionhuang.music.constants.JossRedMultimedia
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
 import com.zionhuang.music.constants.PlayerTransparent
 import com.zionhuang.music.constants.PureBlackKey

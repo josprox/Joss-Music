@@ -106,6 +106,7 @@ import kotlinx.coroutines.launch
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import kotlin.math.roundToInt
@@ -595,6 +596,7 @@ fun Queue(
     }
 }
 
+// Modificación del diálogo SleepTimerDialog
 @Composable
 fun SleepTimerDialog(
     onDismiss: () -> Unit,
@@ -605,6 +607,9 @@ fun SleepTimerDialog(
     }
 
     val (sleepFinishSong, onSleepFinishSongChange) = rememberPreference(key = SleepFinishSong, defaultValue = false)
+
+    // Obtener los próximos intervalos de tiempo
+    val timeChips = remember { getNextIntervals() }
 
     AlertDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
@@ -628,6 +633,30 @@ fun SleepTimerDialog(
         },
         text = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                // Añadir chips de tiempo
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.padding(bottom = 16.dp)
+                ) {
+                    timeChips.forEach { chip ->
+                        OutlinedButton(
+                            onClick = {
+                                sleepTimerValue = chip.minutes.toFloat()
+                            },
+                            shape = RoundedCornerShape(50),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                containerColor = if (sleepTimerValue.roundToInt() == chip.minutes) {
+                                    MaterialTheme.colorScheme.primaryContainer
+                                } else {
+                                    Color.Transparent
+                                }
+                            )
+                        ) {
+                            Text(chip.label)
+                        }
+                    }
+                }
+
                 val pluralString = pluralStringResource(R.plurals.minute, sleepTimerValue.roundToInt(), sleepTimerValue.roundToInt())
                 val endTimeString = SimpleDateFormat
                     .getTimeInstance(SimpleDateFormat.SHORT, Locale.getDefault())
@@ -654,7 +683,6 @@ fun SleepTimerDialog(
                 ) {
                     Text(stringResource(R.string.end_of_song))
                 }
-
             }
         }
     )
@@ -726,4 +754,32 @@ fun DetailsDialog(
             }
         }
     )
+}
+
+// Añade esta data class al principio del archivo o en un archivo separado si prefieres
+data class TimeChip(
+    val minutes: Int,
+    val label: String,
+)
+
+// Función para calcular los próximos intervalos de 15 minutos
+fun getNextIntervals(count: Int = 3): List<TimeChip> {
+    val now = System.currentTimeMillis()
+    val calendar = Calendar.getInstance().apply { timeInMillis = now }
+
+    // Redondear al siguiente intervalo de 15 minutos
+    val currentMinute = calendar.get(Calendar.MINUTE)
+    val minutesToAdd = 15 - (currentMinute % 15)
+    calendar.add(Calendar.MINUTE, minutesToAdd)
+
+    return List(count) { index ->
+        calendar.add(Calendar.MINUTE, if (index == 0) 0 else 15)
+        val time = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
+        val minutes = ((calendar.timeInMillis - now) / (60 * 1000)).toInt()
+
+        TimeChip(
+            minutes = minutes,
+            label = time
+        )
+    }
 }
