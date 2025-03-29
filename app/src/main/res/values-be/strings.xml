@@ -115,43 +115,43 @@
         <item quantity="one">%d песня</item>
         <item quantity="few">%d песні</item>
         <item quantity="many">%d песен</item>
-        <item quantity="other">%d песні</item>
+        <item quantity="other">%d песен</item>
     </plurals>
     <plurals name="n_artist">
         <item quantity="one">%d выканаўца</item>
         <item quantity="few">%d выканаўцы</item>
         <item quantity="many">%d выканаўцаў</item>
-        <item quantity="other">%d выканаўцы</item>
+        <item quantity="other">%d выканаўцаў</item>
     </plurals>
     <plurals name="n_album">
         <item quantity="one">%d альбом</item>
         <item quantity="few">%d альбомы</item>
         <item quantity="many">%d альбомаў</item>
-        <item quantity="other">%d альбомы</item>
+        <item quantity="other">%d альбомаў</item>
     </plurals>
     <plurals name="n_playlist">
         <item quantity="one">%d плей-ліст</item>
         <item quantity="few">%d плей-ліста</item>
         <item quantity="many">%d плей-лістоў</item>
-        <item quantity="other">%d плей-ліста</item>
+        <item quantity="other">%d плей-лістоў</item>
     </plurals>
     <plurals name="n_week" tools:ignore="MissingQuantity">
         <item quantity="one">%d тыдзень</item>
         <item quantity="few">%d тыдні</item>
         <item quantity="many">%d тыдняў</item>
-        <item quantity="other">%d тыдні</item>
+        <item quantity="other">%d тыдняў</item>
     </plurals>
     <plurals name="n_month">
         <item quantity="one">%d месяц</item>
         <item quantity="few">%d месяцы</item>
         <item quantity="many">%d месяцаў</item>
-        <item quantity="other">%d месяцы</item>
+        <item quantity="other">%d месяцаў</item>
     </plurals>
     <plurals name="n_year" tools:ignore="MissingQuantity">
         <item quantity="one">%d год</item>
         <item quantity="few">%d гады</item>
         <item quantity="many">%d raдоў</item>
-        <item quantity="other">%d гады</item>
+        <item quantity="other">%d raдоў</item>
     </plurals>
     <!-- Snackbar -->
     <string name="playlist_imported">Плей-ліст імпартаваны</string>
@@ -238,7 +238,7 @@
     <string name="clear_search_history">Ачысціць гісторыю пошуку</string>
     <string name="clear_search_history_confirm">Сапраўды ачысціць гісторыю пошуку?</string>
     <string name="enable_kugou">Шукаць тэксты песен у KuGou</string>
-    <string name="backup_restore">Рэзервовае капіраванне ды аднеўленне </string>
+    <string name="backup_restore">Рэзервовае капіраванне ды аднеўленне</string>
     <string name="backup">Рэзервовае капіраванне</string>
     <string name="restore">Аднаўленне з рэзервовай копіі</string>
     <string name="imported_playlist">Імпартаваны плей-ліст</string>

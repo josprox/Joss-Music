@@ -10,7 +10,6 @@
     <plurals name="n_selected">
         <item quantity="one">Vybrána %d</item>
         <item quantity="few">Vybrány %d</item>
-        <item quantity="many">Vybráno %d</item>
         <item quantity="other">Vybráno %d</item>
     </plurals>
     <!-- Home -->
@@ -121,43 +120,36 @@
     <plurals name="n_song">
         <item quantity="one">%d skladba</item>
         <item quantity="few">%d skladby</item>
-        <item quantity="many">%d skladeb</item>
         <item quantity="other">%d skladeb</item>
     </plurals>
     <plurals name="n_artist">
         <item quantity="one">%d umělec</item>
         <item quantity="few">%d umělci</item>
-        <item quantity="many">%d umělců</item>
         <item quantity="other">%d umělců</item>
     </plurals>
     <plurals name="n_album">
         <item quantity="one">%d album</item>
         <item quantity="few">%d alba</item>
-        <item quantity="many">%d alb</item>
         <item quantity="other">%d alb</item>
     </plurals>
     <plurals name="n_playlist">
         <item quantity="one">%d playlist</item>
         <item quantity="few">%d playlisty</item>
-        <item quantity="many">%d playlistů</item>
         <item quantity="other">%d playlistů</item>
     </plurals>
     <plurals name="n_week" tools:ignore="MissingQuantity">
         <item quantity="one">%d týden</item>
         <item quantity="few">%d týdny</item>
-        <item quantity="many">%d týdnů</item>
         <item quantity="other">%d týdnů</item>
     </plurals>
     <plurals name="n_month" tools:ignore="MissingQuantity">
         <item quantity="one">%d měsíc</item>
         <item quantity="few">%d měsíce</item>
-        <item quantity="many">%d měsíců</item>
         <item quantity="other">%d měsíců</item>
     </plurals>
     <plurals name="n_year" tools:ignore="MissingQuantity">
         <item quantity="one">%d rok</item>
         <item quantity="few">%d roky</item>
-        <item quantity="many">%d let</item>
         <item quantity="other">%d let</item>
     </plurals>
     <!-- Snackbar -->
@@ -172,7 +164,6 @@
     <plurals name="minute">
         <item quantity="one">1 minuta</item>
         <item quantity="few">%d minuty</item>
-        <item quantity="many">%d minut</item>
         <item quantity="other">%d minut</item>
     </plurals>
     <string name="error_no_stream">Není dostupný žádný stream</string>
@@ -310,9 +301,7 @@
     <string name="default_">Výchozí</string>
     <string name="theme">Motiv</string>
     <string name="player_text_alignment">Zarovnání textu přehrávače</string>
-    <string name="discord_information">InnerTune používá knihovnu KizzyRPC, aby mohl nastavit váš stav na Discordu. Tato funkce zahrnuje připojení k bráně Discord, což může být považováno za porušení podmínek společnosti Discord. Neexistují nicméně žádné známé případy uzamčení účtu z tohoto důvodu. Používejte na vlastní nebezpečí.
-\n
-\nInnerTune pouze extrahuje váš token, vše ostatní je uloženo lokálně.</string>
+    <string name="discord_information">InnerTune používá knihovnu KizzyRPC, aby mohl nastavit váš stav na Discordu. Tato funkce zahrnuje připojení k bráně Discord, což může být považováno za porušení podmínek společnosti Discord. Neexistují nicméně žádné známé případy uzamčení účtu z tohoto důvodu. Používejte na vlastní nebezpečí. \n \nInnerTune pouze extrahuje váš token, vše ostatní je uloženo lokálně.</string>
     <string name="enable_discord_rpc">Povolit stav na Discordu</string>
     <string name="logout">Odhlásit se</string>
     <string name="use_login_for_browse">Použít účet pro procházení obsahu</string>

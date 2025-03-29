@@ -9,8 +9,8 @@
     <!-- Top bar -->
     <plurals name="n_selected">
         <item quantity="one">%d selezionato</item>
-        <item quantity="other">%d selezionati</item>
         <item quantity="many">%d selezionati</item>
+        <item quantity="other">%d selezionati</item>
     </plurals>
     <!-- Home -->
     <string name="history">Cronologia</string>
@@ -119,38 +119,38 @@
     <!-- Noun -->
     <plurals name="n_song">
         <item quantity="one">%d brano</item>
-        <item quantity="other">%d brani</item>
         <item quantity="many">%d brani</item>
+        <item quantity="other">%d brani</item>
     </plurals>
     <plurals name="n_artist">
         <item quantity="one">%d artista</item>
-        <item quantity="other">%d artisti</item>
         <item quantity="many">%d artisti</item>
+        <item quantity="other">%d artisti</item>
     </plurals>
     <plurals name="n_album">
         <item quantity="one">%d album</item>
-        <item quantity="other">%d album</item>
         <item quantity="many">%d album</item>
+        <item quantity="other">%d album</item>
     </plurals>
     <plurals name="n_playlist">
         <item quantity="one">%d playlist</item>
-        <item quantity="other">%d playlist</item>
         <item quantity="many">%d playlist</item>
+        <item quantity="other">%d playlist</item>
     </plurals>
     <plurals name="n_week">
         <item quantity="one">%d settimana</item>
-        <item quantity="other">%d settimane</item>
         <item quantity="many">%d settimane</item>
+        <item quantity="other">%d settimane</item>
     </plurals>
     <plurals name="n_month">
         <item quantity="one">%d mese</item>
-        <item quantity="other">%d mesi</item>
         <item quantity="many">%d mesi</item>
+        <item quantity="other">%d mesi</item>
     </plurals>
     <plurals name="n_year">
         <item quantity="one">%d anno</item>
-        <item quantity="other">%d anni</item>
         <item quantity="many">%d anni</item>
+        <item quantity="other">%d anni</item>
     </plurals>
     <!-- Snackbar -->
     <string name="playlist_imported">Playlist importata</string>
@@ -163,8 +163,8 @@
     <string name="end_of_song">Fine del brano</string>
     <plurals name="minute">
         <item quantity="one">1 minuto</item>
-        <item quantity="other">%d minuti</item>
         <item quantity="many">%d minuti</item>
+        <item quantity="other">%d minuti</item>
     </plurals>
     <string name="error_no_stream">Stream non disponibile</string>
     <string name="error_no_internet">Nessuna connessione di rete</string>

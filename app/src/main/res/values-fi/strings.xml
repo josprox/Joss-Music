@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Bottom navigation -->
     <string name="home">Koti</string>
@@ -5,13 +6,11 @@
     <string name="artists">Artistit</string>
     <string name="albums">Albumit</string>
     <string name="playlists">Soittolistat</string>
-
     <!-- Top bar -->
     <plurals name="n_selected">
         <item quantity="one">%d valittu</item>
         <item quantity="other">%d kappaletta valittu</item>
     </plurals>
-
     <!-- Home -->
     <string name="history">Historia</string>
     <string name="stats">Tilastot</string>
@@ -107,17 +106,14 @@
     <string name="error_song_title_empty">Kappaleen nimi ei voi olla tyhjä.</string>
     <string name="error_song_artist_empty">Artistin nimi ei voi olla tyhjä.</string>
     <string name="save">Tallenna</string>
-
     <string name="choose_playlist">Valitse soittolista</string>
     <string name="edit_playlist">Muokkaa soittolistaa</string>
     <string name="create_playlist">Luo soittolista</string>
     <string name="playlist_name">Soittolistan nimi</string>
     <string name="error_playlist_name_empty">Soittolistan nimi ei voi olla tyhjä.</string>
-
     <string name="edit_artist">Muokkaa artistia</string>
     <string name="artist_name">Artistin nimi</string>
     <string name="error_artist_name_empty">Artistin nimi ei voi olla tyhjä.</string>
-
     <!-- Noun -->
     <plurals name="n_song">
         <item quantity="one">%d kappale</item>
@@ -147,7 +143,6 @@
         <item quantity="one">%d vuosi</item>
         <item quantity="other">%d vuotta</item>
     </plurals>
-
     <!-- Snackbar -->
     <string name="playlist_imported">Soittolista tuotu</string>
     <string name="removed_song_from_playlist">\"%s\" poistettiin soittolistasta</string>
@@ -175,10 +170,8 @@
     <string name="repeat_mode_all">Toista jono</string>
     <!-- Queue Title -->
     <string name="queue_all_songs">Kaikki laulut</string>
-
     <!-- Notification name -->
     <string name="music_player">Soitin</string>
-
     <!-- Settings -->
     <string name="settings">Asetukset</string>
     <string name="appearance">Ulkoasu</string>
@@ -186,14 +179,12 @@
     <string name="dark_theme_on">Käytössä</string>
     <string name="dark_theme_off">Pois käytöstä</string>
     <string name="dark_theme_follow_system">Järjestelmän teeman mukainen</string>
-
     <string name="content">Sisältö</string>
     <string name="content_language">Sisällön oletuskieli</string>
     <string name="content_country">Sisällön oletusmaa</string>
     <string name="system_default">Järjestelmän oletus</string>
     <string name="about">Tietoa</string>
     <string name="app_version">Sovelluksen versio</string>
-
     <string name="add_all_to_library">Lisää kaikki kirjastoon</string>
     <string name="remove_all_from_library">Poista kaikki kirjastosta</string>
     <string name="remove_from_queue">Poista jonosta</string>
@@ -242,9 +233,7 @@
     <string name="enable_lrclib">Ota LrcLib-lyriikantarjoaja käyttöön</string>
     <string name="hide_explicit">Piilota sopimaton sisältö</string>
     <string name="dismiss">Hylkää</string>
-    <string name="discord_information">InnerTune käyttää KizzyRPC-kirjastoa asettaaksesi Discord-tilisi tilan. Tämä edellyttää Discord Gateway-yhteyttä, jota voidaan katsoa Discordin käyttöehtojen rikkomuksena. Ei kuitenkaan ole tiedossa tapauksia, joissa käyttäjätilit olisi jäädytetty tästä syystä. Käytä omalla vastuullasi.
-\n
-\nInnerTune poimii ainoastaan tunnuksesi, ja kaikki muu säilytetään paikallisesti.</string>
+    <string name="discord_information">InnerTune käyttää KizzyRPC-kirjastoa asettaaksesi Discord-tilisi tilan. Tämä edellyttää Discord Gateway-yhteyttä, jota voidaan katsoa Discordin käyttöehtojen rikkomuksena. Ei kuitenkaan ole tiedossa tapauksia, joissa käyttäjätilit olisi jäädytetty tästä syystä. Käytä omalla vastuullasi. \n \nInnerTune poimii ainoastaan tunnuksesi, ja kaikki muu säilytetään paikallisesti.</string>
     <string name="options">Asetukset</string>
     <string name="preview">Esikatselu</string>
     <string name="login_failed">Kirjautuminen epäonnistui</string>

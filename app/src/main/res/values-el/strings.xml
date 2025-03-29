@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Bottom navigation -->
     <string name="home">Αρχική</string>
@@ -10,7 +11,6 @@
         <item quantity="one">%d επιλεγμένο</item>
         <item quantity="other">%d επιλεγμένα</item>
     </plurals>
-
     <!-- Home -->
     <string name="history">Ιστορικό</string>
     <string name="stats">Στατιστικά</string>
@@ -22,18 +22,15 @@
     <string name="keep_listening">Συνέχεια ακρόασης</string>
     <string name="similar_to">Παρόμοια με</string>
     <string name="new_release_albums">Άλμπουμ νέας κυκλοφορίας</string>
-
     <!-- History -->
     <string name="today">Σήμερα</string>
     <string name="yesterday">Εχθές</string>
     <string name="this_week">Αυτήν την εβδομάδα</string>
     <string name="last_week">Τελευταία εβδομάδα</string>
-
     <!-- Stats -->
     <string name="most_played_songs">Τα πιο πολυπαιγμένα τραγούδια</string>
     <string name="most_played_artists">Οι πιο πολυπαιγμένοι καλλιτέχνες</string>
     <string name="most_played_albums">Τα πιο πολυπαιγμένα άλμπουμ</string>
-
     <!-- Search -->
     <string name="search">Αναζήτηση</string>
     <string name="search_yt_music">Αναζήτηση Μουσικής YouTube…</string>
@@ -51,27 +48,23 @@
     <string name="filter_featured_playlists">Προτεινόμενες λίστες αναπαραγωγής</string>
     <string name="filter_bookmarked">Σελιδοδείκτες</string>
     <string name="no_results_found">Δεν βρέθηκαν αποτελέσματα</string>
-
     <!-- Artist screen -->
     <string name="library_song_empty">Τα τραγούδια βιβλιοθήκης εμφανίζονται εδώ</string>
     <string name="library_artist_empty">Οι καλλιτέχνες βιβλιοθήκης εμφανίζονται εδώ</string>
     <string name="library_album_empty">Τα άλμπουμ βιβλιοθήκης εμφανίζονται εδώ</string>
     <string name="library_playlist_empty">Οι λίστες αναπαραγωγής θα εμφανίζονται εδώ</string>
     <string name="from_your_library">Από τη βιβλιοθήκη σας</string>
-
     <!-- Playlist -->
     <string name="liked_songs">Αγαπημένα τραγούδια</string>
     <string name="downloaded_songs">Κατεβασμένα τραγούδια</string>
     <string name="playlist_is_empty">Η λίστα αναπαρ. είναι κενή</string>
     <string name="remove_download_playlist_confirm">Θέλετε πραγματικά να αφαιρέσετε όλα τα τραγούδια της λίστας αναπαραγωγής \\\"%s\\\" από τα Ληφθέντα Τραγούδια;</string>
     <string name="delete_playlist_confirm">Θέλετε πραγματικά να διαγράψετε τη λίστα αναπαραγωγής \"%s\";</string>
-
     <!-- Button -->
     <string name="retry">Επανάληψη</string>
     <string name="radio">Ραδιόφωνο</string>
     <string name="shuffle">Ανακάτεμα</string>
     <string name="reset">Επαναφορά</string>
-
     <!-- Menu -->
     <string name="details">Λεπτομέρειες</string>
     <string name="edit">Επεξεργασία</string>
@@ -98,7 +91,6 @@
     <string name="sync">Συγχρονισμός</string>
     <string name="advanced">Προχωρημένο</string>
     <string name="tempo_and_pitch">Τέμπο και Τάση</string>
-
     <!-- Sort menu -->
     <string name="sort_by_create_date">Ημερομηνία προσθήκης</string>
     <string name="sort_by_name">Όνομα</string>
@@ -108,7 +100,6 @@
     <string name="sort_by_length">Μήκος</string>
     <string name="sort_by_play_time">Χρόνος παιχνιδιού</string>
     <string name="sort_by_custom">Προσαρμοσμένη σειρά</string>
-
     <!-- Dialog -->
     <string name="media_id">Id πολυμέσων</string>
     <string name="mime_type">Τύπος MIME</string>
@@ -120,10 +111,8 @@
     <string name="file_size">Μέγεθος αρχείου</string>
     <string name="unknown">Άγνωστο</string>
     <string name="copied">Αντιγράφηκε στο πρόχειρο</string>
-
     <string name="edit_lyrics">Επεξεργασία στίχων</string>
     <string name="search_lyrics">Αναζήτηση στίχων</string>
-
     <string name="edit_song">Επεξεργασία τραγουδιού</string>
     <string name="song_title">Τίτλος τραγουδιού</string>
     <string name="song_artists">Καλλιτέχνες τραγουδιών</string>
@@ -135,17 +124,14 @@
     <string name="create_playlist">Δημιουργία λίστας</string>
     <string name="playlist_name">Όνομα λίστας</string>
     <string name="error_playlist_name_empty">Το όνομα της λίστας αναπαραγωγής δεν μπορεί να είναι κενό.</string>
-
     <string name="edit_artist">Επεξεργασία καλλιτέχνη</string>
     <string name="artist_name">Όνομα καλλιτέχνη</string>
     <string name="error_artist_name_empty">Το όνομα του καλλιτέχνη δεν μπορεί να είναι κενό.</string>
-
     <string name="duplicates">Διπλότυπα</string>
     <string name="skip_duplicates">Παράλειψη διπλοτύπων</string>
     <string name="add_anyway">Προσθήκη ούτως ή άλλως</string>
     <string name="duplicates_description_single">Το τραγούδι είναι ήδη στη λίστα αναπαρ. σας</string>
     <string name="duplicates_description_multiple">%d τραγούδια είναι ήδη στη λίστα αναπαρ. σας</string>
-
     <!-- Noun -->
     <plurals name="n_song">
         <item quantity="one">%d τραγούδι</item>
@@ -175,13 +161,11 @@
         <item quantity="one">%d έτος</item>
         <item quantity="other">%d χρόνια</item>
     </plurals>
-
     <!-- Snackbar -->
     <string name="playlist_imported">Λίστα αναπαραγωγής εισήχθη</string>
     <string name="removed_song_from_playlist">Αφαίρεση του \"%s\" από τη λίστα</string>
     <string name="playlist_synced">Λίστα αναπαραγωγής συγχρονισμένη</string>
     <string name="undo">Αναίρεση</string>
-
     <!-- Player -->
     <string name="lyrics_not_found">Δεν βρέθηκαν στίχοι</string>
     <string name="sleep_timer">Χρονοδιακόπτης ύπνου</string>
@@ -194,7 +178,6 @@
     <string name="error_no_internet">Δεν υπάρχει σύνδεση δικτύου</string>
     <string name="error_timeout">Τέλος χρονικού ορίου</string>
     <string name="error_unknown">Άγνωστο σφάλμα</string>
-
     <!-- Player action -->
     <string name="action_like">Αγαπημένο</string>
     <string name="action_like_all">Αγαπημένα όλα</string>
@@ -205,14 +188,11 @@
     <string name="repeat_mode_off">Λειτουργία επανάληψης ανενεργό</string>
     <string name="repeat_mode_one">Επανάληψη τρέχοντος τραγουδιού</string>
     <string name="repeat_mode_all">Επανάληψη ουράς</string>
-
     <!-- Queue Title -->
     <string name="queue_all_songs">Όλα τα τραγούδια</string>
     <string name="queue_searched_songs">Αναζητημένα τραγούδια</string>
-
     <!-- Notification name -->
     <string name="music_player">Αναπαραγωγέας Μουσικής</string>
-
     <!-- Settings -->
     <string name="settings">Ρυθμίσεις</string>
     <string name="appearance">Εμφάνιση</string>
@@ -239,7 +219,6 @@
     <string name="grid_cell_size">Μέγεθος κελιού πλέγματος</string>
     <string name="small">Μικρό</string>
     <string name="big">Μεγάλο</string>
-
     <string name="content">Περιεχόμενο</string>
     <string name="login">Σύνδεση</string>
     <string name="not_logged_in">Δεν έχετε συνδεθεί</string>
@@ -250,7 +229,6 @@
     <string name="proxy_type">Τύπος μεσολάβησης</string>
     <string name="proxy_url">URL μεσολάβησης</string>
     <string name="restart_to_take_effect">Επανεκκίνηση για να τεθεί σε ισχύ</string>
-
     <string name="player_and_audio">Αναπαραγωγέας και ήχος</string>
     <string name="audio_quality">Ποιότητα ήχου</string>
     <string name="audio_quality_auto">Αυτόματο</string>
@@ -265,7 +243,6 @@
     <string name="auto_skip_next_on_error_desc">Εξασφάλιση της συνεχούς εμπειρίας αναπαραγωγής σας</string>
     <string name="stop_music_on_task_clear">Διακοπή μουσικής στην εργασία εκκαθάριση</string>
     <string name="equalizer">Ισοσταθμιστής</string>
-
     <string name="storage">Αποθήκευση</string>
     <string name="cache">Κρυφή μνήμη</string>
     <string name="image_cache">Κρυφή Μνήμη Εικόνας</string>
@@ -278,7 +255,6 @@
     <string name="max_song_cache_size">Μέγιστο μέγεθος κρυφής μνήμης τραγουδιού</string>
     <string name="clear_song_cache">Εκκαθάριση προσωρινής μνήμης τραγουδιών</string>
     <string name="size_used">%s χρησιμοποιείται</string>
-
     <string name="privacy">Απόρρητο</string>
     <string name="pause_listen_history">Παύση ιστορικού ακρόασης</string>
     <string name="clear_listen_history">Εκκαθάριση ιστορικού ακρόασης</string>
@@ -289,7 +265,6 @@
     <string name="enable_lrclib">Ενεργοποίηση του παρόχου στίχων LrcLib</string>
     <string name="enable_kugou">Ενεργοποίηση παρόχου στίχων KuGou</string>
     <string name="hide_explicit">Απόκρυψη ρητού περιεχομένου</string>
-
     <string name="backup_restore">Αντίγραφα ασφ. και επαναφορά</string>
     <string name="backup">Αντίγραφο ασφαλείας</string>
     <string name="restore">Επαναφορά</string>
@@ -297,7 +272,6 @@
     <string name="backup_create_success">Δημιουργία αντιγράφου ασφ. με επιτυχία</string>
     <string name="backup_create_failed">Αδυναμία δημιουργίας αντιγράφων ασφαλείας</string>
     <string name="restore_failed">Αποτυχία επαναφοράς αντιγράφου ασφαλείας</string>
-
     <string name="discord_integration">Ενσωμάτωση Discord</string>
     <string name="discord_information">Το InnerTune χρησιμοποιεί τη βιβλιοθήκη KizzyRPC για να ρυθμίσει την κατάσταση του λογαριασμού σας στο Discord. Αυτό περιλαμβάνει τη χρήση της σύνδεσης Discord Gateway, η οποία μπορεί να θεωρηθεί παραβίαση των TOS του Discord. Ωστόσο, δεν υπάρχουν γνωστές περιπτώσεις αναστολής λογαριασμών χρηστών για αυτόν τον λόγο. Η χρήση γίνεται με δική σας ευθύνη.\n\nΤο InnerTune θα εξάγει μόνο το token σας και όλα τα υπόλοιπα αποθηκεύονται τοπικά.</string>
     <string name="dismiss">Απόρριψη</string>
@@ -306,10 +280,8 @@
     <string name="login_failed">Η σύνδεση απέτυχε</string>
     <string name="logout">Αποσύνδεση</string>
     <string name="enable_discord_rpc">Ενεργοποίηση Πλούσιας Παρουσίας</string>
-
     <string name="about">Σχετικά</string>
     <string name="app_version">Έκδοση εφαρμογής</string>
-
     <string name="new_version_available">Νέα διαθέσιμη έκδοση</string>
     <string name="translation_models">Μοντέλα Μετάφρασης</string>
     <string name="clear_translation_models">Εκκάθαριση μοντέλων μετάφρασης</string>
