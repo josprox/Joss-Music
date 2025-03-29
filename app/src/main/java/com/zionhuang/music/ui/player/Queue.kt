@@ -92,7 +92,6 @@ import com.zionhuang.music.ui.component.BottomSheet
 import com.zionhuang.music.ui.component.BottomSheetState
 import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.MediaMetadataListItem
-import com.zionhuang.music.ui.component.SwitchPreference
 import com.zionhuang.music.ui.menu.MediaMetadataMenu
 import com.zionhuang.music.ui.menu.PlayerMenu
 import com.zionhuang.music.ui.menu.QueueSelectionMenu
