@@ -63,11 +63,11 @@ fun JossRedSettings(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        PreferenceEntry(
-            title = { Text(stringResource(R.string.login)) },
-            icon = { Icon(painterResource(R.drawable.person), null) },
-            onClick = { navController.navigate("loginv2") }
-        )
+//        PreferenceEntry(
+//            title = { Text(stringResource(R.string.login)) },
+//            icon = { Icon(painterResource(R.drawable.person), null) },
+//            onClick = { navController.navigate("loginv2") }
+//        )
 
         SwitchPreference(
             title = { Text(stringResource(R.string.enable_proxy)+" Joss Red") },
