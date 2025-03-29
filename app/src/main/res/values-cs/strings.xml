@@ -7,7 +7,7 @@
     <string name="albums">Alba</string>
     <string name="playlists">Playlisty</string>
     <!-- Top bar -->
-    <plurals name="n_selected">
+    <plurals name="n_selected" tools:ignore="MissingQuantity">
         <item quantity="one">Vybrána %d</item>
         <item quantity="few">Vybrány %d</item>
         <item quantity="other">Vybráno %d</item>
@@ -117,22 +117,22 @@
     <string name="artist_name">Jméno umělce</string>
     <string name="error_artist_name_empty">Jméno umělce nemůže být prázdné.</string>
     <!-- Noun -->
-    <plurals name="n_song">
+    <plurals name="n_song" tools:ignore="MissingQuantity">
         <item quantity="one">%d skladba</item>
         <item quantity="few">%d skladby</item>
         <item quantity="other">%d skladeb</item>
     </plurals>
-    <plurals name="n_artist">
+    <plurals name="n_artist" tools:ignore="MissingQuantity">
         <item quantity="one">%d umělec</item>
         <item quantity="few">%d umělci</item>
         <item quantity="other">%d umělců</item>
     </plurals>
-    <plurals name="n_album">
+    <plurals name="n_album" tools:ignore="MissingQuantity">
         <item quantity="one">%d album</item>
         <item quantity="few">%d alba</item>
         <item quantity="other">%d alb</item>
     </plurals>
-    <plurals name="n_playlist">
+    <plurals name="n_playlist" tools:ignore="MissingQuantity">
         <item quantity="one">%d playlist</item>
         <item quantity="few">%d playlisty</item>
         <item quantity="other">%d playlistů</item>
@@ -161,7 +161,7 @@
     <string name="lyrics_not_found">Texty nenalezeny</string>
     <string name="sleep_timer">Časovač spánku</string>
     <string name="end_of_song">Konec skladby</string>
-    <plurals name="minute">
+    <plurals name="minute" tools:ignore="MissingQuantity">
         <item quantity="one">1 minuta</item>
         <item quantity="few">%d minuty</item>
         <item quantity="other">%d minut</item>
