@@ -6,7 +6,10 @@ import com.zionhuang.innertube.models.Artist
 import com.zionhuang.innertube.models.MusicResponsiveHeaderRenderer
 import com.zionhuang.innertube.models.MusicResponsiveListItemRenderer
 import com.zionhuang.innertube.models.SongItem
+import com.zionhuang.innertube.models.getItems
+import com.zionhuang.innertube.models.oddElements
 import com.zionhuang.innertube.models.response.BrowseResponse
+import com.zionhuang.innertube.models.splitBySeparator
 import com.zionhuang.innertube.utils.parseTime
 
 data class AlbumPage(
@@ -15,10 +18,45 @@ data class AlbumPage(
     val otherVersions: List<AlbumItem>,
 ) {
     companion object {
+        fun getPlaylistId(response: BrowseResponse): String? {
+            var playlistId = response.microformat?.microformatDataRenderer?.urlCanonical?.substringAfterLast('=')
+            if (playlistId == null)
+            {
+                playlistId = response.header?.musicDetailHeaderRenderer?.menu?.menuRenderer?.topLevelButtons?.firstOrNull()
+                    ?.buttonRenderer?.navigationEndpoint?.watchPlaylistEndpoint?.playlistId
+            }
+            return playlistId
+        }
+
+        fun getTitle(response: BrowseResponse): String? {
+            val title = getHeader(response)?.title ?: response.header?.musicDetailHeaderRenderer?.title
+            return title?.runs?.firstOrNull()?.text
+        }
 
         fun getYear(response: BrowseResponse): Int? {
             val title = getHeader(response)?.subtitle ?: response.header?.musicDetailHeaderRenderer?.subtitle
             return title?.runs?.lastOrNull()?.text?.toIntOrNull()
+        }
+
+        fun getThumbnail(response: BrowseResponse): String? {
+            return response.background?.musicThumbnailRenderer?.getThumbnailUrl() ?: response.header?.musicDetailHeaderRenderer?.thumbnail
+                ?.croppedSquareThumbnailRenderer?.getThumbnailUrl()
+        }
+
+        fun getArtists(response: BrowseResponse): List<Artist> {
+            val artists = getHeader(response)?.straplineTextOne?.runs?.oddElements()?.map {
+                Artist(
+                    name = it.text,
+                    id = it.navigationEndpoint?.browseEndpoint?.browseId
+                )
+            } ?: response.header?.musicDetailHeaderRenderer?.subtitle?.runs?.splitBySeparator()?.getOrNull(1)?.oddElements()?.map {
+                Artist(
+                    name = it.text,
+                    id = it.navigationEndpoint?.browseEndpoint?.browseId
+                )
+            } ?: emptyList()
+
+            return artists
         }
 
         private fun getHeader(response: BrowseResponse): MusicResponsiveHeaderRenderer? {
@@ -28,6 +66,17 @@ data class AlbumPage(
                 tabs?.firstOrNull()?.tabRenderer?.content?.sectionListRenderer?.contents?.firstOrNull()
             val header = section?.musicResponsiveHeaderRenderer
             return header
+        }
+
+        fun getSongs(response: BrowseResponse, album: AlbumItem): List<SongItem> {
+            val tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs ?: response.contents?.twoColumnBrowseResultsRenderer?.tabs
+            val shelfRenderer = tabs?.firstOrNull()?.tabRenderer?.content?.sectionListRenderer?.contents?.firstOrNull()?.musicShelfRenderer ?:
+                response.contents?.twoColumnBrowseResultsRenderer?.secondaryContents?.sectionListRenderer?.contents?.firstOrNull()?.musicShelfRenderer
+
+            val songs = shelfRenderer?.contents?.getItems()?.mapNotNull {
+                getSong(it, album)
+            }
+            return songs ?: emptyList()
         }
 
         fun getSong(renderer: MusicResponsiveListItemRenderer, album: AlbumItem? = null): SongItem? {

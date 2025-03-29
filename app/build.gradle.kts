@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.compose.compiler)
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 if (isFullBuild && System.getenv("PULL_REQUEST") == null) {
@@ -25,8 +26,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 26
         targetSdk = 35
-        versionCode = 37
-        versionName = "1.9.7"
+        versionCode = 38
+        versionName = "2.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -184,4 +185,5 @@ dependencies {
     implementation(libs.markwon)
     implementation(libs.markwon.html)
     implementation(libs.coil.compose.v240)
+    implementation(libs.kotlinx.serialization.json)
 }

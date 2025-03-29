@@ -74,7 +74,7 @@ object YouTube {
         set(value) {
             innerTube.locale = value
         }
-    var visitorData: String
+    var visitorData: String?
         get() = innerTube.visitorData
         set(value) {
             innerTube.visitorData = value
@@ -262,8 +262,8 @@ object YouTube {
             ArtistItemsPage(
                 title = response.header?.musicHeaderRenderer?.title?.runs?.firstOrNull()?.text!!,
                 items = musicPlaylistShelfRenderer?.contents?.getItems()?.mapNotNull {
-                    ArtistItemsPage.fromMusicResponsiveListItemRenderer(it)
-                }!!,
+                        ArtistItemsPage.fromMusicResponsiveListItemRenderer(it)
+                    }!!,
                 continuation = musicPlaylistShelfRenderer.contents.getContinuation()
             )
         }
@@ -373,9 +373,9 @@ object YouTube {
                 ?.appendContinuationItemsAction?.continuationItems
             PlaylistContinuationPage(
                 songs = continuationItems?.getItems()?.mapNotNull {
-                    PlaylistPage.fromMusicResponsiveListItemRenderer(it)
-                }!!,
-                continuation = continuationItems.getContinuation()
+                        PlaylistPage.fromMusicResponsiveListItemRenderer(it)
+                    } ?: emptyList(),
+                continuation = continuationItems?.getContinuation()
             )
         }
     }
@@ -485,8 +485,7 @@ object YouTube {
                     items = contents.gridRenderer.items
                         .mapNotNull (GridRenderer.Item::musicTwoRowItemRenderer)
                         .mapNotNull { LibraryPage.fromMusicTwoRowItemRenderer(it) },
-                    continuation = contents.gridRenderer.continuations?.firstOrNull()?.
-                    nextContinuationData?.continuation
+                    continuation = contents.gridRenderer.continuations?.getContinuation()
                 )
             }
 
@@ -495,7 +494,7 @@ object YouTube {
                     items = contents?.musicShelfRenderer?.contents!!
                         .mapNotNull (MusicShelfRenderer.Content::musicResponsiveListItemRenderer)
                         .mapNotNull { LibraryPage.fromMusicResponsiveListItemRenderer(it) },
-                    continuation = contents.musicShelfRenderer.contents.getContinuation()
+                    continuation = contents.musicShelfRenderer.continuations?.getContinuation()
                 )
             }
         }
@@ -516,8 +515,7 @@ object YouTube {
                     items = contents.gridContinuation.items
                         .mapNotNull (GridRenderer.Item::musicTwoRowItemRenderer)
                         .mapNotNull { LibraryPage.fromMusicTwoRowItemRenderer(it) },
-                    continuation = contents.gridContinuation.continuations?.firstOrNull()?.
-                    nextContinuationData?.continuation
+                    continuation = contents.gridContinuation.continuations?.getContinuation()
                 )
             }
 
@@ -526,7 +524,7 @@ object YouTube {
                     items = contents?.musicShelfContinuation?.contents!!
                         .mapNotNull (MusicShelfRenderer.Content::musicResponsiveListItemRenderer)
                         .mapNotNull { LibraryPage.fromMusicResponsiveListItemRenderer(it) },
-                    continuation = contents.musicShelfContinuation.contents.getContinuation()
+                    continuation = contents.musicShelfContinuation.continuations?.getContinuation()
                 )
             }
         }
@@ -812,6 +810,4 @@ object YouTube {
     const val MAX_GET_QUEUE_SIZE = 1000
 
     private val VISITOR_DATA_REGEX = Regex("^Cg[t|s]")
-
-    const val DEFAULT_VISITOR_DATA = "CgtsZG1ySnZiQWtSbyiMjuGSBg%3D%3D"
 }
