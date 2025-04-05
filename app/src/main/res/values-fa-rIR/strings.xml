@@ -1,280 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources xmlns:ns0="http://schemas.android.com/tools">
-  <string name="home">خانه</string>
-  <string name="songs">ترانه‌ها</string>
-  <string name="artists">هنرمندها</string>
-  <string name="albums">مجموعه‌ها</string>
-  <string name="playlists">فهرست‌پخش‌ها</string>
-  <plurals name="n_selected">
-    <item quantity="one">%d انتخاب‌شده</item>
-    <item quantity="other">%d انتخاب‌شده‌اند</item>
-  </plurals>
-  <string name="history">تاریخچه</string>
-  <string name="stats">آمار</string>
-  <string name="mood_and_genres">حالت و سبک</string>
-  <string name="account">حساب</string>
-  <string name="quick_picks">انتخاب‌های سریع</string>
-  <string name="quick_picks_empty">به ترانه‌ها گوش دهید تا انتخاب سریع خود ساخته شود</string>
-  <string name="new_release_albums">مجموعه‌های منتشرشده‌ی جدید</string>
-  <string name="today">امروز</string>
-  <string name="yesterday">دیروز</string>
-  <string name="this_week">این هفته</string>
-  <string name="last_week">هفته‌ی گذشته</string>
-  <string name="most_played_songs">بیشترین ترانه‌های پخش‌شده</string>
-  <string name="most_played_artists">بیشترین هنرمندهای پخش‌شده</string>
-  <string name="most_played_albums">بیشترین مجموعه‌های پخش‌شده</string>
-  <string name="search">جستجو</string>
-  <string name="search_yt_music">جستجو در یوتیوب موزیک…</string>
-  <string name="search_library">جستجوی کتاب‌خانه…</string>
-  <string name="filter_library">کتاب‌خانه</string>
-  <string name="filter_liked">پسندشده</string>
-  <string name="filter_downloaded">بارگیری‌شده</string>
-  <string name="filter_all">همه</string>
-  <string name="filter_songs">ترانه‌ها</string>
-  <string name="filter_videos">فیلم‌ها</string>
-  <string name="filter_albums">مجموعه‌ها</string>
-  <string name="filter_artists">هنرمندها</string>
-  <string name="filter_playlists">فهرست‌پخش‌ها</string>
-  <string name="filter_community_playlists">فهرست‌پخش‌های انجمن</string>
-  <string name="filter_featured_playlists">فهرست‌پخش‌های ویژه</string>
-  <string name="filter_bookmarked">نشانک‌گذاری‌شده</string>
-  <string name="no_results_found">نتیجه‌ای پیدا نشد</string>
-  <string name="from_your_library">از کتاب‌خانه شما</string>
-  <string name="liked_songs">ترانه‌های موردپسند</string>
-  <string name="downloaded_songs">ترانه‌های بارگیری‌شده</string>
-  <string name="playlist_is_empty">فهرست‌پخش خالی است</string>
-  <string name="retry">تلاش‌مجدد</string>
-  <string name="radio">رادیو</string>
-  <string name="shuffle">بُرزدن</string>
-  <string name="reset">بازنشانی</string>
-  <string name="details">جزئیات</string>
-  <string name="edit">ویرایش</string>
-  <string name="start_radio">شروع رادیو</string>
-  <string name="play">پخش</string>
-  <string name="play_next">پخش بعدی</string>
-  <string name="add_to_queue">اضافه‌کردن به صف</string>
-  <string name="add_to_library">اضافه‌کردن به کتاب‌خانه</string>
-  <string name="remove_from_library">حذف از کتاب‌خانه</string>
-  <string name="download">بارگیری</string>
-  <string name="downloading">درحال بارگیری</string>
-  <string name="remove_download">حذف بارگیری</string>
-  <string name="import_playlist">واردکردن فهرست‌پخش</string>
-  <string name="add_to_playlist">اضافه‌کردن به فهرست‌پخش</string>
-  <string name="view_artist">مشاهده‌ی هنرمند</string>
-  <string name="view_album">مشاهده‌ی مجموعه</string>
-  <string name="refetch">نوسازی</string>
-  <string name="share">هم‌رسانی</string>
-  <string name="delete">حذف</string>
-  <string name="remove_from_history">حذف از تاریخچه</string>
-  <string name="search_online">جستجوی برخط</string>
-  <string name="sync">همگام‌سازی</string>
-  <string name="advanced">پیشرفته</string>
-  <string name="sort_by_create_date">تاریخ اضافه‌شده</string>
-  <string name="sort_by_name">نام</string>
-  <string name="sort_by_artist">هنرمند</string>
-  <string name="sort_by_year">سال</string>
-  <string name="sort_by_song_count">تعداد ترانه</string>
-  <string name="sort_by_length">طول</string>
-  <string name="sort_by_play_time">زمان پخش</string>
-  <string name="sort_by_custom">ترتیب سفارشی</string>
-  <string name="media_id">شناسه‌ی رسانه</string>
-  <string name="mime_type">نوع رسانه</string>
-  <string name="codecs">رمزگشاها</string>
-  <string name="bitrate">نرخ‌ذره</string>
-  <string name="sample_rate">نرخ نمونه</string>
-  <string name="loudness">بلندی</string>
-  <string name="volume">حجم</string>
-  <string name="file_size">اندازه‌ی پرونده</string>
-  <string name="unknown">ناشناخته</string>
-  <string name="copied">در بُریده‌دان رونوشت‌شد</string>
-  <string name="edit_lyrics">ویرایش متن‌ترانه</string>
-  <string name="search_lyrics">جستجوی متن‌ترانه</string>
-  <string name="edit_song">ویرایش ترانه</string>
-  <string name="song_title">عنوان ترانه</string>
-  <string name="song_artists">هنرمند ترانه</string>
-  <string name="error_song_title_empty">عنوان ترانه نمی تواند خالی باشد.</string>
-  <string name="error_song_artist_empty">هنرمند ترانه نمی تواند خالی باشد.</string>
-  <string name="save">ذخیره</string>
-  <string name="choose_playlist">انتخاب فهرست‌پخش</string>
-  <string name="edit_playlist">ویرایش فهرست‌پخش</string>
-  <string name="create_playlist">ایجاد فهرست‌پخش</string>
-  <string name="playlist_name">نام فهرست‌پخش</string>
-  <string name="error_playlist_name_empty">نام فهرست‌پخش نمی تواند خالی باشد.</string>
-  <string name="edit_artist">ویرایش هنرمند</string>
-  <string name="artist_name">نام هنرمند</string>
-  <string name="error_artist_name_empty">نام هنرمند نمی تواند خالی باشد.</string>
-  <plurals name="n_song">
-    <item quantity="one">%d ترانه</item>
-    <item quantity="other">%d ترانه‌ها</item>
-  </plurals>
-  <plurals name="n_artist">
-    <item quantity="one">%d هنرمند</item>
-    <item quantity="other">%d هنرمندها</item>
-  </plurals>
-  <plurals name="n_album">
-    <item quantity="one">%d مجموعه</item>
-    <item quantity="other">%d مجموعه‌ها</item>
-  </plurals>
-  <plurals name="n_playlist">
-    <item quantity="one">%d فهرست‌پخش</item>
-    <item quantity="other">%d فهرست‌پخش‌ها</item>
-  </plurals>
-  <plurals name="n_week" ns0:ignore="MissingQuantity">
-    <item quantity="one">%d هفته</item>
-    <item quantity="other">%d هفته‌ها</item>
-  </plurals>
-  <plurals name="n_month" ns0:ignore="MissingQuantity">
-    <item quantity="one">%d ماه</item>
-    <item quantity="other">%d ماه‌ها</item>
-  </plurals>
-  <plurals name="n_year" ns0:ignore="MissingQuantity">
-    <item quantity="one">%d سال</item>
-    <item quantity="other">%d سال‌ها</item>
-  </plurals>
-  <string name="playlist_imported">فهرست‌پخش واردشد</string>
-  <string name="removed_song_from_playlist">«%s» از فهرست‌پخش حذف شد</string>
-  <string name="playlist_synced">فهرست‌پخش همگام‌شد</string>
-  <string name="undo">واگرد</string>
-  <string name="lyrics_not_found">متن‌ترانه پیدا نشد</string>
-  <string name="sleep_timer">شمارنده‌ی خواب</string>
-  <string name="end_of_song">پایان ترانه</string>
-  <plurals name="minute">
-    <item quantity="one" ns0:ignore="ImpliedQuantity">۱ دقیقه</item>
-    <item quantity="other">%d دقیقه</item>
-  </plurals>
-  <string name="error_no_stream">جریانی در دسترس نیست</string>
-  <string name="error_no_internet">بدون اتصال به تارکده</string>
-  <string name="error_timeout">اتمام وقت</string>
-  <string name="error_unknown">خطای ناشناخته</string>
-  <string name="action_like">پسندیدن</string>
-  <string name="action_remove_like">حذف پسندیدن</string>
-  <string name="action_shuffle_on">بُرزدن روشن</string>
-  <string name="action_shuffle_off">بُرزدن خاموش</string>
-  <string name="repeat_mode_off">حالت تکرار خاموش</string>
-  <string name="repeat_mode_one">تکرار ترانه‌ی فعلی</string>
-  <string name="repeat_mode_all">ترار صف</string>
-  <string name="queue_all_songs">همه‌ی ترانه‌ها</string>
-  <string name="queue_searched_songs">ترانه‌های جستجوشده</string>
-  <string name="music_player">پخش‌کننده‌ی موسیقی</string>
-  <string name="settings">تنظیمات</string>
-  <string name="appearance">ظاهر</string>
-  <string name="enable_dynamic_theme">فعال‌کردن طرح پویا</string>
-  <string name="dark_theme">تم تاریک</string>
-  <string name="dark_theme_on">روشن</string>
-  <string name="dark_theme_off">خاموش</string>
-  <string name="dark_theme_follow_system">پیروی از سیستم</string>
-  <string name="pure_black">مشکی خالص</string>
-  <string name="default_open_tab">زبانه باز پیش‌فرض</string>
-  <string name="customize_navigation_tabs">سفارشی‌کردن زبانه‌های ناوبری</string>
-  <string name="lyrics_text_position">موقعیت متن ترانه</string>
-  <string name="left">چپ</string>
-  <string name="center">وسط</string>
-  <string name="right">راست</string>
-  <string name="content">محتوا</string>
-  <string name="login">ورود</string>
-  <string name="content_language">زبان پیش‌فرض محتوا</string>
-  <string name="content_country">کشور پیش‌فرض محتوا</string>
-  <string name="system_default">پیش فرض سیستم</string>
-  <string name="enable_proxy">فعال‌کردن پروکسی</string>
-  <string name="proxy_type">نوع پروکسی</string>
-  <string name="proxy_url">آدرس‌اینترنتی پروکسی</string>
-  <string name="restart_to_take_effect">راه‌اندازی‌مجدد برای اعمال اثر</string>
-  <string name="player_and_audio">پخش‌کننده و صدا</string>
-  <string name="audio_quality">کیفیت صدا</string>
-  <string name="audio_quality_auto">خودکار</string>
-  <string name="audio_quality_high">بالا</string>
-  <string name="audio_quality_low">پایین</string>
-  <string name="persistent_queue">صف مداوم</string>
-  <string name="skip_silence">گذر از سکوت</string>
-  <string name="audio_normalization">طبیعی‌سازی صدا</string>
-  <string name="equalizer">میزان‌گر</string>
-  <string name="storage">ذخیره‌سازی</string>
-  <string name="cache">حافظه‌ی‌پنهان</string>
-  <string name="image_cache">حافظه‌‌ی‌پنهان تصویر</string>
-  <string name="song_cache">حافظه‌‌ی‌پنهان ترانه</string>
-  <string name="max_cache_size">حداکثر اندازه‌ی حافظه‌ی‌پنهان</string>
-  <string name="unlimited">نامحدود</string>
-  <string name="clear_all_downloads">پاک‌کردن تمامی بارگیری‌ها</string>
-  <string name="max_image_cache_size">بیشترین اندازه‌ی حافظه‌ی‌پنهان تصویر</string>
-  <string name="clear_image_cache">پاک‌کردن حافظه‌‌ی‌پنهان تصویر</string>
-  <string name="max_song_cache_size">بیشترین اندازه‌ی حافظه‌ی‌پنهان ترانه</string>
-  <string name="clear_song_cache">پاک‌کردن حافظه‌‌ی‌پنهان ترانه</string>
-  <string name="size_used">%s استفاده‌شده‌است</string>
-  <string name="privacy">حریم‌خصوصی</string>
-  <string name="pause_listen_history">متوقف‌کردن تاریخچه‌ی گوش‌دادن</string>
-  <string name="clear_listen_history">پاک‌کردن تاریخچه‌ی گوش‌دادن</string>
-  <string name="clear_listen_history_confirm">آیا از پاک‌کردن تمامی سابقه‌ی گوش‌دادن مطمئن هستید؟</string>
-  <string name="pause_search_history">متوقف‌کردن تاریخچه جستجو</string>
-  <string name="clear_search_history">پاک‌کردن تاریخچه جستجو</string>
-  <string name="clear_search_history_confirm">آیا برای پاک‌کردن تمام سابقه جستجو مطمئن هستید؟</string>
-  <string name="enable_kugou">فعال‌کردن ارائه‌دهنده‌ی متن‌ترانه‌ی KuGou</string>
-  <string name="backup_restore">پشتیبان‌گیری و بازگردانی</string>
-  <string name="backup">پشتیبان‌گیری</string>
-  <string name="restore">بازگردانی</string>
-  <string name="imported_playlist">فهرست‌پخش واردشد</string>
-  <string name="backup_create_success">پشتیبان باموفقیت ایجادشد</string>
-  <string name="backup_create_failed">پشتیبان ایجاد نشد</string>
-  <string name="restore_failed">بازیابی پشتیبان انجام‌نشد</string>
-  <string name="about">درباره</string>
-  <string name="app_version">نسخه‌ی برنامه</string>
-  <string name="new_version_available">نسخه‌ی جدید دردسترس‌است</string>
-  <string name="translation_models">نمونه‌های ترجمه</string>
-  <string name="clear_translation_models">پاک‌کردن نمونه‌های ترجمه</string>
-  <string name="website_url">به وب سایت بروید</string>
-  <string name="latestVersion">آخرین نسخه</string>
-  <string name="close">بستن</string>
-  <string name="donate">اهدا کنید</string>
-  <string name="supportApp">از برنامه ما حمایت کنید</string>
-  <string name="enaNotifications">اعلان ها را فعال کنید</string>
-  <string name="enaNotificationsText">برای ادامه استفاده از برنامه باید اعلان ها را فعال کنید. آنها را در تنظیمات سیستم فعال کنید.</string>
-  <string name="goToSettings">به تنظیمات بروید</string>
-  <string name="enaNotificationsTextTrue">اعلان ها فعال شده است. لطفاً انگشت خود را به عقب بکشید یا دکمه برگشت را روی تلفن خود فشار دهید.</string>
-  <string name="enaNotificationsTextFalse">دسترسی به اطلاعات برنامه امکان پذیر نیست</string>
-  <string name="back">برگشت</string>
-  <string name="noPlayback">بدون پخش</string>
-  <string name="unknownArtist">هنرمند ناشناس</string>
-  <string name="untitled">بدون عنوان</string>
-  <string name="card_donation">کمک مالی شما به ما کمک می کند تا برنامه را رایگان نگه داریم و ویژگی های آن را بهبود ببخشیم…</string>
-  <string name="similar_to">شبیه به</string>
-  <string name="forgotten_favorites">موارد دلخواه فراموش شده</string>
-  <string name="keep_listening">به گوش دادن ادامه بده</string>
-  <string name="your_youtube_playlists">لیست های پخش YouTube شما</string>
-  <string name="other_versions">نسخه های دیگر</string>
-  <string name="library_song_empty">آهنگ‌های کتابخانه در اینجا نمایش داده می‌شوند</string>
-  <string name="library_artist_empty">هنرمندان کتابخانه در اینجا نمایش داده می شوند</string>
-  <string name="action_like_all">مثل همه</string>
-  <string name="action_remove_like_all">حذف همه لایک ها</string>
-  <string name="duplicates">موارد تکراری</string>
-  <string name="skip_duplicates">از موارد تکراری بگذرید</string>
-  <string name="add_anyway">به هر حال اضافه کنید</string>
-  <string name="duplicates_description_single">آهنگ از قبل در لیست پخش شما موجود است</string>
-  <string name="library_album_empty">آلبوم‌های کتابخانه در اینجا نمایش داده می‌شوند</string>
-  <string name="library_playlist_empty">لیست های پخش شما در اینجا نمایش داده می شود</string>
-  <string name="add_all_to_library">همه را به کتابخانه اضافه کنید</string>
-  <string name="remove_all_from_library">همه را از کتابخانه حذف کنید</string>
-  <string name="remove_from_playlist">حذف از لیست پخش</string>
-  <string name="remove_from_queue">حذف از صف</string>
-  <string name="tempo_and_pitch">تمپو و پیچ</string>
-  <string name="theme">تم</string>
-  <string name="logout">خروج از سیستم</string>
-  <string name="login_failed">ورود ناموفق بود</string>
-  <string name="jossredSettings_welcome">به سیستم Joss Red خوش آمدید. این سیستم نوآورانه جایگزین قدرتمندی برای هر دو API «NewPipe» و «YouTube» ارائه می‌کند. با «Joss Red»، می‌توانید هنگام تعامل با انواع پخش، از یک تجربه شخصی‌سازی شده لذت ببرید و به سادگی گزینه‌هایی را که به بهترین وجه با نیازهای شما مطابقت دارند، فعال کنید.</string>
-  <string name="playSongJR">پخش موسیقی از Joss Red.</string>
-  <string name="playSongJRDesc">به شما امکان می دهد هر آهنگی را بدون ورود به سیستم با کیفیت بالا پخش کنید.</string>
-  <string name="gplMessage">این برنامه تحت مجوز GPL 3.0 توزیع شده است و هدف آن احترام و کمک به اکوسیستم نرم افزار منبع باز است. در صورت مشاهده هرگونه تخلف یا بی نظمی احتمالی، از شما دعوت می کنیم با تیم پشتیبانی ما تماس بگیرید تا آن را به درستی حل و فصل کنید.</string>
-  <string name="aboutScreenText1">این اپلیکیشن اطلاعات شخصی کاربر را جمع آوری نمی کند، مگر زمانی که از سرویس «جاس رد» استفاده می کند. داده های ارائه شده در یک پایگاه داده ذخیره می شود که کاربر می تواند در هر زمان دانلود کند. علاوه بر این، با نصب این برنامه، ممکن است اعلان های فشار مربوط به خدمات ما، از جمله Joss Red را دریافت کنید. برای جزئیات بیشتر، شرایط و ضوابط موجود در وب سایت رسمی ما را ببینید.</string>
-  <string name="support">پشتیبانی کنید</string>
-  <string name="websupport">صفحه پشتیبانی</string>
-  <string name="aboutScreenText2">در زیر خط مشی رازداری و شرایط و ضوابط برنامه های کاربردی در Joss Red آمده است. تمام ابزارهای موجود در برنامه طوری طراحی شده اند که داده های شما را با اشخاص ثالث به اشتراک نگذارند و حریم خصوصی شما را همیشه تضمین می کنند.</string>
-  <string name="importantmessage">اطلاعیه مهم</string>
-  <string name="privacyPolicy">سیاست حفظ حریم خصوصی</string>
-  <string name="termsConditions">شرایط و ضوابط</string>
-  <string name="appByJosproxMx">نرم افزار توسعه یافته توسط JOSPROX MX</string>
-  <string name="musicDescNotification">"Joss Music" برای ادامه موسیقی خود باید در پیش زمینه بماند. این به شما امکان می دهد بدون وقفه از آهنگ های خود لذت ببرید و در هر زمان آنها را از سر بگیرید.</string>
-  <string name="musicTitleNotification">🎵 موسیقی جوس همیشه با شما</string>
-  <string name="transparentMode">حالت شفاف</string>
-  <string name="transparentModeText">حالت شفاف را در پخش کننده فعال یا غیرفعال کنید.</string>
-  <string name="sleepTimerSong">آهنگ را قبل از Pausar تمام کنید</string>
-  <string name="sleepTimerSongText">این اجازه می دهد تا آهنگ پخش شود قبل از مکث موسیقی هنگام انقضا تایمر.</string>
-  <string name="discord_information">Joss Music از کتابخانه Kizzyrpc برای ایجاد وضعیت حساب Discord شما استفاده می کند. این به معنای استفاده از اتصال Discord Gateway است ، که می تواند نقض شرایط سرویس Discord تلقی شود. با این حال ، هیچ موردی از حساب های کاربری که به همین دلیل به حالت تعلیق درآمده است ، مشخص نیست. از آن در معرض خطر خود استفاده کنید.</string>
-</resources>
