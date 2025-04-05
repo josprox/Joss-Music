@@ -233,11 +233,11 @@
     <string name="enable_lrclib">Ota LrcLib-lyriikantarjoaja käyttöön</string>
     <string name="hide_explicit">Piilota sopimaton sisältö</string>
     <string name="dismiss">Hylkää</string>
-    <string name="discord_information">InnerTune käyttää KizzyRPC-kirjastoa asettaaksesi Discord-tilisi tilan. Tämä edellyttää Discord Gateway-yhteyttä, jota voidaan katsoa Discordin käyttöehtojen rikkomuksena. Ei kuitenkaan ole tiedossa tapauksia, joissa käyttäjätilit olisi jäädytetty tästä syystä. Käytä omalla vastuullasi. \n \nInnerTune poimii ainoastaan tunnuksesi, ja kaikki muu säilytetään paikallisesti.</string>
+    <string name="discord_information">Joss Music käyttää KizzyRPC-kirjastoa asettaaksesi Discord-tilisi tilan. Tämä edellyttää Discord Gateway-yhteyttä, jota voidaan katsoa Discordin käyttöehtojen rikkomuksena. Ei kuitenkaan ole tiedossa tapauksia, joissa käyttäjätilit olisi jäädytetty tästä syystä. Käytä omalla vastuullasi. \n \nJoss Music poimii ainoastaan tunnuksesi, ja kaikki muu säilytetään paikallisesti.</string>
     <string name="options">Asetukset</string>
     <string name="preview">Esikatselu</string>
     <string name="login_failed">Kirjautuminen epäonnistui</string>
     <string name="logout">Kirjaudu ulos</string>
-    <string name="enable_discord_rpc">Tämä on Discord-integraatio-ominaisuus, se tarkoittaa InnerTune-toiminnan näyttämistä Discord-tililläsi</string>
+    <string name="enable_discord_rpc">Tämä on Discord-integraatio-ominaisuus, se tarkoittaa Joss Music-toiminnan näyttämistä Discord-tililläsi</string>
     <string name="forgotten_favorites">Unohtuneet suosikit</string>
 </resources>
