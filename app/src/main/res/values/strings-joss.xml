@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="card_donation">Your donation helps us keep the app free and improve its features…</string>
+  <string name="website_url">go to website</string>
+  <string name="latestVersion">Latest version</string>
+  <string name="close">Close</string>
+  <string name="donate">Donate</string>
+  <string name="supportApp">Support our app!</string>
+  <string name="enaNotifications">Enable Notifications</string>
+  <string name="enaNotificationsText">You need to enable notifications to continue using the app. Enable them in system settings.</string>
+  <string name="goToSettings">Go to settings</string>
+  <string name="enaNotificationsTextTrue">Notifications have been enabled. Please swipe back or press the back button on your phone.</string>
+  <string name="enaNotificationsTextFalse">Unable to access app information</string>
+  <string name="back">Back</string>
+  <string name="noPlayback">No playback</string>
+  <string name="unknownArtist">Unknown artist</string>
+  <string name="untitled">Untitled</string>
+  <string name="jossredSettings_welcome">Welcome to the Joss Red system. This innovative system offers a powerful alternative to both NewPipe and YouTube APIs. With Joss Red, you can enjoy a personalized experience when interacting with all types of playback, simply activating the options that best suit your needs.</string>
+  <string name="playSongJR">Play music from Joss Red.</string>
+  <string name="playSongJRDesc">It allows you to play any song without logging in with high quality.</string>
+  <string name="gplMessage">This application is distributed under the GPL 3.0 license and aims to respect and contribute to the open source software ecosystem. If you detect any possible violation or irregularity, we invite you to contact our support team to resolve it appropriately.</string>
+  <string name="aboutScreenText1">This application does not collect personal information from the user, except when using the Joss Red service. The data provided will be stored in a database that the user can download at any time. Additionally, by installing this application, you may receive push notifications related to our services, including Joss Red. For more details, see our terms and conditions available on our official website.</string>
+  <string name="support">Support</string>
+  <string name="websupport">Support page</string>
+  <string name="aboutScreenText2">Below are the privacy policy and terms and conditions of the applications within Joss Red. All the tools in the application are designed not to share your data with third parties, guaranteeing your privacy at all times.</string>
+  <string name="importantmessage">Important Notice</string>
+  <string name="privacyPolicy">Privacy Policy</string>
+  <string name="termsConditions">Terms and Conditions</string>
+  <string name="appByJosproxMx">An application developed by JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" needs to stay in the foreground to keep playing your music. This allows you to enjoy your songs without interruptions and resume them anytime.</string>
+  <string name="musicTitleNotification">🎵 Joss Music always with you</string>
+  <string name="transparentMode">Transparent mode</string>
+  <string name="transparentModeText">Activate or deactivate transparent mode in the player.</string>
+  <string name="sleepTimerSong">Finish song before Pausar</string>
+  <string name="sleepTimerSongText">It allows the playing song to end before pausing the music when the timer expires.</string>
+</resources>
