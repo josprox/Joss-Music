@@ -7,12 +7,12 @@ dotenvVaultKotlin = "0.0.2"
 json = "20240303"
 kotlin = "2.0.10"
 compose = "1.7.8"
-kotlinxSerializationJson = "1.6.0"
+kotlinxSerializationJson = "1.6.3"
 lifecycle = "2.8.7"
 material3 = "1.3.1"
 media3 = "1.6.0"
-onesignal = "5.1.26"
-playServicesAds = "24.1.0"
+onesignal = "5.1.29"
+playServicesAds = "24.2.0"
 room = "2.6.1"
 hilt = "2.51.1"
 ktor = "2.3.12"
@@ -100,7 +100,7 @@ junit = { group = "junit", name = "junit", version = "4.13.2" }
 timber = { group = "com.jakewharton.timber", name = "timber", version = "5.0.1" }
 
 google-services = { module = "com.google.gms:google-services", version = "4.4.2" }
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "33.11.0" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "33.12.0" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "3.0.3" }
