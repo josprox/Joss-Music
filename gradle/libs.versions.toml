@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "8.8.2"
+androidGradlePlugin = "8.9.1"
 annotation = "1.9.1"
 billing = "7.1.1"
 coilCompose = "2.7.0"

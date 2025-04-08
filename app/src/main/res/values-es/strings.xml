@@ -17,7 +17,7 @@
     <string name="stats">Estadísticas</string>
     <string name="mood_and_genres">Estado de ánimo y géneros</string>
     <string name="account">Cuenta</string>
-    <string name="quick_picks">Selecciones rápidas</string>
+    <string name="quick_picks">Flash baby</string>
     <string name="quick_picks_empty">Escucha canciones para generar tus selecciones rápidas</string>
     <string name="forgotten_favorites">Favoritos olvidados</string>
     <string name="keep_listening">Seguir escuchando</string>
@@ -307,4 +307,38 @@
     <string name="add_all_to_library">Añadir todo a la biblioteca</string>
     <string name="use_login_for_browse">Utilice el inicio de sesión para ver el contenido</string>
     <string name="use_login_for_browse_desc">Esto puede influir en el contenido que ve y, por ejemplo, muestra álbumes exclusivos si ha iniciado sesión con una cuenta Premium</string>
+    <!-- Traducciones de Joss Music con Joss Red Traductor -->
+  <string name="card_donation">Tu donación nos ayuda a mantener la aplicación gratuita y mejorar sus funciones</string>
+  <string name="website_url">ir al sitio web</string>
+  <string name="latestVersion">Versión más reciente</string>
+  <string name="close">Cerrar</string>
+  <string name="donate">Donar</string>
+  <string name="supportApp">¡Apoya nuestra aplicación!</string>
+  <string name="enaNotifications">Habilitar notificaciones</string>
+  <string name="enaNotificationsText">Es necesario habilitar las notificaciones para seguir utilizando la aplicación. Habilítelas en la configuración del sistema.</string>
+  <string name="goToSettings">Ir a configuración</string>
+  <string name="enaNotificationsTextTrue">Se han habilitado las notificaciones. Deslice el dedo hacia atrás o presione el botón Atrás en su teléfono.</string>
+  <string name="enaNotificationsTextFalse">No se puede acceder a la información de la aplicación</string>
+  <string name="back">Atrás</string>
+  <string name="noPlayback">Sin reproducción</string>
+  <string name="unknownArtist">Artista desconocido</string>
+  <string name="untitled">Sin título</string>
+  <string name="jossredSettings_welcome">Bienvenido al sistema Joss Red. Este innovador sistema ofrece una alternativa eficaz tanto a NewPipe como a las API de YouTube. Con Joss Red, podrás disfrutar de una experiencia personalizada al interactuar con todo tipo de reproducción, simplemente activando las opciones que mejor se ajusten a tus necesidades.</string>
+  <string name="playSongJR">Reproducir música desde Joss Red.</string>
+  <string name="playSongJRDesc">Permite reproducir cualquier canción sin necesidad de iniciar sesión con alta calidad.</string>
+  <string name="gplMessage">Esta aplicación se distribuye bajo la licencia GPL 3.0 y tiene como objetivo respetar y contribuir al ecosistema de software de código abierto. Si detectas alguna posible infracción o irregularidad, te invitamos a ponerte en contacto con nuestro equipo de soporte para resolverlo de manera adecuada.</string>
+  <string name="aboutScreenText1">Esta aplicación no recopila información personal del usuario, excepto cuando se utiliza el servicio Joss Red. Los datos proporcionados serán almacenados en una base de datos que el usuario puede descargar en cualquier momento. Asimismo, al instalar esta aplicación, podrías recibir notificaciones push relacionadas con nuestros servicios, incluyendo Joss Red. Para más detalles, consulta nuestros términos y condiciones disponibles en nuestra página web oficial.</string>
+  <string name="support">Apoyo</string>
+  <string name="websupport">Página de soporte</string>
+  <string name="aboutScreenText2">A continuación, se detallan la política de privacidad y los términos y condiciones de las aplicaciones dentro de Joss Red. Todas las herramientas de la aplicación están diseñadas para no compartir tus datos con terceros, garantizando tu privacidad en todo momento.</string>
+  <string name="importantmessage">Aviso Importante</string>
+  <string name="privacyPolicy">política de privacidad</string>
+  <string name="termsConditions">Términos y condiciones</string>
+  <string name="appByJosproxMx">Una aplicación desarrollada por JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" debe permanecer en primer plano para seguir tocando tu música. Esto le permite disfrutar de sus canciones sin interrupciones y reanudarlas en cualquier momento.</string>
+  <string name="musicTitleNotification">🎵 Joss Music siempre contigo</string>
+  <string name="transparentMode">Modo transparente</string>
+  <string name="transparentModeText">Active o desactive el modo transparente en el reproductor.</string>
+  <string name="sleepTimerSong">Finalizar canción antes de pausar</string>
+  <string name="sleepTimerSongText">Permite que la canción en reproducción termine antes de pausar la música cuando el temporizador expire.</string>
 </resources>
