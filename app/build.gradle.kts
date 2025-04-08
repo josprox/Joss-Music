@@ -26,8 +26,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 26
         targetSdk = 35
-        versionCode = 39
-        versionName = "2.0.1"
+        versionCode = 40
+        versionName = "2.0.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -100,6 +100,9 @@ android {
         includeInApk = false
         // Disables dependency metadata when building Android App Bundles.
         includeInBundle = false
+    }
+    androidResources {
+        generateLocaleConfig = true
     }
 }
 
