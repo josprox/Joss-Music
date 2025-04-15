@@ -149,6 +149,7 @@ import com.zionhuang.music.ui.utils.appBarScrollBehavior
 import com.zionhuang.music.ui.utils.backToMain
 import com.zionhuang.music.ui.utils.resetHeightOffset
 import com.zionhuang.music.utils.NotificationPermissionActivity
+import com.zionhuang.music.utils.UpdateChecker
 import com.zionhuang.music.utils.Updater
 import com.zionhuang.music.utils.dataStore
 import com.zionhuang.music.utils.get
@@ -259,8 +260,10 @@ class MainActivity : ComponentActivity() {
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
 
         // Anuncios
-
         MobileAds.initialize(this)
+
+        //Notificación de actualización.
+        UpdateChecker(this).checkForUpdates()
 
         // Configuraciones adicionales de la interfaz, temas y comportamiento
         lifecycleScope.launch {

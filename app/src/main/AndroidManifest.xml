@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-    <uses-permission android:name="com.android.vending.BILLING" />
 
     <!-- Consultas para otras aplicaciones -->
     <queries>
@@ -43,10 +42,6 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9451235108408321~9379363896" />
-        <meta-data
-            android:name="com.google.android.play.billingclient.version"
-            android:value="7.1.1"/>
-
         <!-- Widget de música -->
         <receiver
             android:name=".MusicWidgetProvider"
