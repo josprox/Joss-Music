@@ -93,3 +93,6 @@ output-metadata.json
 
 # Ignorar el archivo .env
 env.vault
+/app/src/main/res/Kotlin Traductor.exe
+/app/full/release/baselineProfiles/1/app-full-release.dm
+/app/full/release/baselineProfiles/0/app-full-release.dm
