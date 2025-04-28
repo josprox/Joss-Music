@@ -33,7 +33,7 @@ val ProxyUrlKey = stringPreferencesKey("proxyUrl")
 val ProxyTypeKey = stringPreferencesKey("proxyType")
 val JossRedEnabledKey = booleanPreferencesKey("JossRedEnabled")
 val JossRedMultimedia = booleanPreferencesKey("JossRedMultimedia")
-val PlayerTransparent = booleanPreferencesKey("PlayerTransparent")
+val PlayerTransparent = stringPreferencesKey("PlayerTransparent")
 val SleepFinishSong = booleanPreferencesKey("SleepFinishSong")
 
 val AudioQualityKey = stringPreferencesKey("audioQuality")

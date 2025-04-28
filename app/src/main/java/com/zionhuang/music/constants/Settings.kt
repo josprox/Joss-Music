@@ -10,7 +10,7 @@ enum class DarkMode {
 }
 
 enum class PlayerBackgroundStyle {
-    DEFAULT, GRADIENT, BLUR
+    DEFAULT,  TRANSPARENT
 }
 
 enum class LibraryViewType {

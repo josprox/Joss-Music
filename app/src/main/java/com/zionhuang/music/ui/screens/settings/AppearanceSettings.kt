@@ -17,6 +17,9 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Layers
+import androidx.compose.material.icons.filled.LayersClear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -47,6 +50,7 @@ import com.zionhuang.music.constants.DefaultOpenTabKey
 import com.zionhuang.music.constants.DynamicThemeKey
 import com.zionhuang.music.constants.GridCellSize
 import com.zionhuang.music.constants.GridCellSizeKey
+import com.zionhuang.music.constants.PlayerBackgroundStyle
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
 import com.zionhuang.music.constants.PlayerTransparent
 import com.zionhuang.music.constants.PureBlackKey
@@ -76,7 +80,10 @@ fun AppearanceSettings(
     val (sliderStyle, onSliderStyleChange) = rememberEnumPreference(SliderStyleKey, defaultValue = SliderStyle.DEFAULT)
     val (defaultOpenTab, onDefaultOpenTabChange) = rememberEnumPreference(DefaultOpenTabKey, defaultValue = NavigationTab.HOME)
     val (gridCellSize, onGridCellSizeChange) = rememberEnumPreference(GridCellSizeKey, defaultValue = GridCellSize.SMALL)
-    val (playertTransparent, onPlayertTransparentChange) = rememberPreference(key = PlayerTransparent, defaultValue = false)
+    val (playerBackgroundStyle, onPlayerBackgroundStyleChange) = rememberEnumPreference(
+        key = PlayerTransparent,
+        defaultValue = PlayerBackgroundStyle.DEFAULT
+    )
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val useDarkTheme = remember(darkMode, isSystemInDarkTheme) {
@@ -255,12 +262,25 @@ fun AppearanceSettings(
             }
         )
 
-        SwitchPreference(
-            title = { Text(stringResource(R.string.transparentMode)) },
-            description = stringResource(R.string.transparentModeText),
-            icon = { Icon(painterResource(R.drawable.palette), null) },
-            checked = playertTransparent,
-            onCheckedChange = onPlayertTransparentChange
+        EnumListPreference(
+            title = { Text("Selecciona el fondo del reproductor") },
+            icon = {
+                Icon(
+                    imageVector = when (playerBackgroundStyle) {
+                        PlayerBackgroundStyle.DEFAULT -> Icons.Filled.Layers
+                        PlayerBackgroundStyle.TRANSPARENT -> Icons.Filled.LayersClear
+                    },
+                    contentDescription = null
+                )
+            },
+            selectedValue = playerBackgroundStyle,
+            onValueSelected = onPlayerBackgroundStyleChange,
+            valueText = {
+                when (it) {
+                    PlayerBackgroundStyle.DEFAULT -> "Por defecto"
+                    PlayerBackgroundStyle.TRANSPARENT -> "Transparente"
+                }
+            }
         )
 
         PreferenceGroupTitle(

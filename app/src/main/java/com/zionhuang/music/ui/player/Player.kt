@@ -67,6 +67,7 @@ import androidx.navigation.NavController
 import com.zionhuang.music.LocalPlayerConnection
 import com.zionhuang.music.R
 import com.zionhuang.music.constants.DarkModeKey
+import com.zionhuang.music.constants.PlayerBackgroundStyle
 import com.zionhuang.music.constants.PlayerHorizontalPadding
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
 import com.zionhuang.music.constants.PlayerTransparent
@@ -110,19 +111,28 @@ fun BottomSheetPlayer(
         val useDarkTheme = if (darkTheme == DarkMode.AUTO) isSystemInDarkTheme else darkTheme == DarkMode.ON
         useDarkTheme && pureBlack
     }
-    val isTransparent by rememberPreference(PlayerTransparent, defaultValue = false)
+    val backgroundStyle by rememberEnumPreference(
+        key = PlayerTransparent,
+        defaultValue = PlayerBackgroundStyle.DEFAULT
+    )
 
     val backgroundColor = if (useBlackBackground && state.value > state.collapsedBound) {
-        if (isTransparent) {
-            lerp(MaterialTheme.colorScheme.surfaceContainer, Color.Black.copy(alpha = 0.85f), state.progress)
-        } else {
-            lerp(MaterialTheme.colorScheme.surfaceContainer, Color.Black, state.progress)
+        when (backgroundStyle) {
+            PlayerBackgroundStyle.TRANSPARENT -> lerp(
+                MaterialTheme.colorScheme.surfaceContainer,
+                Color.Black.copy(alpha = 0.85f),
+                state.progress
+            )
+            PlayerBackgroundStyle.DEFAULT -> lerp(
+                MaterialTheme.colorScheme.surfaceContainer,
+                Color.Black,
+                state.progress
+            )
         }
     } else {
-        if (isTransparent) {
-            MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.95f) // Menos transparencia
-        } else {
-            MaterialTheme.colorScheme.surfaceContainer
+        when (backgroundStyle) {
+            PlayerBackgroundStyle.TRANSPARENT -> MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.95f)
+            PlayerBackgroundStyle.DEFAULT -> MaterialTheme.colorScheme.surfaceContainer
         }
     }
 
