@@ -33,6 +33,7 @@ import androidx.media3.common.audio.SonicAudioProcessor
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.ResolvingDataSource
+import androidx.media3.datasource.cache.CacheDataSink
 import androidx.media3.datasource.cache.CacheDataSource
 import androidx.media3.datasource.cache.CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR
 import androidx.media3.datasource.cache.SimpleCache
@@ -58,6 +59,7 @@ import com.google.common.util.concurrent.MoreExecutors
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.SongItem
 import com.zionhuang.innertube.models.WatchEndpoint
+import com.zionhuang.innertube.models.response.PlayerResponse
 import com.zionhuang.music.MainActivity
 import com.zionhuang.music.MusicWidgetProvider
 import com.zionhuang.music.R
@@ -672,71 +674,51 @@ class MusicService : MediaLibraryService(),
 
     private fun createCacheDataSource(): CacheDataSource.Factory =
         CacheDataSource.Factory()
-            .setCache(downloadCache)
+            .setCache(downloadCache)  // Mantener sólo la caché de descargas
             .setUpstreamDataSourceFactory(
-                CacheDataSource.Factory()
-                    .setCache(playerCache)
-                    .setUpstreamDataSourceFactory(
-                        DefaultDataSource.Factory(
-                            this,
-                            OkHttpDataSource.Factory(
-                                OkHttpClient.Builder()
-                                    .proxy(YouTube.proxy)
-                                    .build()
-                            )
-                        )
+                DefaultDataSource.Factory(
+                    this,
+                    OkHttpDataSource.Factory(
+                        OkHttpClient.Builder()
+                            .proxy(YouTube.proxy)
+                            .build()
                     )
+                )
             )
+            // No escribir en caché al reproducir
             .setCacheWriteDataSinkFactory(null)
             .setFlags(FLAG_IGNORE_CACHE_ON_ERROR)
 
     private fun createDataSourceFactory(): DataSource.Factory {
-        // Almacena URLs de canciones con su tiempo de expiración
-        val songUrlCache = HashMap<String, Pair<String, Long>>()
-
-        // Crear una instancia de ResolvingDataSource que resolverá las URLs dinámicamente
         return ResolvingDataSource.Factory(createCacheDataSource()) { dataSpec ->
             val mediaId = dataSpec.key ?: error("No media id")
 
-            // Consultar preferencia JossRedMultimedia
+            // 1. Primero verificar si está descargado localmente
+            if (downloadCache.isCached(mediaId, dataSpec.position, if (dataSpec.length >= 0) dataSpec.length else 1)) {
+                scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
+                return@Factory dataSpec // Usar la versión descargada
+            }
+
+            // 2. Si no está descargado, obtener URL de streaming fresca
             val useAlternativeSource = runBlocking {
                 dataStore.data.map { preferences ->
                     preferences[JossRedMultimedia] ?: false
                 }.first()
             }
 
-            // Verificar si está en caché local
-            if (downloadCache.isCached(mediaId, dataSpec.position, if (dataSpec.length >= 0) dataSpec.length else 1) ||
-                playerCache.isCached(mediaId, dataSpec.position, CHUNK_LENGTH)
-            ) {
-                scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
-                return@Factory dataSpec
-            }
-
-            // Validar si hay URL en caché y no ha expirado
-            songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
-                scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
-                return@Factory dataSpec.withUri(it.first.toUri())
-            }
-
-            // Si la preferencia está activa, intentar usar la fuente alternativa
-
+            // Opción de fuente alternativa (JossRed)
             if (useAlternativeSource) {
-                val alternativeUrl = JossRedClient.getStreamingUrl(mediaId)
-                Timber.i("Se está usando Joss Red para la reproducción de música")
                 try {
-                    scope.launch(Dispatchers.IO) {
-                        recoverSong(mediaId)
-                    }
+                    val alternativeUrl = JossRedClient.getStreamingUrl(mediaId)
+                    Timber.i("Usando Joss Red para reproducción")
+                    scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                     return@Factory dataSpec.withUri(alternativeUrl.toUri())
                 } catch (e: Exception) {
-                    Timber.e(e, "Error al usar la fuente alternativa: $mediaId. Reintentando con YouTube.")
+                    Timber.e(e, "Error con fuente alternativa, intentando YouTube")
                 }
             }
 
-            // Verificar si existe el formato para que los usuarios de versiones anteriores puedan ver los detalles del formato
-            // Puede haber inconsistencias entre el archivo descargado y la información mostrada si el usuario cambia la calidad del audio con frecuencia
-            // Obtener formato almacenado
+            // Obtener URL de YouTube directamente
             val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
             val playbackData = runBlocking(Dispatchers.IO) {
                 YTPlayerUtils.playerResponseForPlayback(
@@ -746,45 +728,52 @@ class MusicService : MediaLibraryService(),
                     connectivityManager = connectivityManager,
                 )
             }.getOrElse { throwable ->
-                when (throwable) {
-                    is PlaybackException -> throw throwable
-
-                    is ConnectException, is UnknownHostException -> {
-                        throw PlaybackException(getString(R.string.error_no_internet), throwable, PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)
-                    }
-
-                    is SocketTimeoutException -> {
-                        throw PlaybackException(getString(R.string.error_timeout), throwable, PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT)
-                    }
-
-                    else -> throw PlaybackException(getString(R.string.error_unknown), throwable, PlaybackException.ERROR_CODE_REMOTE_ERROR)
-                }
+                handlePlaybackError(throwable)
             }
-            val format = playbackData.format
 
-            database.query {
-                upsert(
-                    FormatEntity(
-                        id = mediaId,
-                        itag = format.itag,
-                        mimeType = format.mimeType.split(";")[0],
-                        codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
-                        bitrate = format.bitrate,
-                        sampleRate = format.audioSampleRate,
-                        contentLength = format.contentLength!!,
-                        loudnessDb = playbackData.audioConfig?.loudnessDb
-                    )
-                )
-            }
+            // Actualizar metadatos del formato (sin almacenar la URL)
+            updateFormatInfo(mediaId, playbackData.format, playbackData.audioConfig?.loudnessDb)
             scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData) }
 
-            val streamUrl = playbackData.streamUrl
-
-            songUrlCache[mediaId] = streamUrl to System.currentTimeMillis() + (playbackData.streamExpiresInSeconds * 1000L)
-            dataSpec.withUri(streamUrl.toUri()).subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
+            // Usar URL de streaming fresca
+            dataSpec.withUri(playbackData.streamUrl.toUri()).subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
         }
     }
 
+    // Función auxiliar para manejar errores
+    private fun handlePlaybackError(throwable: Throwable): Nothing {
+        when (throwable) {
+            is PlaybackException -> throw throwable
+            is ConnectException, is UnknownHostException -> {
+                throw PlaybackException(getString(R.string.error_no_internet), throwable,
+                    PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)
+            }
+            is SocketTimeoutException -> {
+                throw PlaybackException(getString(R.string.error_timeout), throwable,
+                    PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT)
+            }
+            else -> throw PlaybackException(getString(R.string.error_unknown), throwable,
+                PlaybackException.ERROR_CODE_REMOTE_ERROR)
+        }
+    }
+
+    // Función auxiliar para actualizar información del formato
+    private fun updateFormatInfo(mediaId: String, format: PlayerResponse.StreamingData.Format, loudnessDb: Double?) {
+        database.query {
+            upsert(
+                FormatEntity(
+                    id = mediaId,
+                    itag = format.itag,
+                    mimeType = format.mimeType.split(";")[0],
+                    codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
+                    bitrate = format.bitrate,
+                    sampleRate = format.audioSampleRate,
+                    contentLength = format.contentLength!!,
+                    loudnessDb = loudnessDb
+                )
+            )
+        }
+    }
     private fun createMediaSourceFactory() =
         DefaultMediaSourceFactory(
             createDataSourceFactory()
