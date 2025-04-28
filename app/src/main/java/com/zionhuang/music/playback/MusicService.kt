@@ -33,7 +33,6 @@ import androidx.media3.common.audio.SonicAudioProcessor
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.ResolvingDataSource
-import androidx.media3.datasource.cache.CacheDataSink
 import androidx.media3.datasource.cache.CacheDataSource
 import androidx.media3.datasource.cache.CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR
 import androidx.media3.datasource.cache.SimpleCache
@@ -88,8 +87,8 @@ import com.zionhuang.music.db.entities.Event
 import com.zionhuang.music.db.entities.FormatEntity
 import com.zionhuang.music.db.entities.LyricsEntity
 import com.zionhuang.music.db.entities.RelatedSongMap
-import com.zionhuang.music.di.DownloadCache
 import com.zionhuang.music.di.AppModule.PlayerCache
+import com.zionhuang.music.di.DownloadCache
 import com.zionhuang.music.extensions.SilentHandler
 import com.zionhuang.music.extensions.collect
 import com.zionhuang.music.extensions.collectLatest
