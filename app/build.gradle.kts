@@ -26,8 +26,8 @@ android {
         applicationId = "com.josprox.jossmusic"
         minSdk = 26
         targetSdk = 35
-        versionCode = 41
-        versionName = "2.0.3"
+        versionCode = 42
+        versionName = "2.0.4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -187,4 +187,5 @@ dependencies {
     implementation(libs.markwon.html)
     implementation(libs.coil.compose.v240)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.material.icons.extended)
 }
