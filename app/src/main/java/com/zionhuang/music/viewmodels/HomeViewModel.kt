@@ -22,7 +22,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,7 +42,9 @@ class HomeViewModel @Inject constructor(
     val similarRecommendations = MutableStateFlow<List<SimilarRecommendation>?>(null)
     val accountPlaylists = MutableStateFlow<List<PlaylistItem>?>(null)
     val homePage = MutableStateFlow<HomePage?>(null)
+    val selectedChip = MutableStateFlow<HomePage.Chip?>(null)
     val explorePage = MutableStateFlow<ExplorePage?>(null)
+    private val previousHomePage = MutableStateFlow<HomePage?>(null)
 
     val allLocalItems = MutableStateFlow<List<LocalItem>>(emptyList())
     val allYtItems = MutableStateFlow<List<YTItem>>(emptyList())
@@ -148,6 +152,47 @@ class HomeViewModel @Inject constructor(
                 explorePage.value?.newReleaseAlbums.orEmpty()
 
         isLoading.value = false
+    }
+
+    private val _isLoadingMore = MutableStateFlow(false)
+    fun loadMoreYouTubeItems(continuation: String?) {
+        if (continuation == null || _isLoadingMore.value) return
+
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoadingMore.value = true
+            val nextSections = YouTube.home(continuation).getOrNull() ?: run {
+                _isLoadingMore.value = false
+                return@launch
+            }
+            homePage.value = nextSections.copy(
+                chips = homePage.value?.chips,
+                sections = homePage.value?.sections.orEmpty() + nextSections.sections
+            )
+            _isLoadingMore.value = false
+        }
+    }
+
+    fun toggleChip(chip: HomePage.Chip?) {
+        if (chip == null || chip == selectedChip.value && previousHomePage.value != null) {
+            homePage.value = previousHomePage.value
+            selectedChip.value = null
+            return
+        }
+
+        if (selectedChip.value == null) {
+            // store the actual homepage for deselecting chips
+            previousHomePage.value = homePage.value
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val nextSections = YouTube.home(params = chip?.endpoint?.params).getOrNull() ?: return@launch
+            homePage.value = nextSections.copy(
+                chips = homePage.value?.chips,
+                sections = nextSections.sections,
+                continuation = nextSections.continuation
+            )
+            selectedChip.value = chip
+        }
     }
 
     fun refresh() {

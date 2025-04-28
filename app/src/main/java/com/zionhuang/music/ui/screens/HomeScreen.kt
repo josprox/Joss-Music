@@ -1,5 +1,7 @@
 package com.zionhuang.music.ui.screens
 
+import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
@@ -23,6 +25,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -39,6 +42,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,7 +50,6 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -80,6 +83,7 @@ import com.zionhuang.music.playback.queues.YouTubeAlbumRadio
 import com.zionhuang.music.playback.queues.YouTubeQueue
 import com.zionhuang.music.ui.component.AlbumGridItem
 import com.zionhuang.music.ui.component.ArtistGridItem
+import com.zionhuang.music.ui.component.ChipsRow
 import com.zionhuang.music.ui.component.HideOnScrollFAB
 import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.NavigationTile
@@ -87,6 +91,7 @@ import com.zionhuang.music.ui.component.NavigationTitle
 import com.zionhuang.music.ui.component.SongGridItem
 import com.zionhuang.music.ui.component.SongListItem
 import com.zionhuang.music.ui.component.YouTubeGridItem
+import com.zionhuang.music.ui.component.admob.AdMobBannerAd
 import com.zionhuang.music.ui.component.shimmer.GridItemPlaceHolder
 import com.zionhuang.music.ui.component.shimmer.ShimmerHost
 import com.zionhuang.music.ui.component.shimmer.TextPlaceholder
@@ -105,8 +110,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlin.math.min
 import kotlin.random.Random
-import com.zionhuang.music.ui.component.admob.AdMobBannerAd
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -129,6 +134,8 @@ fun HomeScreen(
     val homePage by viewModel.homePage.collectAsState()
     val explorePage by viewModel.explorePage.collectAsState()
 
+    val selectedChip by viewModel.selectedChip.collectAsState()
+
     val allLocalItems by viewModel.allLocalItems.collectAsState()
     val allYtItems by viewModel.allYtItems.collectAsState()
 
@@ -138,6 +145,7 @@ fun HomeScreen(
 
     val quickPicksLazyGridState = rememberLazyGridState()
     val forgottenFavoritesLazyGridState = rememberLazyGridState()
+    rememberLazyGridState()
 
     val innerTubeCookie by rememberPreference(InnerTubeCookieKey, "")
     val isLoggedIn = remember(innerTubeCookie) {
@@ -156,7 +164,25 @@ fun HomeScreen(
         }
     }
 
-    val localGridItem: @Composable (LocalItem) -> Unit = {
+    LaunchedEffect(Unit) {
+        snapshotFlow { lazylistState.layoutInfo.visibleItemsInfo.lastOrNull()?.index }
+            .collect { lastVisibleIndex ->
+                val len = lazylistState.layoutInfo.totalItemsCount
+                if (lastVisibleIndex != null && lastVisibleIndex >= len - 3) {
+                    viewModel.loadMoreYouTubeItems(homePage?.continuation)
+                }
+            }
+    }
+
+    if (selectedChip != null) {
+        BackHandler {
+            // if a chip is selected, go back to the normal homepage first
+            viewModel.toggleChip(selectedChip)
+        }
+    }
+
+
+    val localGridItem: @Composable (LocalItem, String) -> Unit = { it, source ->
         when (it) {
             is Song -> SongGridItem(
                 song = it,
@@ -167,8 +193,9 @@ fun HomeScreen(
                             if (it.id == mediaMetadata?.id) {
                                 playerConnection.player.togglePlayPause()
                             } else {
+                                val song = it.toMediaMetadata()
                                 playerConnection.playQueue(
-                                    YouTubeQueue.radio(it.toMediaMetadata()),
+                                    YouTubeQueue.radio(song),
                                 )
                             }
                         },
@@ -251,7 +278,14 @@ fun HomeScreen(
                 .combinedClickable(
                     onClick = {
                         when (item) {
-                            is SongItem -> playerConnection.playQueue(YouTubeQueue(item.endpoint ?: WatchEndpoint(videoId = item.id), item.toMediaMetadata()))
+                            is SongItem -> playerConnection.playQueue(
+                                YouTubeQueue(
+                                    item.endpoint ?: WatchEndpoint(
+                                        videoId = item.id
+                                    ), item.toMediaMetadata()
+                                )
+                            )
+
                             is AlbumItem -> navController.navigate("album/${item.id}")
                             is ArtistItem -> navController.navigate("artist/${item.id}")
                             is PlaylistItem -> navController.navigate("online_playlist/${item.id}")
@@ -353,17 +387,25 @@ fun HomeScreen(
                         modifier = Modifier.weight(1f)
                     )
 
-                    if (isLoggedIn) {
-                        NavigationTile(
-                            title = stringResource(R.string.account),
-                            icon = R.drawable.person,
-                            onClick = {
-                                navController.navigate("account")
-                            },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
+                    NavigationTile(
+                        title = stringResource(R.string.account),
+                        icon = R.drawable.person,
+                        onClick = {
+                            navController.navigate("account")
+                        },
+                        modifier = Modifier.weight(1f)
+                    )
                 }
+            }
+
+            item {
+                ChipsRow(
+                    chips = homePage?.chips?.mapNotNull { it to it.title } ?: emptyList(),
+                    currentValue = selectedChip,
+                    onValueUpdate = {
+                        viewModel.toggleChip(it)
+                    }
+                )
             }
 
             item {
@@ -405,7 +447,6 @@ fun HomeScreen(
                         ) { originalSong ->
                             // fetch song from database to keep updated
                             val song by database.song(originalSong.id).collectAsState(initial = originalSong)
-
                             SongListItem(
                                 song = song!!,
                                 showInLibraryIcon = true,
@@ -447,6 +488,7 @@ fun HomeScreen(
                 }
 
                 item {
+                    val queueTitle = stringResource(R.string.forgotten_favorites)
                     // take min in case list size is less than 4
                     val rows = min(4, forgottenFavorites.size)
                     LazyHorizontalGrid(
@@ -461,10 +503,10 @@ fun HomeScreen(
                             .height(ListItemHeight * rows)
                             .animateItem()
                     ) {
-                        items(
+                        itemsIndexed(
                             items = forgottenFavorites,
-                            key = { it.id }
-                        ) { originalSong ->
+                            key = { _, song -> song.id }
+                        ) { index, originalSong ->
                             val song by database.song(originalSong.id).collectAsState(initial = originalSong)
 
                             SongListItem(
@@ -521,7 +563,7 @@ fun HomeScreen(
                             .animateItem()
                     ) {
                         items(keepListening) {
-                            localGridItem(it)
+                            localGridItem(it, stringResource(R.string.keep_listening))
                         }
                     }
                 }
@@ -562,7 +604,8 @@ fun HomeScreen(
                         title = it.title.title,
                         thumbnail = it.title.thumbnailUrl?.let { thumbnailUrl ->
                             {
-                                val shape = if (it.title is Artist) CircleShape else RoundedCornerShape(ThumbnailCornerRadius)
+                                val shape =
+                                    if (it.title is Artist) CircleShape else RoundedCornerShape(ThumbnailCornerRadius)
                                 AsyncImage(
                                     model = thumbnailUrl,
                                     contentDescription = null,
@@ -605,7 +648,10 @@ fun HomeScreen(
                         label = it.label,
                         thumbnail = it.thumbnail?.let { thumbnailUrl ->
                             {
-                                val shape = if (it.endpoint?.isArtistEndpoint == true) CircleShape else RoundedCornerShape(ThumbnailCornerRadius)
+                                val shape =
+                                    if (it.endpoint?.isArtistEndpoint == true) CircleShape else RoundedCornerShape(
+                                        ThumbnailCornerRadius
+                                    )
                                 AsyncImage(
                                     model = thumbnailUrl,
                                     contentDescription = null,
@@ -613,6 +659,14 @@ fun HomeScreen(
                                         .size(ListThumbnailSize)
                                         .clip(shape)
                                 )
+                            }
+                        },
+                        onClick = it.endpoint?.browseId?.let { browseId ->
+                            {
+                                if (browseId == "FEmusic_moods_and_genres")
+                                    navController.navigate("mood_and_genres")
+                                else
+                                    navController.navigate("browse/$browseId")
                             }
                         },
                         modifier = Modifier.animateItem()
@@ -633,51 +687,21 @@ fun HomeScreen(
                 }
             }
 
-            explorePage?.newReleaseAlbums?.let { newReleaseAlbums ->
+            if (homePage?.continuation != null && homePage?.sections?.isNotEmpty() == true) {
                 item {
-                    NavigationTitle(
-                        title = stringResource(R.string.new_release_albums),
-                        onClick = {
-                            navController.navigate("new_release")
-                        },
-                        modifier = Modifier.animateItem()
-                    )
-                }
-
-                item {
-                    LazyRow(
-                        contentPadding = WindowInsets.systemBars
-                            .only(WindowInsetsSides.Horizontal)
-                            .asPaddingValues(),
+                    ShimmerHost(
                         modifier = Modifier.animateItem()
                     ) {
-                        items(
-                            items = newReleaseAlbums,
-                            key = { it.id }
-                        ) { album ->
-                            YouTubeGridItem(
-                                item = album,
-                                isActive = mediaMetadata?.album?.id == album.id,
-                                isPlaying = isPlaying,
-                                coroutineScope = scope,
-                                modifier = Modifier
-                                    .combinedClickable(
-                                        onClick = {
-                                            navController.navigate("album/${album.id}")
-                                        },
-                                        onLongClick = {
-                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                            menuState.show {
-                                                YouTubeAlbumMenu(
-                                                    albumItem = album,
-                                                    navController = navController,
-                                                    onDismiss = menuState::dismiss
-                                                )
-                                            }
-                                        }
-                                    )
-                                    .animateItem()
-                            )
+                        TextPlaceholder(
+                            height = 36.dp,
+                            modifier = Modifier
+                                .padding(12.dp)
+                                .width(250.dp),
+                        )
+                        LazyRow {
+                            items(4) {
+                                GridItemPlaceHolder()
+                            }
                         }
                     }
                 }
@@ -693,7 +717,6 @@ fun HomeScreen(
                         modifier = Modifier.animateItem()
                     )
                 }
-
                 item {
                     LazyHorizontalGrid(
                         rows = GridCells.Fixed(4),
