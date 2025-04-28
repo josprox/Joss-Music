@@ -721,7 +721,8 @@ class MainActivity : ComponentActivity() {
                                         }
                                         IconButton(
                                             onClick = {
-                                                searchSource = searchSource.toggle()
+                                                searchSource =
+                                                    if (searchSource == SearchSource.ONLINE) SearchSource.LOCAL else SearchSource.ONLINE
                                             }
                                         ) {
                                             Icon(

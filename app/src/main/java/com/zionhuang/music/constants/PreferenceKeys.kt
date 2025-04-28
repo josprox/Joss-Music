@@ -38,10 +38,6 @@ val SleepFinishSong = booleanPreferencesKey("SleepFinishSong")
 
 val AudioQualityKey = stringPreferencesKey("audioQuality")
 
-enum class AudioQuality {
-    AUTO, HIGH, LOW
-}
-
 val PersistentQueueKey = booleanPreferencesKey("persistentQueue")
 val SkipSilenceKey = booleanPreferencesKey("skipSilence")
 val AudioNormalizationKey = booleanPreferencesKey("audioNormalization")
@@ -75,6 +71,9 @@ val PlaylistSortTypeKey = stringPreferencesKey("playlistSortType")
 val PlaylistSortDescendingKey = booleanPreferencesKey("playlistSortDescending")
 val ArtistSongSortTypeKey = stringPreferencesKey("artistSongSortType")
 val ArtistSongSortDescendingKey = booleanPreferencesKey("artistSongSortDescending")
+val LibraryViewTypeKey = stringPreferencesKey("libraryViewType")
+val PlayerBackgroundStyleKey = stringPreferencesKey("playerBackgroundStyle")
+val SwipeToSkip = booleanPreferencesKey("swipeToSkip")
 
 val SongFilterKey = stringPreferencesKey("songFilter")
 val ArtistFilterKey = stringPreferencesKey("artistFilter")
@@ -85,50 +84,7 @@ val PlaylistViewTypeKey = stringPreferencesKey("playlistViewType")
 
 val PlaylistEditLockKey = booleanPreferencesKey("playlistEditLock")
 
-enum class LibraryViewType {
-    LIST, GRID;
 
-    fun toggle() = when (this) {
-        LIST -> GRID
-        GRID -> LIST
-    }
-}
-
-enum class SongSortType {
-    CREATE_DATE, NAME, ARTIST, PLAY_TIME
-}
-
-enum class PlaylistSongSortType {
-    CUSTOM, CREATE_DATE, NAME, ARTIST, PLAY_TIME
-}
-
-enum class ArtistSortType {
-    CREATE_DATE, NAME, SONG_COUNT, PLAY_TIME
-}
-
-enum class ArtistSongSortType {
-    CREATE_DATE, NAME, PLAY_TIME
-}
-
-enum class AlbumSortType {
-    CREATE_DATE, NAME, ARTIST, YEAR, SONG_COUNT, LENGTH, PLAY_TIME
-}
-
-enum class PlaylistSortType {
-    CREATE_DATE, NAME, SONG_COUNT
-}
-
-enum class SongFilter {
-    LIBRARY, LIKED, DOWNLOADED
-}
-
-enum class ArtistFilter {
-    LIBRARY, LIKED
-}
-
-enum class AlbumFilter {
-    LIBRARY, LIKED
-}
 
 val ShowLyricsKey = booleanPreferencesKey("showLyrics")
 val TranslateLyricsKey = booleanPreferencesKey("translateLyrics")
@@ -139,14 +95,6 @@ val RepeatModeKey = intPreferencesKey("repeatMode")
 
 val SearchSourceKey = stringPreferencesKey("searchSource")
 
-enum class SearchSource {
-    LOCAL, ONLINE;
-
-    fun toggle() = when (this) {
-        LOCAL -> ONLINE
-        ONLINE -> LOCAL
-    }
-}
 
 val VisitorDataKey = stringPreferencesKey("visitorData")
 val DataSyncIdKey = stringPreferencesKey("dataSyncId")

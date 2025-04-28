@@ -593,7 +593,7 @@ fun MediaMetadataListItem(
         if (song?.song?.inLibrary != null) {
             Icon.Library()
         }
-        val download by LocalDownloadUtil.current.getDownload(song?.id).collectAsState(initial = null)
+        val download by LocalDownloadUtil.current.getDownload(song?.id.toString()).collectAsState(initial = null)
         Icon.Download(download?.state)
     },
     isActive: Boolean = false,

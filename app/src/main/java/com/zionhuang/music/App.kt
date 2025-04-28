@@ -1,3 +1,12 @@
+/*
+ * Copyright (C) 2024 z-huang/InnerTune
+ * Copyright (C) 2025 OuterTune Project
+ *
+ * SPDX-License-Identifier: GPL-3.0
+ *
+ * For any other attributions, refer to the git commit history
+ */
+
 package com.zionhuang.music
 
 import android.app.Application
@@ -5,20 +14,35 @@ import android.content.Context
 import android.os.Build
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import androidx.compose.ui.res.stringResource
 import androidx.datastore.preferences.core.edit
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.request.CachePolicy
-import com.zionhuang.music.constants.*
-import com.zionhuang.music.extensions.*
-import com.zionhuang.music.utils.dataStore
-import com.zionhuang.music.utils.get
-import com.zionhuang.music.utils.reportException
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.YouTubeLocale
 import com.zionhuang.kugou.KuGou
+import com.zionhuang.music.constants.AccountChannelHandleKey
+import com.zionhuang.music.constants.AccountEmailKey
+import com.zionhuang.music.constants.AccountNameKey
+import com.zionhuang.music.constants.ContentCountryKey
+import com.zionhuang.music.constants.ContentLanguageKey
+import com.zionhuang.music.constants.CountryCodeToName
+import com.zionhuang.music.constants.DataSyncIdKey
+import com.zionhuang.music.constants.InnerTubeCookieKey
+import com.zionhuang.music.constants.LanguageCodeToName
+import com.zionhuang.music.constants.MaxImageCacheSizeKey
+import com.zionhuang.music.constants.ProxyEnabledKey
+import com.zionhuang.music.constants.ProxyTypeKey
+import com.zionhuang.music.constants.ProxyUrlKey
+import com.zionhuang.music.constants.SYSTEM_DEFAULT
+import com.zionhuang.music.constants.UseLoginForBrowse
+import com.zionhuang.music.constants.VisitorDataKey
+import com.zionhuang.music.extensions.toEnum
+import com.zionhuang.music.extensions.toInetSocketAddress
+import com.zionhuang.music.utils.dataStore
+import com.zionhuang.music.utils.get
+import com.zionhuang.music.utils.reportException
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -30,15 +54,16 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.net.Proxy
-import java.util.*
+import java.util.Locale
 
 @HiltAndroidApp
 class App : Application(), ImageLoaderFactory {
+    private val TAG = App::class.simpleName.toString()
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate() {
         super.onCreate()
         instance = this;
-        Timber.plant(Timber.DebugTree())
 
         val locale = Locale.getDefault()
         val languageTag = locale.toLanguageTag().replace("-Hant", "") // replace zh-Hant-* to zh-*
@@ -92,9 +117,7 @@ class App : Application(), ImageLoaderFactory {
         }
         GlobalScope.launch {
             dataStore.data
-                .map {
-                    it[DataSyncIdKey]
-                }
+                .map { it[DataSyncIdKey] }
                 .distinctUntilChanged()
                 .collect { dataSyncId ->
                     YouTube.dataSyncId = dataSyncId?.let {
@@ -122,7 +145,8 @@ class App : Application(), ImageLoaderFactory {
                         YouTube.cookie = cookie
                     } catch (e: Exception) {
                         // we now allow user input now, here be the demons. This serves as a last ditch effort to avoid a crash loop
-                        Timber.e("Could not parse cookie. Clearing existing cookie. %s", e.message)
+                        Timber.tag(TAG)
+                            .e("Could not parse cookie. Clearing existing cookie. ${e.message}")
                         forgetAccount(this@App)
                     }
                 }

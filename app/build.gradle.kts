@@ -149,6 +149,7 @@ dependencies {
     implementation(libs.runtime.livedata)
     implementation(project(":jossredconnect"))
     implementation(libs.lifecycle.process)
+    implementation(libs.androidx.media3.exoplayer.workmanager)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 

@@ -15,6 +15,7 @@ data class MediaMetadata(
     val thumbnailUrl: String? = null,
     val album: Album? = null,
     val explicit: Boolean = false,
+    var shuffleIndex: Int = -1
 ) : Serializable {
     data class Artist(
         val id: String?,

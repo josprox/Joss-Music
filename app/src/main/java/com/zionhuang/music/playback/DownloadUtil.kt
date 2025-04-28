@@ -12,13 +12,17 @@ import androidx.media3.datasource.okhttp.OkHttpDataSource
 import androidx.media3.exoplayer.offline.Download
 import androidx.media3.exoplayer.offline.DownloadManager
 import androidx.media3.exoplayer.offline.DownloadNotificationHelper
+import androidx.media3.exoplayer.offline.DownloadRequest
+import androidx.media3.exoplayer.offline.DownloadService
 import com.zionhuang.innertube.YouTube
 import com.zionhuang.music.constants.AudioQuality
 import com.zionhuang.music.constants.AudioQualityKey
 import com.zionhuang.music.db.MusicDatabase
 import com.zionhuang.music.db.entities.FormatEntity
+import com.zionhuang.music.db.entities.SongEntity
+import com.zionhuang.music.di.AppModule.PlayerCache
 import com.zionhuang.music.di.DownloadCache
-import com.zionhuang.music.di.PlayerCache
+import com.zionhuang.music.models.MediaMetadata
 import com.zionhuang.music.utils.YTPlayerUtils
 import com.zionhuang.music.utils.enumPreference
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -36,7 +40,7 @@ import javax.inject.Singleton
 
 @Singleton
 class DownloadUtil @Inject constructor(
-    @ApplicationContext context: Context,
+    @ApplicationContext private val context: Context,
     val database: MusicDatabase,
     val databaseProvider: DatabaseProvider,
     @DownloadCache val downloadCache: SimpleCache,
@@ -58,15 +62,10 @@ class DownloadUtil @Inject constructor(
     ) { dataSpec ->
         val mediaId = dataSpec.key ?: error("No media id")
         val length = if (dataSpec.length >= 0) dataSpec.length else 1
-
         if (playerCache.isCached(mediaId, dataSpec.position, length)) {
             return@Factory dataSpec
         }
 
-        /**
-         * Actúa sobre elementos válidos (it.second > System.currentTimeMillis()).
-         * Anteriormente actuaba sobre elementos expirados (it.second < System.currentTimeMillis())
-         * **/
         songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
             return@Factory dataSpec.withUri(it.first.toUri())
         }
@@ -92,7 +91,7 @@ class DownloadUtil @Inject constructor(
                     bitrate = format.bitrate,
                     sampleRate = format.audioSampleRate,
                     contentLength = format.contentLength!!,
-                    loudnessDb = playbackData.audioConfig?.loudnessDb
+                    loudnessDb = playbackData.audioConfig?.loudnessDb,
                 )
             )
         }
@@ -102,7 +101,6 @@ class DownloadUtil @Inject constructor(
             "${it}&range=0-${format.contentLength ?: 10000000}"
         }
 
-        // Más simple y eficiente si siempre necesitas saber exactamente cuándo expira el recurso.
         songUrlCache[mediaId] = streamUrl to System.currentTimeMillis() + (playbackData.streamExpiresInSeconds * 1000L)
         dataSpec.withUri(streamUrl.toUri())
     }
@@ -119,7 +117,33 @@ class DownloadUtil @Inject constructor(
     }
     val downloads = MutableStateFlow<Map<String, Download>>(emptyMap())
 
-    fun getDownload(songId: String?): Flow<Download?> = downloads.map { it[songId] }
+
+    fun getDownload(songId: String): Flow<Download?> = downloads.map { it[songId] }
+
+    fun download(songs: List<MediaMetadata>) {
+        songs.forEach { song -> downloadSong(song.id, song.title) }
+    }
+
+    fun download(song: MediaMetadata) {
+        downloadSong(song.id, song.title)
+    }
+
+    fun download(song: SongEntity) {
+        downloadSong(song.id, song.title)
+    }
+
+    private fun downloadSong(id: String, title: String) {
+        val downloadRequest = DownloadRequest.Builder(id, id.toUri())
+            .setCustomCacheKey(id)
+            .setData(title.toByteArray())
+            .build()
+        DownloadService.sendAddDownload(
+            context,
+            ExoDownloadService::class.java,
+            downloadRequest,
+            false)
+    }
+
 
     init {
         val result = mutableMapOf<String, Download>()

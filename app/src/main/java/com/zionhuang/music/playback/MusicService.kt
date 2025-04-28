@@ -87,7 +87,7 @@ import com.zionhuang.music.db.entities.FormatEntity
 import com.zionhuang.music.db.entities.LyricsEntity
 import com.zionhuang.music.db.entities.RelatedSongMap
 import com.zionhuang.music.di.DownloadCache
-import com.zionhuang.music.di.PlayerCache
+import com.zionhuang.music.di.AppModule.PlayerCache
 import com.zionhuang.music.extensions.SilentHandler
 import com.zionhuang.music.extensions.collect
 import com.zionhuang.music.extensions.collectLatest
