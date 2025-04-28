@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <!-- Traducciones de Joss Music con Joss Red Traductor -->
+  <string name="card_donation">Donasi Anda membantu kami menjaga aplikasi tetap gratis dan meningkatkan fitur-fiturnya</string>
+  <string name="website_url">pergi ke situs web</string>
+  <string name="latestVersion">Versi terbaru</string>
+  <string name="close">Menutup</string>
+  <string name="donate">Menyumbangkan</string>
+  <string name="supportApp">Dukung aplikasi kami!</string>
+  <string name="enaNotifications">Aktifkan Notifikasi</string>
+  <string name="enaNotificationsText">Anda perlu mengaktifkan notifikasi untuk terus menggunakan aplikasi. Aktifkan mereka di pengaturan sistem.</string>
+  <string name="goToSettings">Buka pengaturan</string>
+  <string name="enaNotificationsTextTrue">Notifikasi telah diaktifkan. Silakan geser ke belakang atau tekan tombol kembali di ponsel Anda.</string>
+  <string name="enaNotificationsTextFalse">Tidak dapat mengakses informasi aplikasi</string>
+  <string name="back">Kembali</string>
+  <string name="noPlayback">Tidak ada pemutaran</string>
+  <string name="unknownArtist">Artis tidak dikenal</string>
+  <string name="untitled">Tanpa judul</string>
+  <string name="jossredSettings_welcome">Selamat datang di sistem Joss Red. Sistem inovatif ini menawarkan alternatif yang ampuh untuk API NewPipe dan YouTube. Dengan Joss Red, Anda dapat menikmati pengalaman yang dipersonalisasi saat berinteraksi dengan semua jenis pemutaran, cukup mengaktifkan opsi yang paling sesuai dengan kebutuhan Anda.</string>
+  <string name="playSongJR">Putar musik dari Joss Red.</string>
+  <string name="playSongJRDesc">Ini memungkinkan Anda memutar lagu apa pun tanpa login dengan kualitas tinggi.</string>
+  <string name="gplMessage">Aplikasi ini didistribusikan di bawah lisensi GPL 3.0 dan bertujuan untuk menghormati dan berkontribusi pada ekosistem perangkat lunak sumber terbuka. Jika Anda mendeteksi kemungkinan pelanggaran atau ketidakberesan, kami mengundang Anda untuk menghubungi tim dukungan kami untuk menyelesaikannya dengan tepat.</string>
+  <string name="aboutScreenText1">Aplikasi ini tidak mengumpulkan informasi pribadi dari pengguna, kecuali saat menggunakan layanan Joss Red. Data yang diberikan akan disimpan dalam database yang dapat diunduh pengguna kapan saja. Selain itu, dengan menginstal aplikasi ini, Anda mungkin menerima pemberitahuan push terkait layanan kami, termasuk Joss Red. Untuk lebih jelasnya, lihat syarat dan ketentuan kami yang tersedia di situs web resmi kami.</string>
+  <string name="support">Mendukung</string>
+  <string name="websupport">Halaman dukungan</string>
+  <string name="aboutScreenText2">Di bawah ini adalah kebijakan privasi serta syarat dan ketentuan aplikasi dalam Joss Red. Semua alat dalam aplikasi dirancang untuk tidak membagikan data Anda dengan pihak ketiga, sehingga menjamin privasi Anda setiap saat.</string>
+  <string name="importantmessage">Pemberitahuan Penting</string>
+  <string name="privacyPolicy">Kebijakan Privasi</string>
+  <string name="termsConditions">syarat dan Ketentuan</string>
+  <string name="appByJosproxMx">Aplikasi yang dikembangkan oleh JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" perlu tetap di latar depan untuk terus memainkan musik Anda. Ini memungkinkan Anda untuk menikmati lagu Anda tanpa gangguan dan melanjutkannya kapan saja.</string>
+  <string name="musicTitleNotification">🎵 Musik Joss selalu bersamamu</string>
+  <string name="transparentMode">Mode transparan</string>
+  <string name="transparentModeText">Mengaktifkan atau menonaktifkan mode transparan di pemain.</string>
+  <string name="sleepTimerSong">Selesaikan lagu sebelum Pausar</string>
+  <string name="sleepTimerSongText">Ini memungkinkan lagu bermain untuk berakhir sebelum menghentikan musik ketika timer berakhir.</string>
+</resources>

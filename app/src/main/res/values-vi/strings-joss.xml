@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <!-- Traducciones de Joss Music con Joss Red Traductor -->
+  <string name="card_donation">Khoản đóng góp của bạn giúp chúng tôi duy trì ứng dụng miễn phí và cải thiện các tính năng của ứng dụng</string>
+  <string name="website_url">truy cập trang web</string>
+  <string name="latestVersion">Phiên bản mới nhất</string>
+  <string name="close">Đóng</string>
+  <string name="donate">Quyên tặng</string>
+  <string name="supportApp">Hỗ trợ ứng dụng của chúng tôi!</string>
+  <string name="enaNotifications">Bật thông báo</string>
+  <string name="enaNotificationsText">Bạn cần bật thông báo để tiếp tục sử dụng ứng dụng. Kích hoạt chúng trong cài đặt hệ thống.</string>
+  <string name="goToSettings">Đi tới cài đặt</string>
+  <string name="enaNotificationsTextTrue">Thông báo đã được kích hoạt. Vui lòng vuốt lại hoặc nhấn nút quay lại trên điện thoại của bạn.</string>
+  <string name="enaNotificationsTextFalse">Không thể truy cập thông tin ứng dụng</string>
+  <string name="back">Mặt sau</string>
+  <string name="noPlayback">Không phát lại</string>
+  <string name="unknownArtist">Nghệ sĩ vô danh</string>
+  <string name="untitled">Không có tiêu đề</string>
+  <string name="jossredSettings_welcome">Chào mừng đến với hệ thống Joss Red. Hệ thống đổi mới này cung cấp giải pháp thay thế mạnh mẽ cho cả API NewPipe và YouTube. Với Joss Red, bạn có thể tận hưởng trải nghiệm được cá nhân hóa khi tương tác với tất cả các kiểu phát lại, chỉ cần kích hoạt các tùy chọn phù hợp nhất với nhu cầu của bạn.</string>
+  <string name="playSongJR">Phát nhạc từ Joss Red.</string>
+  <string name="playSongJRDesc">Nó cho phép bạn phát bất kỳ bài hát nào mà không cần đăng nhập với chất lượng cao.</string>
+  <string name="gplMessage">Ứng dụng này được phân phối theo giấy phép GPL 3.0 và nhằm mục đích tôn trọng và đóng góp cho hệ sinh thái phần mềm nguồn mở. Nếu bạn phát hiện bất kỳ vi phạm hoặc bất thường nào có thể xảy ra, chúng tôi mời bạn liên hệ với nhóm hỗ trợ của chúng tôi để giải quyết một cách thích hợp.</string>
+  <string name="aboutScreenText1">Ứng dụng này không thu thập thông tin cá nhân từ người dùng, ngoại trừ khi sử dụng dịch vụ Joss Red. Dữ liệu được cung cấp sẽ được lưu trữ trong cơ sở dữ liệu mà người dùng có thể tải xuống bất cứ lúc nào. Ngoài ra, bằng cách cài đặt ứng dụng này, bạn có thể nhận được thông báo đẩy liên quan đến các dịch vụ của chúng tôi, bao gồm cả Joss Red. Để biết thêm chi tiết, hãy xem các điều khoản và điều kiện có sẵn trên trang web chính thức của chúng tôi.</string>
+  <string name="support">Ủng hộ</string>
+  <string name="websupport">Trang hỗ trợ</string>
+  <string name="aboutScreenText2">Dưới đây là chính sách quyền riêng tư cũng như các điều khoản và điều kiện của các ứng dụng trong \'Joss Red\'. Tất cả các công cụ trong ứng dụng được thiết kế để không chia sẻ dữ liệu của bạn với bên thứ ba, đảm bảo quyền riêng tư của bạn mọi lúc.</string>
+  <string name="importantmessage">Thông báo quan trọng</string>
+  <string name="privacyPolicy">Chính sách bảo mật</string>
+  <string name="termsConditions">Điều khoản và Điều kiện</string>
+  <string name="appByJosproxMx">Một ứng dụng được phát triển bởi JOSPROX MX</string>
+  <string name="musicDescNotification">"Joss Music" cần phải ở trong tiền cảnh để tiếp tục chơi nhạc của bạn. Điều này cho phép bạn thưởng thức các bài hát của mình mà không bị gián đoạn và tiếp tục chúng bất cứ lúc nào.</string>
+  <string name="musicTitleNotification">🎵 Joss Music luôn với bạn</string>
+  <string name="transparentMode">Chế độ trong suốt</string>
+  <string name="transparentModeText">Kích hoạt hoặc hủy kích hoạt chế độ trong suốt trong trình phát.</string>
+  <string name="sleepTimerSong">Kết thúc bài hát trước khi pausar</string>
+  <string name="sleepTimerSongText">Nó cho phép bài hát chơi kết thúc trước khi tạm dừng âm nhạc khi bộ hẹn giờ hết hạn.</string>
+</resources>

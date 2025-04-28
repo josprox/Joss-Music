@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <!-- Traducciones de Joss Music con Joss Red Traductor -->
+    <string name="card_donation">Váš dar nám pomáhá udržovat aplikaci zdarma a zlepšovat její funkce</string>
+    <string name="website_url">přejděte na webovou stránku</string>
+    <string name="latestVersion">Nejnovější verze</string>
+    <string name="close">Blízko</string>
+    <string name="donate">Darovat</string>
+    <string name="supportApp">Podpořte naši aplikaci!</string>
+    <string name="enaNotifications">Povolit oznámení</string>
+    <string name="enaNotificationsText">Chcete-li aplikaci nadále používat, musíte povolit oznámení. Povolte je v nastavení systému.</string>
+    <string name="goToSettings">Přejděte do nastavení</string>
+    <string name="enaNotificationsTextTrue">Oznámení byla povolena. Přejeďte prstem zpět nebo stiskněte tlačítko Zpět na telefonu.</string>
+    <string name="enaNotificationsTextFalse">Nelze získat přístup k informacím o aplikaci</string>
+    <string name="back">Zadní</string>
+    <string name="noPlayback">Žádné přehrávání</string>
+    <string name="unknownArtist">Neznámý umělec</string>
+    <string name="untitled">Bez názvu</string>
+    <string name="jossredSettings_welcome">Vítejte v systému Joss Red. Tento inovativní systém nabízí výkonnou alternativu k API „NewPipe“ a „YouTube“. S Joss Red si můžete vychutnat personalizovaný zážitek při interakci se všemi typy přehrávání, jednoduše aktivujte možnosti, které nejlépe vyhovují vašim potřebám.</string>
+    <string name="playSongJR">Přehrávejte hudbu z Joss Red.</string>
+    <string name="playSongJRDesc">Umožňuje vám přehrávat jakoukoli skladbu bez přihlášení ve vysoké kvalitě.</string>
+    <string name="gplMessage">Tato aplikace je distribuována pod licencí GPL 3.0 a jejím cílem je respektovat a přispívat k ekosystému softwaru s otevřeným zdrojovým kódem. Pokud zjistíte jakékoli možné porušení nebo nesrovnalost, zveme vás, abyste se obrátili na náš tým podpory, abychom to náležitě vyřešili.</string>
+    <string name="aboutScreenText1">Tato aplikace neshromažďuje osobní údaje od uživatele, s výjimkou použití služby „Joss Red“. Poskytnutá data budou uložena v databázi, kterou si uživatel může kdykoliv stáhnout. Instalací této aplikace můžete navíc dostávat oznámení push související s našimi službami, včetně „Joss Red“. Další podrobnosti naleznete v našich smluvních podmínkách dostupných na našich oficiálních webových stránkách.</string>
+    <string name="support">Podpora</string>
+    <string name="websupport">Stránka podpory</string>
+    <string name="aboutScreenText2">Níže jsou uvedeny zásady ochrany osobních údajů a podmínky aplikací v rámci „Joss Red“. Všechny nástroje v aplikaci jsou navrženy tak, aby nesdílely vaše data s třetími stranami, a zaručují tak vaše soukromí za všech okolností.</string>
+    <string name="importantmessage">Důležité upozornění</string>
+    <string name="privacyPolicy">Zásady ochrany osobních údajů</string>
+    <string name="termsConditions">Smluvní podmínky</string>
+    <string name="appByJosproxMx">Aplikace vyvinutá společností JOSPROX MX</string>
+    <string name="musicDescNotification">„Jossova hudba“ musí zůstat v popředí, aby mohla hrát hudbu. To vám umožní užít si své písně bez přerušení a obnovit je kdykoli.</string>
+    <string name="musicTitleNotification">🎵 Joss Music vždy s vámi</string>
+    <string name="transparentMode">Transparentní režim</string>
+    <string name="transparentModeText">Aktivujte nebo deaktivujte transparentní režim v přehrávači.</string>
+    <string name="sleepTimerSong">Dokončete píseň před Pausar</string>
+    <string name="sleepTimerSongText">Umožňuje přehrávací skladbu před zastavením hudby, když vyprší časovač.</string>
+    
+</resources>
