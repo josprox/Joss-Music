@@ -3,4 +3,6 @@
   <string name="transparent">Läbipaistev</string>
   <string name="selectPlayerBackground">Muusikamängija taust</string>
   <string name="defaultText">Täitmata jätmine</string>
+  <string name="slim_navbar_title">Õhuke navigeerimisriba</string>
+  <string name="slim_navbar_description">Navigeerimisriba kõrguse vähendamiseks kõrvaldage tekstisildid</string>
 </resources>

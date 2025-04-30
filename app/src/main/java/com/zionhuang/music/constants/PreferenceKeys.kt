@@ -17,6 +17,7 @@ enum class SliderStyle {
 
 val DefaultOpenTabKey = stringPreferencesKey("defaultOpenTab")
 val GridCellSizeKey = stringPreferencesKey("gridCellSize")
+val SlimNavBarKey = booleanPreferencesKey("slimNavBar")
 
 enum class GridCellSize {
     SMALL, BIG

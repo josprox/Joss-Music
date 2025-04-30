@@ -37,4 +37,6 @@
   <string name="transparent">Minh bạch</string>
   <string name="selectPlayerBackground">Nền máy nghe nhạc</string>
   <string name="defaultText">Mặc định</string>
+  <string name="slim_navbar_title">Thanh điều hướng mỏng</string>
+  <string name="slim_navbar_description">Loại bỏ nhãn văn bản để giảm chiều cao của thanh điều hướng</string>
 </resources>

@@ -60,4 +60,6 @@
   <string name="transparent">ସ୍ୱଚ୍ଛ</string>
   <string name="selectPlayerBackground">ସଂଗୀତ ଖେଳାଳି ପୃଷ୍ଠଭୂମି |</string>
   <string name="defaultText">ଡିଫଲ୍ଟ |</string>
+  <string name="slim_navbar_title">ପତଳା ନାଭିଗେସନ୍ ବାର୍ |</string>
+  <string name="slim_navbar_description">ନାଭିଗେସନ୍ ବାର୍ ଉଚ୍ଚତା ହ୍ରାସ କରିବାକୁ ପାଠ୍ୟ ଲେବଲ୍ ବିଲୋପ କରନ୍ତୁ |</string>
 </resources>

@@ -37,4 +37,6 @@
   <string name="transparent">Transparan</string>
   <string name="selectPlayerBackground">Latar belakang pemutar musik</string>
   <string name="defaultText">Bawaan</string>
+  <string name="slim_navbar_title">Bilah navigasi tipis</string>
+  <string name="slim_navbar_description">Menghilangkan label teks untuk mengurangi ketinggian bilah navigasi</string>
 </resources>

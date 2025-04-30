@@ -3,4 +3,6 @@
   <string name="transparent">வெளிப்படையானது</string>
   <string name="selectPlayerBackground">மியூசிக் பிளேயர் பின்னணி</string>
   <string name="defaultText">இயல்புநிலை</string>
+  <string name="slim_navbar_title">மெல்லிய வழிசெலுத்தல் பட்டி</string>
+  <string name="slim_navbar_description">வழிசெலுத்தல் பட்டியின் உயரத்தைக் குறைக்க உரை லேபிள்களை அகற்றவும்</string>
 </resources>

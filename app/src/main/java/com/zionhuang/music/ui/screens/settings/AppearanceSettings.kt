@@ -20,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Layers
 import androidx.compose.material.icons.filled.LayersClear
+import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -50,6 +51,7 @@ import com.zionhuang.music.constants.DefaultOpenTabKey
 import com.zionhuang.music.constants.DynamicThemeKey
 import com.zionhuang.music.constants.GridCellSize
 import com.zionhuang.music.constants.GridCellSizeKey
+import com.zionhuang.music.constants.SlimNavBarKey
 import com.zionhuang.music.constants.PlayerBackgroundStyle
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
 import com.zionhuang.music.constants.PlayerTransparent
@@ -80,6 +82,7 @@ fun AppearanceSettings(
     val (sliderStyle, onSliderStyleChange) = rememberEnumPreference(SliderStyleKey, defaultValue = SliderStyle.DEFAULT)
     val (defaultOpenTab, onDefaultOpenTabChange) = rememberEnumPreference(DefaultOpenTabKey, defaultValue = NavigationTab.HOME)
     val (gridCellSize, onGridCellSizeChange) = rememberEnumPreference(GridCellSizeKey, defaultValue = GridCellSize.SMALL)
+    val (slimNav, onSlimNavChange) = rememberPreference(SlimNavBarKey, defaultValue = false)
     val (playerBackgroundStyle, onPlayerBackgroundStyleChange) = rememberEnumPreference(
         key = PlayerTransparent,
         defaultValue = PlayerBackgroundStyle.DEFAULT
@@ -222,6 +225,14 @@ fun AppearanceSettings(
                 onCheckedChange = onPureBlackChange
             )
         }
+
+        SwitchPreference(
+            title = { Text(stringResource(R.string.slim_navbar_title)) },
+            description = stringResource(R.string.slim_navbar_description),
+            icon = { Icon(Icons.Rounded.MoreHoriz, null) },
+            checked = slimNav,
+            onCheckedChange = onSlimNavChange
+        )
 
         PreferenceGroupTitle(
             title = stringResource(R.string.player)

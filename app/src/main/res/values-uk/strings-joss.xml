@@ -37,4 +37,6 @@
   <string name="transparent">Прозорий</string>
   <string name="selectPlayerBackground">Фон музики</string>
   <string name="defaultText">За замовчуванням</string>
+  <string name="slim_navbar_title">Тонка навігаційна панель</string>
+  <string name="slim_navbar_description">Усуньте текстові мітки, щоб зменшити висоту навігаційної панелі</string>
 </resources>

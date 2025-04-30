@@ -37,4 +37,6 @@
   <string name="transparent">透明的</string>
   <string name="selectPlayerBackground">音乐播放器背景</string>
   <string name="defaultText">默认</string>
+  <string name="slim_navbar_title">薄导航栏</string>
+  <string name="slim_navbar_description">消除文本标签以降低导航栏的高度</string>
 </resources>

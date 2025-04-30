@@ -37,4 +37,6 @@
   <string name="transparent">Прозрачный</string>
   <string name="selectPlayerBackground">Музыкальный фон</string>
   <string name="defaultText">По умолчанию</string>
+  <string name="slim_navbar_title">Тонкая навигационная планка</string>
+  <string name="slim_navbar_description">Устранить текстовые метки, чтобы уменьшить высоту навигационной панели</string>
 </resources>

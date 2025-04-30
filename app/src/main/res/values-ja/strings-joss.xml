@@ -37,4 +37,6 @@
   <string name="transparent">透明</string>
   <string name="selectPlayerBackground">音楽プレーヤーの背景</string>
   <string name="defaultText">デフォルト</string>
+  <string name="slim_navbar_title">薄いナビゲーションバー</string>
+  <string name="slim_navbar_description">ナビゲーションバーの高さを減らすためにテキストラベルを排除する</string>
 </resources>

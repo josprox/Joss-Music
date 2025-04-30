@@ -37,4 +37,6 @@
   <string name="transparent">Průhledný</string>
   <string name="selectPlayerBackground">Pozadí hudebního přehrávače</string>
   <string name="defaultText">Výchozí</string>
+  <string name="slim_navbar_title">Tenká navigační lišta</string>
+  <string name="slim_navbar_description">Eliminujte textové štítky pro snížení výšky navigačního panelu</string>
 </resources>

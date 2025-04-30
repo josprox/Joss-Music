@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
@@ -79,6 +80,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastAny
@@ -118,6 +120,7 @@ import com.zionhuang.music.constants.PauseSearchHistoryKey
 import com.zionhuang.music.constants.PureBlackKey
 import com.zionhuang.music.constants.SearchSource
 import com.zionhuang.music.constants.SearchSourceKey
+import com.zionhuang.music.constants.SlimNavBarKey
 import com.zionhuang.music.constants.StopMusicOnTaskClearKey
 import com.zionhuang.music.db.MusicDatabase
 import com.zionhuang.music.db.entities.SearchHistory
@@ -166,7 +169,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.dotenv.vault.dotenvVault
 import timber.log.Timber
-import java.net.URLDecoder
 import javax.inject.Inject
 
 val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
@@ -251,7 +253,6 @@ class MainActivity : ComponentActivity() {
     }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -398,6 +399,7 @@ class MainActivity : ComponentActivity() {
                     val defaultOpenTab = remember {
                         dataStore[DefaultOpenTabKey].toEnum(defaultValue = NavigationTab.HOME)
                     }
+                    val (slimNav) = rememberPreference(SlimNavBarKey, defaultValue = false)
                     val tabOpenedFromShortcut = remember {
                         when (intent?.action) {
                             ACTION_SONGS -> NavigationTab.SONG
@@ -460,6 +462,14 @@ class MainActivity : ComponentActivity() {
                         navBackStackEntry?.destination?.route == null ||
                                 navigationItems.fastAny { it.route == navBackStackEntry?.destination?.route } && !active
                     }
+
+                    fun getNavPadding(): Dp {
+                        return if (shouldShowNavigationBar) {
+                            if (slimNav) 52.dp else 68.dp
+                        } else {
+                            0.dp
+                        }
+                    }
                     val navigationBarHeight by animateDpAsState(
                         targetValue = if (shouldShowNavigationBar) NavigationBarHeight else 0.dp,
                         animationSpec = NavigationBarAnimationSpec,
@@ -468,7 +478,7 @@ class MainActivity : ComponentActivity() {
 
                     val playerBottomSheetState = rememberBottomSheetState(
                         dismissedBound = 0.dp,
-                        collapsedBound = bottomInset + (if (shouldShowNavigationBar) NavigationBarHeight else 0.dp) + MiniPlayerHeight,
+                        collapsedBound = bottomInset + getNavPadding() + MiniPlayerHeight,
                         expandedBound = maxHeight,
                     )
 
@@ -806,6 +816,7 @@ class MainActivity : ComponentActivity() {
                         NavigationBar(
                             modifier = Modifier
                                 .align(Alignment.BottomCenter)
+                                .height(bottomInset + getNavPadding())
                                 .offset {
                                     if (navigationBarHeight == 0.dp) {
                                         IntOffset(x = 0, y = (bottomInset + NavigationBarHeight).roundToPx())
@@ -829,11 +840,13 @@ class MainActivity : ComponentActivity() {
                                         )
                                     },
                                     label = {
-                                        Text(
-                                            text = stringResource(screen.titleId),
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis
-                                        )
+                                        if (!slimNav) {
+                                            Text(
+                                                text = stringResource(screen.titleId),
+                                                maxLines = 1,
+                                                overflow = TextOverflow.Ellipsis
+                                            )
+                                        }
                                     },
                                     onClick = {
                                         if (navBackStackEntry?.destination?.hierarchy?.any { it.route == screen.route } == true) {

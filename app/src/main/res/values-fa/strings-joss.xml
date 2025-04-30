@@ -3,4 +3,6 @@
   <string name="transparent">شفاف</string>
   <string name="selectPlayerBackground">پس زمینه پخش کننده موسیقی</string>
   <string name="defaultText">پیش فرض</string>
+  <string name="slim_navbar_title">نوار ناوبری نازک</string>
+  <string name="slim_navbar_description">برچسب های متن را برای کاهش ارتفاع نوار ناوبری از بین ببرید</string>
 </resources>

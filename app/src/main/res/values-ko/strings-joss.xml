@@ -37,4 +37,6 @@
   <string name="transparent">투명한</string>
   <string name="selectPlayerBackground">음악 플레이어 배경</string>
   <string name="defaultText">기본</string>
+  <string name="slim_navbar_title">얇은 내비게이션 바</string>
+  <string name="slim_navbar_description">내비게이션 막대의 높이를 줄이기 위해 텍스트 레이블 제거</string>
 </resources>

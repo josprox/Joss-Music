@@ -37,4 +37,6 @@
   <string name="transparent">شفاف</string>
   <string name="selectPlayerBackground">خلفية مشغل الموسيقى</string>
   <string name="defaultText">تقصير</string>
+  <string name="slim_navbar_title">شريط التنقل الرقيق</string>
+  <string name="slim_navbar_description">قم بإزالة الملصقات النصية لتقليل ارتفاع شريط التنقل</string>
 </resources>

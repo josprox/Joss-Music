@@ -3,4 +3,6 @@
   <string name="transparent">पारदर्शी</string>
   <string name="selectPlayerBackground">संगीत खिलाड़ी पृष्ठभूमि</string>
   <string name="defaultText">गलती करना</string>
+  <string name="slim_navbar_title">पतली नेविगेशन बार</string>
+  <string name="slim_navbar_description">नेविगेशन बार की ऊंचाई को कम करने के लिए टेक्स्ट लेबल को हटा दें</string>
 </resources>

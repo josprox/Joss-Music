@@ -50,4 +50,6 @@
   <string name="transparent">Átlátszó</string>
   <string name="selectPlayerBackground">Zenelejátszó háttér</string>
   <string name="defaultText">Mulasztás</string>
+  <string name="slim_navbar_title">Vékony navigációs sáv</string>
+  <string name="slim_navbar_description">Távolítsa el a szöveges címkéket a navigációs sáv magasságának csökkentése érdekében</string>
 </resources>

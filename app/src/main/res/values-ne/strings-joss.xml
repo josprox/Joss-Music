@@ -3,4 +3,6 @@
   <string name="transparent">वारपार देखिने</string>
   <string name="selectPlayerBackground">संगीत प्लेयर पृष्ठभूमि</string>
   <string name="defaultText">पुरा नगर्नु</string>
+  <string name="slim_navbar_title">पातलो नेभिगेसन बार</string>
+  <string name="slim_navbar_description">नेभिगेसन पट्टीको उचाई कम गर्न पाठ लेबलहरू हटाउनुहोस्</string>
 </resources>

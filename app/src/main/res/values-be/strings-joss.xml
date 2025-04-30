@@ -61,4 +61,6 @@
   <string name="transparent">Празрысты</string>
   <string name="selectPlayerBackground">Фон музычнага прайгравальніка</string>
   <string name="defaultText">Недахоп</string>
+  <string name="slim_navbar_title">Тонкая навігацыйная планка</string>
+  <string name="slim_navbar_description">Выключыце тэкставыя ярлыкі, каб паменшыць вышыню панэлі навігацыі</string>
 </resources>

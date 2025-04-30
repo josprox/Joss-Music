@@ -37,4 +37,6 @@
   <string name="transparent">Şeffaf</string>
   <string name="selectPlayerBackground">Müzik çalar arka planı</string>
   <string name="defaultText">Varsayılan</string>
+  <string name="slim_navbar_title">İnce gezinme çubuğu</string>
+  <string name="slim_navbar_description">Gezinme çubuğunun yüksekliğini azaltmak için metin etiketlerini ortadan kaldırın</string>
 </resources>

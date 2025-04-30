@@ -3,4 +3,6 @@
   <string name="transparent">Transparentan</string>
   <string name="selectPlayerBackground">Pozadina glazbenog playera</string>
   <string name="defaultText">Zadano</string>
+  <string name="slim_navbar_title">Tanka navigacijska traka</string>
+  <string name="slim_navbar_description">Uklonite naljepnice teksta kako biste smanjili visinu navigacijske trake</string>
 </resources>

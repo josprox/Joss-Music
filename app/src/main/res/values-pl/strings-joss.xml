@@ -37,4 +37,6 @@
   <string name="transparent">Przezroczysty</string>
   <string name="selectPlayerBackground">Tło odtwarzacza muzyki</string>
   <string name="defaultText">Domyślny</string>
+  <string name="slim_navbar_title">Cienki pasek nawigacyjny</string>
+  <string name="slim_navbar_description">Wyeliminuj etykiety tekstowe, aby zmniejszyć wysokość paska nawigacyjnego</string>
 </resources>

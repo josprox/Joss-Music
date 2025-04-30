@@ -37,4 +37,6 @@
   <string name="transparent">Transparente</string>
   <string name="selectPlayerBackground">Fondo del reproductor de música</string>
   <string name="defaultText">Por defecto</string>
+  <string name="slim_navbar_title">Barra de navegación delgada</string>
+  <string name="slim_navbar_description">Eliminar etiquetas de texto para reducir la altura de la barra de navegación</string>
 </resources>

@@ -37,4 +37,6 @@
   <string name="transparent">Gjennomsiktig</string>
   <string name="selectPlayerBackground">Musikkspillerbakgrunn</string>
   <string name="defaultText">Misligholde</string>
+  <string name="slim_navbar_title">Tynn navigasjonsstang</string>
+  <string name="slim_navbar_description">Fjern tekstetiketter for å redusere høyden på navigasjonslinjen</string>
 </resources>

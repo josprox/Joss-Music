@@ -61,4 +61,6 @@
   <string name="transparent">স্বচ্ছ</string>
   <string name="selectPlayerBackground">সংগীত প্লেয়ারের পটভূমি</string>
   <string name="defaultText">ডিফল্ট</string>
+  <string name="slim_navbar_title">পাতলা নেভিগেশন বার</string>
+  <string name="slim_navbar_description">নেভিগেশন বারের উচ্চতা হ্রাস করতে পাঠ্য লেবেলগুলি দূর করুন</string>
 </resources>

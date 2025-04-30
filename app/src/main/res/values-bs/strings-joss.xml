@@ -3,4 +3,6 @@
   <string name="transparent">Prozirni</string>
   <string name="selectPlayerBackground">Muzička igrača pozadina</string>
   <string name="defaultText">Podrazumevano</string>
+  <string name="slim_navbar_title">Tanka navigacijska traka</string>
+  <string name="slim_navbar_description">Uklonite tekstualne naljepnice za smanjenje visine navigacijskog trake</string>
 </resources>

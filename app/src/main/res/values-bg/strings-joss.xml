@@ -37,4 +37,6 @@
   <string name="transparent">Прозрачен</string>
   <string name="selectPlayerBackground">Фон за музикален плейър</string>
   <string name="defaultText">По подразбиране</string>
+  <string name="slim_navbar_title">Тънка навигационна лента</string>
+  <string name="slim_navbar_description">Елиминирайте текстовите етикети, за да намалите височината на навигационната лента</string>
 </resources>

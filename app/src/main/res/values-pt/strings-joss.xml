@@ -3,4 +3,6 @@
   <string name="transparent">Transparente</string>
   <string name="selectPlayerBackground">Fundo do reprodutor</string>
   <string name="defaultText">Padrão</string>
+  <string name="slim_navbar_title">Barra de navegação fina</string>
+  <string name="slim_navbar_description">Elimine os rótulos de texto para reduzir a altura da barra de navegação</string>
 </resources>

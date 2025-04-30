@@ -37,4 +37,6 @@
   <string name="transparent">Transparent</string>
   <string name="selectPlayerBackground">Music Player Hintergrund</string>
   <string name="defaultText">Standard</string>
+  <string name="slim_navbar_title">Dünne Navigationsstange</string>
+  <string name="slim_navbar_description">Beseitigen Sie Textbezeichnungen, um die Höhe der Navigationsleiste zu verringern</string>
 </resources>

@@ -38,4 +38,6 @@
   <string name="transparent">സുതാരമായ</string>
   <string name="selectPlayerBackground">മ്യൂസിക് പ്ലെയർ പശ്ചാത്തലം</string>
   <string name="defaultText">കുറ്റം</string>
+  <string name="slim_navbar_title">നേർത്ത നാവിഗേഷൻ ബാർ</string>
+  <string name="slim_navbar_description">നാവിഗേഷൻ ബാറിന്റെ ഉയരം കുറയ്ക്കുന്നതിന് വാചക ലേബലുകൾ ഇല്ലാതാക്കുക</string>
 </resources>

@@ -3,4 +3,6 @@
   <string name="transparent">Trasparente</string>
   <string name="selectPlayerBackground">Sfondo per lettore musicale</string>
   <string name="defaultText">Predefinito</string>
+  <string name="slim_navbar_title">Barra di navigazione sottile</string>
+  <string name="slim_navbar_description">Elimina le etichette di testo per ridurre l\'altezza della barra di navigazione</string>
 </resources>

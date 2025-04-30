@@ -37,4 +37,6 @@
   <string name="transparent">Διαφανής</string>
   <string name="selectPlayerBackground">Φόντο αναπαραγωγής μουσικής</string>
   <string name="defaultText">Αθέτηση</string>
+  <string name="slim_navbar_title">Λεπτή γραμμή πλοήγησης</string>
+  <string name="slim_navbar_description">Εξαλείψτε τις ετικέτες κειμένου για να μειώσετε το ύψος της γραμμής πλοήγησης</string>
 </resources>

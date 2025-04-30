@@ -58,4 +58,6 @@
   <string name="transparent">ਪਾਰਦਰਸ਼ੀ</string>
   <string name="selectPlayerBackground">ਸੰਗੀਤ ਪਲੇਅਰ ਦੀ ਪਿੱਠਭੂਮੀ</string>
   <string name="defaultText">ਮੂਲ</string>
+  <string name="slim_navbar_title">ਪਤਲੀ ਨੇਵੀਗੇਸ਼ਨ ਬਾਰ</string>
+  <string name="slim_navbar_description">ਨੇਵੀਗੇਸ਼ਨ ਬਾਰ ਦੀ ਉਚਾਈ ਨੂੰ ਘਟਾਉਣ ਲਈ ਟੈਕਸਟ ਲੇਬਲ ਨੂੰ ਖਤਮ ਕਰੋ</string>
 </resources>

@@ -37,4 +37,6 @@
   <string name="transparent">Transparant</string>
   <string name="selectPlayerBackground">Muziekspelerachtergrond</string>
   <string name="defaultText">Standaard</string>
+  <string name="slim_navbar_title">Dunne navigatiebalk</string>
+  <string name="slim_navbar_description">Elimineer tekstlabels om de hoogte van de navigatiebalk te verminderen</string>
 </resources>

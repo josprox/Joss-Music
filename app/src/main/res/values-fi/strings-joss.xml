@@ -37,4 +37,6 @@
   <string name="transparent">Läpinäkyvä</string>
   <string name="selectPlayerBackground">Musiikkisoitintausta</string>
   <string name="defaultText">Laiminlyönti</string>
+  <string name="slim_navbar_title">Ohut navigointipalkki</string>
+  <string name="slim_navbar_description">Poista tekstimerkinnät navigointipalkin korkeuden vähentämiseksi</string>
 </resources>
