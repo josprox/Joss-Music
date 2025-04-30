@@ -83,7 +83,6 @@ import com.zionhuang.music.ui.component.NavigationTitle
 import com.zionhuang.music.ui.component.SongListItem
 import com.zionhuang.music.ui.component.YouTubeGridItem
 import com.zionhuang.music.ui.component.YouTubeListItem
-import com.zionhuang.music.ui.component.admob.AdMobBannerAd
 import com.zionhuang.music.ui.component.shimmer.ButtonPlaceholder
 import com.zionhuang.music.ui.component.shimmer.ListItemPlaceHolder
 import com.zionhuang.music.ui.component.shimmer.ShimmerHost
@@ -210,16 +209,6 @@ fun ArtistScreen(
                                 }
                             }
                         }
-                    }
-                }
-                item {
-                    Row (
-                        modifier = Modifier
-                            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
-                            .padding(horizontal = 12.dp, vertical = 6.dp)
-                            .fillMaxWidth()
-                    ) {
-                        AdMobBannerAd()
                     }
                 }
                 if (librarySongs.isNotEmpty()) {

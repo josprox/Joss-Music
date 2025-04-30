@@ -103,7 +103,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.imageLoader
 import coil.request.ImageRequest
-import com.google.android.gms.ads.MobileAds
 import com.onesignal.OneSignal
 import com.valentinilk.shimmer.LocalShimmerTheme
 import com.zionhuang.innertube.YouTube
@@ -259,9 +258,6 @@ class MainActivity : ComponentActivity() {
 
         // Inicializar OneSignal
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
-
-        // Anuncios
-        MobileAds.initialize(this)
 
         //Notificación de actualización.
         UpdateChecker(this).checkForUpdates()
