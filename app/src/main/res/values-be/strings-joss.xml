@@ -58,4 +58,7 @@
   <string name="sleepTimerSong">Скончыце песню перад Паусарам</string>
   <string name="sleepTimerSongText">Гэта дазваляе прайграваць песню, перш чым спыніць музыку, калі скончыцца таймер.</string>
   <string name="discord_information">Joss Music выкарыстоўвае бібліятэку Kizzyrpc для ўстанаўлення стану вашага ўліковага запісу разладу. Гэта прадугледжвае выкарыстанне падключэння дагарання шлюза, якое можна лічыць парушэннем умоў службы разладу. Аднак па гэтай прычыне не вядомыя выпадкі ўліковых запісаў карыстальнікаў. Выкарыстоўвайце яго на ўласную рызыку.</string>
+  <string name="transparent">Празрысты</string>
+  <string name="selectPlayerBackground">Фон музычнага прайгравальніка</string>
+  <string name="defaultText">Недахоп</string>
 </resources>

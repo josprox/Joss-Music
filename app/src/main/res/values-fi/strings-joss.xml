@@ -34,4 +34,7 @@
   <string name="transparentModeText">Aktivoi tai deaktivoi läpinäkyvä tila soittimessa.</string>
   <string name="sleepTimerSong">Lopeta kappale ennen Pausaria</string>
   <string name="sleepTimerSongText">Se antaa soittavan kappaleen loppua ennen kuin keskeyttää musiikin ajastimen päättyessä.</string>
+  <string name="transparent">Läpinäkyvä</string>
+  <string name="selectPlayerBackground">Musiikkisoitintausta</string>
+  <string name="defaultText">Laiminlyönti</string>
 </resources>

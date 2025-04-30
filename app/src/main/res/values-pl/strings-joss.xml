@@ -34,4 +34,7 @@
   <string name="transparentModeText">Aktywuj lub dezaktywuj tryb przezroczystego przez gracza.</string>
   <string name="sleepTimerSong">Zakończ piosenkę przed Pausar</string>
   <string name="sleepTimerSongText">Umożliwia to zakończenie piosenki, zanim zatrzyma muzykę, gdy wygaśnie czas.</string>
+  <string name="transparent">Przezroczysty</string>
+  <string name="selectPlayerBackground">Tło odtwarzacza muzyki</string>
+  <string name="defaultText">Domyślny</string>
 </resources>

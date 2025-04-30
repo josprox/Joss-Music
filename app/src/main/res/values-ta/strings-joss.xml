@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">வெளிப்படையானது</string>
+  <string name="selectPlayerBackground">மியூசிக் பிளேயர் பின்னணி</string>
+  <string name="defaultText">இயல்புநிலை</string>
 </resources>

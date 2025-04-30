@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">Transparente</string>
+  <string name="selectPlayerBackground">Fundo do reprodutor</string>
+  <string name="defaultText">Padrão</string>
 </resources>

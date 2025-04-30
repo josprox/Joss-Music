@@ -34,4 +34,7 @@
   <string name="transparentModeText">Активировать или деактивировать прозрачный режим у игрока.</string>
   <string name="sleepTimerSong">Финал песни перед Паусаром</string>
   <string name="sleepTimerSongText">Это позволяет игровой песне закончиться, прежде чем приостановить музыку, когда истекает таймер.</string>
+  <string name="transparent">Прозрачный</string>
+  <string name="selectPlayerBackground">Музыкальный фон</string>
+  <string name="defaultText">По умолчанию</string>
 </resources>

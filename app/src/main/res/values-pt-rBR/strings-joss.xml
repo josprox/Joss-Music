@@ -34,4 +34,7 @@
   <string name="transparentModeText">Ative ou desative o modo transparente no jogador.</string>
   <string name="sleepTimerSong">Terming Song Before Pausar</string>
   <string name="sleepTimerSongText">Ele permite que a música tocar antes de parar a música quando o timer expirar.</string>
+  <string name="transparent">Transparente</string>
+  <string name="selectPlayerBackground">Plano de fundo do reprodutor</string>
+  <string name="defaultText">Padrão</string>
 </resources>

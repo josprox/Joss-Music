@@ -34,4 +34,7 @@
   <string name="transparentModeText">Aktiver eller deaktiver gjennomsiktig modus i spilleren.</string>
   <string name="sleepTimerSong">Fullfør sangen før Pausar</string>
   <string name="sleepTimerSongText">Den lar den spillende sangen avsluttes før du tar en pause musikken når tidtakeren går ut.</string>
+  <string name="transparent">Gjennomsiktig</string>
+  <string name="selectPlayerBackground">Musikkspillerbakgrunn</string>
+  <string name="defaultText">Misligholde</string>
 </resources>

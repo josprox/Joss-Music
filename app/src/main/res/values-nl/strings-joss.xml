@@ -34,4 +34,7 @@
   <string name="transparentModeText">Activeer of deactiveer de transparante modus in de speler.</string>
   <string name="sleepTimerSong">Voltooid lied voor Pausar</string>
   <string name="sleepTimerSongText">Hiermee kan het speelnummer eindigen voordat de muziek pauzeert wanneer de timer verloopt.</string>
+  <string name="transparent">Transparant</string>
+  <string name="selectPlayerBackground">Muziekspelerachtergrond</string>
+  <string name="defaultText">Standaard</string>
 </resources>

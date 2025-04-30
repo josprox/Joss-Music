@@ -31,4 +31,7 @@
   <string name="transparentModeText">Activez ou désactivez le mode transparent dans le lecteur.</string>
   <string name="sleepTimerSong">Terminer la chanson avant Pausar</string>
   <string name="sleepTimerSongText">Il permet à la chanson de jeu de se terminer avant de faire une pause de la musique lorsque la minuterie expire.</string>
+  <string name="transparent">Transparent</string>
+  <string name="selectPlayerBackground">Contexte du lecteur de musique</string>
+  <string name="defaultText">Défaut</string>
 </resources>

@@ -34,4 +34,7 @@
   <string name="transparentModeText">Ενεργοποιήστε ή απενεργοποιήστε τη διαφανή λειτουργία στη συσκευή αναπαραγωγής.</string>
   <string name="sleepTimerSong">Τελειώστε το τραγούδι πριν από το Pausar</string>
   <string name="sleepTimerSongText">Επιτρέπει στο να τελειώνει το τραγούδι πριν από την παύση της μουσικής όταν λήγει ο χρονοδιακόπτης.</string>
+  <string name="transparent">Διαφανής</string>
+  <string name="selectPlayerBackground">Φόντο αναπαραγωγής μουσικής</string>
+  <string name="defaultText">Αθέτηση</string>
 </resources>

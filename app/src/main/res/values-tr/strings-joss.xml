@@ -34,4 +34,7 @@
   <string name="transparentModeText">Oynatıcıdaki şeffaf modu etkinleştirin veya devre dışı bırakın.</string>
   <string name="sleepTimerSong">Pausar\'dan Önce Şarkıyı Bitir</string>
   <string name="sleepTimerSongText">Zamanlayıcı sona erdiğinde müziği duraklatmadan önce çalma şarkısının bitmesine izin verir.</string>
+  <string name="transparent">Şeffaf</string>
+  <string name="selectPlayerBackground">Müzik çalar arka planı</string>
+  <string name="defaultText">Varsayılan</string>
 </resources>

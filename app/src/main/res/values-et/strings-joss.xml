@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">Läbipaistev</string>
+  <string name="selectPlayerBackground">Muusikamängija taust</string>
+  <string name="defaultText">Täitmata jätmine</string>
 </resources>

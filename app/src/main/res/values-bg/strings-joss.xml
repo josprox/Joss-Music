@@ -34,4 +34,7 @@
   <string name="transparentModeText">Активирайте или деактивирайте прозрачния режим в плейъра.</string>
   <string name="sleepTimerSong">Завършете песен преди Паузар</string>
   <string name="sleepTimerSongText">Тя позволява на песента да приключи, преди да спира музиката, когато таймерът изтече.</string>
+  <string name="transparent">Прозрачен</string>
+  <string name="selectPlayerBackground">Фон за музикален плейър</string>
+  <string name="defaultText">По подразбиране</string>
 </resources>

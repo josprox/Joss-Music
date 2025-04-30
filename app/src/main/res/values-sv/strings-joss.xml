@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">Transparent</string>
+  <string name="selectPlayerBackground">Musikspelares bakgrund</string>
+  <string name="defaultText">Standard</string>
 </resources>

@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">شفاف</string>
+  <string name="selectPlayerBackground">پس زمینه پخش کننده موسیقی</string>
+  <string name="defaultText">پیش فرض</string>
 </resources>

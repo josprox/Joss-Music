@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">Prozirni</string>
+  <string name="selectPlayerBackground">Muzička igrača pozadina</string>
+  <string name="defaultText">Podrazumevano</string>
 </resources>

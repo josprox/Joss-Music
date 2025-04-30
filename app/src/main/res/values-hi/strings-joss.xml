@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">पारदर्शी</string>
+  <string name="selectPlayerBackground">संगीत खिलाड़ी पृष्ठभूमि</string>
+  <string name="defaultText">गलती करना</string>
 </resources>

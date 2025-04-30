@@ -55,4 +55,7 @@
   <string name="transparentModeText">ਖਿਡਾਰੀ ਵਿੱਚ ਪਾਰਦਰਸ਼ੀ mode ੰਗ ਨੂੰ ਸਰਗਰਮ ਜਾਂ ਅਯੋਗ ਕਰੋ.</string>
   <string name="sleepTimerSong">ਪਾਖਰ ਤੋਂ ਪਹਿਲਾਂ ਗਾਣਾ ਪੂਰਾ ਕਰੋ</string>
   <string name="sleepTimerSongText">ਜਦੋਂ ਟਾਈਮਰ ਦੀ ਮਿਆਦ ਖਤਮ ਹੋ ਜਾਂਦੀ ਹੈ ਤਾਂ ਸੰਗੀਤ ਨੂੰ ਰੋਕਣ ਤੋਂ ਪਹਿਲਾਂ ਖੇਡਣ ਵਾਲੇ ਗਾਣੇ ਨੂੰ ਖਤਮ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿੰਦਾ ਹੈ.</string>
+  <string name="transparent">ਪਾਰਦਰਸ਼ੀ</string>
+  <string name="selectPlayerBackground">ਸੰਗੀਤ ਪਲੇਅਰ ਦੀ ਪਿੱਠਭੂਮੀ</string>
+  <string name="defaultText">ਮੂਲ</string>
 </resources>

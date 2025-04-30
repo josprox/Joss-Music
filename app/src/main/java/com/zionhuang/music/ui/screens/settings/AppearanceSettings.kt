@@ -263,7 +263,7 @@ fun AppearanceSettings(
         )
 
         EnumListPreference(
-            title = { Text("Selecciona el fondo del reproductor") },
+            title = { Text(stringResource(R.string.selectPlayerBackground)) },
             icon = {
                 Icon(
                     imageVector = when (playerBackgroundStyle) {
@@ -277,8 +277,8 @@ fun AppearanceSettings(
             onValueSelected = onPlayerBackgroundStyleChange,
             valueText = {
                 when (it) {
-                    PlayerBackgroundStyle.DEFAULT -> "Por defecto"
-                    PlayerBackgroundStyle.TRANSPARENT -> "Transparente"
+                    PlayerBackgroundStyle.DEFAULT -> stringResource(R.string.defaultText)
+                    PlayerBackgroundStyle.TRANSPARENT -> stringResource(R.string.transparent)
                 }
             }
         )

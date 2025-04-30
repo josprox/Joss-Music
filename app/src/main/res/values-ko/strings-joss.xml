@@ -34,4 +34,7 @@
   <string name="transparentModeText">플레이어에서 투명 모드를 활성화하거나 비활성화합니다.</string>
   <string name="sleepTimerSong">Pausar 전에 노래를 마칩니다</string>
   <string name="sleepTimerSongText">타이머가 만료되면 음악을 일시 중지하기 전에 재생 노래가 끝날 수 있습니다.</string>
+  <string name="transparent">투명한</string>
+  <string name="selectPlayerBackground">음악 플레이어 배경</string>
+  <string name="defaultText">기본</string>
 </resources>

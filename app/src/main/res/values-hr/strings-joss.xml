@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">Transparentan</string>
+  <string name="selectPlayerBackground">Pozadina glazbenog playera</string>
+  <string name="defaultText">Zadano</string>
 </resources>

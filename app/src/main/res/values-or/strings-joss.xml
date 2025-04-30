@@ -57,4 +57,7 @@
   <string name="transparentModeText">ପ୍ଲେୟାରରେ ସ୍ୱଚ୍ଛ ମୋଡ୍ ସକ୍ରିୟ କିମ୍ବା ନିଷ୍କ୍ରିୟ କରନ୍ତୁ |</string>
   <string name="sleepTimerSong">ପାରୁସର ପୂର୍ବରୁ ଗୀତ ଶେଷ କର |</string>
   <string name="sleepTimerSongText">ଏହା ସମୟ ସମାପ୍ତ ହେବା ପୂର୍ବରୁ ସଂଗୀତକୁ ବିରୋଧ କରିବା ପୂର୍ବରୁ ଶେଷ ହେବା ପୂର୍ବରୁ ଶେଷ କରିବାକୁ ଅନୁମତି ଦିଏ |</string>
+  <string name="transparent">ସ୍ୱଚ୍ଛ</string>
+  <string name="selectPlayerBackground">ସଂଗୀତ ଖେଳାଳି ପୃଷ୍ଠଭୂମି |</string>
+  <string name="defaultText">ଡିଫଲ୍ଟ |</string>
 </resources>

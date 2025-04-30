@@ -33,4 +33,7 @@
   <string name="transparentModeText">Activate or deactivate transparent mode in the player.</string>
   <string name="sleepTimerSong">Finish song before Pausar</string>
   <string name="sleepTimerSongText">It allows the playing song to end before pausing the music when the timer expires.</string>
+  <string name="transparent">Transparent</string>
+  <string name="selectPlayerBackground">Music player background</string>
+  <string name="defaultText">Default</string>
 </resources>

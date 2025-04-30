@@ -34,4 +34,7 @@
   <string name="transparentModeText">在玩家中激活或停用透明模式。</string>
   <string name="sleepTimerSong">Pausar之前的歌曲</string>
   <string name="sleepTimerSongText">它允许播放歌曲在计时器到期之前暂停音乐之前结束。</string>
+  <string name="transparent">透明的</string>
+  <string name="selectPlayerBackground">音乐播放器背景</string>
+  <string name="defaultText">默认</string>
 </resources>

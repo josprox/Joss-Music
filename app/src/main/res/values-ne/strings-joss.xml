@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  
+  <string name="transparent">वारपार देखिने</string>
+  <string name="selectPlayerBackground">संगीत प्लेयर पृष्ठभूमि</string>
+  <string name="defaultText">पुरा नगर्नु</string>
 </resources>

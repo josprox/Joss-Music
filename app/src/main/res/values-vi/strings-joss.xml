@@ -34,4 +34,7 @@
   <string name="transparentModeText">Kích hoạt hoặc hủy kích hoạt chế độ trong suốt trong trình phát.</string>
   <string name="sleepTimerSong">Kết thúc bài hát trước khi pausar</string>
   <string name="sleepTimerSongText">Nó cho phép bài hát chơi kết thúc trước khi tạm dừng âm nhạc khi bộ hẹn giờ hết hạn.</string>
+  <string name="transparent">Minh bạch</string>
+  <string name="selectPlayerBackground">Nền máy nghe nhạc</string>
+  <string name="defaultText">Mặc định</string>
 </resources>
