@@ -53,8 +53,8 @@ import com.zionhuang.music.constants.GridCellSize
 import com.zionhuang.music.constants.GridCellSizeKey
 import com.zionhuang.music.constants.SlimNavBarKey
 import com.zionhuang.music.constants.PlayerBackgroundStyle
+import com.zionhuang.music.constants.PlayerMode
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
-import com.zionhuang.music.constants.PlayerTransparent
 import com.zionhuang.music.constants.PureBlackKey
 import com.zionhuang.music.constants.SliderStyle
 import com.zionhuang.music.constants.SliderStyleKey
@@ -84,7 +84,7 @@ fun AppearanceSettings(
     val (gridCellSize, onGridCellSizeChange) = rememberEnumPreference(GridCellSizeKey, defaultValue = GridCellSize.SMALL)
     val (slimNav, onSlimNavChange) = rememberPreference(SlimNavBarKey, defaultValue = false)
     val (playerBackgroundStyle, onPlayerBackgroundStyleChange) = rememberEnumPreference(
-        key = PlayerTransparent,
+        key = PlayerMode,
         defaultValue = PlayerBackgroundStyle.DEFAULT
     )
 

@@ -69,8 +69,8 @@ import com.zionhuang.music.R
 import com.zionhuang.music.constants.DarkModeKey
 import com.zionhuang.music.constants.PlayerBackgroundStyle
 import com.zionhuang.music.constants.PlayerHorizontalPadding
+import com.zionhuang.music.constants.PlayerMode
 import com.zionhuang.music.constants.PlayerTextAlignmentKey
-import com.zionhuang.music.constants.PlayerTransparent
 import com.zionhuang.music.constants.PureBlackKey
 import com.zionhuang.music.constants.QueuePeekHeight
 import com.zionhuang.music.constants.ShowLyricsKey
@@ -81,9 +81,9 @@ import com.zionhuang.music.extensions.toggleRepeatMode
 import com.zionhuang.music.models.MediaMetadata
 import com.zionhuang.music.ui.component.BottomSheet
 import com.zionhuang.music.ui.component.BottomSheetState
+import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.ResizableIconButton
 import com.zionhuang.music.ui.component.rememberBottomSheetState
-import com.zionhuang.music.ui.menu.PlayerMenu
 import com.zionhuang.music.ui.screens.settings.DarkMode
 import com.zionhuang.music.ui.screens.settings.PlayerTextAlignment
 import com.zionhuang.music.utils.makeTimeString
@@ -92,7 +92,6 @@ import com.zionhuang.music.utils.rememberPreference
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import me.saket.squiggles.SquigglySlider
-import com.zionhuang.music.ui.component.LocalMenuState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -112,7 +111,7 @@ fun BottomSheetPlayer(
         useDarkTheme && pureBlack
     }
     val backgroundStyle by rememberEnumPreference(
-        key = PlayerTransparent,
+        key = PlayerMode,
         defaultValue = PlayerBackgroundStyle.DEFAULT
     )
 

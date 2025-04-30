@@ -182,7 +182,6 @@ dependencies {
     // Joss Music
     implementation(libs.onesignal)
     implementation(libs.dotenv.vault.kotlin)
-    implementation(libs.play.services.ads)
     implementation(libs.markwon)
     implementation(libs.markwon.html)
     implementation(libs.coil.compose.v240)
