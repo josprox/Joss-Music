@@ -12,27 +12,22 @@ import com.zionhuang.innertube.models.response.PlayerResponse
 import com.zionhuang.music.constants.AudioQuality
 import com.zionhuang.music.db.entities.FormatEntity
 import okhttp3.OkHttpClient
+import java.io.IOException
 
 object YTPlayerUtils {
+
+    class PlaybackException(
+        val statusCode: Int,
+        message: String,
+        cause: Throwable? = null
+    ) : Exception(message, cause)
 
     private val httpClient = OkHttpClient.Builder()
         .proxy(YouTube.proxy)
         .build()
 
-    /**
-     * El cliente principal se utiliza para los metadatos y las transmisiones iniciales.
-     * No se deben usar otros clientes para esto, ya que puede dar lugar a metadatos inconsistentes.
-     * Por ejemplo, otros clientes pueden tener objetivos de normalización diferentes (loudnessDb).
-     *
-     * [com.zionhuang.innertube.models.YouTubeClient.WEB_REMIX] debería ser el preferido aquí porque actualmente es el único cliente que proporciona:
-     * - los metadatos correctos (como loudnessDb)
-     * - formatos premium
-     */
     private val MAIN_CLIENT: YouTubeClient = WEB_REMIX
 
-    /**
-     * Clientes usados para transmisiones de respaldo en caso de que las del cliente principal no funcionen.
-     */
     private val STREAM_FALLBACK_CLIENTS: Array<YouTubeClient> = arrayOf(
         TVHTML5_SIMPLY_EMBEDDED_PLAYER,
         IOS,
@@ -46,11 +41,6 @@ object YTPlayerUtils {
         val streamExpiresInSeconds: Int,
     )
 
-    /**
-     * Respuesta de reproductor personalizada destinada para la reproducción.
-     * Los metadatos como audioConfig y videoDetails provienen de [MAIN_CLIENT].
-     * El formato y la transmisión pueden ser de [MAIN_CLIENT] o de [STREAM_FALLBACK_CLIENTS].
-     */
     suspend fun playerResponseForPlayback(
         videoId: String,
         playlistId: String? = null,
@@ -60,8 +50,31 @@ object YTPlayerUtils {
     ): Result<PlaybackData> = runCatching {
         val signatureTimestamp = getSignatureTimestampOrNull(videoId)
 
-        val mainPlayerResponse =
-            YouTube.player(videoId, playlistId, MAIN_CLIENT, signatureTimestamp).getOrThrow()
+        val mainPlayerResponse = YouTube.player(videoId, playlistId, MAIN_CLIENT, signatureTimestamp).getOrThrow()
+
+        // Manejar códigos de estado específicos del reproductor
+        mainPlayerResponse.playabilityStatus?.let { status ->
+            when (status.status) {
+                "ERROR" -> throw PlaybackException(
+                    statusCode = 403,
+                    message = status.reason ?: "Error de reproducción"
+                )
+                "UNPLAYABLE" -> throw PlaybackException(
+                    statusCode = 403,
+                    message = status.reason ?: "Contenido no reproducible"
+                )
+                "LOGIN_REQUIRED" -> throw PlaybackException(
+                    statusCode = 401,
+                    message = "Se requiere inicio de sesión"
+                )
+                "AGE_CHECK_REQUIRED" -> throw PlaybackException(
+                    statusCode = 403,
+                    message = "Verificación de edad requerida"
+                )
+
+                else -> {}
+            }
+        }
 
         val audioConfig = mainPlayerResponse.playerConfig?.audioConfig
         val videoDetails = mainPlayerResponse.videoDetails
@@ -87,7 +100,17 @@ object YTPlayerUtils {
                 YouTube.player(videoId, playlistId, client, signatureTimestamp).getOrNull()
             }
 
-            if (streamPlayerResponse?.playabilityStatus?.status != "OK") continue
+            if (streamPlayerResponse?.playabilityStatus?.status != "OK") {
+                val status = streamPlayerResponse?.playabilityStatus
+                throw PlaybackException(
+                    statusCode = when (status?.status) {
+                        "LOGIN_REQUIRED" -> 401
+                        "AGE_CHECK_REQUIRED" -> 403
+                        else -> 400
+                    },
+                    message = status?.reason ?: "Error desconocido al reproducir"
+                )
+            }
 
             format = findFormat(streamPlayerResponse, playedFormat, audioQuality, connectivityManager)
                 ?: continue
@@ -101,41 +124,36 @@ object YTPlayerUtils {
         }
 
         if (streamPlayerResponse == null) {
-            return Result.failure(Exception("No se obtuvo una respuesta válida del reproductor"))
+            throw PlaybackException(404, "No se obtuvo una respuesta válida del reproductor")
         }
 
-        // Si el estado no es OK, pero hay metadatos, devolverlos con error manejable
-        if (streamPlayerResponse.playabilityStatus.status != "OK") {
-            return Result.failure(
-                PlaybackException(
-                    streamPlayerResponse.playabilityStatus.reason ?: "Motivo desconocido",
-                    null,
-                    PlaybackException.ERROR_CODE_REMOTE_ERROR
-                )
-            )
-        }
-
-        // Validaciones finales de datos críticos
         if (streamExpiresInSeconds == null || format == null || streamUrl == null) {
-            return Result.failure(Exception("No se pudo obtener información completa de la transmisión"))
+            throw PlaybackException(500, "No se pudo obtener información completa de la transmisión")
         }
 
-        return Result.success(
-            PlaybackData(
-                audioConfig,
-                videoDetails,
-                format,
-                streamUrl,
-                streamExpiresInSeconds,
-            )
+        PlaybackData(
+            audioConfig,
+            videoDetails,
+            format,
+            streamUrl,
+            streamExpiresInSeconds,
         )
+    }.mapError { e ->
+        when (e) {
+            is PlaybackException -> e
+            is IOException -> PlaybackException(
+                statusCode = 503,
+                message = "Error de conexión: ${e.message}",
+                cause = e
+            )
+            else -> PlaybackException(
+                statusCode = 500,
+                message = "Error desconocido: ${e.message}",
+                cause = e
+            )
+        }
     }
 
-
-    /**
-     * Respuesta simple del reproductor destinada solo para metadatos.
-     * Las URLs de transmisión de esta respuesta podrían no funcionar, por lo que no deben usarse.
-     */
     suspend fun playerResponseForMetadata(
         videoId: String,
         playlistId: String? = null,
@@ -158,52 +176,45 @@ object YTPlayerUtils {
                         AudioQuality.AUTO -> if (connectivityManager.isActiveNetworkMetered) -1 else 1
                         AudioQuality.HIGH -> 1
                         AudioQuality.LOW -> -1
-                    } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0) // preferir flujo opus
+                    } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0)
                 }
         }
 
-    /**
-     * Verifica si la URL de transmisión devuelve un estado exitoso.
-     * Si esto devuelve true, la URL probablemente funcionará.
-     * Si esto devuelve false, la URL podría causar un error durante la reproducción.
-     */
     private fun validateStatus(url: String): Boolean {
-        try {
-            val requestBuilder = okhttp3.Request.Builder()
+        return try {
+            val request = okhttp3.Request.Builder()
                 .head()
                 .url(url)
-            val response = httpClient.newCall(requestBuilder.build()).execute()
-            return response.isSuccessful
+                .build()
+            val response = httpClient.newCall(request).execute()
+            response.use {
+                it.isSuccessful
+            }
         } catch (e: Exception) {
             reportException(e)
+            false
         }
-        return false
     }
 
-    /**
-     * Envoltura alrededor de la función [NewPipeUtils.getSignatureTimestamp] que informa excepciones.
-     */
-    private fun getSignatureTimestampOrNull(
-        videoId: String
-    ): Int? {
+    private fun getSignatureTimestampOrNull(videoId: String): Int? {
         return NewPipeUtils.getSignatureTimestamp(videoId)
-            .onFailure {
-                reportException(it)
-            }
+            .onFailure { reportException(it) }
             .getOrNull()
     }
 
-    /**
-     * Envoltura alrededor de la función [NewPipeUtils.getStreamUrl] que informa excepciones.
-     */
     private fun findUrlOrNull(
         format: PlayerResponse.StreamingData.Format,
         videoId: String
     ): String? {
         return NewPipeUtils.getStreamUrl(format, videoId)
-            .onFailure {
-                reportException(it)
-            }
+            .onFailure { reportException(it) }
             .getOrNull()
+    }
+
+    private inline fun <T> Result<T>.mapError(transform: (Throwable) -> Throwable): Result<T> {
+        return when {
+            isSuccess -> this
+            else -> Result.failure(transform(exceptionOrNull()!!))
+        }
     }
 }

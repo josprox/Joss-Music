@@ -692,7 +692,7 @@ class MusicService : MediaLibraryService(),
         return ResolvingDataSource.Factory(createCacheDataSource()) { dataSpec ->
             val mediaId = dataSpec.key ?: error("No media id")
 
-            // 1. Verificar si está en caché local
+            // 1. Verificar si está en caché local (sólo para descargas)
             if (downloadCache.isCached(
                     mediaId,
                     dataSpec.position,
@@ -715,37 +715,69 @@ class MusicService : MediaLibraryService(),
                 try {
                     val alternativeUrl = JossRedClient.getStreamingUrl(mediaId)
                     Timber.i("Usando Joss Red para reproducción")
-                    Timber.i("Usando la URL alternativa: $alternativeUrl")
+                    Timber.i("URL alternativa: $alternativeUrl")
                     scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                     return@Factory dataSpec.withUri(alternativeUrl.toUri())
                 } catch (e: Exception) {
-                    Timber.e(e, "Error con fuente alternativa, intentando YouTube")
+                    when {
+                        e is JossRedClient.JossRedException && e.statusCode == 403 -> {
+                            Timber.w("Error 403 en JossRed, continuando con YouTube")
+                        }
+                        e is JossRedClient.JossRedException && e.statusCode in 400..499 -> {
+                            Timber.w("Error ${e.statusCode} en JossRed, continuando con YouTube")
+                            throw PlaybackException("Error en fuente alternativa", e, PlaybackException.ERROR_CODE_IO_BAD_HTTP_STATUS)
+                        }
+                        else -> {
+                            Timber.e(e, "Error con fuente alternativa, intentando YouTube")
+                        }
+                    }
                 }
             }
 
-            // 3. Fuente predeterminada: YouTube
-            val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
-            val playbackData = runBlocking(Dispatchers.IO) {
-                YTPlayerUtils.playerResponseForPlayback(
-                    mediaId,
-                    playedFormat = playedFormat,
-                    audioQuality = audioQuality,
-                    connectivityManager = connectivityManager,
-                )
-            }.getOrElse { throwable ->
-                handlePlaybackError(throwable)
+            // 3. Fuente predeterminada: YouTube con reintentos para errores 403
+            var retryCount = 0
+            var lastError: Throwable? = null
+
+            while (retryCount < 4) {
+                try {
+                    val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
+                    val playbackData = runBlocking(Dispatchers.IO) {
+                        YTPlayerUtils.playerResponseForPlayback(
+                            mediaId,
+                            playedFormat = playedFormat,
+                            audioQuality = audioQuality,
+                            connectivityManager = connectivityManager,
+                        ).getOrThrow()
+                    }
+
+                    // Actualizar metadatos
+                    updateFormatInfo(mediaId, playbackData.format, playbackData.audioConfig?.loudnessDb)
+                    scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData) }
+
+                    // Mostrar la URL de reproducción
+                    val streamUrl = playbackData.streamUrl
+                    Timber.i("URL de streaming obtenida (intento ${retryCount + 1}): $streamUrl")
+
+                    // Devolver DataSpec actualizado (sin cachear)
+                    return@Factory dataSpec
+                        .withUri(streamUrl.toUri())
+
+                } catch (e: Exception) {
+                    lastError = e
+                    when {
+                        e is YTPlayerUtils.PlaybackException && e.statusCode == 403 -> {
+                            retryCount++
+                            if (retryCount < 4) {
+                                Timber.w("Error 403 en streaming (intento $retryCount), reintentando...")
+                            }
+                        }
+                        else -> break // Otro tipo de error, salir del bucle
+                    }
+                }
             }
 
-            // Actualizar metadatos
-            updateFormatInfo(mediaId, playbackData.format, playbackData.audioConfig?.loudnessDb)
-            scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData) }
-
-            // Mostrar la URL de reproducción
-            val streamUrl = playbackData.streamUrl
-            Timber.i("Usando la URL de YouTube: $streamUrl")
-
-            // Devolver DataSpec actualizado
-            return@Factory dataSpec.withUri(streamUrl.toUri())
+            // Si llegamos aquí es porque fallaron todos los reintentos o hubo otro error
+            handlePlaybackError(lastError ?: Exception("Error desconocido al obtener URL de streaming"))
         }
     }
 
