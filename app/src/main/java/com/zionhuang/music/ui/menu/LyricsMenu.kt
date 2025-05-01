@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Intent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -123,42 +124,56 @@ fun LyricsMenu(
             icon = { Icon(painter = painterResource(R.drawable.search), contentDescription = null) },
             title = { Text(stringResource(R.string.search_lyrics)) },
             buttons = {
-                TextButton(
-                    onClick = { showSearchDialog = false }
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(stringResource(android.R.string.cancel))
-                }
+                    // Botón Buscar Online (arriba, ocupa todo el ancho)
+                    TextButton(
+                        onClick = {
+                            showSearchDialog = false
+                            onDismiss()
+                            try {
+                                context.startActivity(
+                                    Intent(Intent.ACTION_WEB_SEARCH).apply {
+                                        putExtra(SearchManager.QUERY, "${artistField.text} ${titleField.text} lyrics")
+                                    }
+                                )
+                            } catch (_: Exception) {
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(R.string.search_online))
+                    }
 
-                Spacer(Modifier.width(8.dp))
+                    // Fila con Cancelar y Aceptar
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        TextButton(
+                            onClick = { showSearchDialog = false },
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(stringResource(android.R.string.cancel))
+                        }
 
-                TextButton(
-                    onClick = {
-                        showSearchDialog = false
-                        onDismiss()
-                        try {
-                            context.startActivity(
-                                Intent(Intent.ACTION_WEB_SEARCH).apply {
-                                    putExtra(SearchManager.QUERY, "${artistField.text} ${titleField.text} lyrics")
-                                }
-                            )
-                        } catch (_: Exception) {
+                        Spacer(Modifier.width(8.dp))
+
+                        TextButton(
+                            onClick = {
+                                viewModel.search(searchMediaMetadata.id, titleField.text, artistField.text, searchMediaMetadata.duration)
+                                showSearchResultDialog = true
+                            },
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(stringResource(android.R.string.ok))
                         }
                     }
-                ) {
-                    Text(stringResource(R.string.search_online))
-                }
-
-                Spacer(Modifier.width(8.dp))
-
-                TextButton(
-                    onClick = {
-                        viewModel.search(searchMediaMetadata.id, titleField.text, artistField.text, searchMediaMetadata.duration)
-                        showSearchResultDialog = true
-                    }
-                ) {
-                    Text(stringResource(android.R.string.ok))
                 }
             }
+
         ) {
             OutlinedTextField(
                 value = titleField,
