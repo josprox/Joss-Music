@@ -692,24 +692,30 @@ class MusicService : MediaLibraryService(),
         return ResolvingDataSource.Factory(createCacheDataSource()) { dataSpec ->
             val mediaId = dataSpec.key ?: error("No media id")
 
-            // 1. Primero verificar si está descargado localmente
-            if (downloadCache.isCached(mediaId, dataSpec.position, if (dataSpec.length >= 0) dataSpec.length else 1)) {
+            // 1. Verificar si está en caché local
+            if (downloadCache.isCached(
+                    mediaId,
+                    dataSpec.position,
+                    if (dataSpec.length >= 0) dataSpec.length else 1
+                )
+            ) {
                 scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                 return@Factory dataSpec // Usar la versión descargada
             }
 
-            // 2. Si no está descargado, obtener URL de streaming fresca
+            // 2. Consultar si se debe usar fuente alternativa
             val useAlternativeSource = runBlocking {
                 dataStore.data.map { preferences ->
                     preferences[JossRedMultimedia] ?: false
                 }.first()
             }
 
-            // Opción de fuente alternativa (JossRed)
+            // Fuente alternativa: JossRed
             if (useAlternativeSource) {
                 try {
                     val alternativeUrl = JossRedClient.getStreamingUrl(mediaId)
                     Timber.i("Usando Joss Red para reproducción")
+                    Timber.i("Usando la URL alternativa: $alternativeUrl")
                     scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
                     return@Factory dataSpec.withUri(alternativeUrl.toUri())
                 } catch (e: Exception) {
@@ -717,7 +723,7 @@ class MusicService : MediaLibraryService(),
                 }
             }
 
-            // Obtener URL de YouTube directamente
+            // 3. Fuente predeterminada: YouTube
             val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
             val playbackData = runBlocking(Dispatchers.IO) {
                 YTPlayerUtils.playerResponseForPlayback(
@@ -730,12 +736,16 @@ class MusicService : MediaLibraryService(),
                 handlePlaybackError(throwable)
             }
 
-            // Actualizar metadatos del formato (sin almacenar la URL)
+            // Actualizar metadatos
             updateFormatInfo(mediaId, playbackData.format, playbackData.audioConfig?.loudnessDb)
             scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData) }
 
-            // Usar URL de streaming fresca
-            dataSpec.withUri(playbackData.streamUrl.toUri()).subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
+            // Mostrar la URL de reproducción
+            val streamUrl = playbackData.streamUrl
+            Timber.i("Usando la URL de YouTube: $streamUrl")
+
+            // Devolver DataSpec actualizado
+            return@Factory dataSpec.withUri(streamUrl.toUri())
         }
     }
 

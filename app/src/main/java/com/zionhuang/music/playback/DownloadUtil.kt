@@ -62,48 +62,77 @@ class DownloadUtil @Inject constructor(
     ) { dataSpec ->
         val mediaId = dataSpec.key ?: error("No media id")
         val length = if (dataSpec.length >= 0) dataSpec.length else 1
+
+        // 1. Si ya está en cache local, no se hace nada más.
         if (playerCache.isCached(mediaId, dataSpec.position, length)) {
             return@Factory dataSpec
         }
 
-        songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
-            return@Factory dataSpec.withUri(it.first.toUri())
+        // La opción 2 está deshabilitado ya que ahora no usaremos cache de las canciones, evitamos problemas de desofuscación.
+        // 2. Si está en el songUrlCache y no ha expirado, usamos esa URL.
+//        songUrlCache[mediaId]?.takeIf { it.second > System.currentTimeMillis() }?.let {
+//            return@Factory dataSpec.withUri(it.first.toUri())
+//        }
+
+        var lastError: Exception? = null
+
+        repeat(3) retry@{ attempt ->
+            try {
+                // 3. Obtener formato reproducido previamente (desde BD)
+                val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
+
+                // 4. Pedir nueva URL con lógica actual
+                val playbackData = runBlocking(Dispatchers.IO) {
+                    YTPlayerUtils.playerResponseForPlayback(
+                        mediaId,
+                        playedFormat = playedFormat,
+                        audioQuality = audioQuality,
+                        connectivityManager = connectivityManager,
+                    )
+                }.getOrThrow()
+
+                val format = playbackData.format
+
+                // Guardar formato actualizado en la base de datos
+                database.query {
+                    upsert(
+                        FormatEntity(
+                            id = mediaId,
+                            itag = format.itag,
+                            mimeType = format.mimeType.split(";")[0],
+                            codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
+                            bitrate = format.bitrate,
+                            sampleRate = format.audioSampleRate,
+                            contentLength = format.contentLength!!,
+                            loudnessDb = playbackData.audioConfig?.loudnessDb,
+                        )
+                    )
+                }
+
+                // Generar la URL final con rango forzado
+                val streamUrl = playbackData.streamUrl.let {
+                    "${it}&range=0-${format.contentLength ?: 10000000}"
+                }
+
+                // Cachear la URL hasta que expire
+                songUrlCache[mediaId] = streamUrl to System.currentTimeMillis() + (playbackData.streamExpiresInSeconds * 1000L)
+
+                // Retornar nuevo DataSpec con la URL resuelta
+                return@Factory dataSpec.withUri(streamUrl.toUri())
+
+            } catch (e: Exception) {
+                lastError = e
+
+                // Si no es error 403, no tiene sentido reintentar
+                val is403 = e.message?.contains("403") == true || e.message?.contains("Forbidden") == true
+                if (!is403) return@Factory dataSpec // usar el original (fallará, pero se verá en logs)
+            }
         }
 
-        val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
-        val playbackData = runBlocking(Dispatchers.IO) {
-            YTPlayerUtils.playerResponseForPlayback(
-                mediaId,
-                playedFormat = playedFormat,
-                audioQuality = audioQuality,
-                connectivityManager = connectivityManager,
-            )
-        }.getOrThrow()
-        val format = playbackData.format
-
-        database.query {
-            upsert(
-                FormatEntity(
-                    id = mediaId,
-                    itag = format.itag,
-                    mimeType = format.mimeType.split(";")[0],
-                    codecs = format.mimeType.split("codecs=")[1].removeSurrounding("\""),
-                    bitrate = format.bitrate,
-                    sampleRate = format.audioSampleRate,
-                    contentLength = format.contentLength!!,
-                    loudnessDb = playbackData.audioConfig?.loudnessDb,
-                )
-            )
-        }
-
-        val streamUrl = playbackData.streamUrl.let {
-            // Specify range to avoid YouTube's throttling
-            "${it}&range=0-${format.contentLength ?: 10000000}"
-        }
-
-        songUrlCache[mediaId] = streamUrl to System.currentTimeMillis() + (playbackData.streamExpiresInSeconds * 1000L)
-        dataSpec.withUri(streamUrl.toUri())
+        // Si se llegó aquí, falló 3 veces: regresar el DataSpec original sin tocar nada (se maneja como error en otro lado si aplica)
+        return@Factory dataSpec
     }
+
     val downloadNotificationHelper = DownloadNotificationHelper(context, ExoDownloadService.CHANNEL_ID)
     val downloadManager: DownloadManager = DownloadManager(context, databaseProvider, downloadCache, dataSourceFactory, Executor(Runnable::run)).apply {
         maxParallelDownloads = 3

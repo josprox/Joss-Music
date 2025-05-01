@@ -58,12 +58,6 @@ object YTPlayerUtils {
         audioQuality: AudioQuality,
         connectivityManager: ConnectivityManager,
     ): Result<PlaybackData> = runCatching {
-        /**
-         * Esto es necesario para que algunos clientes obtengan transmisiones funcionales, sin embargo,
-         * no debería forzarse para el [MAIN_CLIENT], ya que se requiere la respuesta de este cliente
-         * incluso si las transmisiones no funcionan.
-         * Por esto, se permite que sea nulo.
-         */
         val signatureTimestamp = getSignatureTimestampOrNull(videoId)
 
         val mainPlayerResponse =
@@ -77,79 +71,66 @@ object YTPlayerUtils {
         var streamExpiresInSeconds: Int? = null
 
         var streamPlayerResponse: PlayerResponse? = null
+
         for (clientIndex in (-1 until STREAM_FALLBACK_CLIENTS.size)) {
-            // reiniciar para cada cliente
             format = null
             streamUrl = null
             streamExpiresInSeconds = null
 
-            // decidir qué cliente usar
-            if (clientIndex == -1) {
-                // intentar primero con transmisiones del cliente principal
-                streamPlayerResponse = mainPlayerResponse
+            streamPlayerResponse = if (clientIndex == -1) {
+                mainPlayerResponse
             } else {
-                // después del cliente principal, usar clientes de respaldo
                 val client = STREAM_FALLBACK_CLIENTS[clientIndex]
                 if (client.loginRequired && YouTube.cookie == null) {
-                    // omitir cliente si requiere inicio de sesión pero el usuario no está conectado
                     continue
                 }
-
-                streamPlayerResponse =
-                    YouTube.player(videoId, playlistId, client, signatureTimestamp).getOrNull()
+                YouTube.player(videoId, playlistId, client, signatureTimestamp).getOrNull()
             }
 
-            // procesar la respuesta del cliente actual
-            if (streamPlayerResponse?.playabilityStatus?.status == "OK") {
-                format =
-                    findFormat(
-                        streamPlayerResponse,
-                        playedFormat,
-                        audioQuality,
-                        connectivityManager,
-                    ) ?: continue
-                streamUrl = findUrlOrNull(format, videoId) ?: continue
-                streamExpiresInSeconds = streamPlayerResponse.streamingData?.expiresInSeconds ?: continue
+            if (streamPlayerResponse?.playabilityStatus?.status != "OK") continue
 
-                if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1) {
-                    /** omitir [validateStatus] para el último cliente */
-                    break
-                }
-                if (validateStatus(streamUrl)) {
-                    // se encontró una transmisión funcional
-                    break
-                }
+            format = findFormat(streamPlayerResponse, playedFormat, audioQuality, connectivityManager)
+                ?: continue
+
+            streamUrl = findUrlOrNull(format, videoId) ?: continue
+            streamExpiresInSeconds = streamPlayerResponse.streamingData?.expiresInSeconds ?: continue
+
+            if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || validateStatus(streamUrl)) {
+                break
             }
         }
 
         if (streamPlayerResponse == null) {
-            throw Exception("Respuesta del reproductor de transmisiones inválida")
-        }
-        if (streamPlayerResponse.playabilityStatus.status != "OK") {
-            throw PlaybackException(
-                streamPlayerResponse.playabilityStatus.reason,
-                null,
-                PlaybackException.ERROR_CODE_REMOTE_ERROR
-            )
-        }
-        if (streamExpiresInSeconds == null) {
-            throw Exception("Falta el tiempo de expiración de la transmisión")
-        }
-        if (format == null) {
-            throw Exception("No se pudo encontrar el formato")
-        }
-        if (streamUrl == null) {
-            throw Exception("No se pudo encontrar la URL de transmisión")
+            return Result.failure(Exception("No se obtuvo una respuesta válida del reproductor"))
         }
 
-        PlaybackData(
-            audioConfig,
-            videoDetails,
-            format,
-            streamUrl,
-            streamExpiresInSeconds,
+        // Si el estado no es OK, pero hay metadatos, devolverlos con error manejable
+        if (streamPlayerResponse.playabilityStatus.status != "OK") {
+            return Result.failure(
+                PlaybackException(
+                    streamPlayerResponse.playabilityStatus.reason ?: "Motivo desconocido",
+                    null,
+                    PlaybackException.ERROR_CODE_REMOTE_ERROR
+                )
+            )
+        }
+
+        // Validaciones finales de datos críticos
+        if (streamExpiresInSeconds == null || format == null || streamUrl == null) {
+            return Result.failure(Exception("No se pudo obtener información completa de la transmisión"))
+        }
+
+        return Result.success(
+            PlaybackData(
+                audioConfig,
+                videoDetails,
+                format,
+                streamUrl,
+                streamExpiresInSeconds,
+            )
         )
     }
+
 
     /**
      * Respuesta simple del reproductor destinada solo para metadatos.
