@@ -925,12 +925,6 @@ class MainActivity : ComponentActivity() {
             isAppearanceLightStatusBars = !isDark
             isAppearanceLightNavigationBars = !isDark
         }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            window.statusBarColor = (if (isDark) Color.Transparent else Color.Black.copy(alpha = 0.2f)).toArgb()
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            window.navigationBarColor = (if (isDark) Color.Transparent else Color.Black.copy(alpha = 0.2f)).toArgb()
-        }
     }
 
     private fun handleDeepLink(intent: Intent?) {
