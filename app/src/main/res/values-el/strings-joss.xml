@@ -39,4 +39,8 @@
   <string name="defaultText">Αθέτηση</string>
   <string name="slim_navbar_title">Λεπτή γραμμή πλοήγησης</string>
   <string name="slim_navbar_description">Εξαλείψτε τις ετικέτες κειμένου για να μειώσετε το ύψος της γραμμής πλοήγησης</string>
+  <string name="usingJossRedMusicPlayback">Χρήση Joss Red για αναπαραγωγή μουσικής</string>
+  <string name="errorJossRed403">Σφάλμα 403 στο Jossred, συνεχίζοντας με ροή από το YouTube</string>
+  <string name="errorAlternativeSource">Σφάλμα στην εναλλακτική πηγή</string>
+  <string name="errorAlternativeSourceTryYT">Σφάλμα με εναλλακτική πηγή, δοκιμάζοντας το YouTube</string>
 </resources>

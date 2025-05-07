@@ -39,4 +39,8 @@
   <string name="defaultText">تقصير</string>
   <string name="slim_navbar_title">شريط التنقل الرقيق</string>
   <string name="slim_navbar_description">قم بإزالة الملصقات النصية لتقليل ارتفاع شريط التنقل</string>
+  <string name="usingJossRedMusicPlayback">باستخدام جوس الأحمر لتكاثر الموسيقى</string>
+  <string name="errorJossRed403">خطأ 403 في jossred ، والاستمرار مع البث بواسطة YouTube</string>
+  <string name="errorAlternativeSource">خطأ في المصدر البديل</string>
+  <string name="errorAlternativeSourceTryYT">خطأ مع مصدر بديل ، تجربة يوتيوب</string>
 </resources>

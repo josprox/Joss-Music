@@ -39,4 +39,8 @@
   <string name="defaultText">Mặc định</string>
   <string name="slim_navbar_title">Thanh điều hướng mỏng</string>
   <string name="slim_navbar_description">Loại bỏ nhãn văn bản để giảm chiều cao của thanh điều hướng</string>
+  <string name="usingJossRedMusicPlayback">Sử dụng Joss Red để tái tạo âm nhạc</string>
+  <string name="errorJossRed403">Lỗi 403 trong Jossred, tiếp tục phát trực tuyến bởi YouTube</string>
+  <string name="errorAlternativeSource">Lỗi trong nguồn thay thế</string>
+  <string name="errorAlternativeSourceTryYT">Lỗi với nguồn thay thế, thử YouTube</string>
 </resources>

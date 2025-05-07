@@ -63,4 +63,8 @@
   <string name="defaultText">Недахоп</string>
   <string name="slim_navbar_title">Тонкая навігацыйная планка</string>
   <string name="slim_navbar_description">Выключыце тэкставыя ярлыкі, каб паменшыць вышыню панэлі навігацыі</string>
+  <string name="usingJossRedMusicPlayback">Выкарыстанне Joss Red для размнажэння музыкі</string>
+  <string name="errorJossRed403">Памылка 403 у Jossred, працягваючы трансляцыю на YouTube</string>
+  <string name="errorAlternativeSource">Памылка ў альтэрнатыўнай крыніцы</string>
+  <string name="errorAlternativeSourceTryYT">Памылка з альтэрнатыўнай крыніцай, спрабуючы YouTube</string>
 </resources>

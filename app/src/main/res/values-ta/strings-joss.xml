@@ -5,4 +5,8 @@
   <string name="defaultText">இயல்புநிலை</string>
   <string name="slim_navbar_title">மெல்லிய வழிசெலுத்தல் பட்டி</string>
   <string name="slim_navbar_description">வழிசெலுத்தல் பட்டியின் உயரத்தைக் குறைக்க உரை லேபிள்களை அகற்றவும்</string>
+  <string name="usingJossRedMusicPlayback">இசை இனப்பெருக்கம் ஜோஸ் ரெட் பயன்படுத்துதல்</string>
+  <string name="errorJossRed403">YouTube ஆல் ஸ்ட்ரீமிங்கைத் தொடரும் ஜாஸில் பிழை 403</string>
+  <string name="errorAlternativeSource">மாற்று மூலத்தில் பிழை</string>
+  <string name="errorAlternativeSourceTryYT">மாற்று மூலத்துடன் பிழை, YouTube ஐ முயற்சிக்கிறது</string>
 </resources>

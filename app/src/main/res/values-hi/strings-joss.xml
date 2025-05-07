@@ -5,4 +5,8 @@
   <string name="defaultText">गलती करना</string>
   <string name="slim_navbar_title">पतली नेविगेशन बार</string>
   <string name="slim_navbar_description">नेविगेशन बार की ऊंचाई को कम करने के लिए टेक्स्ट लेबल को हटा दें</string>
+  <string name="usingJossRedMusicPlayback">संगीत प्रजनन के लिए जॉस रेड का उपयोग करना</string>
+  <string name="errorJossRed403">YouTube द्वारा स्ट्रीमिंग के साथ जारी, Jossred में 403</string>
+  <string name="errorAlternativeSource">वैकल्पिक स्रोत में त्रुटि</string>
+  <string name="errorAlternativeSourceTryYT">वैकल्पिक स्रोत के साथ त्रुटि, YouTube की कोशिश कर रहा है</string>
 </resources>

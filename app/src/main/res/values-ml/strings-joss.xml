@@ -40,4 +40,8 @@
   <string name="defaultText">കുറ്റം</string>
   <string name="slim_navbar_title">നേർത്ത നാവിഗേഷൻ ബാർ</string>
   <string name="slim_navbar_description">നാവിഗേഷൻ ബാറിന്റെ ഉയരം കുറയ്ക്കുന്നതിന് വാചക ലേബലുകൾ ഇല്ലാതാക്കുക</string>
+  <string name="usingJossRedMusicPlayback">സംഗീത പുനരുൽപാദനത്തിനായി ജോസ് ചുവപ്പ് ഉപയോഗിക്കുന്നു</string>
+  <string name="errorJossRed403">JOSSOT ൽ പിശക് 403, YouTube സ്ട്രീമിംഗ് തുടരുന്നത്</string>
+  <string name="errorAlternativeSource">ബദൽ ഉറവിടത്തിലെ പിശക്</string>
+  <string name="errorAlternativeSourceTryYT">ഇതര ഉറവിടം ഉപയോഗിച്ച് പിശക്, YouTube ശ്രമിക്കുന്നു</string>
 </resources>

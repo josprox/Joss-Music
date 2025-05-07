@@ -5,4 +5,8 @@
   <string name="defaultText">Standard</string>
   <string name="slim_navbar_title">Tunn navigationsfält</string>
   <string name="slim_navbar_description">Eliminera textetiketter för att minska höjden på navigeringsfältet</string>
+  <string name="usingJossRedMusicPlayback">Använda Joss Red for Music Reproduktion</string>
+  <string name="errorJossRed403">Fel 403 i Josred, fortsätter med streaming av YouTube</string>
+  <string name="errorAlternativeSource">Fel i den alternativa källan</string>
+  <string name="errorAlternativeSourceTryYT">Fel med alternativ källa, prova YouTube</string>
 </resources>

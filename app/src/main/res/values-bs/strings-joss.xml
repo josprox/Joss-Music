@@ -5,4 +5,8 @@
   <string name="defaultText">Podrazumevano</string>
   <string name="slim_navbar_title">Tanka navigacijska traka</string>
   <string name="slim_navbar_description">Uklonite tekstualne naljepnice za smanjenje visine navigacijskog trake</string>
+  <string name="usingJossRedMusicPlayback">Korištenje Joss Red za reprodukciju muzike</string>
+  <string name="errorJossRed403">GREŠKA 403 u Josred, nastavljajući s streaming YouTubeom</string>
+  <string name="errorAlternativeSource">Greška u alternativnom izvoru</string>
+  <string name="errorAlternativeSourceTryYT">Pogreška sa alternativnim izvorom, pokušavajući YouTube</string>
 </resources>

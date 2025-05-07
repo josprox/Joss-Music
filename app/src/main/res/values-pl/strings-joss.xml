@@ -39,4 +39,8 @@
   <string name="defaultText">Domyślny</string>
   <string name="slim_navbar_title">Cienki pasek nawigacyjny</string>
   <string name="slim_navbar_description">Wyeliminuj etykiety tekstowe, aby zmniejszyć wysokość paska nawigacyjnego</string>
+  <string name="usingJossRedMusicPlayback">Używanie Joss Red do reprodukcji muzyki</string>
+  <string name="errorJossRed403">Błąd 403 w Jossred, kontynuujący strumieniowanie przez YouTube</string>
+  <string name="errorAlternativeSource">Błąd w alternatywnym źródle</string>
+  <string name="errorAlternativeSourceTryYT">Błąd z alternatywnym źródłem, wypróbowanie YouTube</string>
 </resources>

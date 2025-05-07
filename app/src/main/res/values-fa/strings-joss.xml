@@ -5,4 +5,8 @@
   <string name="defaultText">پیش فرض</string>
   <string name="slim_navbar_title">نوار ناوبری نازک</string>
   <string name="slim_navbar_description">برچسب های متن را برای کاهش ارتفاع نوار ناوبری از بین ببرید</string>
+  <string name="usingJossRedMusicPlayback">استفاده از Joss Red برای تولید مثل موسیقی</string>
+  <string name="errorJossRed403">خطای 403 در Jossred ، ادامه با جریان توسط YouTube</string>
+  <string name="errorAlternativeSource">خطا در منبع جایگزین</string>
+  <string name="errorAlternativeSourceTryYT">خطا با منبع جایگزین ، تلاش برای یوتیوب</string>
 </resources>

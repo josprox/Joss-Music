@@ -39,4 +39,8 @@
   <string name="defaultText">Výchozí</string>
   <string name="slim_navbar_title">Tenká navigační lišta</string>
   <string name="slim_navbar_description">Eliminujte textové štítky pro snížení výšky navigačního panelu</string>
+  <string name="usingJossRedMusicPlayback">Použití Joss Red pro reprodukci hudby</string>
+  <string name="errorJossRed403">Chyba 403 v Jossaredu, pokračování streamování na YouTube</string>
+  <string name="errorAlternativeSource">Chyba v alternativním zdroji</string>
+  <string name="errorAlternativeSourceTryYT">Chyba s alternativním zdrojem, vyzkoušet YouTube</string>
 </resources>

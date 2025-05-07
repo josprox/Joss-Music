@@ -5,4 +5,8 @@
   <string name="defaultText">Predefinito</string>
   <string name="slim_navbar_title">Barra di navigazione sottile</string>
   <string name="slim_navbar_description">Elimina le etichette di testo per ridurre l\'altezza della barra di navigazione</string>
+  <string name="usingJossRedMusicPlayback">Utilizzo di Joss Red per la riproduzione della musica</string>
+  <string name="errorJossRed403">Errore 403 in Jossred, continuando con lo streaming di YouTube</string>
+  <string name="errorAlternativeSource">Errore nella fonte alternativa</string>
+  <string name="errorAlternativeSourceTryYT">Errore con fonte alternativa, provando YouTube</string>
 </resources>

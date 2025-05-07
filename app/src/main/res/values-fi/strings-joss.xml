@@ -39,4 +39,8 @@
   <string name="defaultText">Laiminlyönti</string>
   <string name="slim_navbar_title">Ohut navigointipalkki</string>
   <string name="slim_navbar_description">Poista tekstimerkinnät navigointipalkin korkeuden vähentämiseksi</string>
+  <string name="usingJossRedMusicPlayback">Joss Red käyttämällä musiikin jäljentää</string>
+  <string name="errorJossRed403">Virhe 403 Jossredissa jatkuu suoratoistolla YouTube</string>
+  <string name="errorAlternativeSource">Virhe vaihtoehtoisessa lähteessä</string>
+  <string name="errorAlternativeSourceTryYT">Virhe vaihtoehtoisella lähteellä, YouTube -yrittäminen</string>
 </resources>

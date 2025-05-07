@@ -5,4 +5,8 @@
   <string name="defaultText">Täitmata jätmine</string>
   <string name="slim_navbar_title">Õhuke navigeerimisriba</string>
   <string name="slim_navbar_description">Navigeerimisriba kõrguse vähendamiseks kõrvaldage tekstisildid</string>
+  <string name="usingJossRedMusicPlayback">Joss Redi kasutamine muusika reprodutseerimiseks</string>
+  <string name="errorJossRed403">Viga 403 Jossredis, jätkates YouTube\'i voogesitust</string>
+  <string name="errorAlternativeSource">Viga alternatiivse allika korral</string>
+  <string name="errorAlternativeSourceTryYT">Viga alternatiivse allikaga, proovides YouTube\'i</string>
 </resources>

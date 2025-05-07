@@ -715,34 +715,27 @@ class MusicService : MediaLibraryService(),
 
             if (useAlternativeSource) {
                 try {
-                    val alternativeUrl = JossRedClient.getStreamingUrl(mediaId, JossRedKey)
-                    Timber.i("Usando Joss Red para reproducción")
-                    Timber.i("URL alternativa: $alternativeUrl")
+                    Timber.i(getString(R.string.usingJossRedMusicPlayback))
 
                     scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
 
-                    // Solo para JossRed, inyectamos el header
-                    val modifiedDataSpec = dataSpec.buildUpon()
-                        .setUri(alternativeUrl.toUri())
-                        .setHttpRequestHeaders(mapOf("X-JossRed-Auth" to JossRedKey))
-                        .build()
-
+                    val modifiedDataSpec = JossRedClient.resolveDataSpec(dataSpec, mediaId, JossRedKey)
                     return@Factory modifiedDataSpec
 
                 } catch (e: Exception) {
                     when {
                         e is JossRedClient.JossRedException && e.statusCode == 403 -> {
-                            Timber.w("Error 403 en JossRed, continuando con YouTube")
+                            Timber.w(getString(R.string.errorJossRed403))
                         }
                         e is JossRedClient.JossRedException && e.statusCode in 400..499 -> {
                             Timber.w("Error ${e.statusCode} en JossRed, continuando con YouTube")
                             throw PlaybackException(
-                                "Error en fuente alternativa", e,
+                                getString(R.string.errorAlternativeSource), e,
                                 PlaybackException.ERROR_CODE_IO_BAD_HTTP_STATUS
                             )
                         }
                         else -> {
-                            Timber.e(e, "Error con fuente alternativa, intentando YouTube")
+                            Timber.e(e, getString(R.string.errorAlternativeSourceTryYT))
                         }
                     }
                 }

@@ -5,4 +5,8 @@
   <string name="defaultText">Padrão</string>
   <string name="slim_navbar_title">Barra de navegação fina</string>
   <string name="slim_navbar_description">Elimine os rótulos de texto para reduzir a altura da barra de navegação</string>
+  <string name="usingJossRedMusicPlayback">Usando Joss Red para reprodução musical</string>
+  <string name="errorJossRed403">Erro 403 em Jossred, continuando com streaming by youtube</string>
+  <string name="errorAlternativeSource">Erro na fonte alternativa</string>
+  <string name="errorAlternativeSourceTryYT">Erro com fonte alternativa, experimentando o YouTube</string>
 </resources>

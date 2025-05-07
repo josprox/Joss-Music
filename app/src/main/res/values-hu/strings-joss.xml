@@ -52,4 +52,8 @@
   <string name="defaultText">Mulasztás</string>
   <string name="slim_navbar_title">Vékony navigációs sáv</string>
   <string name="slim_navbar_description">Távolítsa el a szöveges címkéket a navigációs sáv magasságának csökkentése érdekében</string>
+  <string name="usingJossRedMusicPlayback">A Joss Red használatával a zenei reprodukcióhoz</string>
+  <string name="errorJossRed403">403 hiba a Jossredben, folytatva a YouTube streamingjét</string>
+  <string name="errorAlternativeSource">Hiba az alternatív forrásban</string>
+  <string name="errorAlternativeSourceTryYT">Hiba az alternatív forráshoz, kipróbálni a YouTube -ot</string>
 </resources>

@@ -62,4 +62,8 @@
   <string name="defaultText">ଡିଫଲ୍ଟ |</string>
   <string name="slim_navbar_title">ପତଳା ନାଭିଗେସନ୍ ବାର୍ |</string>
   <string name="slim_navbar_description">ନାଭିଗେସନ୍ ବାର୍ ଉଚ୍ଚତା ହ୍ରାସ କରିବାକୁ ପାଠ୍ୟ ଲେବଲ୍ ବିଲୋପ କରନ୍ତୁ |</string>
+  <string name="usingJossRedMusicPlayback">ସଂଗୀତ ପ୍ରଜନନ ପାଇଁ ଜେସ୍ ଲାଲ୍ ବ୍ୟବହାର କରିବା |</string>
+  <string name="errorJossRed403">ୟୁଟ୍ୟୁବ୍ ଦ୍ୱାରା ଷ୍ଟ୍ରିମିଂ ସହିତ ଜାଳେଣି 403 ରେ ତ୍ରୁଟି 403 |</string>
+  <string name="errorAlternativeSource">ବିକଳ୍ପ ଉତ୍ସରେ ତ୍ରୁଟି |</string>
+  <string name="errorAlternativeSourceTryYT">ବିକଳ୍ପ ଉତ୍ସ, ୟୁଟ୍ୟୁବ୍ ଚେଷ୍ଟା କରିବା ସହିତ ତ୍ରୁଟି |</string>
 </resources>

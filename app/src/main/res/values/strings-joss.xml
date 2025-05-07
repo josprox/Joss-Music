@@ -38,4 +38,8 @@
   <string name="defaultText">Default</string>
   <string name="slim_navbar_title">Thin navigation bar</string>
   <string name="slim_navbar_description">Eliminate text labels to reduce the height of the navigation bar</string>
+  <string name="usingJossRedMusicPlayback">Using Joss Red for Music Reproduction</string>
+  <string name="errorJossRed403">Error 403 in Jossred, continuing with streaming by YouTube</string>
+  <string name="errorAlternativeSource">Error in the alternative source</string>
+  <string name="errorAlternativeSourceTryYT">Error with alternative source, trying YouTube</string>
 </resources>

@@ -39,4 +39,8 @@
   <string name="defaultText">Standard</string>
   <string name="slim_navbar_title">Dünne Navigationsstange</string>
   <string name="slim_navbar_description">Beseitigen Sie Textbezeichnungen, um die Höhe der Navigationsleiste zu verringern</string>
+  <string name="usingJossRedMusicPlayback">Verwenden Sie Joss Red für Musikreproduktion</string>
+  <string name="errorJossRed403">Fehler 403 in Jossred, Fortsetzung mit Streaming von YouTube</string>
+  <string name="errorAlternativeSource">Fehler in der alternativen Quelle</string>
+  <string name="errorAlternativeSourceTryYT">Fehler mit alternativer Quelle, versuchen Sie YouTube</string>
 </resources>

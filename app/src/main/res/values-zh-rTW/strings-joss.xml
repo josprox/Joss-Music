@@ -39,4 +39,8 @@
   <string name="defaultText">預設</string>
   <string name="slim_navbar_title">薄導航欄</string>
   <string name="slim_navbar_description">消除文本標籤以降低導航欄的高度</string>
+  <string name="usingJossRedMusicPlayback">使用喬斯紅進行音樂繁殖</string>
+  <string name="errorJossRed403">喬斯雷德（Jossred）中的錯誤403，繼續通過YouTube流媒體</string>
+  <string name="errorAlternativeSource">替代源中的錯誤</string>
+  <string name="errorAlternativeSourceTryYT">替代來源的錯誤，嘗試YouTube</string>
 </resources>

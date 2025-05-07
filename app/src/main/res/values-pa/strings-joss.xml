@@ -60,4 +60,8 @@
   <string name="defaultText">ਮੂਲ</string>
   <string name="slim_navbar_title">ਪਤਲੀ ਨੇਵੀਗੇਸ਼ਨ ਬਾਰ</string>
   <string name="slim_navbar_description">ਨੇਵੀਗੇਸ਼ਨ ਬਾਰ ਦੀ ਉਚਾਈ ਨੂੰ ਘਟਾਉਣ ਲਈ ਟੈਕਸਟ ਲੇਬਲ ਨੂੰ ਖਤਮ ਕਰੋ</string>
+  <string name="usingJossRedMusicPlayback">ਸੰਗੀਤ ਪ੍ਰਜਨਨ ਲਈ ਜੌਸ ਲਾਲ ਦੀ ਵਰਤੋਂ ਕਰਨਾ</string>
+  <string name="errorJossRed403">ਗਲਤੀ ਵਿੱਚ 403 ਗਲਤੀ ਵਿੱਚ, ਯੂਟਿ .ਬ ਦੁਆਰਾ ਸਟ੍ਰੀਮਿੰਗ ਜਾਰੀ ਰੱਖਣਾ</string>
+  <string name="errorAlternativeSource">ਵਿਕਲਪਿਕ ਸਰੋਤ ਵਿੱਚ ਗਲਤੀ</string>
+  <string name="errorAlternativeSourceTryYT">ਵਿਕਲਪਿਕ ਸਰੋਤ ਨਾਲ ਗਲਤੀ, ਯੂਟਿ .ਬ ਨੂੰ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਿਹਾ ਹੈ</string>
 </resources>

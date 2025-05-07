@@ -63,4 +63,8 @@
   <string name="defaultText">ডিফল্ট</string>
   <string name="slim_navbar_title">পাতলা নেভিগেশন বার</string>
   <string name="slim_navbar_description">নেভিগেশন বারের উচ্চতা হ্রাস করতে পাঠ্য লেবেলগুলি দূর করুন</string>
+  <string name="usingJossRedMusicPlayback">সঙ্গীত প্রজননের জন্য জোস রেড ব্যবহার করে</string>
+  <string name="errorJossRed403">জোস্রেডে 403 ত্রুটি, ইউটিউব দ্বারা স্ট্রিমিংয়ের সাথে চালিয়ে যাওয়া</string>
+  <string name="errorAlternativeSource">বিকল্প উত্সে ত্রুটি</string>
+  <string name="errorAlternativeSourceTryYT">বিকল্প উত্সের সাথে ত্রুটি, ইউটিউব চেষ্টা করে</string>
 </resources>

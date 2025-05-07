@@ -1,10 +1,11 @@
+import androidx.media3.datasource.DataSpec
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import android.net.Uri
 
 object JossRedClient {
-    private const val BASE_URL_API = "https://jossred.josprox.com/api/"
     private const val BASE_STREAM_URL = "https://jossred.josprox.com/yt/v2/stream/"
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
@@ -55,4 +56,15 @@ object JossRedClient {
         response.close()
         return requestUrl
     }
+
+    fun resolveDataSpec(original: DataSpec, mediaId: String, secretKey: String): DataSpec {
+        val streamUrl = getStreamingUrl(mediaId, secretKey)
+
+        return original.buildUpon()
+            .setUri(Uri.parse(streamUrl))
+            .setHttpRequestHeaders(mapOf("X-JossRed-Auth" to secretKey))
+            .build()
+    }
+
+
 }

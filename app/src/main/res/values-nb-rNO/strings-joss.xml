@@ -39,4 +39,8 @@
   <string name="defaultText">Misligholde</string>
   <string name="slim_navbar_title">Tynn navigasjonsstang</string>
   <string name="slim_navbar_description">Fjern tekstetiketter for å redusere høyden på navigasjonslinjen</string>
+  <string name="usingJossRedMusicPlayback">Bruker Joss Red for musikkreproduksjon</string>
+  <string name="errorJossRed403">Feil 403 i Jossred, fortsetter med streaming av YouTube</string>
+  <string name="errorAlternativeSource">Feil i den alternative kilden</string>
+  <string name="errorAlternativeSourceTryYT">Feil med alternativ kilde, prøver YouTube</string>
 </resources>

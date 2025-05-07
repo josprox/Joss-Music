@@ -39,4 +39,8 @@
   <string name="defaultText">デフォルト</string>
   <string name="slim_navbar_title">薄いナビゲーションバー</string>
   <string name="slim_navbar_description">ナビゲーションバーの高さを減らすためにテキストラベルを排除する</string>
+  <string name="usingJossRedMusicPlayback">音楽の複製にJoss Redを使用します</string>
+  <string name="errorJossRed403">Jossredのエラー403、YouTubeによるストリーミングを続けています</string>
+  <string name="errorAlternativeSource">代替ソースのエラー</string>
+  <string name="errorAlternativeSourceTryYT">YouTubeを試してみる代替ソースでエラー</string>
 </resources>

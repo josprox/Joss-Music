@@ -39,4 +39,8 @@
   <string name="defaultText">Bawaan</string>
   <string name="slim_navbar_title">Bilah navigasi tipis</string>
   <string name="slim_navbar_description">Menghilangkan label teks untuk mengurangi ketinggian bilah navigasi</string>
+  <string name="usingJossRedMusicPlayback">Menggunakan Joss Red untuk reproduksi musik</string>
+  <string name="errorJossRed403">Kesalahan 403 Di Jossred, melanjutkan streaming oleh YouTube</string>
+  <string name="errorAlternativeSource">Kesalahan di sumber alternatif</string>
+  <string name="errorAlternativeSourceTryYT">Kesalahan dengan sumber alternatif, mencoba YouTube</string>
 </resources>

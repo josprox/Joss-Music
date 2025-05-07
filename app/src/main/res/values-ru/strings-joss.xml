@@ -39,4 +39,8 @@
   <string name="defaultText">По умолчанию</string>
   <string name="slim_navbar_title">Тонкая навигационная планка</string>
   <string name="slim_navbar_description">Устранить текстовые метки, чтобы уменьшить высоту навигационной панели</string>
+  <string name="usingJossRedMusicPlayback">Использование Joss Red для воспроизведения музыки</string>
+  <string name="errorJossRed403">Ошибка 403 в Jossred, продолжение потоковой передачи YouTube</string>
+  <string name="errorAlternativeSource">Ошибка в альтернативном источнике</string>
+  <string name="errorAlternativeSourceTryYT">Ошибка с альтернативным источником, пробуя YouTube</string>
 </resources>

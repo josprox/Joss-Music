@@ -39,4 +39,8 @@
   <string name="defaultText">默认</string>
   <string name="slim_navbar_title">薄导航栏</string>
   <string name="slim_navbar_description">消除文本标签以降低导航栏的高度</string>
+  <string name="usingJossRedMusicPlayback">使用乔斯红进行音乐繁殖</string>
+  <string name="errorJossRed403">乔斯雷德（Jossred）中的错误403，继续通过YouTube流媒体</string>
+  <string name="errorAlternativeSource">替代源中的错误</string>
+  <string name="errorAlternativeSourceTryYT">替代来源的错误，尝试YouTube</string>
 </resources>

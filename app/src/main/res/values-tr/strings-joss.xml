@@ -39,4 +39,8 @@
   <string name="defaultText">Varsayılan</string>
   <string name="slim_navbar_title">İnce gezinme çubuğu</string>
   <string name="slim_navbar_description">Gezinme çubuğunun yüksekliğini azaltmak için metin etiketlerini ortadan kaldırın</string>
+  <string name="usingJossRedMusicPlayback">Müzik Reprodüksiyonu için Joss Red\'i Kullanma</string>
+  <string name="errorJossRed403">Jossred\'de 403 Hata, YouTube tarafından akış yapmaya devam ediyor</string>
+  <string name="errorAlternativeSource">Alternatif kaynaktaki hata</string>
+  <string name="errorAlternativeSourceTryYT">Alternatif kaynakla hata, youtube denemek</string>
 </resources>
