@@ -53,6 +53,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -72,6 +73,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
@@ -130,6 +132,7 @@ import com.zionhuang.music.playback.MusicService.MusicBinder
 import com.zionhuang.music.playback.PlayerConnection
 import com.zionhuang.music.ui.component.BottomSheetMenu
 import com.zionhuang.music.ui.component.IconButton
+import com.zionhuang.music.ui.component.IconResult
 import com.zionhuang.music.ui.component.LocalMenuState
 import com.zionhuang.music.ui.component.SearchBar
 import com.zionhuang.music.ui.component.getIconForDate
@@ -348,8 +351,8 @@ class MainActivity : ComponentActivity() {
                 mutableStateOf(DefaultThemeColor)
             }
 
-            val iconResId = getIconForDate() // Obtener el recurso dinámico
-            val iconPainter: Painter = painterResource(id = iconResId)
+            val icon = getIconForDate()
+            val iconPainter = iconResultToPainter(icon)
 
             LaunchedEffect(playerConnection, enableDynamicTheme, isSystemInDarkTheme) {
                 val playerConnection = playerConnection
@@ -905,6 +908,14 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+    @Composable
+    fun iconResultToPainter(icon: IconResult): Painter {
+        return when (icon) {
+            is IconResult.Vector -> rememberVectorPainter(icon.icon)
+            is IconResult.Drawable -> painterResource(id = icon.resId)
         }
     }
 
