@@ -107,6 +107,7 @@ import com.zionhuang.music.playback.queues.YouTubeQueue
 import com.zionhuang.music.playback.queues.filterExplicit
 import com.zionhuang.music.utils.CoilBitmapLoader
 import com.zionhuang.music.utils.DiscordRPC
+import com.zionhuang.music.utils.SecureKeys
 import com.zionhuang.music.utils.YTPlayerUtils
 import com.zionhuang.music.utils.dataStore
 import com.zionhuang.music.utils.enumPreference
@@ -184,6 +185,8 @@ class MusicService : MediaLibraryService(),
     private val normalizeFactor = MutableStateFlow(1f)
     val playerVolume = MutableStateFlow(dataStore.get(PlayerVolumeKey, 1f).coerceIn(0f, 1f))
     private val sleepTimerFinish = MutableStateFlow(dataStore.get(SleepFinishSong, false))
+
+    val JossRedKey = SecureKeys.getJossRedKey()
 
     lateinit var sleepTimer: SleepTimer
 
@@ -710,14 +713,22 @@ class MusicService : MediaLibraryService(),
                 }.first()
             }
 
-            // Fuente alternativa: JossRed
             if (useAlternativeSource) {
                 try {
-                    val alternativeUrl = JossRedClient.getStreamingUrl(mediaId)
+                    val alternativeUrl = JossRedClient.getStreamingUrl(mediaId, JossRedKey)
                     Timber.i("Usando Joss Red para reproducción")
                     Timber.i("URL alternativa: $alternativeUrl")
+
                     scope.launch(Dispatchers.IO) { recoverSong(mediaId) }
-                    return@Factory dataSpec.withUri(alternativeUrl.toUri())
+
+                    // Solo para JossRed, inyectamos el header
+                    val modifiedDataSpec = dataSpec.buildUpon()
+                        .setUri(alternativeUrl.toUri())
+                        .setHttpRequestHeaders(mapOf("X-JossRed-Auth" to JossRedKey))
+                        .build()
+
+                    return@Factory modifiedDataSpec
+
                 } catch (e: Exception) {
                     when {
                         e is JossRedClient.JossRedException && e.statusCode == 403 -> {
@@ -725,7 +736,10 @@ class MusicService : MediaLibraryService(),
                         }
                         e is JossRedClient.JossRedException && e.statusCode in 400..499 -> {
                             Timber.w("Error ${e.statusCode} en JossRed, continuando con YouTube")
-                            throw PlaybackException("Error en fuente alternativa", e, PlaybackException.ERROR_CODE_IO_BAD_HTTP_STATUS)
+                            throw PlaybackException(
+                                "Error en fuente alternativa", e,
+                                PlaybackException.ERROR_CODE_IO_BAD_HTTP_STATUS
+                            )
                         }
                         else -> {
                             Timber.e(e, "Error con fuente alternativa, intentando YouTube")
@@ -740,7 +754,10 @@ class MusicService : MediaLibraryService(),
 
             while (retryCount < 4) {
                 try {
-                    val playedFormat = runBlocking(Dispatchers.IO) { database.format(mediaId).first() }
+                    val playedFormat = runBlocking(Dispatchers.IO) {
+                        database.format(mediaId).first()
+                    }
+
                     val playbackData = runBlocking(Dispatchers.IO) {
                         YTPlayerUtils.playerResponseForPlayback(
                             mediaId,
@@ -750,33 +767,27 @@ class MusicService : MediaLibraryService(),
                         ).getOrThrow()
                     }
 
-                    // Actualizar metadatos
                     updateFormatInfo(mediaId, playbackData.format, playbackData.audioConfig?.loudnessDb)
                     scope.launch(Dispatchers.IO) { recoverSong(mediaId, playbackData) }
 
-                    // Mostrar la URL de reproducción
                     val streamUrl = playbackData.streamUrl
                     Timber.i("URL de streaming obtenida (intento ${retryCount + 1}): $streamUrl")
 
-                    // Devolver DataSpec actualizado (sin cachear)
-                    return@Factory dataSpec
-                        .withUri(streamUrl.toUri())
+                    return@Factory dataSpec.withUri(streamUrl.toUri())
 
                 } catch (e: Exception) {
                     lastError = e
-                    when {
-                        e is YTPlayerUtils.PlaybackException && e.statusCode == 403 -> {
-                            retryCount++
-                            if (retryCount < 4) {
-                                Timber.w("Error 403 en streaming (intento $retryCount), reintentando...")
-                            }
+                    if (e is YTPlayerUtils.PlaybackException && e.statusCode == 403) {
+                        retryCount++
+                        if (retryCount < 4) {
+                            Timber.w("Error 403 en streaming (intento $retryCount), reintentando...")
                         }
-                        else -> break // Otro tipo de error, salir del bucle
+                    } else {
+                        break
                     }
                 }
             }
 
-            // Si llegamos aquí es porque fallaron todos los reintentos o hubo otro error
             handlePlaybackError(lastError ?: Exception("Error desconocido al obtener URL de streaming"))
         }
     }

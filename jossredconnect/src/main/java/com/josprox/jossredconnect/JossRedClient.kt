@@ -19,11 +19,13 @@ object JossRedClient {
     ) : Exception(message, cause)
 
     // Metodo para obtener la URL de streaming con manejo de errores
-    fun getStreamingUrl(mediaId: String): String {
+    fun getStreamingUrl(mediaId: String, secretKey: String): String {
         val requestUrl = "$BASE_STREAM_URL$mediaId"
+
         val request = Request.Builder()
             .url(requestUrl)
-            .head() // Usamos HEAD para verificar sin descargar el contenido completo
+            .addHeader("X-JossRed-Auth", secretKey)
+            .get() // Usamos HEAD para verificar sin descargar el contenido completo
             .build()
 
         val response = try {
