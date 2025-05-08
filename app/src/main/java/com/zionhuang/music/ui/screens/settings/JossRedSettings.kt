@@ -45,7 +45,7 @@ fun JossRedSettings(
 ) {
     // Configuración próxima de Joss Red
     val (jossRedEnabled, onJossRedEnabledChange) = rememberPreference(key = JossRedEnabledKey, defaultValue = false)
-    val (jossRedMultimedia, onJossRedMultimediaChange) = rememberPreference(key = JossRedMultimedia, defaultValue = false)
+    val (jossRedMultimedia, onJossRedMultimediaChange) = rememberPreference(key = JossRedMultimedia, defaultValue = true)
 
     //Variables de preferencia
     val (autoSkipNextOnError, onAutoSkipNextOnErrorChange) = rememberPreference(AutoSkipNextOnErrorKey, defaultValue = false)
