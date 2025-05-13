@@ -64,7 +64,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.InnerTune"
+            android:theme="@style/splashScreen"
             android:windowSoftInputMode="adjustResize">
 
             <!-- Intent Filter principal para abrir la app -->
