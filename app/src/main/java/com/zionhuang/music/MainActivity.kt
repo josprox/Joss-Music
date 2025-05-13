@@ -70,9 +70,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
@@ -210,32 +208,29 @@ class MainActivity : ComponentActivity() {
     // Handle deep links
     private lateinit var navController: NavHostController
 
-    override fun onStart() {
-        super.onStart()
-
-        /*
-        * Cambios en el formato del ServiceIntent para android 14+ manteniendo la lógica para android 13 o menor.
-        * Evita errores de cierres innesperados.
-        * */
-
+    private fun bindMusicService() {
         val serviceIntent = Intent(this, MusicService::class.java)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // Android 14+ Vivo y Samsung
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             if (ProcessLifecycleOwner.get().lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                 ContextCompat.startForegroundService(this, serviceIntent)
             } else {
-                Timber.tag("MainActivity")
-                    .w("No se puede iniciar el servicio: la app está en background")
+                Timber.tag("MainActivity").w("No se puede iniciar el servicio: la app está en background")
             }
         } else {
-            startService(serviceIntent) // Para Android 13 o menor
+            startService(serviceIntent)
         }
 
-
-        // Vincular el servicio en ambas versiones
         bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE)
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        if (!isServiceBound) {
+            bindMusicService()
+        }
+    }
 
     override fun onStop() {
         if (isServiceBound) {
