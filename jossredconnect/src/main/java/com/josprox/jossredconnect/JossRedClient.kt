@@ -26,7 +26,7 @@ object JossRedClient {
         val request = Request.Builder()
             .url(requestUrl)
             .addHeader("X-JossRed-Auth", secretKey)
-            .get() // Usamos HEAD para verificar sin descargar el contenido completo
+            .get()
             .build()
 
         val response = try {
@@ -39,21 +39,30 @@ object JossRedClient {
             )
         }
 
-        if (!response.isSuccessful) {
+        val responseBody = response.body?.string()
+        val code = response.code
+
+        if (!response.isSuccessful || responseBody?.contains("Unable to fetch audio URL") == true) {
             response.close()
-            throw JossRedException(
-                statusCode = response.code,
-                message = when (response.code) {
+
+            val message = if (responseBody?.contains("Unable to fetch audio URL") == true) {
+                "Error del servidor: No se pudo obtener el audio desde JossRed"
+            } else {
+                when (code) {
                     403 -> "Acceso denegado (403) para el recurso"
                     404 -> "Recurso no encontrado (404)"
-                    in 400..499 -> "Error del cliente (${response.code})"
-                    in 500..599 -> "Error del servidor (${response.code})"
-                    else -> "Error desconocido (${response.code})"
+                    in 400..499 -> "Error del cliente ($code)"
+                    in 500..599 -> "Error del servidor ($code)"
+                    else -> "Error desconocido ($code)"
                 }
+            }
+
+            throw JossRedException(
+                statusCode = code,
+                message = message
             )
         }
 
-        response.close()
         return requestUrl
     }
 
