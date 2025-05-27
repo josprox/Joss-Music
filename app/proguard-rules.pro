@@ -94,3 +94,15 @@
 -assumenosideeffects class com.zionhuang.music.* {
     public static java.lang.String JossRedKey;
 }
+
+# Keep Rhino classes
+-keep class org.mozilla.javascript.** { *; }
+-dontwarn org.mozilla.javascript.**
+
+# Keep javax.script classes
+-keep class javax.script.** { *; }
+-dontwarn javax.script.**
+
+# Keep jdk.dynalink classes
+-keep class jdk.dynalink.** { *; }
+-dontwarn jdk.dynalink.**

@@ -754,7 +754,6 @@ class MusicService : MediaLibraryService(),
                     val playbackData = runBlocking(Dispatchers.IO) {
                         YTPlayerUtils.playerResponseForPlayback(
                             mediaId,
-                            playedFormat = playedFormat,
                             audioQuality = audioQuality,
                             connectivityManager = connectivityManager,
                         ).getOrThrow()
