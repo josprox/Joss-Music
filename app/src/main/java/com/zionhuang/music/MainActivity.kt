@@ -88,7 +88,6 @@ import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
@@ -105,7 +104,6 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import com.onesignal.OneSignal
 import com.valentinilk.shimmer.LocalShimmerTheme
-import com.zionhuang.innertube.YouTube
 import com.zionhuang.innertube.models.SongItem
 import com.zionhuang.music.constants.AppBarHeight
 import com.zionhuang.music.constants.DarkModeKey
@@ -151,6 +149,7 @@ import com.zionhuang.music.ui.theme.extractThemeColor
 import com.zionhuang.music.ui.utils.appBarScrollBehavior
 import com.zionhuang.music.ui.utils.backToMain
 import com.zionhuang.music.ui.utils.resetHeightOffset
+import com.zionhuang.music.utils.DeepLinkHandler
 import com.zionhuang.music.utils.NotificationPermissionActivity
 import com.zionhuang.music.utils.UpdateChecker
 import com.zionhuang.music.utils.Updater
@@ -158,7 +157,6 @@ import com.zionhuang.music.utils.dataStore
 import com.zionhuang.music.utils.get
 import com.zionhuang.music.utils.rememberEnumPreference
 import com.zionhuang.music.utils.rememberPreference
-import com.zionhuang.music.utils.reportException
 import com.zionhuang.music.utils.urlEncode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -206,6 +204,7 @@ class MainActivity : ComponentActivity() {
     private var latestVersionName by mutableStateOf(BuildConfig.VERSION_NAME)
 
     // Handle deep links
+    private lateinit var deepLinkHandler: DeepLinkHandler
     private lateinit var navController: NavHostController
 
     private fun bindMusicService() {
@@ -317,9 +316,6 @@ class MainActivity : ComponentActivity() {
 
         // Solicitar permiso de notificaciones
         requestNotificationPermission()
-
-        // Handle deep links
-        handleDeepLink(intent)
     }
 
     @SuppressLint("UnusedBoxWithConstraintsScope")
@@ -387,6 +383,15 @@ class MainActivity : ComponentActivity() {
                     val bottomInset = with(density) { windowsInsets.getBottom(density).toDp() }
 
                     val navController = rememberNavController()
+
+                    // Inicializar DeepLinkHandler cuando navController esté listo
+                    LaunchedEffect(navController) {
+                        this@MainActivity.navController = navController
+                        deepLinkHandler = DeepLinkHandler(navController, lifecycleScope)
+
+                        // Manejar deep link inicial
+                        deepLinkHandler.handleInitialDeepLink(intent)
+                    }
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val inSelectMode = navBackStackEntry?.savedStateHandle?.getStateFlow("inSelectMode", false)?.collectAsState()
 
@@ -552,43 +557,8 @@ class MainActivity : ComponentActivity() {
                     }
                     DisposableEffect(Unit) {
                         val listener = Consumer<Intent> { intent ->
-                            val uri = intent.data ?: intent.extras?.getString(Intent.EXTRA_TEXT)?.toUri() ?: return@Consumer
-                            when (val path = uri.pathSegments.firstOrNull()) {
-                                "playlist" -> uri.getQueryParameter("list")?.let { playlistId ->
-                                    if (playlistId.startsWith("OLAK5uy_")) {
-                                        coroutineScope.launch {
-                                            YouTube.albumSongs(playlistId).onSuccess { songs ->
-                                                songs.firstOrNull()?.album?.id?.let { browseId ->
-                                                    navController.navigate("album/$browseId")
-                                                }
-                                            }.onFailure {
-                                                reportException(it)
-                                            }
-                                        }
-                                    } else {
-                                        navController.navigate("online_playlist/$playlistId")
-                                    }
-                                }
-
-                                "channel", "c" -> uri.lastPathSegment?.let { artistId ->
-                                    navController.navigate("artist/$artistId")
-                                }
-
-                                else -> when {
-                                    path == "watch" -> uri.getQueryParameter("v")
-                                    uri.host == "youtu.be" -> path
-                                    else -> null
-                                }?.let { videoId ->
-                                    coroutineScope.launch {
-                                        withContext(Dispatchers.IO) {
-                                            YouTube.queue(listOf(videoId))
-                                        }.onSuccess {
-                                            sharedSong = it.firstOrNull()
-                                        }.onFailure {
-                                            reportException(it)
-                                        }
-                                    }
-                                }
+                            deepLinkHandler.handleNewIntent(intent) { song ->
+                                sharedSong = song
                             }
                         }
 
@@ -920,35 +890,6 @@ class MainActivity : ComponentActivity() {
         WindowCompat.getInsetsController(window, window.decorView.rootView).apply {
             isAppearanceLightStatusBars = !isDark
             isAppearanceLightNavigationBars = !isDark
-        }
-    }
-
-    private fun handleDeepLink(intent: Intent?) {
-        intent?.data?.let { uri ->
-            val pathSegments = uri.pathSegments
-            when {
-                pathSegments.contains("playlist") -> {
-                    val idPlaylist = pathSegments.lastOrNull()
-                    idPlaylist?.let {
-                        navController.navigate("online_playlist/$it")
-                    }
-                }
-                pathSegments.contains("artist") -> {
-                    val idArtist = pathSegments.lastOrNull()
-                    idArtist?.let {
-                        navController.navigate("artist/$it")
-                    }
-                }
-                pathSegments.contains("album") -> {
-                    val idAlbum = pathSegments.lastOrNull()
-                    idAlbum?.let {
-                        navController.navigate("album/$it")
-                    }
-                }
-                else -> {
-                    navController.navigate(Screens.Home.route)
-                }
-            }
         }
     }
 
