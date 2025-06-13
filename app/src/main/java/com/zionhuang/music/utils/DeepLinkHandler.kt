@@ -79,6 +79,10 @@ class DeepLinkHandler(
                 // Es una playlist. El ID es directo.
                 navController.navigate("online_playlist/$id")
             }
+            "channel" -> {
+                // Es un canal/artista. El ID del canal es el ID del artista.
+                navController.navigate("artist/$id")
+            }
         }
     }
 
