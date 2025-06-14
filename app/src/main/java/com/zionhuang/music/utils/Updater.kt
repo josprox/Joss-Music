@@ -50,8 +50,6 @@ object Updater {
 
     // Obtener solo la versión.
 
-
-
     suspend fun getLatestVersionName(): Result<String> = runCatching {
         val response = client.get(dotenv["UPDATER_URL"]).bodyAsText()
         val json = JSONObject(response)

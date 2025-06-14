@@ -1,24 +1,27 @@
 package com.zionhuang.music.utils
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import android.Manifest
-import com.zionhuang.music.R
-import okhttp3.*
-import org.json.JSONObject
-import java.io.IOException
 import androidx.core.net.toUri
 import com.zionhuang.music.BuildConfig
+import com.zionhuang.music.R
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import org.dotenv.vault.dotenvVault
+import org.json.JSONObject
+import java.io.IOException
 
 class UpdateChecker(private val context: Context) {
 

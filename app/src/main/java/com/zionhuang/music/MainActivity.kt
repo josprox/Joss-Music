@@ -13,6 +13,7 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.animateDpAsState
@@ -152,6 +153,8 @@ import com.zionhuang.music.ui.utils.resetHeightOffset
 import com.zionhuang.music.utils.DeepLinkHandler
 import com.zionhuang.music.utils.NotificationPermissionActivity
 import com.zionhuang.music.utils.UpdateChecker
+import com.zionhuang.music.utils.UpdateMainViewModel
+import com.zionhuang.music.utils.UpdateMainViewModelFactory
 import com.zionhuang.music.utils.Updater
 import com.zionhuang.music.utils.dataStore
 import com.zionhuang.music.utils.get
@@ -201,11 +204,13 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private var latestVersionName by mutableStateOf(BuildConfig.VERSION_NAME)
-
     // Handle deep links
     private lateinit var deepLinkHandler: DeepLinkHandler
     private lateinit var navController: NavHostController
+
+    private val updateViewModel: UpdateMainViewModel by viewModels {
+        UpdateMainViewModelFactory(application)
+    }
 
     private fun bindMusicService() {
         val serviceIntent = Intent(this, MusicService::class.java)
@@ -222,7 +227,6 @@ class MainActivity : ComponentActivity() {
 
         bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE)
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -323,12 +327,10 @@ class MainActivity : ComponentActivity() {
     private fun initializeApp() {
 
         setContent {
-            LaunchedEffect(Unit) {
-                Updater.getLatestVersionName().onSuccess {
-                    latestVersionName = it
-                }
-            }
 
+            // Observamos los `StateFlow` del ViewModel para que la UI reaccione a los cambios.
+            val showBadge by updateViewModel.showUpdateBadge.collectAsState()
+            val latestVersionName by updateViewModel.latestVersionName.collectAsState()
             val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
             val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
             val pureBlack by rememberPreference(PureBlackKey, defaultValue = false)
@@ -621,7 +623,13 @@ class MainActivity : ComponentActivity() {
                                     }
                                 )
                         ) {
-                            navigationBuilder(navController, topAppBarScrollBehavior, latestVersionName)
+                            (latestVersionName ?: packageManager.getPackageInfo(packageName, 0).versionName)?.let {
+                                navigationBuilder(
+                                    navController,
+                                    topAppBarScrollBehavior,
+                                    it
+                                )
+                            }
                         }
 
                         AnimatedVisibility(
@@ -722,7 +730,7 @@ class MainActivity : ComponentActivity() {
                                         ) {
                                             BadgedBox(
                                                 badge = {
-                                                    if (latestVersionName > BuildConfig.VERSION_NAME) {
+                                                    if (showBadge) {
                                                         Badge()
                                                     }
                                                 }
