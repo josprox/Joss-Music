@@ -263,7 +263,7 @@ fun MediaMetadataMenu(
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, "https://music.youtube.com/watch?v=${mediaMetadata.id}")
+                putExtra(Intent.EXTRA_TEXT, "https://jossmusic.com/sound/${mediaMetadata.id}")
             }
             context.startActivity(Intent.createChooser(intent, null))
             onDismiss()

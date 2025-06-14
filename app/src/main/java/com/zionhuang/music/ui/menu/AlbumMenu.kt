@@ -334,7 +334,7 @@ fun AlbumMenu(
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, "https://music.youtube.com/browse/${album.album.id}")
+                putExtra(Intent.EXTRA_TEXT, "https://jossmusic.com/album/${album.album.id}")
             }
             context.startActivity(Intent.createChooser(intent, null))
         }
