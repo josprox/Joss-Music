@@ -126,7 +126,7 @@ fun ArtistScreen(
     LazyColumn(
         state = lazyListState,
         contentPadding = LocalPlayerAwareWindowInsets.current
-            .add(WindowInsets(top = -WindowInsets.systemBars.asPaddingValues().calculateTopPadding() - AppBarHeight))
+            .add(WindowInsets(top = 0.dp)) // Asegura que el padding superior sea 0
             .asPaddingValues()
     ) {
         artistPage.let {
