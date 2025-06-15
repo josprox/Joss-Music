@@ -61,7 +61,7 @@ data class PlaylistItem(
     override val explicit: Boolean
         get() = false
     override val shareLink: String
-        get() = "https://music.youtube.com/playlist?list=$id"
+        get() = "https://jossmusic.com/playlist/$id"
 }
 
 data class ArtistItem(
@@ -76,5 +76,5 @@ data class ArtistItem(
     override val explicit: Boolean
         get() = false
     override val shareLink: String
-        get() = "https://music.youtube.com/channel/$id"
+        get() = "https://jossmusic.com/channel/$id"
 }

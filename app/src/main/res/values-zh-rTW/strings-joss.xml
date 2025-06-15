@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">替代來源的錯誤，嘗試YouTube</string>
   <string name="current">當前的</string>
   <string name="newString">新的</string>
+  <string name="link_copied">複製的鏈接</string>
 </resources>

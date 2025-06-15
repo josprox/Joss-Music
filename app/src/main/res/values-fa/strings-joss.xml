@@ -11,4 +11,5 @@
   <string name="errorAlternativeSourceTryYT">خطا با منبع جایگزین ، تلاش برای یوتیوب</string>
   <string name="current">جاری</string>
   <string name="newString">جدید</string>
+  <string name="link_copied">پیوند کپی شده</string>
 </resources>

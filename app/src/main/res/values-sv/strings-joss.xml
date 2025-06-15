@@ -11,4 +11,5 @@
   <string name="errorAlternativeSourceTryYT">Fel med alternativ källa, prova YouTube</string>
   <string name="current">Nuvarande</string>
   <string name="newString">Ny</string>
+  <string name="link_copied">Kopierad länk</string>
 </resources>

@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">خطأ مع مصدر بديل ، تجربة يوتيوب</string>
   <string name="current">حاضِر</string>
   <string name="newString">جديد</string>
+  <string name="link_copied">رابط نسخ</string>
 </resources>

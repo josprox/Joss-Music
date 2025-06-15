@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Грешка при алтернативен източник, опитвайки се в YouTube</string>
   <string name="current">Ток</string>
   <string name="newString">Ново</string>
+  <string name="link_copied">Копирана връзка</string>
 </resources>

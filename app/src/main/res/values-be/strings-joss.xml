@@ -69,4 +69,5 @@
   <string name="errorAlternativeSourceTryYT">Памылка з альтэрнатыўнай крыніцай, спрабуючы YouTube</string>
   <string name="current">Бягучы</string>
   <string name="newString">Новы</string>
+  <string name="link_copied">Скапіраваная спасылка</string>
 </resources>

@@ -11,4 +11,5 @@
   <string name="errorAlternativeSourceTryYT">वैकल्पिक स्रोतको साथ त्रुटि, यूट्यूबको प्रयास गर्दै</string>
   <string name="current">हालको</string>
   <string name="newString">नंया</string>
+  <string name="link_copied">प्रतिलिपि गरिएको लिंक</string>
 </resources>

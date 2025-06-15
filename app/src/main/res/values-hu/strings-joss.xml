@@ -58,4 +58,5 @@
   <string name="errorAlternativeSourceTryYT">Hiba az alternatív forráshoz, kipróbálni a YouTube -ot</string>
   <string name="current">Jelenlegi</string>
   <string name="newString">Új</string>
+  <string name="link_copied">Másolt link</string>
 </resources>

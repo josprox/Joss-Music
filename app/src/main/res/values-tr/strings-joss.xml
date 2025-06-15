@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Alternatif kaynakla hata, youtube denemek</string>
   <string name="current">Akım</string>
   <string name="newString">Yeni</string>
+  <string name="link_copied">Kopyalanan bağlantı</string>
 </resources>

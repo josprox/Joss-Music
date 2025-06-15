@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Virhe vaihtoehtoisella lähteellä, YouTube -yrittäminen</string>
   <string name="current">Nykyinen</string>
   <string name="newString">Uusi</string>
+  <string name="link_copied">Kopioitu linkki</string>
 </resources>

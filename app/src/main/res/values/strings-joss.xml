@@ -44,4 +44,5 @@
   <string name="errorAlternativeSourceTryYT">Error with alternative source, trying YouTube</string>
   <string name="current">Current</string>
   <string name="newString">New</string>
+  <string name="link_copied">Copied link</string>
 </resources>

@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Lỗi với nguồn thay thế, thử YouTube</string>
   <string name="current">Hiện hành</string>
   <string name="newString">Mới</string>
+  <string name="link_copied">Liên kết đã sao chép</string>
 </resources>

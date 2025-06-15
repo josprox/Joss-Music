@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">YouTubeを試してみる代替ソースでエラー</string>
   <string name="current">現在</string>
   <string name="newString">新しい</string>
+  <string name="link_copied">コピーされたリンク</string>
 </resources>

@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Chyba s alternativním zdrojem, vyzkoušet YouTube</string>
   <string name="current">Proud</string>
   <string name="newString">Nový</string>
+  <string name="link_copied">Zkopírovaný odkaz</string>
 </resources>

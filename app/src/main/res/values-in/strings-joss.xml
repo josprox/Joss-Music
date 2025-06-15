@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Kesalahan dengan sumber alternatif, mencoba YouTube</string>
   <string name="current">Saat ini</string>
   <string name="newString">Baru</string>
+  <string name="link_copied">Tautan yang disalin</string>
 </resources>

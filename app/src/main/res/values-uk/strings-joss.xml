@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Помилка з альтернативним джерелом, спробуйте YouTube</string>
   <string name="current">Поточний</string>
   <string name="newString">Новачок</string>
+  <string name="link_copied">Скопійоване посилання</string>
 </resources>

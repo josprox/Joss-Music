@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Σφάλμα με εναλλακτική πηγή, δοκιμάζοντας το YouTube</string>
   <string name="current">Ρεύμα</string>
   <string name="newString">Νέος</string>
+  <string name="link_copied">Αντιγραφεί σύνδεσμος</string>
 </resources>

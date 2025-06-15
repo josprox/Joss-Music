@@ -11,4 +11,5 @@
   <string name="errorAlternativeSourceTryYT">Viga alternatiivse allikaga, proovides YouTube\'i</string>
   <string name="current">Voolu-</string>
   <string name="newString">Uus</string>
+  <string name="link_copied">Kopeeritud link</string>
 </resources>

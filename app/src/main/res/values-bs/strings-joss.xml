@@ -11,4 +11,5 @@
   <string name="errorAlternativeSourceTryYT">Pogreška sa alternativnim izvorom, pokušavajući YouTube</string>
   <string name="current">Struja</string>
   <string name="newString">Nervozan</string>
+  <string name="link_copied">Kopirana veza</string>
 </resources>

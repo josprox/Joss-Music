@@ -45,4 +45,5 @@
   <string name="errorAlternativeSourceTryYT">Feil med alternativ kilde, prøver YouTube</string>
   <string name="current">Nåværende</string>
   <string name="newString">Ny</string>
+  <string name="link_copied">Kopiert lenke</string>
 </resources>

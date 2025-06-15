@@ -46,4 +46,5 @@
   <string name="errorAlternativeSourceTryYT">ഇതര ഉറവിടം ഉപയോഗിച്ച് പിശക്, YouTube ശ്രമിക്കുന്നു</string>
   <string name="current">ഒഴുകിക്കൊണ്ടിരിക്കുന്ന</string>
   <string name="newString">നവീനമായ</string>
+  <string name="link_copied">പകർത്തിയ ലിങ്ക്</string>
 </resources>

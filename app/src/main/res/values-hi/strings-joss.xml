@@ -11,4 +11,5 @@
   <string name="errorAlternativeSourceTryYT">वैकल्पिक स्रोत के साथ त्रुटि, YouTube की कोशिश कर रहा है</string>
   <string name="current">मौजूदा</string>
   <string name="newString">नया</string>
+  <string name="link_copied">कॉपी किया हुआ लिंक</string>
 </resources>

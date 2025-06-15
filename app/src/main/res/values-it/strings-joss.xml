@@ -11,4 +11,5 @@
   <string name="errorAlternativeSourceTryYT">Errore con fonte alternativa, provando YouTube</string>
   <string name="current">Attuale</string>
   <string name="newString">Nuovo</string>
+  <string name="link_copied">Collegamento copiato</string>
 </resources>

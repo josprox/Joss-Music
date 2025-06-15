@@ -69,4 +69,5 @@
   <string name="errorAlternativeSourceTryYT">বিকল্প উত্সের সাথে ত্রুটি, ইউটিউব চেষ্টা করে</string>
   <string name="current">কারেন্ট</string>
   <string name="newString">নতুন</string>
+  <string name="link_copied">অনুলিপি লিঙ্ক</string>
 </resources>
