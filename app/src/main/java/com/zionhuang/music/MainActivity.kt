@@ -208,6 +208,9 @@ class MainActivity : ComponentActivity() {
     private lateinit var deepLinkHandler: DeepLinkHandler
     private lateinit var navController: NavHostController
 
+    // Variable para guardar el intent inicial y asegurar que se procese una sola vez.
+    private var initialIntent: Intent? = null
+
     private val updateViewModel: UpdateMainViewModel by viewModels {
         UpdateMainViewModelFactory(application)
     }
@@ -258,6 +261,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        // Guardamos el intent que inició la actividad para procesarlo después.
+        initialIntent = intent
+
         // Inicializar OneSignal
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
 
@@ -281,44 +287,7 @@ class MainActivity : ComponentActivity() {
                 }
         }
 
-        setContent {
-            // Configuraciones de interfaz y temas
-            val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
-            val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
-            val isSystemInDarkTheme = isSystemInDarkTheme()
-            val useDarkTheme = remember(darkTheme, isSystemInDarkTheme) {
-                if (darkTheme == DarkMode.AUTO) isSystemInDarkTheme else darkTheme == DarkMode.ON
-            }
-
-            LaunchedEffect(useDarkTheme) {
-                setSystemBarAppearance(useDarkTheme)
-            }
-
-            // Lógica de la interfaz y color de tema dinámico
-            var themeColor by rememberSaveable(stateSaver = ColorSaver) { mutableStateOf(DefaultThemeColor) }
-            LaunchedEffect(playerConnection, enableDynamicTheme, isSystemInDarkTheme) {
-                val playerConnection = playerConnection
-                if (!enableDynamicTheme || playerConnection == null) {
-                    themeColor = DefaultThemeColor
-                    return@LaunchedEffect
-                }
-                playerConnection.service.currentMediaMetadata.collectLatest { song ->
-                    themeColor = if (song != null) {
-                        withContext(Dispatchers.IO) {
-                            val result = imageLoader.execute(
-                                ImageRequest.Builder(this@MainActivity)
-                                    .data(song.thumbnailUrl)
-                                    .allowHardware(false)
-                                    .build()
-                            )
-                            (result.drawable as? BitmapDrawable)?.bitmap?.extractThemeColor() ?: DefaultThemeColor
-                        }
-                    } else DefaultThemeColor
-                }
-            }
-        }
-
-        // Solicitar permiso de notificaciones
+        // Solicitar permiso de notificaciones, que a su vez llamará a initializeApp()
         requestNotificationPermission()
     }
 
@@ -386,13 +355,17 @@ class MainActivity : ComponentActivity() {
 
                     val navController = rememberNavController()
 
-                    // Inicializar DeepLinkHandler cuando navController esté listo
+                    // Inicializar DeepLinkHandler y manejar el deep link inicial cuando todo esté listo.
                     LaunchedEffect(navController) {
                         this@MainActivity.navController = navController
                         deepLinkHandler = DeepLinkHandler(navController, lifecycleScope)
 
-                        // Manejar deep link inicial
-                        deepLinkHandler.handleInitialDeepLink(intent)
+                        // Procesar el deep link inicial que guardamos en onCreate.
+                        initialIntent?.let { intent ->
+                            deepLinkHandler.handleInitialDeepLink(intent)
+                            // Limpiamos el intent para evitar que se procese de nuevo.
+                            initialIntent = null
+                        }
                     }
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val inSelectMode = navBackStackEntry?.savedStateHandle?.getStateFlow("inSelectMode", false)?.collectAsState()
@@ -559,8 +532,11 @@ class MainActivity : ComponentActivity() {
                     }
                     DisposableEffect(Unit) {
                         val listener = Consumer<Intent> { intent ->
-                            deepLinkHandler.handleNewIntent(intent) { song ->
-                                sharedSong = song
+                            // Añadimos un chequeo para asegurar que el handler esté inicializado.
+                            if (::deepLinkHandler.isInitialized) {
+                                deepLinkHandler.handleNewIntent(intent) { song ->
+                                    sharedSong = song
+                                }
                             }
                         }
 
