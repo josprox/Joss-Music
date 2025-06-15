@@ -150,7 +150,6 @@ dependencies {
     implementation(project(":jossredconnect"))
     implementation(libs.lifecycle.process)
     implementation(libs.androidx.media3.exoplayer.workmanager)
-    implementation(libs.androidx.material3.jvmstubs)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
 

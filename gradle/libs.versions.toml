@@ -24,7 +24,6 @@ jetbrainsKotlinJvm = "2.0.10"
 lifecycleProcess = "2.9.1"
 markwon = "4.6.2"
 media3ExoplayerWorkmanager = "1.7.1"
-material3Jvmstubs = "1.4.0-alpha15"
 
 [libraries]
 
@@ -126,7 +125,6 @@ lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", 
 nanojson = { group = "com.github.TeamNewPipe", name = "nanojson", version = "1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751" }
 androidx-webkit = { group = "androidx.webkit", name = "webkit", version = "1.14.0" }
 androidx-media3-exoplayer-workmanager = { group = "androidx.media3", name = "media3-exoplayer-workmanager", version.ref = "media3ExoplayerWorkmanager" }
-androidx-material3-jvmstubs = { group = "androidx.compose.material3", name = "material3-jvmstubs", version.ref = "material3Jvmstubs" }
 
 [plugins]
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
