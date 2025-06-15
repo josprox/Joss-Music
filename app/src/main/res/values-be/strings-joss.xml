@@ -67,4 +67,6 @@
   <string name="errorJossRed403">Памылка 403 у Jossred, працягваючы трансляцыю на YouTube</string>
   <string name="errorAlternativeSource">Памылка ў альтэрнатыўнай крыніцы</string>
   <string name="errorAlternativeSourceTryYT">Памылка з альтэрнатыўнай крыніцай, спрабуючы YouTube</string>
+  <string name="current">Бягучы</string>
+  <string name="newString">Новы</string>
 </resources>

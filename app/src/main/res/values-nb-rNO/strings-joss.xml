@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Feil 403 i Jossred, fortsetter med streaming av YouTube</string>
   <string name="errorAlternativeSource">Feil i den alternative kilden</string>
   <string name="errorAlternativeSourceTryYT">Feil med alternativ kilde, prøver YouTube</string>
+  <string name="current">Nåværende</string>
+  <string name="newString">Ny</string>
 </resources>

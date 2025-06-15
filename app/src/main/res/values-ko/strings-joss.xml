@@ -43,4 +43,6 @@
   <string name="errorJossRed403">오류 403 Jossred의 YouTube 스트리밍을 계속합니다</string>
   <string name="errorAlternativeSource">대체 소스의 오류</string>
   <string name="errorAlternativeSourceTryYT">대체 소스의 오류, YouTube 시도</string>
+  <string name="current">현재의</string>
+  <string name="newString">새로운</string>
 </resources>

@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Σφάλμα 403 στο Jossred, συνεχίζοντας με ροή από το YouTube</string>
   <string name="errorAlternativeSource">Σφάλμα στην εναλλακτική πηγή</string>
   <string name="errorAlternativeSourceTryYT">Σφάλμα με εναλλακτική πηγή, δοκιμάζοντας το YouTube</string>
+  <string name="current">Ρεύμα</string>
+  <string name="newString">Νέος</string>
 </resources>

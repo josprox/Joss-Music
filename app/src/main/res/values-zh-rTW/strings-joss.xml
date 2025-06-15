@@ -43,4 +43,6 @@
   <string name="errorJossRed403">喬斯雷德（Jossred）中的錯誤403，繼續通過YouTube流媒體</string>
   <string name="errorAlternativeSource">替代源中的錯誤</string>
   <string name="errorAlternativeSourceTryYT">替代來源的錯誤，嘗試YouTube</string>
+  <string name="current">當前的</string>
+  <string name="newString">新的</string>
 </resources>

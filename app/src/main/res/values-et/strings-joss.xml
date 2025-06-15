@@ -9,4 +9,6 @@
   <string name="errorJossRed403">Viga 403 Jossredis, jätkates YouTube\'i voogesitust</string>
   <string name="errorAlternativeSource">Viga alternatiivse allika korral</string>
   <string name="errorAlternativeSourceTryYT">Viga alternatiivse allikaga, proovides YouTube\'i</string>
+  <string name="current">Voolu-</string>
+  <string name="newString">Uus</string>
 </resources>

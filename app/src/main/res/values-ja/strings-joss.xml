@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Jossredのエラー403、YouTubeによるストリーミングを続けています</string>
   <string name="errorAlternativeSource">代替ソースのエラー</string>
   <string name="errorAlternativeSourceTryYT">YouTubeを試してみる代替ソースでエラー</string>
+  <string name="current">現在</string>
+  <string name="newString">新しい</string>
 </resources>

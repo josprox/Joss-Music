@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Chyba 403 v Jossaredu, pokračování streamování na YouTube</string>
   <string name="errorAlternativeSource">Chyba v alternativním zdroji</string>
   <string name="errorAlternativeSourceTryYT">Chyba s alternativním zdrojem, vyzkoušet YouTube</string>
+  <string name="current">Proud</string>
+  <string name="newString">Nový</string>
 </resources>

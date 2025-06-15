@@ -20,6 +20,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
@@ -27,9 +29,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.zionhuang.music.BuildConfig
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.R
+import com.zionhuang.music.utils.UpdateMainViewModel
 import com.zionhuang.music.ui.component.IconButton
 import com.zionhuang.music.ui.component.PreferenceEntry
 import com.zionhuang.music.ui.utils.backToMain
@@ -39,9 +41,13 @@ import com.zionhuang.music.ui.utils.backToMain
 fun SettingsScreen(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
-    latestVersionName: String,
+    viewModel: UpdateMainViewModel,
 ) {
     val uriHandler = LocalUriHandler.current
+
+    val showUpdate by viewModel.showUpdateBadge.collectAsState()
+    val latestVersion by viewModel.latestVersionName.collectAsState()
+    val currentVersion by viewModel.currentVersionName.collectAsState()
 
     Column(
         Modifier
@@ -67,9 +73,9 @@ fun SettingsScreen(
                     painter = painterResource(id = R.drawable.joss_music_logo),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(24.dp) // Ajusta el tamaño a 24 dp
-                        .clip(CircleShape) // Aplica la forma circular
-                        .background(MaterialTheme.colorScheme.surfaceContainer) // Fondo
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceContainer)
                 )
             },
             onClick = { navController.navigate("JossRedSettings") }
@@ -111,23 +117,22 @@ fun SettingsScreen(
                     painter = painterResource(id = R.drawable.joss_music_logo),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(24.dp) // Ajusta el tamaño a 24 dp
-                        .clip(CircleShape) // Aplica la forma circular
-                        .background(MaterialTheme.colorScheme.surfaceContainer) // Fondo
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceContainer)
                 )
             },
             onClick = { uriHandler.openUri("https://www.paypal.me/jossestradamx") },
             modifier = Modifier
                 .border(4.dp, MaterialTheme.colorScheme.primary, CircleShape) // Borde)
         )
-        if (latestVersionName > BuildConfig.VERSION_NAME) {
+
+        if (showUpdate && latestVersion != null) {
             PreferenceEntry(
                 title = {
-                    Text(
-                        text = stringResource(R.string.new_version_available),
-                    )
+                    Text(text = stringResource(R.string.new_version_available))
                 },
-                description = stringResource(R.string.latestVersion)+": "+BuildConfig.VERSION_NAME+"<"+latestVersionName,
+                description = stringResource(R.string.current) + ": $currentVersion  →  "+ stringResource(R.string.newString) + ": $latestVersion",
                 icon = {
                     BadgedBox(
                         badge = { Badge() }
@@ -137,14 +142,12 @@ fun SettingsScreen(
                 },
                 onClick = { navController.navigate("settings/update") }
             )
-        }else{
+        } else {
             PreferenceEntry(
                 title = {
-                    Text(
-                        text = stringResource(R.string.app_version),
-                    )
+                    Text(text = stringResource(R.string.app_version))
                 },
-                description = "Última version: "+BuildConfig.VERSION_NAME,
+                description = stringResource(R.string.latestVersion) + ": $currentVersion",
                 onClick = { navController.navigate("settings/update") }
             )
         }

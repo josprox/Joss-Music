@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Fout 403 in Jossred, doorgaan met streaming door YouTube</string>
   <string name="errorAlternativeSource">Fout in de alternatieve bron</string>
   <string name="errorAlternativeSourceTryYT">Fout met alternatieve bron, proberen YouTube</string>
+  <string name="current">Huidig</string>
+  <string name="newString">Nieuw</string>
 </resources>

@@ -9,4 +9,6 @@
   <string name="errorJossRed403">YouTube द्वारा स्ट्रीमिंग के साथ जारी, Jossred में 403</string>
   <string name="errorAlternativeSource">वैकल्पिक स्रोत में त्रुटि</string>
   <string name="errorAlternativeSourceTryYT">वैकल्पिक स्रोत के साथ त्रुटि, YouTube की कोशिश कर रहा है</string>
+  <string name="current">मौजूदा</string>
+  <string name="newString">नया</string>
 </resources>

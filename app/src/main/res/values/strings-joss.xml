@@ -42,4 +42,6 @@
   <string name="errorJossRed403">Error 403 in Jossred, continuing with streaming by YouTube</string>
   <string name="errorAlternativeSource">Error in the alternative source</string>
   <string name="errorAlternativeSourceTryYT">Error with alternative source, trying YouTube</string>
+  <string name="current">Current</string>
+  <string name="newString">New</string>
 </resources>

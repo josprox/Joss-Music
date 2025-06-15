@@ -64,4 +64,6 @@
   <string name="errorJossRed403">ਗਲਤੀ ਵਿੱਚ 403 ਗਲਤੀ ਵਿੱਚ, ਯੂਟਿ .ਬ ਦੁਆਰਾ ਸਟ੍ਰੀਮਿੰਗ ਜਾਰੀ ਰੱਖਣਾ</string>
   <string name="errorAlternativeSource">ਵਿਕਲਪਿਕ ਸਰੋਤ ਵਿੱਚ ਗਲਤੀ</string>
   <string name="errorAlternativeSourceTryYT">ਵਿਕਲਪਿਕ ਸਰੋਤ ਨਾਲ ਗਲਤੀ, ਯੂਟਿ .ਬ ਨੂੰ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਿਹਾ ਹੈ</string>
+  <string name="current">ਮੌਜੂਦਾ</string>
+  <string name="newString">ਨਵਾਂ</string>
 </resources>

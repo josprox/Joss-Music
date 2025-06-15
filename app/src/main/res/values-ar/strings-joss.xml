@@ -43,4 +43,6 @@
   <string name="errorJossRed403">خطأ 403 في jossred ، والاستمرار مع البث بواسطة YouTube</string>
   <string name="errorAlternativeSource">خطأ في المصدر البديل</string>
   <string name="errorAlternativeSourceTryYT">خطأ مع مصدر بديل ، تجربة يوتيوب</string>
+  <string name="current">حاضِر</string>
+  <string name="newString">جديد</string>
 </resources>

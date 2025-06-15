@@ -9,18 +9,19 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-// Archivo: UpdateMainViewModel.kt
-
 class UpdateMainViewModel(private val application: Application) : ViewModel() {
 
     // Estado para mostrar/ocultar el badge (sin cambios)
     private val _showUpdateBadge = MutableStateFlow(false)
     val showUpdateBadge = _showUpdateBadge.asStateFlow()
 
-    // +++ NUEVO ESTADO PARA EXPONER LA VERSIÓN +++
-    // Así otras partes de la UI pueden acceder al nombre de la versión más reciente.
     private val _latestVersionName = MutableStateFlow<String?>(null)
     val latestVersionName = _latestVersionName.asStateFlow()
+
+    // +++ NUEVO ESTADO PARA LA VERSIÓN ACTUAL +++
+    // Guardará la versión de la app instalada (ej: "1.2.3")
+    private val _currentVersionName = MutableStateFlow("")
+    val currentVersionName = _currentVersionName.asStateFlow()
 
     init {
         checkForUpdates()
@@ -28,21 +29,29 @@ class UpdateMainViewModel(private val application: Application) : ViewModel() {
 
     private fun checkForUpdates() {
         viewModelScope.launch {
+            // Obtener la versión más reciente del servidor
             val latestVersionResult = Updater.getLatestVersionName()
 
+            // Obtener la versión actual de la app instalada
+            val currentVersion = try {
+                application.packageManager.getPackageInfo(application.packageName, 0).versionName
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
+                "" // Fallback en caso de error
+            }
+            // ++ ACTUALIZAR EL NUEVO ESTADO ++
+            if (currentVersion != null) {
+                _currentVersionName.value = currentVersion
+            }
+
+            // La lógica de comparación sigue igual
             latestVersionResult.onSuccess { fetchedVersionName ->
-                // Actualiza el nuevo estado con la versión obtenida
                 _latestVersionName.value = fetchedVersionName
-
-                val currentVersionName = try {
-                    application.packageManager.getPackageInfo(application.packageName, 0).versionName
-                } catch (e: PackageManager.NameNotFoundException) { null }
-
-                // La lógica del badge sigue igual
-                if (currentVersionName != null && fetchedVersionName > currentVersionName) {
-                    _showUpdateBadge.value = true
+                if (currentVersion != null) {
+                    if (currentVersion.isNotEmpty() && fetchedVersionName > currentVersion.toString()) {
+                        _showUpdateBadge.value = true
+                    }
                 }
-
             }.onFailure {
                 it.printStackTrace()
                 _showUpdateBadge.value = false

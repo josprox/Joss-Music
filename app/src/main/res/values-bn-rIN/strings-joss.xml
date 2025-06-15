@@ -67,4 +67,6 @@
   <string name="errorJossRed403">জোস্রেডে 403 ত্রুটি, ইউটিউব দ্বারা স্ট্রিমিংয়ের সাথে চালিয়ে যাওয়া</string>
   <string name="errorAlternativeSource">বিকল্প উত্সে ত্রুটি</string>
   <string name="errorAlternativeSourceTryYT">বিকল্প উত্সের সাথে ত্রুটি, ইউটিউব চেষ্টা করে</string>
+  <string name="current">কারেন্ট</string>
+  <string name="newString">নতুন</string>
 </resources>

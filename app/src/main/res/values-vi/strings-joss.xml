@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Lỗi 403 trong Jossred, tiếp tục phát trực tuyến bởi YouTube</string>
   <string name="errorAlternativeSource">Lỗi trong nguồn thay thế</string>
   <string name="errorAlternativeSourceTryYT">Lỗi với nguồn thay thế, thử YouTube</string>
+  <string name="current">Hiện hành</string>
+  <string name="newString">Mới</string>
 </resources>

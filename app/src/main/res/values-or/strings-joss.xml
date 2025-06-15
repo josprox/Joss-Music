@@ -66,4 +66,6 @@
   <string name="errorJossRed403">ୟୁଟ୍ୟୁବ୍ ଦ୍ୱାରା ଷ୍ଟ୍ରିମିଂ ସହିତ ଜାଳେଣି 403 ରେ ତ୍ରୁଟି 403 |</string>
   <string name="errorAlternativeSource">ବିକଳ୍ପ ଉତ୍ସରେ ତ୍ରୁଟି |</string>
   <string name="errorAlternativeSourceTryYT">ବିକଳ୍ପ ଉତ୍ସ, ୟୁଟ୍ୟୁବ୍ ଚେଷ୍ଟା କରିବା ସହିତ ତ୍ରୁଟି |</string>
+  <string name="current">ସାମ୍ପ୍ରତିକ</string>
+  <string name="newString">ନୂତନ</string>
 </resources>

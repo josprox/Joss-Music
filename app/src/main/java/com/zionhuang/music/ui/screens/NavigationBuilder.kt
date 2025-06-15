@@ -34,12 +34,13 @@ import com.zionhuang.music.ui.screens.settings.PlayerSettings
 import com.zionhuang.music.ui.screens.settings.PrivacySettings
 import com.zionhuang.music.ui.screens.settings.SettingsScreen
 import com.zionhuang.music.ui.screens.settings.StorageSettings
+import com.zionhuang.music.utils.UpdateMainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.navigationBuilder(
     navController: NavHostController,
     scrollBehavior: TopAppBarScrollBehavior,
-    latestVersionName: String,
+    viewModel: UpdateMainViewModel // Recibe el ViewModel
 ) {
     composable(Screens.Home.route) {
         HomeScreen(navController)
@@ -190,7 +191,7 @@ fun NavGraphBuilder.navigationBuilder(
         YouTubeBrowseScreen(navController, scrollBehavior)
     }
     composable("settings") {
-        SettingsScreen(navController, scrollBehavior, latestVersionName)
+        SettingsScreen(navController, scrollBehavior, viewModel = viewModel)
     }
     composable("JossRedSettings") {
         JossRedSettings(navController, scrollBehavior)
@@ -223,7 +224,7 @@ fun NavGraphBuilder.navigationBuilder(
         AboutScreen(navController, scrollBehavior)
     }
     composable("settings/update") {
-        DataUpdate(navController, scrollBehavior, latestVersionName)
+        DataUpdate(navController, scrollBehavior, viewModel)
     }
     composable("login") {
         LoginScreen(navController)

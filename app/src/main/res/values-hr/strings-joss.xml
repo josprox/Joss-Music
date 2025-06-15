@@ -9,4 +9,6 @@
   <string name="errorJossRed403">Pogreška 403 u Jossredu, nastavljajući s strujanjem YouTubea</string>
   <string name="errorAlternativeSource">Pogreška u alternativnom izvoru</string>
   <string name="errorAlternativeSourceTryYT">Pogreška s alternativnim izvorom, isprobavanje YouTubea</string>
+  <string name="current">Trenutni</string>
+  <string name="newString">Novi</string>
 </resources>

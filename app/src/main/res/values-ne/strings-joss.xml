@@ -9,4 +9,6 @@
   <string name="errorJossRed403">EXSED मा jerce03 jerceply, यूट्यूब द्वारा स्ट्रिमिंग जारी राख्दै</string>
   <string name="errorAlternativeSource">वैकल्पिक स्रोतमा त्रुटि</string>
   <string name="errorAlternativeSourceTryYT">वैकल्पिक स्रोतको साथ त्रुटि, यूट्यूबको प्रयास गर्दै</string>
+  <string name="current">हालको</string>
+  <string name="newString">नंया</string>
 </resources>

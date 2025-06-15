@@ -9,4 +9,6 @@
   <string name="errorJossRed403">GREŠKA 403 u Josred, nastavljajući s streaming YouTubeom</string>
   <string name="errorAlternativeSource">Greška u alternativnom izvoru</string>
   <string name="errorAlternativeSourceTryYT">Pogreška sa alternativnim izvorom, pokušavajući YouTube</string>
+  <string name="current">Struja</string>
+  <string name="newString">Nervozan</string>
 </resources>

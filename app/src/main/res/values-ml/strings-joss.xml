@@ -44,4 +44,6 @@
   <string name="errorJossRed403">JOSSOT ൽ പിശക് 403, YouTube സ്ട്രീമിംഗ് തുടരുന്നത്</string>
   <string name="errorAlternativeSource">ബദൽ ഉറവിടത്തിലെ പിശക്</string>
   <string name="errorAlternativeSourceTryYT">ഇതര ഉറവിടം ഉപയോഗിച്ച് പിശക്, YouTube ശ്രമിക്കുന്നു</string>
+  <string name="current">ഒഴുകിക്കൊണ്ടിരിക്കുന്ന</string>
+  <string name="newString">നവീനമായ</string>
 </resources>

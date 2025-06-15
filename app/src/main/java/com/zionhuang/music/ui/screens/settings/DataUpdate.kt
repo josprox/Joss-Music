@@ -1,19 +1,40 @@
 package com.zionhuang.music.ui.screens.settings
 
 import android.content.Intent
-import android.net.Uri
 import android.text.Spanned
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.runtime.*
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,11 +49,13 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.zionhuang.music.BuildConfig
 import com.zionhuang.music.LocalPlayerAwareWindowInsets
 import com.zionhuang.music.R
+import com.zionhuang.music.utils.UpdateMainViewModel
 import com.zionhuang.music.utils.Updater
 import io.noties.markwon.Markwon
 import kotlinx.coroutines.launch
@@ -43,7 +66,7 @@ import org.dotenv.vault.dotenvVault
 fun DataUpdate(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
-    latestVersionName: String,
+    viewModel: UpdateMainViewModel
 ) {
     val dotenv = dotenvVault(BuildConfig.DOTENV_KEY) {
         directory = "/assets"
@@ -55,6 +78,7 @@ fun DataUpdate(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
+    val showUpdate by viewModel.showUpdateBadge.collectAsState()
     val releaseDetails = remember { mutableStateOf<Updater.ReleaseDetails?>(null) }
     val errorMessage = remember { mutableStateOf<String?>(null) }
 
@@ -154,10 +178,10 @@ fun DataUpdate(
                 Spacer(Modifier.height(16.dp))
             }
 
-            if (latestVersionName > BuildConfig.VERSION_NAME) {
+            if (showUpdate) {
                 Button(
                     onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(details.downloadUrl))
+                        val intent = Intent(Intent.ACTION_VIEW, details.downloadUrl.toUri())
                         context.startActivity(intent)
                     },
                     modifier = Modifier.padding(horizontal = 16.dp)
@@ -202,7 +226,7 @@ fun DataUpdate(
 
 // Función para extraer URLs de imágenes del Markdown
 fun extractImageUrls(markdown: String): List<String> {
-    val regex = Regex("""!\[.*?\]\((.*?)\)""")
+    val regex = Regex("""!\[.*?]\((.*?)\)""")
     return regex.findAll(markdown).map { it.groupValues[1] }.toList()
 }
 

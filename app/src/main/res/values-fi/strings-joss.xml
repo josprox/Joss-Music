@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Virhe 403 Jossredissa jatkuu suoratoistolla YouTube</string>
   <string name="errorAlternativeSource">Virhe vaihtoehtoisessa lähteessä</string>
   <string name="errorAlternativeSourceTryYT">Virhe vaihtoehtoisella lähteellä, YouTube -yrittäminen</string>
+  <string name="current">Nykyinen</string>
+  <string name="newString">Uusi</string>
 </resources>

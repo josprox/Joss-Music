@@ -56,4 +56,6 @@
   <string name="errorJossRed403">403 hiba a Jossredben, folytatva a YouTube streamingjét</string>
   <string name="errorAlternativeSource">Hiba az alternatív forrásban</string>
   <string name="errorAlternativeSourceTryYT">Hiba az alternatív forráshoz, kipróbálni a YouTube -ot</string>
+  <string name="current">Jelenlegi</string>
+  <string name="newString">Új</string>
 </resources>

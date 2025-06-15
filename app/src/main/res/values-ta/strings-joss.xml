@@ -9,4 +9,6 @@
   <string name="errorJossRed403">YouTube ஆல் ஸ்ட்ரீமிங்கைத் தொடரும் ஜாஸில் பிழை 403</string>
   <string name="errorAlternativeSource">மாற்று மூலத்தில் பிழை</string>
   <string name="errorAlternativeSourceTryYT">மாற்று மூலத்துடன் பிழை, YouTube ஐ முயற்சிக்கிறது</string>
+  <string name="current">நடப்பு</string>
+  <string name="newString">புதியது</string>
 </resources>

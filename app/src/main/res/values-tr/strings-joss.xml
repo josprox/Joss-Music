@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Jossred\'de 403 Hata, YouTube tarafından akış yapmaya devam ediyor</string>
   <string name="errorAlternativeSource">Alternatif kaynaktaki hata</string>
   <string name="errorAlternativeSourceTryYT">Alternatif kaynakla hata, youtube denemek</string>
+  <string name="current">Akım</string>
+  <string name="newString">Yeni</string>
 </resources>

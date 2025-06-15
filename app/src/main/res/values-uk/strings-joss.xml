@@ -43,4 +43,6 @@
   <string name="errorJossRed403">Помилка 403 в Джоссреді, продовжуючи потокове потік YouTube</string>
   <string name="errorAlternativeSource">Помилка в альтернативному джерелі</string>
   <string name="errorAlternativeSourceTryYT">Помилка з альтернативним джерелом, спробуйте YouTube</string>
+  <string name="current">Поточний</string>
+  <string name="newString">Новачок</string>
 </resources>
