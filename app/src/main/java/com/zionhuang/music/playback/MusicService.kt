@@ -709,7 +709,7 @@ class MusicService : MediaLibraryService(),
             // 2. Consultar si se debe usar fuente alternativa
             val useAlternativeSource = runBlocking {
                 dataStore.data.map { preferences ->
-                    preferences[JossRedMultimedia] ?: true
+                    preferences[JossRedMultimedia] ?: false
                 }.first()
             }
 
