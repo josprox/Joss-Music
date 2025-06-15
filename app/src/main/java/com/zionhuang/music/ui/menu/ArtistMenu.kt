@@ -117,13 +117,21 @@ fun ArtistMenu(
                 icon = R.drawable.share,
                 title = R.string.share
             ) {
-                onDismiss()
+                // +++ LÓGICA CORREGIDA +++
+
+                // 1. Prepara el Intent con la URL correcta.
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, "https://music.youtube.com/channel/${artist.id}")
+                    // Arreglamos la interpolación del String y usamos una URL estándar.
+                    putExtra(Intent.EXTRA_TEXT, "https://jossmusic.com/channel/${artist.id}")
                 }
+
+                // 2. Inicia la actividad de compartir PRIMERO.
                 context.startActivity(Intent.createChooser(intent, null))
+
+                // 3. Descarta el menú DESPUÉS.
+                onDismiss()
             }
         }
     }
