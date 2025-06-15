@@ -4,6 +4,8 @@ import android.graphics.Bitmap
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialExpressiveTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -23,6 +25,7 @@ import com.google.material.color.score.Score
 
 val DefaultThemeColor = Color(0xFF4285F4)
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class) // 1. Se añade la anotación OptIn para la API experimental
 @Composable
 fun InnerTuneTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -42,7 +45,8 @@ fun InnerTuneTheme(
         }
     }
 
-    MaterialTheme(
+    // 2. Reemplazamos MaterialTheme con MaterialExpressiveTheme
+    MaterialExpressiveTheme(
         colorScheme = colorScheme,
         typography = MaterialTheme.typography,
         content = content
