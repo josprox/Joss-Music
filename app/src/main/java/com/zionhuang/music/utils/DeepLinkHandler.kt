@@ -73,7 +73,7 @@ class DeepLinkHandler(
             }
             "album" -> {
                 // Es un álbum. El ID es un playlistId que necesita ser procesado.
-                handleYouTubeMusicAlbum(id)
+                navController.navigate("album/$id")
             }
             "playlist" -> {
                 // Es una playlist. El ID es directo.
